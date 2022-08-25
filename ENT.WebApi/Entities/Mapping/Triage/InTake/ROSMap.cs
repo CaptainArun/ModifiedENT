@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ENT.WebApi.Entities;
+
+namespace ENT.WebApi.Mapping
+{
+    public class ROSMap : IEntityTypeConfiguration<ROS>
+    {
+        public void Configure(EntityTypeBuilder<ROS> builder)
+        {
+            builder.ToTable("ROS", "dbo");
+            builder.HasKey(x => x.ROSID);
+
+            builder.Property(x => x.ROSID).HasColumnName("ROSID");
+            builder.Property(x => x.PatientID).HasColumnName("PatientID");
+            builder.Property(x => x.VisitID).HasColumnName("VisitID");
+            builder.Property(x => x.RecordedDate).HasColumnName("RecordedDate");
+            builder.Property(x => x.RecordedBy).HasColumnName("RecordedBy").HasMaxLength(50);
+            builder.Property(x => x.Weightlossorgain).HasColumnName("Weightlossorgain");
+            builder.Property(x => x.Feverorchills).HasColumnName("Feverorchills");
+            builder.Property(x => x.Troublesleeping).HasColumnName("Troublesleeping");
+            builder.Property(x => x.Fatigue).HasColumnName("Fatigue");
+            builder.Property(x => x.GeneralWeakness).HasColumnName("GeneralWeakness");
+            builder.Property(x => x.GeneralOthers).HasColumnName("GeneralOthers");
+            builder.Property(x => x.GeneralothersComments).HasColumnName("GeneralothersComments").HasMaxLength(75);
+            builder.Property(x => x.Rashes).HasColumnName("Rashes");
+            builder.Property(x => x.SkinItching).HasColumnName("SkinItching");
+            builder.Property(x => x.Colorchanges).HasColumnName("Colorchanges");
+            builder.Property(x => x.SkinLumps).HasColumnName("SkinLumps");
+            builder.Property(x => x.Dryness).HasColumnName("Dryness");
+            builder.Property(x => x.Hairandnailchanges).HasColumnName("Hairandnailchanges");
+            builder.Property(x => x.SkinOthers).HasColumnName("SkinOthers");
+            builder.Property(x => x.SkinothersComments).HasColumnName("SkinothersComments").HasMaxLength(75);
+            builder.Property(x => x.Headache).HasColumnName("Headache");
+            builder.Property(x => x.Headinjury).HasColumnName("Headinjury");
+            builder.Property(x => x.Others).HasColumnName("Others");
+            builder.Property(x => x.HeadothersComments).HasColumnName("HeadothersComments").HasMaxLength(75);
+            builder.Property(x => x.Decreasedhearing).HasColumnName("Decreasedhearing");
+            builder.Property(x => x.Earache).HasColumnName("Earache");
+            builder.Property(x => x.Ringinginears).HasColumnName("Ringinginears");
+            builder.Property(x => x.Drainage).HasColumnName("Drainage");
+            builder.Property(x => x.EarOthers).HasColumnName("EarOthers");
+            builder.Property(x => x.EarothersComments).HasColumnName("EarothersComments").HasMaxLength(75);
+            builder.Property(x => x.Vision).HasColumnName("Vision");
+            builder.Property(x => x.Blurryordoublevision).HasColumnName("Blurryordoublevision");
+            builder.Property(x => x.Cataracts).HasColumnName("Cataracts");
+            builder.Property(x => x.Glassesorcontacts).HasColumnName("Glassesorcontacts");
+            builder.Property(x => x.Flashinglights).HasColumnName("Flashinglights");
+            builder.Property(x => x.Lasteyeexam).HasColumnName("Lasteyeexam");
+            builder.Property(x => x.EyePain).HasColumnName("EyePain");
+            builder.Property(x => x.Specks).HasColumnName("Specks");
+            builder.Property(x => x.Redness).HasColumnName("Redness");
+            builder.Property(x => x.Glaucoma).HasColumnName("Glaucoma");
+            builder.Property(x => x.EyeOthers).HasColumnName("EyeOthers");
+            builder.Property(x => x.EyesothersComments).HasColumnName("EyesothersComments").HasMaxLength(75);
+            builder.Property(x => x.Stuffiness).HasColumnName("Stuffiness");
+            builder.Property(x => x.NoseItching).HasColumnName("NoseItching");
+            builder.Property(x => x.Nosebleeds).HasColumnName("Nosebleeds");
+            builder.Property(x => x.Discharge).HasColumnName("Discharge");
+            builder.Property(x => x.Hayfever).HasColumnName("Hayfever");
+            builder.Property(x => x.Sinuspain).HasColumnName("Sinuspain");
+            builder.Property(x => x.NoseOthers).HasColumnName("NoseOthers");
+            builder.Property(x => x.NoseothersComments).HasColumnName("NoseothersComments").HasMaxLength(75);
+            builder.Property(x => x.Teeth).HasColumnName("Teeth");
+            builder.Property(x => x.Soretongue).HasColumnName("Soretongue");
+            builder.Property(x => x.Thrush).HasColumnName("Thrush");
+            builder.Property(x => x.Gums).HasColumnName("Gums");
+            builder.Property(x => x.Drymouth).HasColumnName("Drymouth");
+            builder.Property(x => x.Nonhealingsores).HasColumnName("Nonhealingsores");
+            builder.Property(x => x.Bleeding).HasColumnName("Bleeding");
+            builder.Property(x => x.Sorethroat).HasColumnName("Sorethroat");
+            builder.Property(x => x.Sinus).HasColumnName("Sinus");
+            builder.Property(x => x.Lastdentalexam).HasColumnName("Lastdentalexam");
+            builder.Property(x => x.Lastdentalexamdate).HasColumnName("Lastdentalexamdate");
+            builder.Property(x => x.Dentures).HasColumnName("Dentures");
+            builder.Property(x => x.Hoarseness).HasColumnName("Hoarseness");
+            builder.Property(x => x.ThroatOthers).HasColumnName("ThroatOthers");
+            builder.Property(x => x.ThroatothersComments).HasColumnName("ThroatothersComments").HasMaxLength(75);
+            builder.Property(x => x.NeckLumps).HasColumnName("NeckLumps");
+            builder.Property(x => x.NeckPain).HasColumnName("NeckPain");
+            builder.Property(x => x.Swollenglands).HasColumnName("Swollenglands");
+            builder.Property(x => x.Stiffness).HasColumnName("Stiffness");
+            builder.Property(x => x.NeckOthers).HasColumnName("NeckOthers");
+            builder.Property(x => x.NeckothersComments).HasColumnName("NeckothersComments").HasMaxLength(75);
+            builder.Property(x => x.Cough).HasColumnName("Cough");
+            builder.Property(x => x.Coughingupblood).HasColumnName("Coughingupblood");
+            builder.Property(x => x.Wheezing).HasColumnName("Wheezing");
+            builder.Property(x => x.Sputum).HasColumnName("Sputum");
+            builder.Property(x => x.Shortnessofbreath).HasColumnName("Shortnessofbreath");
+            builder.Property(x => x.Painfulbreathing).HasColumnName("Painfulbreathing");
+            builder.Property(x => x.RespiratoryOthers).HasColumnName("RespiratoryOthers");
+            builder.Property(x => x.Respiratoryotherscomments).HasColumnName("Respiratoryotherscomments").HasMaxLength(75);
+            builder.Property(x => x.Dizziness).HasColumnName("Dizziness");
+            builder.Property(x => x.Weakness).HasColumnName("Weakness");
+            builder.Property(x => x.Tremor).HasColumnName("Tremor");
+            builder.Property(x => x.Fainting).HasColumnName("Fainting");
+            builder.Property(x => x.Numbness).HasColumnName("Numbness");
+            builder.Property(x => x.Seizures).HasColumnName("Seizures");
+            builder.Property(x => x.Tingling).HasColumnName("Tingling");
+            builder.Property(x => x.NeurologicOthers).HasColumnName("NeurologicOthers");
+            builder.Property(x => x.Neurologicotherscomments).HasColumnName("Neurologicotherscomments").HasMaxLength(75);
+            builder.Property(x => x.Easeofbruising).HasColumnName("Easeofbruising");
+            builder.Property(x => x.Easeofbleeding).HasColumnName("Easeofbleeding");
+            builder.Property(x => x.HematologicOthers).HasColumnName("HematologicOthers");
+            builder.Property(x => x.Hematologicotherscomments).HasColumnName("Hematologicotherscomments").HasMaxLength(75);
+            builder.Property(x => x.Nervousness).HasColumnName("Nervousness");
+            builder.Property(x => x.Memoryloss).HasColumnName("Memoryloss");
+            builder.Property(x => x.Stress).HasColumnName("Stress");
+            builder.Property(x => x.Depression).HasColumnName("Depression");
+            builder.Property(x => x.PsychiatricOthers).HasColumnName("PsychiatricOthers");
+            builder.Property(x => x.Psychiatricotherscomments).HasColumnName("Psychiatricotherscomments").HasMaxLength(75);
+            builder.Property(x => x.IsActive).HasColumnName("IsActive");
+            builder.Property(x => x.CreatedBy).HasColumnName("CreatedBy").HasMaxLength(50);
+            builder.Property(x => x.Createddate).HasColumnName("Createddate");
+            builder.Property(x => x.ModifiedBy).HasColumnName("ModifiedBy").HasMaxLength(50);
+            builder.Property(x => x.ModifiedDate).HasColumnName("ModifiedDate");
+        }
+    }
+}
