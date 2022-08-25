@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <UserSecretsId>990fe336-0ac2-429c-b12c-73caa12f220a</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClientApp\src\app\consult\**" />
+    <Content Remove="ClientApp\src\app\consult\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\consult\**" />
+    <None Remove="ClientApp\src\app\consult\**" />
+    <TypeScriptCompile Remove="ClientApp\src\app\consult\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\appointments\models\availabilityModel.ts" />
+    <None Remove="ClientApp\src\app\new-patient\models\file.ts" />
+    <None Remove="ClientApp\src\app\new-patient\models\file1.ts" />
+    <None Remove="ClientApp\src\app\new-patient\models\PatientFamilyHistoryModel.ts" />
+    <None Remove="ClientApp\src\app\ot\models\anesthesiaFitnessModel.ts" />
+    <None Remove="ClientApp\src\app\ot\ot.service.ts" />
+    <None Remove="ClientApp\src\app\physician\models\physicianExtraActivitiesModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\assrTestModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\beraTestModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\electrocochleographyModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\hearingAidTrialModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\oaeTestModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\speechTherapyModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\speechtherapySpecialtestsModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\tinnitusmaskingModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\tuningForkTestModel.ts" />
+    <None Remove="ClientApp\src\app\tests\models\tympanometryModel.ts" />
+    <None Remove="ClientApp\src\app\tests\tests.service.ts" />
+    <None Remove="ClientApp\src\app\triage\models\nursingSignOffModel.ts" />
+    <None Remove="ClientApp\src\app\triage\models\opdNursingMedicationModel.ts" />
+    <None Remove="ClientApp\src\app\triage\models\surgeryRequestModel.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.5.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\appointments\models\availabilityModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\employeeDatabase.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\new-patient\models\file.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\new-patient\models\file1.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\new-patient\models\PatientFamilyHistoryModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\ot\models\anesthesiaFitnessModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\ot\ot.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\physician\models\physicianExtraActivitiesModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\assrTestModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\beraTestModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\electrocochleographyModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\hearingAidTrialModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\oaeTestModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\speechTherapyModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\speechtherapySpecialtestsModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\tinnitusmaskingModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\tuningForkTestModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\models\tympanometryModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\tests\tests.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\triage\models\nursingSignOffModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\triage\models\opdNursingMedicationModel.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\triage\models\surgeryRequestModel.ts" />
+  </ItemGroup>
+
+</Project>
