@@ -1,0 +1,79 @@
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\ENT.WebApi.deps.json
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.json
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.dev.json
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\ENT.WebApi.csproj.CoreCompileInputs.cache
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cache
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cs
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfoInputs.cache
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfo.cs
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorTargetAssemblyInfo.cache
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\ENT.WebApi.csprojAssemblyReference.cache
+D:\ENT project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.deps.json
+D:\ENT project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.json
+D:\ENT project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.dev.json
+D:\ENT project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\ENT project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\ENT project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.csprojAssemblyReference.cache
+D:\ENT project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.csproj.CoreCompileInputs.cache
+D:\ENT project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cache
+D:\ENT project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cs
+D:\ENT project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfoInputs.cache
+D:\ENT project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfo.cs
+D:\ENT project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorTargetAssemblyInfo.cache
+D:\ENT project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\ENT project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.deps.json
+D:\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.json
+D:\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.dev.json
+D:\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.csproj.CoreCompileInputs.cache
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cache
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cs
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfoInputs.cache
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfo.cs
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorTargetAssemblyInfo.cache
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\appsettings.Development.json
+D:\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\appsettings.json
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.genruntimeconfig.cache
+D:\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.csprojAssemblyReference.cache
+D:\Murali\TFS\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\appsettings.Development.json
+D:\Murali\TFS\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\appsettings.json
+D:\Murali\TFS\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.deps.json
+D:\Murali\TFS\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.json
+D:\Murali\TFS\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.dev.json
+D:\Murali\TFS\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\Murali\TFS\ENT demo project\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.csprojAssemblyReference.cache
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfoInputs.cache
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfo.cs
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.csproj.CoreCompileInputs.cache
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cache
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cs
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorTargetAssemblyInfo.cache
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\Murali\TFS\ENT demo project\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.genruntimeconfig.cache
+D:\ent\ENT.WebApi\bin\Debug\netcoreapp2.1\appsettings.Development.json
+D:\ent\ENT.WebApi\bin\Debug\netcoreapp2.1\appsettings.json
+D:\ent\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.deps.json
+D:\ent\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.json
+D:\ent\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.runtimeconfig.dev.json
+D:\ent\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\ent\ENT.WebApi\bin\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfoInputs.cache
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.AssemblyInfo.cs
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.csproj.CoreCompileInputs.cache
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cache
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorAssemblyInfo.cs
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.RazorTargetAssemblyInfo.cache
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.dll
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.pdb
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.genruntimeconfig.cache
+D:\ent\ENT.WebApi\obj\Debug\netcoreapp2.1\ENT.WebApi.csprojAssemblyReference.cache

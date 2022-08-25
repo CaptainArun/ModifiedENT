@@ -1,0 +1,28 @@
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.deps.json
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.runtimeconfig.json
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.runtimeconfig.dev.json
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.dll
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.pdb
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.csproj.CoreCompileInputs.cache
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.RazorAssemblyInfo.cache
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.RazorAssemblyInfo.cs
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.AssemblyInfoInputs.cache
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.AssemblyInfo.cs
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.RazorTargetAssemblyInfo.cache
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.dll
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.pdb
+D:\BmsProjects2018\ShroffHMS\BMS.ENT.EmployeePortal.WebApi\BMS.ENT.EmployeePortal.WebApi\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.csprojAssemblyReference.cache
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.deps.json
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.runtimeconfig.json
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.runtimeconfig.dev.json
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.dll
+D:\ENT project\ENT.API\bin\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.pdb
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.csprojAssemblyReference.cache
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.csproj.CoreCompileInputs.cache
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.RazorAssemblyInfo.cache
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.RazorAssemblyInfo.cs
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.AssemblyInfoInputs.cache
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.AssemblyInfo.cs
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.RazorTargetAssemblyInfo.cache
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.dll
+D:\ENT project\ENT.API\obj\Debug\netcoreapp2.1\BMS.ENT.EmployeePortal.WebApi.pdb
