@@ -1,0 +1,138 @@
+<app-admissionHeaderComponent></app-admissionHeaderComponent>
+<div class="overflow-hidden px-4 py-1">
+  <div class="row col-xl-12 ml-0 pl-0">
+    <mat-card class="col-xl-4 ml-0 my-2">
+      <div class="col-12">
+        <div class="row justify-content-md-left">
+          <div class="col-xl-12 text-center">
+            <h3 class="text-left">Procedure Request Status</h3>
+          </div>
+          <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-1">
+            <p class="m-0">Today's Total Procedure Request : <b>{{totalCount}}</b></p>
+          </div>
+
+        </div>
+      </div>
+    </mat-card>
+    <div class="" style="margin:6px">
+    </div>
+    <mat-card class="row col-xl-8 ml-0 my-2">
+      <form [formGroup]="searchForm">
+        <div class="col-xl-12">
+          <div class="col-xl-12 text-center">
+            <h3 class="text-left">Search</h3>
+          </div>
+          <div class="row justify-content-between w-100 opdstop pt-2">
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label> From Date</mat-label>
+                <input formControlName="FromDate" matInput [matDatepicker]="from" placeholder="From Date">
+                <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                <mat-datepicker #from></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label> To Date</mat-label>
+                <input formControlName="ToDate" matInput [matDatepicker]="to" placeholder="To Date">
+                <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                <mat-datepicker #to></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Visit Number</mat-label>
+                <mat-icon matSuffix
+                  *ngIf="(searchForm.value.VisitNo == '' || searchForm.value.VisitNo == null) ? true : searchForm.value.VisitNo.length > 2 ? false : true">
+                  search</mat-icon>
+                <input maxlength="12" matInput placeholder="Type and Select" [matAutocomplete]="autoAdmission"
+                  #autoCompleteNumber="matAutocompleteTrigger" (keyup)="getVisitNumberbySearch()"
+                  formControlName="VisitNo">
+                <mat-autocomplete autoActiveFirstOption #autoAdmission="matAutocomplete">
+                  <mat-option *ngFor="let vstno of VisitNo" [value]="vstno">{{vstno}}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Facility</mat-label>
+                <mat-select formControlName="Facility">
+                  <mat-option *ngFor="let value of facilityData" [value]="value.FacilityId">
+                    {{value.FacilityName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Patient Name</mat-label>
+                <mat-icon matSuffix
+                  *ngIf="(searchForm.value.PatientName == '' || searchForm.value.PatientName == null) ? true : searchForm.value.PatientName.length > 2 ? false : true">
+                  search</mat-icon>
+                <input maxlength="35" type="text" placeholder="Type and Select" matInput [matAutocomplete]="autot"
+                  #autoCompletePatientName="matAutocompleteTrigger" formControlName="PatientName" />
+                <mat-autocomplete autoActiveFirstOption #autot="matAutocomplete">
+                  <mat-option *ngFor="let option of patientname"
+                    [value]="option.PatientFirstName+ ' ' +  option.PatientMiddleName+' ' +  option.PatientLastName"
+                    (onSelectionChange)="setPatientID(option.PatientId)">
+                    {{option.PatientFirstName}}&nbsp;{{option.PatientMiddleName}}&nbsp;{{option.PatientLastName}}&nbsp;-{{option.MRNo}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Physician</mat-label>
+                <mat-icon matSuffix
+                  *ngIf="(searchForm.value.Physician == '' || searchForm.value.Physician == null) ? true : searchForm.value.Physician.length > 2 ? false : true">
+                  search</mat-icon>
+                <input maxlength="35" type="text" placeholder="Type and Select" matInput [matAutocomplete]="autocpty"
+                  #autoCompletePhysician="matAutocompleteTrigger" formControlName="Physician" />
+                <mat-autocomplete autoActiveFirstOption #autocpty="matAutocomplete">
+                  <mat-option *ngFor="let option of Physician" [value]="option.ProviderName"
+                    (onSelectionChange)="setphysician(option.ProviderID)">
+                    {{option.ProviderName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4 mt-2">
+              <div class="pull-right mr-2">
+                <button mat-stroked-button class="transperent-button light-sky primary w-auto"
+                  (click)="CancelForm()">Clear</button>
+              </div>
+              <div class="pull-right mr-2">
+                <button mat-flat-button [disabled]="IsDateCorect" class="custome-button mat-primary w-auto"
+                  (click)="openAddUpdateform()">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  <div>
+    <!-- <mat-card class="table-wrapper w-100 row" *ngIf="IsTableShow">
+      <div class="col-xs-12 mt-1">
+        <mat-card-content>
+          <app-bms-table [config]="tableConfig" [datas]="getAllProcedureReq" (viewItem)="viewProcedureReq($event)"
+            (editItem)="editProcedureReq($event)"></app-bms-table>
+        </mat-card-content>
+      </div>
+    </mat-card> -->
+    <mat-card  *ngIf="IsTableShow">
+      <app-cardContainer [configCard]="ProcedureConvertListCard" [dataForContainer]="getAllProcedureReq"
+      (viewItem)="viewProcedureReq($event)"
+      (editItem)="editProcedureReq($event)"></app-cardContainer>
+    </mat-card>
+    <mat-card *ngIf="!IsTableShow">
+      <h3>No Record Found</h3>
+    </mat-card>
+  </div>
+</div>

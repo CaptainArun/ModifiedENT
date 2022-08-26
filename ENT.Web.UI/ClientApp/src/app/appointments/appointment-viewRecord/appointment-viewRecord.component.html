@@ -1,0 +1,67 @@
+<div class="row" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+<div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+  <div class="white">
+    <h5 cdkDragHandle class="p-3 title-bg">
+      Appointment Details <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+    <app-patient-demographic [PatID]="data.PatientID"></app-patient-demographic>
+
+    <mat-card>
+      <div class="row p-0 m-0 scroll-md">
+        <div class="col-lg-6">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+
+              <div class="row  pb-1 pt-3">
+                <div class="col font_color">Appointment Date</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.AppointmentDate | date:'dd-MM-yyyy'}}</div>
+              </div>
+
+              <div class="row  pb-1 pt-3">
+                <div class="col font_color">Appointment Time</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.AppointmentTime}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">To Consult</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.ToConsult}}</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">{{data.ToConsult }} Name</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.ProviderName}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Purpose</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Reason}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Appointment Status</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Appointmentstatus}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </mat-card>
+  </div>
+</div>
+</div>    

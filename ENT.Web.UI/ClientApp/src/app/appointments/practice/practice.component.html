@@ -1,0 +1,45 @@
+<div>
+    <div class="row mr-2">
+        <div class="text-right w-100 mt-2 mb-2 mr-2">
+            <button class="custome-button mat-primary btn btn-info" (click)="createNewFacility()">
+                Add New
+            </button>
+        </div>
+    </div>
+    <!-- <div>
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Action</th>
+                    <th>Facility Name</th>
+                    <th>Email</th>
+                    <th>State</th>
+                    <th>Telephone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let facility of facilityData">
+                    <td><i class="fa-solid fa-pen-to-square" (click)="editFacilityForm(facility.FacilityId)" style="font-size: 1.4rem;"></i></td>
+                    <td>{{facility.FacilityName}}</td>
+                    <td>{{facility.Email}}</td>
+                    <td>{{facility.State}}</td>
+                    <td>{{facility.Telephone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+
+    <div>
+        <mat-card class="table-wrapper">
+            <mat-card-content>
+                <h4>Facility</h4>
+                <div class="row text-center">
+                    <app-bms-table [config]="tableConfig" [datas]="facilityData" (editItem)="editFacilityForm($event)">
+                    </app-bms-table>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+
+</div>

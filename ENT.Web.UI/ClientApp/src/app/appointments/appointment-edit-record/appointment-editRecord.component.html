@@ -1,0 +1,98 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+      <div class="white">
+        <mat-card class="p-0">
+          <h5 cdkDragHandle class="p-3 title-bg">
+            Appointment Details <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+              <span aria-hidden="true">X</span>
+            </button>
+          </h5>
+          <app-patient-demographic [PatID]="data.PatientID"></app-patient-demographic>
+          <div class="col-12 py-4">
+            <form [formGroup]="appointmentEditForm">
+              <div class="row">
+                <div class="col-xl-3 col-lg-6" hidden>
+                  <mat-form-field class=" w-100 " appearance="outline">
+                    <mat-label>Patient Name</mat-label>
+                    <input matInput Value="Rahul Sharma" formControlName="PatientName" readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(appointmentEditForm.value.AppointmentDate == '' || appointmentEditForm.value.AppointmentDate == null) ? true : false"></span>Appointment
+                      Date</mat-label>
+                    <input matInput [matDatepicker]="pickers" placeholder="Date" formControlName="AppointmentDate" (dateChange)="getTimeDuration()" [min]="minDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                    <mat-datepicker #pickers></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(appointmentEditForm.value.AppointmentTime == '' || appointmentEditForm.value.AppointmentTime == null) ? true : false"></span>Appointment
+                      Time</mat-label>
+                    <mat-select formControlName="AppointmentTime">
+                      <mat-option *ngFor="let appointTym of availableTime" [value]="appointTym.ScheduleTime">
+                        {{appointTym.ScheduleTime}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6" hidden>
+                  <mat-form-field class=" w-100 " appearance="outline" readonly>
+                    <mat-label>To Consult</mat-label>
+                    <input matInput Value="Dr.Amit Vyas/ ENT Surgery" formControlName="ToConsult">
+                    <mat-select formControlName="ToConsult">
+                      <mat-option *ngFor="let toCon of providerName" [value]="toCon.ProviderID">{{toCon.FirstName}}
+                        {{toCon.MiddleName}} {{toCon.LastName}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class=" w-100 " appearance="outline">
+                    <mat-label>To Consult</mat-label>
+                    <input maxlength="100" matInput Value="Rahul Sharma" formControlName="ToConsult">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="example-full-width w-100" appearance="outline">
+                    <mat-label>Physician</mat-label>
+                    <input maxlength="35" type="text" matInput [matAutocomplete]="auto2"
+                      formControlName="PhysicianName">
+                    <mat-autocomplete #auto2="matAutocomplete">
+                      <mat-option *ngFor="let value of orderPhysician" [value]="value">
+                        {{value}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class=" w-100 " appearance="outline">
+                    <mat-label>Purpose</mat-label>
+                    <input maxlength="50" matInput Value="Ear Pain" formControlName="Reason">
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </form>
+            <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center schedbtn"
+              *ngIf="cancelData">
+
+              <div>
+                <button type="submit" mat-flat-button color="" class="custome-button mat-primary mr-2"
+                  (click)="updatePatientAppointmentDetails()"> Save </button>
+                <button mat-stroked-button class="transperent-button" color="primary"
+                  (click)="cancelForm()">Clear</button>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

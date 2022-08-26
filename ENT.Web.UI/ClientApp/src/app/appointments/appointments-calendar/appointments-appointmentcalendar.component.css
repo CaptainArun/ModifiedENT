@@ -1,0 +1,70 @@
+::ng-deep .dx-scheduler-header {
+  background-color: #58bdbd;
+  color: white;
+}
+
+::ng-deep .dx-scheduler-header-panel-cell,
+.dx-scheduler-cell-sizes-horizontal,
+.dx-scheduler-header-panel-current-time-cell {
+  background-color: #58bdbd;
+  color: white;
+}
+
+::ng-deep .dx-scheduler-time-panel-cell {
+  color: #0c8a87de;
+  font-weight: 450;
+}
+
+::ng-deep .dx-scheduler-appointment {
+  font-size: 17px;
+  font-weight: 400;
+  color: white;
+}
+::ng-deep .dx-scheduler-appointment-content {
+  background: linear-gradient(to right, #58bdbd 0%, #a49ee1 100%) !important;
+  font-size: 17px !important;
+  font-weight: 50 !important;
+}
+
+::ng-deep .dx-scheduler-dropdown-appointment-info-block {
+  background-color: #58bdbd;
+  color: white;
+}
+
+::ng-deep .dx-list-item-content,
+.dx-scheduler-dropdown-appointment {
+  background-color: #58bdbd;
+  color: white;
+}
+
+::ng-deep .dx-scheduler-dropdown-appointment-date {
+  color: white;
+}
+
+::ng-deep .dx-tab-text {
+  font-size: 17px;
+  font-weight: 400;
+}
+
+::ng-deep .dx-overlay-content:hover,
+.dx-popup-normal:hover,
+.dx-resizable:hover {
+  /* background: linear-gradient(to right, #58bdbd 0%, #a49ee1 100%) !important; */
+  overflow: visible;
+  visibility: visible;
+}
+
+/* ::ng-deep .dx-overlay-content:active,
+.dx-overlay-content:visited,
+.dx-popup-normal:active,
+.dx-popup-normal:visited .dx-resizable:active,
+.dx-resizable:visited {
+  overflow: hidden;
+  visibility: hidden;
+} */
+/* ::ng-deep .dx-overlay-content,
+.dx-popup-normal,
+.dx-resizable {
+  overflow: hidden;
+  visibility: hidden;
+} */

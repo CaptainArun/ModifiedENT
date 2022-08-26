@@ -1,0 +1,122 @@
+<div>
+    <h5 class="p-3 bg-primary text-light">
+        {{showvalue}} Facility<button style="color: rgb(255, 248, 248)" class="close" (click)="dialogClose()"
+            aria-label="Close">
+            <span aria-hidden="true">X</span>
+        </button>
+    </h5>
+
+    <div class="overflow-hidden px-3 pb-2">
+        <form [formGroup]="facilityForm">
+            <div class="row">
+
+                <div class=" col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Facility Number</mat-label>
+                        <input matInput formControlName="FacilityNumber" placeholder="Enter" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Facility Name</mat-label>
+                        <input matInput formControlName="FacilityName" placeholder="Enter" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6 col-sm-6 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Address 1</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" formControlName="AddressOne"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>City</mat-label>
+                        <input matInput formControlName="City" placeholder="Enter" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>State</mat-label>
+                        <input matInput formControlName="State" placeholder="Enter" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6 col-sm-6 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Address 2</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" formControlName="AddressTwo"></textarea>
+                    </mat-form-field>
+                </div>
+
+
+
+                <div class="col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <input matInput formControlName="Country" placeholder="Enter" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>PinCode</mat-label>
+                        <input matInput formControlName="PinCode" placeholder="Enter" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Telephone</mat-label>
+                        <input matInput placeholder="Ex.000-000-0000" formControlName="TelePhone" maxlength="12"
+                            minlength="12" appPhoneMask>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Alternate Telephone</mat-label>
+                        <input matInput placeholder="Ex.000-000-0000" formControlName="AlternateTelephone"
+                            maxlength="12" minlength="12" appPhoneMask>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="Email" placeholder="Enter" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-3 col-sm-3 mt-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Speciality</mat-label>
+                        <mat-select multiple formControlName="Speciality">
+                            <mat-option *ngFor="let spec of facility" [value]="spec.SpecialityID">
+                                {{spec.SpecialityDescription}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="text-right justify-content-end">
+                    <button mat-flat-button color="" class="custome-button mat-primary mr-2" (click)="submitFacility()">
+                        Submit
+                    </button>
+                    <button mat-stroked-button class="transperent-button" color="primary" type="button"
+                        (click)="cleartheForm()">
+                        Clear
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>

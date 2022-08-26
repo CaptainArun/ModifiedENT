@@ -1,0 +1,169 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Admission <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <div class="white mt-0 mb-2">
+    <mat-card class="mb-2">
+      <app-patient-demographic [PatID]="this.data.PatientID"></app-patient-demographic>
+    </mat-card>
+  </div>
+  <div style=" overflow: auto; width: 1500px; height: 270px;" class="white mt-4">
+    <mat-card class="p-1">
+      <div class="scroll-x">
+        <div class="row p-0 m-0 scroll-md">
+          <div class="col-xl-6">
+            <div class="v-line">
+              <div class="pt-3 pb-2">
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admission Date</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AdmissionDateTime | date: 'dd-MM-yyyy'}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admission Time</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{getTime}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admission No</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AdmissionNo}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admission Origin</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AdmissionOrigin}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admission Type</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.admissionTypeDesc}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admitting Physician</div>
+                  <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                  <div class="col-xl-7 col-lg-7 col-md-7">{{data.ProviderName}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Speciality</div>
+                  <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                  <div class="col-xl-7 col-lg-7 col-md-7">{{data.specialityName}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admitting Reason</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AdmittingReason}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">preprocedure Diagnosis</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.PreProcedureDiagnosis}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Procedure Name</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.ProcedureDesc}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">ICD Code</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.ICDCode}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Procedure Type</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.ProcedureTypeDesc}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Planned Procedure</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.PlannedProcedure}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">CPT Code</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.CPTCode}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-6">
+            <div class="v-line">
+              <div class="pt-3 pb-2">
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Urgency</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.UrgencyType}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Patient Arrival Condition</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.arrivalCondition}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Patient Arrival By</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.arrivalby}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Patient Expected Stay</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.PatientExpectedStay}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Anesthesia Fitness Required</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{fitness}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Blood Required</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{blood}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Anesthesia Required Desc</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AnesthesiaFitnessRequiredDesc}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Blood Required Desc</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.BloodRequiredDesc}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Initial Admission Status</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.admissionStatusDesc}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Instruction To Patient</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.InstructionToPatient}}</div>
+                </div>
+
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Accompanied By</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AccompaniedBy}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Ward And Bed</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.WardAndBed}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Additional Info</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AdditionalInfo}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  </div>

@@ -1,0 +1,127 @@
+<div class="overflow-hidden p-4">
+  <div class="white">
+    <h5 class="p-3 title-bg">Appointment History</h5>
+    <mat-card class="p-0">
+      <div class="scroll-x">
+        <div class="row p-0 m-0 scroll-md">
+          <div class="col-sm-1 p-0 ">
+            <img src="assets/images/patient-img.png" class="img-fluid" height="136" />
+          </div>
+
+          <div class="col-sm-4">
+            <div class="v-line">
+              <div class="pt-3 pb-2">
+                <div class="row pb-1">
+                  <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                    Patient Name
+                  </div>
+                  <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                  <div class="col-xl-7 col-lg-7 col-md-7">
+                    Mr.Rahul Sharma
+                  </div>
+                </div>
+
+                <div class="row  pb-1">
+                  <div class="col font_color">DOB/ Age</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">25-08-1994(25 Years)</div>
+                </div>
+
+                <div class="row  pb-1">
+                  <div class="col font_color">Cell Number</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">+91-123456789</div>
+                </div>
+
+                <div class="row">
+                  <div class="col font_color">Next of kin</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">Mr.Roshan Sharma (Father)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 v-line">
+            <div class="pt-3 col flex-grow-1 w-auto">
+              <div class="row pb-1">
+                <div class="col pl-4 font_color ">Primary Physician</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">Dr.Nithin Parmar</div>
+              </div>
+              <div class="row pb-1">
+                <div class="col pl-4 font_color ">Last Visit Date</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">14-02-2019</div>
+              </div>
+              <div class="row pb-1">
+                <div class="col pl-4 font_color ">Diabetic</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">NO</div>
+              </div>
+              <div class="row pb-1">
+                <div class="col pl-4 red">Allergies</div>
+                <div class="col-lg-1">:</div>
+                <div class="col red">Hives</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3 w-auto v-line">
+            <div class="pt-3 col flex-grow-1 w-auto">
+              <div class="row">
+                <div class="col pl-4 font_color ">Bill Amount</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">5000</div>
+              </div>
+              <div class="row">
+                <div class="col pl-4 font_color ">Paid</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">2500</div>
+              </div>
+              <div class="row">
+                <div class="col pl-4 font_color ">Balance</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">2500</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="row m-0">
+    <mat-card class="col-xl-12 ml-0 my-2">
+      <div class="col-12">
+        <div class="row justify-content-md-center">
+          <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-1">
+            <p class="m-0">Total Appointments : <b>15</b></p>
+          </div>
+          <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-2">
+            <p class="m-0">Visited : <b>8</b></p>
+          </div>
+          <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-3">
+            <p class="m-0">Rescheduled : <b>4</b></p>
+          </div>
+          <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-4">
+            <p class="m-0">Rescheduled : <b>3</b></p>
+          </div>
+          <div class="col-xl-2 p-2 m-2 text-center rounded" style="background-color: #b3cb67;">
+            <p class="m-0">No Show : <b>0</b></p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <mat-card>
+      <mat-card-content>
+        <div class="row">
+          <app-bms-table [config]="tableConfig" [datas]=""></app-bms-table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+ 
+</div>

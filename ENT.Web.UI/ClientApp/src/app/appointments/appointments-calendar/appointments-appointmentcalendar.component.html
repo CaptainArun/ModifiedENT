@@ -1,0 +1,42 @@
+<app-appointment-header></app-appointment-header>
+
+<div class="overflow-hidden p-4">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <form>
+        <dx-scheduler [dataSource]="appointmentsData" (onOptionChanged)="onOptionChanged($event)" [editing]="false"
+          [startDayHour]="6" [endDayHour]="22" [height]="680" [views]='["day","week","month"]' currentView="day"
+          [currentDate]="currentDate" startDateExpr="StartDate" endDateExpr="EndDate" [showAllDayPanel]="false"
+          (onAppointmentClick)="onAppointmentClick($event)" [cellDuration]="10"
+          resourceCellTemplate="resourceCellTemplate" appointmentTemplate="appointmentTemplate">
+
+          <div *dxTemplate="let appointment of 'appointmentTemplate'" class="appointment-slot">
+
+            <!-- <div class="apppointment-patient">Dr. {{appointment.ProviderName}}- {{appointment.ShortName}}</div> -->
+            <div class="apppointment-procedure">{{appointment.text}}</div>
+
+            <div class="apppointment-time">
+              {{appointment.StartDate | date : 'MMM dd, hh:mm aa'}} -
+              {{appointment.EndDate | date : 'hh:mm aa'}}
+            </div>
+          </div>
+          <!-- <div *dxTemplate="let cellData of 'dataCellTemplate'">
+            {{cellData.text}}
+
+          </div> -->
+        </dx-scheduler>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- cellDuration - length of cell in minutes -->
+<!-- editing - to allow edit or modify in boolean values -->
+<!-- dataSource - data for scheduler which includes text, StartDate, EndDate-->
+<!-- views - mode of view  -->
+<!-- onOptionChanged - change in date calls a function -->
+<!--currentView & currentDate -  initial view mode and today date  -->
+<!-- startDateExpr & endDateExpr - start and end date values -->
+<!-- showAllDayPanel - shows a all day panel - boolean values -->
+<!--  (onCellClick)="cellClick($event)" === on click a cell  -->
+<!--textExpr="PatientName"  -Title-->
+<!-- dataCellTemplate="dataCellTemplate" -->

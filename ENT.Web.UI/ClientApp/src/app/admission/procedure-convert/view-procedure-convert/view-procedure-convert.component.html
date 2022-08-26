@@ -1,0 +1,106 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Procedure Request<button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <div class="white" *ngIf="this.data">
+    <mat-card class="mb-2">
+      <app-patient-demographic [PatID]="this.data.PatientId"></app-patient-demographic>
+    </mat-card>
+  </div>
+  <div class="white mt-2">
+    <mat-card class="p-1">
+      <div class="scroll-x">
+        <div class="row p-0 m-0 scroll-md">
+          <div class="col-xl-6">
+            <div class="v-line">
+              <div class="pt-2 pb-1">
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Procedure Request Date</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.ProcedureRequestedDate | date: 'dd-MM-yyyy'}}</div>
+                </div>
+
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admitting Physician</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AdmittingPhysicianName}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Expected Stay</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.PatientExpectedStay}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Instructions To Patient</div>
+                  <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                  <div class="col-xl-7 col-lg-7 col-md-7">{{data.InstructionToPatient}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admission Type</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AdmissionTypeName}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Anesthesia Fitness Required</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AnesthesiaFitnessRequiredDesc}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Blood Required</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.BloodRequiredDesc}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="v-line">
+              <div class="pt-2 pb-1">
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Procedure Request Time</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.ProcedureRequestedDate | date: 'hh:mm a'}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">ICD Code</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.ICDCode}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">CPT Code</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.CPTCode}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Procedure Name</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.ProcedureNameDesc}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admission Type</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AdmissionTypeName}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admission Status</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.AdmissionStatusDesc}}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Urgency Type</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{data.UrgencyType}}</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  </div>
+

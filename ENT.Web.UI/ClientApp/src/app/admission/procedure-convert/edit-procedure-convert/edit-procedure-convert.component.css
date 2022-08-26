@@ -1,0 +1,6 @@
+.overflow450 {
+  overflow: auto;
+  overflow-x: hidden;
+  width: auto;
+  max-height: 450px;
+}
