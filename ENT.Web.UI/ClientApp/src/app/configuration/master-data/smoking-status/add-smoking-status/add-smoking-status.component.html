@@ -1,0 +1,59 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <h5 cdkDragHandle class="p-3 title-bg">
+    {{showvalue}} Smoking Status <button style="color: white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <div class="overflow-hidden px-3 pb-2">
+    <form [formGroup]="SmokingTypeForm">
+      <div class="row">
+
+        <div class="col-sm-12 mt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Smoking Master Code</mat-label>
+            <input matInput [readonly]="isReadOnly" maxlength="10"
+                   placeholder="Enter"
+                   formControlName="SmokingMasterCode" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-12 mt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Smoking Master Description </mat-label>
+            <input matInput
+                   placeholder="Enter"
+                   formControlName="SmokingMasterDesc" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-sm-12 mt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Order No  </mat-label>
+            <input numeric matInput
+                   placeholder="Enter"
+                   formControlName="OrderNo" />
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div>
+        <div class="text-right justify-content-end">
+          <button mat-flat-button
+                  color=""
+                  class="custome-button mat-primary mr-2"
+                  (click)="submitSalutation()">
+            Save
+          </button>
+          <button mat-stroked-button
+                  class="transperent-button"
+                  color="primary"
+                  type="button"
+                  (click)="cleartheForm()">
+            Clear
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

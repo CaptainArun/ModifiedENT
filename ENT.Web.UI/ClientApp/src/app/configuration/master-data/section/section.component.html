@@ -1,0 +1,25 @@
+<div>
+  <app-MasterData></app-MasterData>
+
+  <div class="row mr-3">
+    <div class="text-right w-100 mt-2 mb-2 mr-2">
+      <button class="custome-button mat-primary btn btn-info"
+              (click)="addNewsection()">
+        Add New
+      </button>
+    </div>
+  </div>
+  <div>
+    <mat-card class="table-wrapper">
+      <mat-card-content>
+        <h4>Section</h4>
+        <div class="row">
+          <app-bms-table [config]="tableConfig"
+                         [datas]="sectiongrid"
+                         (editItem)="editsection($event)"
+                         (deleteItem)="deletesection($event)"></app-bms-table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
