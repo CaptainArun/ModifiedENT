@@ -1,0 +1,121 @@
+<div class="bg-white upload-da" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+      <h5 cdkDragHandle class="p-3 title-bg">
+        <b>Add e-Lab Test(Sub-Master) </b><button style="color:white" class="close" (click)="close()"
+          aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+      </h5>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+
+          <form [formGroup]="LabSubMasterForm">
+            <mat-card class="px-3 py-1 card">
+              <div class="row">
+
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(LabSubMasterForm.value.DepartmentID == '' || LabSubMasterForm.value.DepartmentID == null) ? true : LabSubMasterForm.value.DepartmentID.length > 2 ? false : true">
+                      </span> Department </mat-label>
+                    <mat-icon matSuffix
+                      *ngIf="(LabSubMasterForm.value.DepartmentID == '' || LabSubMasterForm.value.DepartmentID == null) ? true : LabSubMasterForm.value.DepartmentID.length > 2 ? false : true">
+                      search</mat-icon>
+                    <input type="text" matInput placeholder="Type and Select" [matAutocomplete]="Department"
+                      #autoCompleteDepartment="matAutocompleteTrigger" formControlName="DepartmentID">
+                    <mat-autocomplete autoActiveFirstOption #Department="matAutocomplete">
+                      <mat-option *ngFor="let option of DepartmentInfo"
+                        (onSelectionChange)="setDepartment(option.DepartmentID)" [value]="option.DepartmentDesc">
+                        {{option.DepartmentDesc}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(LabSubMasterForm.value.TestName == '' || LabSubMasterForm.value.TestName == null) ? true : LabSubMasterForm.value.TestName.length > 2 ? false : true">
+                      </span> Test Name </mat-label>
+                    <mat-icon matSuffix
+                      *ngIf="(LabSubMasterForm.value.TestName == '' || LabSubMasterForm.value.TestName == null) ? true : LabSubMasterForm.value.TestName.length > 2 ? false : true">
+                      search</mat-icon>
+                    <input type="text" matInput placeholder="Type and Select" [matAutocomplete]="AutoDepartment"
+                      #autoCompleteTestName="matAutocompleteTrigger" formControlName="TestName">
+                    <mat-autocomplete autoActiveFirstOption #AutoDepartment="matAutocomplete">
+                      <mat-option *ngFor="let option of TestNameInfo"
+                        (onSelectionChange)="setTestNameNumber(option.LabMasterID)" [value]="option.LabMasterDesc">
+                        {{option.LabMasterDesc}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(LabSubMasterForm.value.TestCodesub == '' || LabSubMasterForm.value.TestCodesub == null) ? true : false">
+                      </span>Test code sub</mat-label>
+                    <input matInput placeholder="Enter code" formControlName="TestCodesub">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(LabSubMasterForm.value.SubName == '' || LabSubMasterForm.value.SubName == null) ? true : false">
+                      </span>Sub Name</mat-label>
+                    <input matInput placeholder="Enter Name" formControlName="SubName">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="Status">
+                      <mat-option *ngFor="let option of StatusValue" [value]="option.LabMasterStatusDescription">
+                        {{option.LabMasterStatusDescription}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(LabSubMasterForm.value.OrderNo == '' || LabSubMasterForm.value.OrderNo == null) ? true : false">
+                      </span>Order Number</mat-label>
+                    <input numeric matInput placeholder="Enter Number" formControlName="OrderNo">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Units</mat-label>
+                    <input matInput placeholder="Enter Units" formControlName="Units">
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Normal Range</mat-label>
+                    <input matInput placeholder="Enter Range" formControlName="NormalRange">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-12 col-lg-6 text-right pb-3 pt-3">
+                  <button mat-flat-button color="primary" class="custome-button mat-primary mr-2"
+                    (click)="submitData()">Save</button>
+                  <button mat-stroked-button class="transperent-button" (click)="cleartheForm()">Clear</button>
+                </div>
+              </div>
+            </mat-card>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

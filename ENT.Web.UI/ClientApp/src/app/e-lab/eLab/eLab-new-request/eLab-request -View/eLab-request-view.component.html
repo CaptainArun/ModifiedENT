@@ -1,0 +1,85 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg">
+    <b class="mr-4">Request View</b>
+    <span class="mr-4 ml-4" *ngIf="IsVisitDate">Visit Date and Time : {{visitDateandtimeView}}</span>
+    <span class="mr-4 ml-4 " *ngIf="!IsVisitDate">Admission Date and Time : {{AdmissionDateandtimeView}}</span>
+    <span class="mr-4 ml-4">Physician Name : {{PhysicianNameView}}</span>
+    <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+
+  <div>
+    <mat-card>
+      <form [formGroup]="eLabOrderForm">
+        <div class="row">
+          <!-- <h1>Patient Card</h1> -->
+          <div class="col-xl-12" *ngIf="patientId">
+            <app-patient-demographic [PatID]="patientId"></app-patient-demographic>
+          </div>
+          <!-- <h1>Table</h1> style="overflow: auto; overflow-x: hidden; max-height: 500px;" -->
+          <div class="col-xl-12 mt-2 mb-1">
+            <div class="table-responsive shroff-table reduce-field">
+              <table class="table table-bordered table-hover w-100">
+
+                <thead>
+                  <tr class="font-weight-bold">
+                    <th class="w-100 text-center">Test Name</th>
+                    <th class="w-50 text-center">Urgency</th>
+                    <th class="w-50 text-center">On Date</th>
+                    <th class="w-100 text-center">Notes</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <div class="col-xl-12 mt-2 mb-1">
+            <div class="table-responsive shroff-table reduce-field scroll">
+              <table class="table table-bordered table-hover w-100 ">
+
+                <tbody formArrayName="eLab">
+                  <tr class="pt-2 pb-2"
+                    *ngFor="let eLabOrder of eLabOrderForm.get('eLab')?.controls; let index = index;">
+                    <td [formGroupName]="index" class="w-100 text-center">
+                      <mat-form-field class="w-100" [matTooltip]="data.labRequestItems[index].setupMasterDesc"
+                        matTooltipPosition="below" matTooltipClass="Tooltip-md" appearance="outline">
+                        <input matInput readonly formControlName="TestName">
+                      </mat-form-field>
+                    </td>
+
+                    <td [formGroupName]="index" class="w-50 text-center">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <input type="text" readonly matInput formControlName="UrgencyView">
+                      </mat-form-field>
+                    </td>
+
+                    <td [formGroupName]="index" class="w-50 text-center">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <input type="text" readonly matInput formControlName="DateView">
+                      </mat-form-field>
+                    </td>
+
+                    <td [formGroupName]="index" class="w-100 text-center">
+                      <mat-form-field class="w-100" [matTooltip]="data.labRequestItems[index].LabNotes"
+                        matTooltipPosition="below" matTooltipClass="Tooltip-md" appearance="outline">
+                        <input matInput placeholder="Notes" readonly rows="1" cols="1" formControlName="Notes">
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--end of .table-responsive-->
+          </div>
+          <div class="col-xl-12 mt-2 mb-2">
+            <div class="col-lg-6 f-l pull-right">
+              <button mat-flat-button color="primary" class="custome-button mat-primary pull-right mr-2"
+                (click)="dialogClose()">Close</button>
+            </div>
+          </div>
+        </div>
+        <!-- <h1>Sign Off</h1> -->
+      </form>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,205 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg">
+    <b class="mr-4"> Update Report </b>
+    <span class="mr-4 ml-4">Order No : {{data?.LabOrderNo}}</span>
+    <span class="mr-4 ml-4" *ngIf="data.visitDateandTime">Visit Date & Time : {{data?.visitDateandTime}}</span>
+    <span class="mr-4 ml-4" *ngIf="data.AdmissionDateandTime">Admission Date & Time :
+      {{data?.AdmissionDateandTime}}</span>
+    <span class="mr-4 ml-4">Requesting Physician : {{data?.physicianName}}</span>
+    <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+
+  <div>
+    <div class="col-xl-12" *ngIf="data.patientId">
+      <app-patient-demographic [PatID]="data.patientId"></app-patient-demographic>
+    </div>
+
+    <form [formGroup]="OrderUpdateForm" #ngForm="ngForm">
+      <div class="row mt-2">
+        <div class="col-xl-12 ">
+          <div class="table-responsive shroff-table reduce-field">
+            <table class="table table-bordered table-hover w-100">
+              <thead class="text-center">
+                <tr class="font-weight-bold">
+                  <th class="w-100 text-center">Test Name</th>
+                  <th class="w-25 text-center">Sub Name</th>
+                  <th class="w-25 text-center">Urgency</th>
+                  <th class="w-25 text-center">Date</th>
+                  <th class="w-100 text-center">Notes</th>
+                  <th class="w-75 text-center">Value</th>
+                  <th class="w-50 text-center">Range</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-xl-12 overflow600px">
+          <div class="table-responsive shroff-table reduce-field ">
+            <table class="table table-bordered table-hover w-100 ">
+              <tbody formArrayName="eLab">
+
+                <tr class="text-center pt-2 pb-2" *ngFor="let items of eLabDynamic().controls; let index = index;"
+                  [formGroupName]="index">
+
+                  <td class="w-100 text-center">
+                    <input matInput readonly formControlName="TestName">
+                  </td>
+
+                  <td class="w-25 text-center">
+                    <input matInput readonly formControlName="SubName">
+                  </td>
+
+                  <td class="w-25 text-center">
+                    <input matInput readonly formControlName="Urgency">
+                  </td>
+
+                  <td class="w-25 text-center">
+                    <input matInput readonly formControlName="OnDate">
+                  </td>
+
+                  <td class="w-100 text-center">
+                    <input matInput readonly formControlName="Notes">
+                  </td>
+
+                  <td class="w-75 text-center">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <input matInput placeholder="Value" formControlName="Value">
+                    </mat-form-field>
+                  </td>
+
+                  <td class="w-50 text-center">
+                    <input matInput readonly formControlName="Range">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--end of .table-responsive-->
+        </div>
+
+        <div class="col-xl-6  mt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Notes</mat-label>
+            <textarea matInput placeholder="Enter Notes" formControlName="CommonNotes" rows="1"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6  mt-3">
+          <input type="file" #multiple placeholder="Choose file" value="upload" (change)="FileUploadMethod($event)"
+            style="display:none;" multiple>
+          <button type="button" mat-raised-button color="primary" [disabled]="IsSignOff"
+            (click)="multiple.click()">Upload
+            Documents</button>
+        </div>
+
+        <div class="col-xl-12 overflow100px">
+          <mat-list>
+            <mat-list-item *ngFor="let file of ViewFile;let index= index">
+
+              <span>
+                <i class="fa fa-file-text-o mr-2" aria-hidden="true"></i>
+                <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a> [{{file.Size}}]
+                <button mat-mini-fab color="warn" [disabled]="IsSignOff" (click)="RemoveFile(file.FileName,index)">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </span>
+            </mat-list-item>
+          </mat-list>
+        </div>
+
+      </div>
+      <mat-card>
+        <div class="row">
+          <div class="col-lg-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Sample Collected Date</mat-label>
+              <input matInput formControlName="SampleCollectedDate" [matDatepicker]="SampleCollectedDate" />
+              <mat-datepicker-toggle matSuffix [for]="SampleCollectedDate"></mat-datepicker-toggle>
+              <mat-datepicker #SampleCollectedDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Report Date</mat-label>
+              <input matInput formControlName="ReportDate" [matDatepicker]="ReportDate" />
+              <mat-datepicker-toggle matSuffix [for]="ReportDate"></mat-datepicker-toggle>
+              <mat-datepicker #ReportDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-3 timepick">
+            <mat-form-field class="input-full-width timer w-100" appearance="outline">
+              <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" formControlName="ReportTime" />
+              <mat-label>Report Time</mat-label>
+              <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+              </ngx-material-timepicker-toggle>
+              <ngx-material-timepicker #toggleTimepicker1>
+              </ngx-material-timepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-3 mt-3"
+            [ngClass]="{'validate': ngForm.submitted && OrderUpdateForm.get('ReportStatus').invalid}">
+            <mat-label><b>Report Status :</b></mat-label>
+            <mat-radio-group class="pl-3" formControlName="ReportStatus">
+              <mat-radio-button class="pl-3 pr-3" value="Completed">Completed</mat-radio-button>
+              <mat-radio-button class="pl-3 pr-3" value="Pending">Pending</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div class="col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label> Approved By</mat-label>
+              <input matInput [matAutocomplete]="autoap" placeholder="Type and Select" formControlName="ApprovedBy" />
+              <mat-autocomplete autoActiveFirstOption #autoap="matAutocomplete">
+                <mat-option *ngFor="let option of PhysicianName" [value]="option.ProviderName"
+                  (onSelectionChange)="setPhysicianNameNumber(option.ProviderID)">
+                  {{ option.ProviderName }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="row mt-4">
+
+          <div class="col-xl-3 col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>UserName</mat-label>
+              <input matInput placeholder="Enter" formControlName="UserName" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" placeholder="Enter" formControlName="Password" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6 text-right" *ngIf="!IsSignOff">
+
+            <button mat-flat-button #save color="primary" class="custome-button mat-primary mr-2"
+              (click)="SaveFunction()">Save</button>
+            <button type="button" mat-stroked-button #clear class="transperent-button" color="primary"
+              (click)="resetForm()">Clear</button>
+            <button mat-flat-button #submit color="primary" class="custome-button mat-primary ml-2"
+              (click)="SignOff()">SignOff</button>
+
+          </div>
+
+          <div class="col-xl-6 col-lg-6 text-right" *ngIf="IsSignOff">
+            <button mat-flat-button #submit color="primary" class="custome-button mat-primary "
+              (click)="dialogClose()">Close</button>
+          </div>
+
+        </div>
+      </mat-card>
+    </form>
+  </div>
+</div>

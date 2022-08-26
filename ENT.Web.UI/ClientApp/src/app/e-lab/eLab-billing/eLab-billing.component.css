@@ -1,0 +1,10 @@
+/* button gradient active or non-active */
+.button-active{
+    background :linear-gradient(to right, #58bdbd 0%, #a49ee1 100%);
+    color:#fff;
+  }
+  
+  .button-NotActive{
+    background :#fff;
+    color:#717c8c;
+  }

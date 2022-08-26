@@ -1,0 +1,96 @@
+<div class="bg-white upload-da" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+      <h5 cdkDragHandle class="p-3 title-bg">
+        <b>Edit e-Lab Test(Sub-Master) </b><button style="color:white" class="close" (click)="close()"
+          aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+      </h5>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+
+          <form [formGroup]="LabSubMasterForm">
+            <mat-card class="px-3 py-1 card">
+              <div class="row">
+
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" [matTooltip]="DepartmentToolTipValue" matTooltipPosition="below"
+                    matTooltipClass="Tooltip-sm" appearance="outline">
+                    <mat-label> Department </mat-label>
+                    <input type="text" matInput placeholder="Type and Select" readonly formControlName="DepartmentID">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" [matTooltip]="TestNameToolTipValue" matTooltipPosition="below"
+                    matTooltipClass="Tooltip-sm" appearance="outline">
+                    <mat-label> Test Name </mat-label>
+                    <input type="text" matInput placeholder="Type and Select" readonly formControlName="TestName">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" [matTooltip]="TestCodesubToolTipValue" matTooltipPosition="below"
+                    matTooltipClass="Tooltip-sm" appearance="outline">
+                    <mat-label>Test code sub</mat-label>
+                    <input matInput placeholder="Enter code" readonly formControlName="TestCodesub">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(LabSubMasterForm.value.SubName == '' || LabSubMasterForm.value.SubName == null) ? true : false">
+                      </span>Sub Name</mat-label>
+                    <input matInput placeholder="Enter Name" formControlName="SubName">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="Status">
+                      <mat-option *ngFor="let option of StatusValue" [value]="option.LabMasterStatusDescription">
+                        {{option.LabMasterStatusDescription}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(LabSubMasterForm.value.OrderNo == '' || LabSubMasterForm.value.OrderNo == null) ? true : false">
+                      </span>Order Number</mat-label>
+                    <input numeric matInput placeholder="Enter Number" formControlName="OrderNo">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Units</mat-label>
+                    <input matInput placeholder="Enter Units" formControlName="Units">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Normal Range</mat-label>
+                    <input matInput placeholder="Enter Range" formControlName="NormalRange">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-12 col-lg-6 text-right pb-3 pt-3">
+                  <button mat-flat-button color="primary" class="custome-button mat-primary mr-2"
+                    (click)="submitData()">Save</button>
+                  <button mat-stroked-button class="transperent-button" (click)="cleartheForm()">Clear</button>
+                </div>
+              </div>
+            </mat-card>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

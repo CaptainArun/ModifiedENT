@@ -1,0 +1,182 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg">
+    <b class="mr-4"> E-Mail Report </b>
+    <span class="mr-4 ml-4">Order No : {{data?.LabOrderNo}}</span>
+    <span class="mr-4 ml-4" *ngIf="data.visitDateandTime">Visit Date & Time : {{data?.visitDateandTime}}</span>
+    <span class="mr-4 ml-4" *ngIf="data.AdmissionDateandTime">Admission Date & Time :
+      {{data?.AdmissionDateandTime}}</span>
+    <span class="mr-4 ml-4">Requesting Physician : {{data?.physicianName}}</span>
+    <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <div>
+
+    <div class="col-xl-12" *ngIf="data.patientId">
+      <app-patient-demographic [PatID]="data.patientId"></app-patient-demographic>
+    </div>
+
+    <div class="scroll-x">
+      <div class="row p-0 m-0 scroll-md">
+        <div class="col-xl-4">
+          <div class="v-line">
+            <div class="pt-2 pb-1">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Order No</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data?.LabOrderNo}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Requested Date</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data?.Createddate | date:"dd-MM-yyyy"}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4">
+          <div class="v-line">
+            <div class="pt-2 pb-1">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Visit Date & Time / Admission Time</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data?.visitDateandTime || data?.AdmissionDateandTime}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Sample Collection Date</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data?.labOrderStatusReport?.SampleCollectedDate | date:"dd-MM-yyyy"}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4">
+          <div class="v-line">
+            <div class="pt-2 pb-1">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Requesting Physician</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data?.physicianName}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Report Date</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data?.labOrderStatusReport?.ReportDate| date:"dd-MM-yyyy hh-mm a "}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="EmailForm" #ngForm="ngForm">
+      <div class="row">
+        <div class="col-xl-12 ">
+          <div class="table-responsive shroff-table reduce-field">
+            <table class="table table-bordered table-hover w-100">
+              <thead>
+                <tr class="font-weight-bold">
+                  <th class="w-100 text-center">Test Name</th>
+                  <th class="w-25 text-center">Sub Name</th>
+                  <th class="w-25 text-center">Urgency</th>
+                  <th class="w-25 text-center">Date</th>
+                  <th class="w-100 text-center">Notes</th>
+                  <th class="w-75 text-center">Value</th>
+                  <th class="w-50 text-center">Range</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+        <div class="col-xl-12 overflow600px">
+          <div class="table-responsive shroff-table reduce-field ">
+            <table class="table table-bordered table-hover w-100 ">
+              <tbody formArrayName="eLab">
+                <tr class="pt-2 pb-2" *ngFor="let items of eLabDynamic().controls; let index = index;"
+                  [formGroupName]="index">
+                  <td class="w-100 text-center">
+                    <input matInput readonly formControlName="TestName">
+                  </td>
+                  <td class="w-25 text-center">
+                    <input matInput readonly formControlName="SubName">
+                  </td>
+                  <td class="w-25 text-center">
+                    <input matInput readonly formControlName="Urgency">
+                  </td>
+                  <td class="w-25 text-center">
+                    <input matInput readonly formControlName="OnDate">
+                  </td>
+                  <td class="w-100 text-center">
+                    <input matInput readonly formControlName="Notes">
+                  </td>
+                  <td class="w-75 text-center" *ngIf="this.data.labOrderItems[index].red; else elsePart">
+                    <mat-error>
+                      <mat-form-field class="w-100" appearance="outline">
+                        <input matInput placeholder="Value" formControlName="Value">
+                      </mat-form-field>
+                    </mat-error>
+                  </td>
+                  <ng-template #elsePart>
+                    <td class="w-75 text-center">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <input matInput readonly placeholder="Value" formControlName="Value">
+                      </mat-form-field>
+                    </td>
+                  </ng-template>
+                  <td class="w-50 text-center">
+                    <input matInput readonly formControlName="Range">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--end of .table-responsive-->
+        </div>
+        <div class="col-xl-12 mt-4 ">
+          <mat-form-field class="w-50" appearance="outline">
+            <mat-label>Notes</mat-label>
+            <textarea matInput placeholder="Enter Notes" formControlName="CommonNotes" rows="1" readonly></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-10 text-right font_color"> <b> Approved By : </b></div>
+        <div class="col-xl-2 text-left">
+          <h5>{{data?.labOrderStatusReport?.ApprovedbyPhysician}}</h5>
+        </div>
+      </div>
+      <hr>
+      <mat-card *ngIf="showMmail">
+        <div class="row">
+          <div class="col-xl-12">
+            <mat-form-field class="w-50" appearance="outline">
+              <mat-label>email-id</mat-label>
+              <input matInput placeholder="demo1@mail.com , demo2@mail.com" formControlName="emailid"
+                (keydown.space)="$event.preventDefault();">
+              <!-- type="email" email multiple -->
+            </mat-form-field>
+          </div>
+          <div class="col-xl-9 mt-4">
+            <span class="ml-4 mr-4"><b class="font_color ml-4 mr-4">Subject :</b></span>{{data?.patientName}} , Order no
+            : {{data?.LabOrderNo}} Report
+            <!-- <span class="ml-4 mr-4"><b class="font_color ml-4 mr-4">Order No :</b></span> -->
+          </div>
+          <div class="col-xl-3 text-right">
+            <button mat-flat-button color="primary" class="custome-button mat-primary mr-2"
+              (click)="OnFormSubmission()">Send</button>
+            <button type="button" mat-stroked-button class="transperent-button" color="primary"
+              (click)="resetForm()">Clear</button>
+          </div>
+        </div>
+
+
+      </mat-card>
+      <div class="row" *ngIf="!showMmail">
+        <div class="col-xl-12 text-right">
+          <button mat-flat-button class="custome-button mat-primary" (click)="dialogClose()">Close</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="bg-white upload-da" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+      <h5 cdkDragHandle class="p-3 title-bg">
+        <b>e-Lab Billing Setup</b>
+        <button style="color:white" class="close" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+      </h5>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+          <form [formGroup]="ElabBillingSetupForm">
+            <div class="row mb-4">
+              <div class="col-12">
+                <mat-card>
+                  <div class="row">
+
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label> <span class="required-asterisk"
+                            *ngIf="(ElabBillingSetupForm.value.DepartmentID == '' || ElabBillingSetupForm.value.DepartmentID == null) ? true : ElabBillingSetupForm.value.DepartmentID.length > 2 ? false : true">
+                          </span>Department </mat-label>
+                        <mat-icon matSuffix
+                          *ngIf="(ElabBillingSetupForm.value.DepartmentID == '' || ElabBillingSetupForm.value.DepartmentID == null) ? true : ElabBillingSetupForm.value.DepartmentID.length > 2 ? false : true">
+                          search</mat-icon>
+                        <input matInput placeholder="Type and Select" [matAutocomplete]="AutoDepartment"
+                          #autoCompleteDepartment="matAutocompleteTrigger" formControlName="DepartmentID">
+                        <mat-autocomplete autoActiveFirstOption #AutoDepartment="matAutocomplete">
+                          <mat-option *ngFor="let option of DepartmentInfo"
+                            (onSelectionChange)="setDepartment(option.DepartmentID)" [value]="option.DepartmentDesc">
+                            {{option.DepartmentDesc}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label> <span class="required-asterisk"
+                            *ngIf="(ElabBillingSetupForm.value.TestName == '' || ElabBillingSetupForm.value.TestName == null) ? true : ElabBillingSetupForm.value.TestName.length > 2 ? false : true">
+                          </span>Test Name </mat-label>
+                        <mat-icon matSuffix
+                          *ngIf="(ElabBillingSetupForm.value.TestName == '' || ElabBillingSetupForm.value.TestName == null) ? true : ElabBillingSetupForm.value.TestName.length > 2 ? false : true">
+                          search</mat-icon>
+                        <input matInput placeholder="Type and Select" [matAutocomplete]="TestName"
+                          #autoCompleteTestName="matAutocompleteTrigger" formControlName="TestName">
+                        <mat-autocomplete autoActiveFirstOption #TestName="matAutocomplete">
+                          <mat-option *ngFor="let option of TestNameInfo"
+                            (onSelectionChange)="setTestName(option.LabMasterID)" [value]="option.LabMasterDesc">
+                            {{option.LabMasterDesc}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(ElabBillingSetupForm.value.TestSubName == '' || ElabBillingSetupForm.value.TestSubName == null) ? true : ElabBillingSetupForm.value.TestSubName.length > 2 ? false : true">
+                          </span>Test Name Sub</mat-label>
+                        <mat-icon matSuffix
+                          *ngIf="(ElabBillingSetupForm.value.TestSubName == '' || ElabBillingSetupForm.value.TestSubName == null) ? true : ElabBillingSetupForm.value.TestSubName.length > 2 ? false : true">
+                          search</mat-icon>
+                        <input matInput placeholder="Type and Select" formControlName="TestSubName"
+                          #autoCompleteTestSubName="matAutocompleteTrigger" [matAutocomplete]="TestNameSub">
+                        <mat-autocomplete autoActiveFirstOption #TestNameSub="matAutocomplete">
+                          <mat-option *ngFor="let option of TestNameSubInfo"
+                            (onSelectionChange)="setTestNameSub(option.LabSubMasterID)"
+                            [value]="option.LabSubMasterDesc">
+                            {{option.LabSubMasterDesc}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label> <span class="required-asterisk"
+                            *ngIf="(ElabBillingSetupForm.value.Status == '' || ElabBillingSetupForm.value.Status == null) ? true : false">
+                          </span>Status</mat-label>
+                        <mat-select formControlName="Status">
+                          <mat-option *ngFor="let option of StatusValue" [value]="option.LabMasterStatusDescription">
+                            {{option.LabMasterStatusDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label> <span class="required-asterisk"
+                            *ngIf="(ElabBillingSetupForm.value.OrderNo == '' || ElabBillingSetupForm.value.OrderNo == null) ? true : false">
+                          </span>Order Number</mat-label>
+                        <input matInput numeric placeholder="Enter Number" formControlName="OrderNo">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(ElabBillingSetupForm.value.Charges == '' || ElabBillingSetupForm.value.Charges == null) ? true : false">
+                          </span>Charges</mat-label>
+                        <input numeric matInput placeholder="Enter Charges" formControlName="Charges">
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-xl-6 mt-3"></div>
+                    <div class="col-xl-6 text-right">
+                      <button mat-flat-button color="" class="custome-button mr-2 mat-primary" (click)="submitData()">
+                        Save</button>
+                      <button mat-stroked-button class="transperent-button" (click)="clear()">Clear</button>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

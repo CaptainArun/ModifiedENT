@@ -1,0 +1,7 @@
+.scroll{
+    overflow: auto;
+     overflow-x: hidden; 
+      max-height: 400px;
+   }
+   
+   

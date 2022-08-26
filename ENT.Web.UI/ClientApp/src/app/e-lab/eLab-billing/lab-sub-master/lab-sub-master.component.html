@@ -1,0 +1,24 @@
+
+    <div class="row mt-4 mb-2">
+      <div class="col-xl-4"></div>
+      <div class="col-xl-4 ml-5"></div>
+      <div class="col-xl-1  ml-1">
+      <button class="custome-button mat-primary btn btn-info"(click)="addNew()">Add New</button>
+    </div>
+     <div class="col-xl-2">
+      <form [formGroup]="searchForm">
+        <input type="search"placeholder="Search" matInput formControlName="search">  
+       </form>
+    </div>
+    </div>
+  <div class="row mt-1">
+    <div class="col-xs-12 p-3 w-100">
+      <div class="table-responsive shroff-table">
+      <mat-card class="table-wrapper">        
+          <h4>Sub Master e-Lab</h4>          
+            <app-bms-table [config]="tableConfig" [datas]="gridData"  (viewItem)="ViewLabSubMaster($event)" (editItem)="EditRecord($event)"></app-bms-table>
+      </mat-card>
+      </div>
+    </div>
+  </div>
+

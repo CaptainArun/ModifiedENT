@@ -1,0 +1,24 @@
+<div class="overflow-hidden px-4">
+   <div class="d-flex align-content-center scroll-x mt-2">
+
+      <div *ngFor="let option of TitleValues">
+         <div class="mr-2">
+            <button mat-button class="d-flex align-content-center" routerLink={{option.Url}}
+               (click)="changeButtonColor(option)" [ngClass]="option.isOpen? 'button-active' : 'button-NotActive'">
+               <span class="f-18 "><mat-icon><img src={{option.Icon}} /></mat-icon>&nbsp;&nbsp;{{option.Title}}</span>
+            </button>
+         </div>
+      </div>
+      <button mat-flat-button color="primary" class="schedbtn btn btn-info ml-5" (click)="Back()">Back</button>
+
+   </div>
+</div>
+<!-- <button mat-button class="mr-4" [ngClass]="MasterIsActive? 'button-active' : 'button-NotActive'"
+   (click)="openTestMaster()">
+   <span class="f-18 "> e-Lab Test(Master) </span>
+</button>
+
+<button mat-button class="mr-4" [ngClass]="SetupIsActive? 'button-active' : 'button-NotActive'"
+   (click)="openTestSetup()">
+   <span class="f-18 "> e-Lab Test(Setup) </span>
+</button> -->
