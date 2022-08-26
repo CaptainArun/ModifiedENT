@@ -1,0 +1,134 @@
+<div class="h-100">
+  <div class="container-fluid p-0 flex h-100 align-items-center d-flex justify-content-center w-100">
+    <div class=" row w-100  h-100 d-flex justify-content-center">
+      <div class="dr_shroff_logo"><img src="assets/images/drshroff-logo.png" /></div>
+      <div class="col-md-6   p-0 col-7 border border-left-0 border-bottom-0 border-top-0 d-none d-lg-block">
+        <div class="h-100 d-flex justify-content-center align-items-center">
+          <img src="assets/images/login-logo/login-logo.png" />
+        </div>
+      </div>
+
+      <div class=" col-md-6 d-flex justify-content-center align-items-center h-100"
+        style="background: linear-gradient(to right, rgba(9, 185, 172, 1) 0%,rgba(151, 89, 195, 1) 100%)">
+        <div class="forms-width">
+          <h1 class="greay-light-text font-weight-bold  pt-4" style="color: white;">Welcome</h1>
+          <div>
+            <div class="pt-4">
+              <h4 class="greay-light-text font-weight-bold  pt-4" style="color: white;">Please login using your account
+              </h4>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="pt-2">
+                <br>
+                <br>
+
+                <mat-form-field class=" w-100 LoginInputfield" appearance="d-none" style="color:black;">
+
+                  <input class="LoginInput" matInput placeholder="Email" formControlName="UserName" autocomplete="off">
+                  <mat-error class="slidetop" *ngIf="f.UserName.hasError('required')" style="padding: bottom 2rem;">
+                    <b>Enter your Email</b>
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+              <br>
+
+              <div>
+                <mat-form-field class=" w-100  LoginInputfield" appearance="d-none" style="color:black;">
+
+                  <input class="LoginInput" matInput [type]="showPassword ? 'text' : 'password'" placeholder="Password"
+                    formControlName="Password" autocomplete="off">
+
+                  <mat-icon class="icon mr-2" matSuffix (click)="togglePasswordVisibility()">
+                    {{showPassword?'visibility_off':'visibility'}}
+                  </mat-icon>
+
+                  <mat-error class="slidetop" *ngIf="f.Password.hasError('required')">
+                    Enter your password
+                  </mat-error>
+
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <div class="text-danger" *ngIf="erroMessage!=''">
+                  {{erroMessage}}
+                </div>
+              </div>
+
+              <div class="text-right justify-content-end">
+                <a href="#" class="dark-blue-text f-13 font-weight-bold" style="color:darkblue" data-target="#pwdModal"
+                  data-toggle="modal">Forgot Password?</a>
+              </div>
+              <div id="pwdModal" class="modal fade" tabindex="1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    </div>
+
+                    <div class="modal-body">
+                      <div class="col-md-12">
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+                            <div class="text-center">
+                              <p><B>If you have forgotten your password you can reset it here.</B></p>
+                              <div class="panel-body">
+                                <fieldset>
+                                  <div class="form-group">
+                                    <input class="form-control input-lg" placeholder="Enter your E-mail Address"
+                                      name="email" type="email">
+                                  </div>
+                                  <div class="LoginForgot mt-3">
+                                    <div>
+                                      <button type="submit" mat-flat-button class="custome-button mat-primary mr-2"
+                                        form="nameform" value="Submit">Save</button>
+
+                                      <button type="button" mat-stroked-button
+                                        class="transperent-button light-sky primary" data-dismiss="modal"
+                                        aria-hidden="true">Cancel</button>
+                                    </div>
+
+                                  </div>
+
+                                </fieldset>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- <div class="modal-footer">
+                      <div class="col-md-12">
+                        <button type="button" mat-stroked-button class="transperent-button mr-2" data-dismiss="modal"
+                          aria-hidden="true">Cancel</button>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+
+
+              <br>
+              <br>
+
+              <button mat-flat-button type="submit" class="button-big mr-2  mat-primary font-weight-bold shadow">
+                LOGIN
+              </button>
+              <!-- <br>
+              <br>
+              <br>
+              <p style="font-size: 15px; padding-top: black!important;">
+                <mat-label class="greay-light-text font-weight-bold" style="color: white;">Don't have an account?
+                </mat-label> &nbsp;<a class="dark-blue-text f-13 font-weight-bold" (click)="SignUp()"
+                  style="color:darkblue;cursor:pointer;">Signup</a>
+              </p> -->
+            </form>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+
+.center {  
+  align-items: center; 
+}
+
+.saveBtn{
+  padding-top: 25%;
+  padding-left: 30%;
+}
+
+.cropImage{
+  padding-top: 25%;  
+  padding-left: 24%;
+}
+
+.chooseBtn{
+  padding-left: 20%;
+}
+
+.crop{
+  height:150px;
+  width: 150px;
+}

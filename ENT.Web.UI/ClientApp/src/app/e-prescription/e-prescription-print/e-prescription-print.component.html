@@ -1,0 +1,120 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    <h5 cdkDragHandle class="p-3 title-bg non-printable">
+        e-Prescription
+        <button class="print-icon" style="color: white" (click)="printPage()">
+            <i class="fa fa-print fa-lg" aria-hidden="true"></i>
+        </button>
+        <button class="close" style="color: white" (click)="close()" aria-label="Close">
+            <span aria-hidden="true">X</span>
+        </button>
+    </h5>
+
+    <mat-card class="printable px-4 pb-4">
+        <div class="col-xl-12 header">    
+            <div class="col-xl-5 flex">
+                <span><h4 class="text-left">{{data.physicianName}}</h4></span> 
+                <span class="font"><b>{{data.ProviderSpecialities}}</b></span>  
+                <span class="font">Address: {{data.ProviderAddress}}</span>                           
+                <span class="font">Mobile No: {{data.ProviderContactNumber}}</span>                            
+            </div>
+
+            <div class="col-xl-2">
+                <div class="col-12">
+                    <img src={{tenantLogo}} class="logo">
+                </div>
+            </div>
+
+            <div class="col-xl-5 align flex">
+                <span><h4 class="text-left">{{data.facilityName}}</h4></span>
+                <span class="font">Address: {{data.facilityAddress}}</span>
+                <span class="font">Mobile No: {{data.facilityContactNumber}}</span>
+             </div>
+        </div>
+
+        <hr>
+
+        <div class="row col-xl-12 ml-0 my-2">
+            <div class="col-12">
+                <div class="pull-right">
+                    <div class="font">Date: {{data.CreatedDate | date: 'M/d/yyyy, h:mm a'}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row col-xl-12 ml-0 my-2">
+            <div class="col-12">
+                <div class="row justify-content-md-left">
+                    <div class="col-xl-12 text-center">
+                        <h5 class="text-left">{{data.PatientName}} - {{data.MRNumber}}</h5>
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="font">Age: {{data.Age}}; Sex: {{data.Sex}}</div>
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="font">Address: {{data.PatientAddress}}</div>
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="font">Mobile No: {{data.PatientContactNumber}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row pt-4">
+            <div class="col-xl-12 col-lg-12">
+                <div class="table-responsive shroff-table reduce-field">
+                    <table class="table table-bordered table-hover w-100">
+                        <thead>
+                            <tr class="font-weight-bold">
+                                <th class="w-20 text-center">Item / Drug Name</th>
+                                <th class="w-10 text-center">Quantity</th>
+                                <th class="w-10 text-center">Morning</th>
+                                <th class="w-10 text-center">Brunch</th>
+                                <th class="w-10 text-center">Noon</th>
+                                <th class="w-10 text-center">Evening</th>
+                                <th class="w-10 text-center">Night</th>
+                                <th class="w-10 text-center">Before</th>
+                                <th class="w-10 text-center">After</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of medicationsItemsList">
+                                <td>{{data.DrugName}}</td>
+                                <td class="text-center">{{data.TotalQuantity}}</td>
+                                <td class="text-center">{{data.MorningValue}}</td>
+                                <td class="text-center">{{data.BrunchValue}}</td>
+                                <td class="text-center">{{data.NoonValue}}</td>
+                                <td class="text-center">{{data.EveningValue}}</td>
+                                <td class="text-center">{{data.NightValue}}</td>
+                                <td class="text-center">{{data.BeforeValue}}</td>
+                                <td class="text-center">{{data.AfterValue}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row col-xl-12 top">
+            <div class="col-12">
+                <div class="text-right" *ngIf="this.data.signatureImage != null">
+                    <div class="pt-2">
+                        <img src={{signPic}} class="sign-widht">
+                    </div>
+                </div>
+                <div class="text-right" *ngIf="this.data.signatureImage == null">
+                    <p class="m-auto sign">No Signature Found</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row col-xl-12">
+            <div class="col-12">
+                <div class="text-right">
+                    <h5>{{data.physicianName}}</h5>
+                    <div class="font"><b>{{data.ProviderSpecialities}}</b></div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>

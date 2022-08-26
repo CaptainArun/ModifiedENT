@@ -1,0 +1,42 @@
+.body {
+  padding-top: 17%;
+  padding-left: 29%;
+}
+
+.example-chip-list {
+  width: 60%;
+}
+
+/*.mat-chip-list-wrapper .mat-standard-chip, .mat-chip-list-wrapper input.mat-input-element{
+  margin:0px;
+}*/
+.mat-chip.mat-standard-chip {
+  background: #09b9ac !important;
+  color: #fff;
+}
+
+.btnUpload {
+  margin-left: 5%;
+  margin-top: 10%;
+}
+
+
+/* 
+.element {
+  width: 100%;
+  height: 100%;
+  animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    background-color:  #06f7f7 ;
+  }
+  30% {
+    background-color: #9c94f1;
+  }
+  70% {
+    background-color: #cef108;
+  } 
+}
+*/

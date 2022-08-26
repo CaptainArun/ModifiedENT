@@ -1,0 +1,15 @@
+/* Gradient button active or inactive */
+.button-active {
+    background : linear-gradient(to right, #58bdbd 0%, #a49ee1 100%);
+    color: #fff;
+}
+  
+.button-inactive {
+    background : #fff;
+    color: #717c8c;
+}
+
+.new-rx-btn {
+    height: 32px; 
+    width: 140px;
+}
