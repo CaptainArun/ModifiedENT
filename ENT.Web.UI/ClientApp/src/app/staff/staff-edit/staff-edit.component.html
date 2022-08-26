@@ -1,0 +1,1826 @@
+
+<!--<div class="overflow-hidden px-4">
+  <div class="common_submenu p-2  d-flex">
+    <div class="d-flex align-content-center scroll-x">
+      <div class="row">
+        <div class="col-xl-12">
+        <button mat-button class="d-flex align-content-center" id="Address" (click)="openAddress()">
+          <mat-icon><img src='assets/images/patientprofile/patient-chart.png' /> </mat-icon>
+          <span class="f-18 ">Address</span>
+        </button>
+              <button mat-flat-button color="" class="custome-button pull-right   mat-primary vissub" (click)="back()">Back</button>
+
+      </div>
+        </div>
+</div>
+   
+  </div>-->
+  <div class="overflow-hidden px-4">
+    <div class="row mt-2">
+      <div class="col-xl-12 common_submenu">
+  
+        <button mat-button class="align-content-center" id="Address" (click)="openAddress()">
+          <mat-icon><img src='assets/images/MenuNewIcons/physician/profile.png' /> </mat-icon>
+          <span class="f-18 ">Profile</span>
+        </button>
+  
+        <button mat-flat-button color="" class="custome-button mat-primary vissub pull-right "
+                (click)="back()">
+          Back
+        </button>
+      </div>
+    </div>
+    <app-staffcardComponent [submit]="this.submitData"></app-staffcardComponent>
+    <h5 cdkDragHandle class="p-3 title-bg mt-2">
+      Add Staff
+    </h5>
+  
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+          <mat-horizontal-stepper #stepper (selectionChange)="stepChanged($event, stepper);">
+            <mat-step [stepControl]="personalFormGroup">
+              <form [formGroup]="staffeditform">
+  
+                <ng-template matStepLabel>Profile</ng-template>
+                <mat-card class="mb-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-xl-2">
+                          <div class="upload-file p-2" *ngIf="StaffDetailById?.StaffImage != null || !imageFlag" style="text-align: center;">
+                            <img src={{profilePics}} style="width:200px; height:200px; ">
+                          </div>
+  
+                          <div class="upload-file " *ngIf="StaffDetailById?.StaffImage == null && imageFlag">
+                            <img src="assets/images/No-Image.png" class="img-fluid" width="200" />                        
+                          </div>
+                          <div class="upload-file p-2" style="text-align: center;">
+                            <button type="button" mat-flat-button color="" value="upload" (click)="openImageCropper()"
+                                    class="custome-button mat-primary">
+                              Upload Image
+                            </button>
+                          </div>
+  
+                          <div class="col-lg-3 body">
+                            <h4>  <mat-checkbox formControlName="IsActive"> Active</mat-checkbox></h4>
+                          </div>
+                        </div>
+  
+                        <div class="col-xl-10 col-lg-12">
+                          <div class="row">
+                            <div class="col-lg-3">
+                              <mat-form-field class="w-100" [matTooltip]="departmentToolTip" matTooltipPosition="above"
+                                              matTooltipClass="Tooltip-lg" appearance="outline">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                        *ngIf="(staffeditform.value.Department == '' || staffeditform.value.Department == null) ? true : staffeditform.value.Department.length > 2 ? false : true"></span>
+                                  Department
+                                </mat-label>
+                                <mat-icon matSuffix
+                                          *ngIf="(staffeditform.value.Department == '' || staffeditform.value.Department == null) ? true : staffeditform.value.Department.length > 2 ? false : true">
+                                  search
+                                </mat-icon>
+                                <input matInput placeholder="Type and Select" #autoCompleteDepartment="matAutocompleteTrigger" [matAutocomplete]="deptartmentAuto" formControlName="Department" maxlength="500" />
+  
+                                <mat-autocomplete autoActiveFirstOption #deptartmentAuto="matAutocomplete">
+                                  <mat-option *ngFor="let item of department" [value]="item.DepartmentDesc" (onSelectionChange)="setDepartmentToolTip(item.DepartmentDesc,item.DepartmentID)">
+                                    {{item.DepartmentDesc}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                            <!--<div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Category</mat-label>
+                      <mat-select formControlName="Category">
+  
+                      </mat-select>
+                    </mat-form-field>
+                  </div>-->
+                            <div class="col-lg-3">
+                              <mat-form-field class="w-100" appearance="outline" [matTooltip]="facilitytooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                        *ngIf="(staffeditform.value.facility == '' || staffeditform.value.facility == null) ? true : false"></span>Facility
+                                </mat-label>
+                                <mat-select formControlName="facility" placeholder="facility" multiple>
+                                  <mat-option *ngFor="let facility of Facility" (click)="setFacility()" [value]="facility.FacilityId"> {{facility.FacilityName}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                        *ngIf="(staffeditform.value.Role == '' || staffeditform.value.Role == null) ? true : false"></span>Role
+                                </mat-label>
+                                <mat-select formControlName="Role">
+                                  <mat-option *ngFor="let Role of role" [value]="Role.RoleId">{{Role.RoleDescription}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>User Type</mat-label>
+                                <mat-select formControlName="UserType">
+                                  <mat-option *ngFor="let usertype of UserType" [value]="usertype.UserTypeId">{{usertype.UserTypeDescription}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Employee Number</mat-label>
+  
+                                <input readonly matInput placeholder="Employee Number" formControlName="EmployeeNumber">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Date of Joining</mat-label>
+                                <input matInput [matDatepicker]="datebirth" placeholder="Date of Joining" formControlName="DateofJoining" [max]="maxDate">
+                                <mat-datepicker-toggle matSuffix [for]="datebirth"></mat-datepicker-toggle>
+                                <mat-datepicker #datebirth></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-3">
+                              <mat-form-field class="w-100" appearance="outline" [matTooltip]="SchedulerdepartmentToolTip" matTooltipPosition="above"
+                                              matTooltipClass="Tooltip-lg">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                        *ngIf="(staffeditform.value.SchedulerDepartment == '' || staffeditform.value.SchedulerDepartment == null) ? true : staffeditform.value.SchedulerDepartment.length > 2 ? false : true"></span>Scheduler Department
+                                </mat-label>
+                                <mat-icon matSuffix
+                                          *ngIf="(staffeditform.value.SchedulerDepartment == '' || staffeditform.value.SchedulerDepartment == null) ? true : staffeditform.value.SchedulerDepartment.length > 2 ? false : true">
+                                  search
+                                </mat-icon>
+                                <input type="text" matInput placeholder="Type and Select" [matAutocomplete]="autoschedulerdepartment" #autoCompleteSchedulerDepartment="matAutocompleteTrigger" formControlName="SchedulerDepartment" maxlength="500" />
+                                <mat-autocomplete #autoschedulerdepartment="matAutocomplete">
+                                  <mat-option *ngFor="let item of Schedulerdepartment" (onSelectionChange)="setSchedulerDepartmentToolTip(item.DepartmentDesc,item.DepartmentID)"
+                                              [value]="item.DepartmentDesc">
+                                    {{item.DepartCode}}-{{item.DepartmentDesc}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-6">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label> Additional Details</mat-label>
+                                <textarea maxlength="500" matInput placeholder="Enter" rows="1" cols="1" formControlName="AdditionalDetails"></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="d-flex col-xl-4 col-lg-6 p-0">
+                              <div class="col-xl-6 col-lg-6 pr-0">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>Salutation</mat-label>
+                                  <mat-select formControlName="Salutation">
+                                    <mat-option *ngFor="let Salutation of salutation" [value]="Salutation.SalutationID">{{Salutation.SalutationCode}}</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-xl-6 col-lg-6 pl-0">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>
+                                    <span class="required-asterisk"
+                                          *ngIf="(staffeditform.value.Firstname == '' || staffeditform.value.Firstname == null) ? true : false"></span>First Name
+                                  </mat-label>
+                                  <input maxlength="50" matInput placeholder="Enter" formControlName="Firstname">
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-6">
+                              <mat-form-field class=" w-100 " appearance="outline">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                        *ngIf="(staffeditform.value.MiddleName == '' || staffeditform.value.MiddleName == null) ? true : false"></span>Middle Name
+                                </mat-label>
+                                <input maxlength="50" matInput placeholder="Enter" formControlName="MiddleName">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-4 col-lg-6">
+                              <mat-form-field class=" w-100 " appearance="outline">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                        *ngIf="(staffeditform.value.Lastname == '' || staffeditform.value.Lastname == null) ? true : false"></span>Last Name
+                                </mat-label>
+                                <input maxlength="50" matInput placeholder="Enter" formControlName="Lastname">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xl-4 col-lg-6">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Gender</mat-label>
+                                <mat-select formControlName="Gender">
+                                  <mat-option *ngFor="let Gender of gender" [value]="Gender.GenderID">{{Gender.GenderDesc}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-4 col-lg-6">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                        *ngIf="(staffeditform.value.DateofBirth == '' || staffeditform.value.DateofBirth == null) ? true : false"></span>Date of Birth
+                                </mat-label>
+                                <input matInput [matDatepicker]="pickeryu" placeholder="Date of Birth" (dateChange)="bindDob()" formControlName="DateofBirth" [max]="startDate" [min]="endDate">
+                                <mat-datepicker-toggle matSuffix [for]="pickeryu"></mat-datepicker-toggle>
+                                <mat-datepicker #pickeryu></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+  
+                            <div class="col-xl-4 col-lg-6">
+                              <mat-form-field class=" w-100 " appearance="outline">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                        *ngIf="(staffeditform.value.staffAge == '' || staffeditform.value.staffAge == null) ? true : false"></span>Age
+                                </mat-label>
+                                <input matInput placeholder="Enter" (blur)="bindAgeDob()" formControlName="staffAge" type="number">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="d-flex col-xl-4 col-lg-6 p-0">
+                              <div class="col-xl-6 col-lg-6 pr-0">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>
+                                    <span class="required-asterisk"
+                                          *ngIf="(staffeditform.value.Identification == '' || staffeditform.value.Identification == null) ? true : false"></span>Identification
+                                  </mat-label>
+                                  <mat-select formControlName="Identification">
+                                    <mat-option *ngFor="let identification of Identification"(click)="setIdentification(identification.IDTDescription)" [value]="identification.IDTId">{{identification.IDTDescription}}</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-xl-6 col-lg-6 pl-0">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>
+                                    <span class="required-asterisk"
+                                          *ngIf="(staffeditform.value.PatientIdentificationtypedetails == '' || staffeditform.value.PatientIdentificationtypedetails == null) ? true : false"></span>Identification Details -1
+                                  </mat-label>
+                                  <input  matInput placeholder="Enter" formControlName="PatientIdentificationtypedetails" (keyup)= "valid()">
+                                  
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="d-flex col-xl-4 col-lg-6 p-0">
+                              <div class="col-xl-6 col-lg-6 pr-0">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>
+                                    <span class="required-asterisk"
+                                          *ngIf="(staffeditform.value.Identificationname == '' || staffeditform.value.Identificationname == null) ? true : false"></span>Identification
+                                  </mat-label>
+                                  <mat-select formControlName="Identificationname">
+                                    <mat-option *ngFor="let identification of Identification" (click)="setIdentification1(identification.IDTDescription)" [value]="identification.IDTId">{{identification.IDTDescription}}</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+
+                              </div>
+                              <div class="col-xl-6 col-lg-6 pl-0">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>
+                                    <span class="required-asterisk"
+                                          *ngIf="(staffeditform.value.PatientIdentificationtypedetailsname == '' || staffeditform.value.PatientIdentificationtypedetailsname == null) ? true : false"></span>Identification Details -2
+                                  </mat-label>
+                                  <input  matInput placeholder="Enter" formControlName="PatientIdentificationtypedetailsname" (keyup)= "valid1()">
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            
+                            <div class="col-xl-4 col-lg-6">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Marital Status</mat-label>
+                                <mat-select formControlName="MaritalStatus">
+                                  <mat-option *ngFor="let MartialStatus of martialstatus"  [value]="MartialStatus.MaritalStatusID">{{MartialStatus.MaritalStatusDesc}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xl-4 col-lg-6">
+                              <mat-form-field class=" w-100 " appearance="outline">
+                                <mat-label>Mother's Maiden Name</mat-label>
+                                <input maxlength="50" matInput placeholder="Enter" formControlName="MothersMaidenName">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-4 col-lg-6">
+                              <mat-form-field class=" w-100" appearance="outline">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                        *ngIf="(staffeditform.value.preferedlanguage == '' || staffeditform.value.preferedlanguage == null) ? true : staffeditform.value.preferedlanguage ? false : staffeditform.value.preferedlanguage.length > 2 ? false : true"></span>Prefered Language
+                                </mat-label>
+                                <mat-icon matSuffix
+                                          *ngIf="(staffeditform.value.preferedlanguage == '' || staffeditform.value.preferedlanguage == null) ? true : staffeditform.value.preferedlanguage ? false : staffeditform.value.preferedlanguage.length > 2 ? false : true">
+                                  search
+                                </mat-icon>
+                                <mat-chip-list #chipList>
+                                  <mat-chip *ngFor="let language of languages"
+                                            [removable]="removable"
+                                            (removed)="remove(language,i)">
+                                    {{language}}
+  
+                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                  </mat-chip>
+                                  <input matInput placeholder="Type and Select" style="padding-right:10px;"
+                                         #LanguageInput [matAutocomplete]="autopreferedlanguage" #autocompleteTrigger="matAutocompleteTrigger"
+                                         formControlName="preferedlanguage"
+                                         [matChipInputFor]="chipList" />
+                                </mat-chip-list>
+                                <mat-autocomplete #autopreferedlanguage="matAutocomplete" (optionSelected)="selected($event)">
+                                  <mat-option *ngFor="let languagefilter of Preferedlanguage" [value]="languagefilter">
+                                    <mat-checkbox color="primary" style="padding: 0 12px"
+                                                  [checked]="languages.indexOf(languagefilter.LanguageDescription) >= 0"></mat-checkbox>
+                                    {{languagefilter.LanguageCode}}-{{languagefilter.LanguageDescription}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-4 col-lg-6">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Blood group</mat-label>
+                                <mat-select formControlName="Bloodgroup">
+                                  <mat-option *ngFor="let Blood of bloodgroup" [value]="Blood.BloodGroupDesc">{{Blood.BloodGroupDesc}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+  
+                            <div class="row">
+  
+  
+                              <div class="col-xl-3 col-lg6">
+                                <mat-form-field class="w-100 " appearance="outline">
+                                  <mat-label>Cell Number</mat-label>
+                                  <input matInput  placeholder="Ex.000-000-0000" formControlName="CellNumber" maxlength="12" minlength="12" appPhoneMask >
+                                </mat-form-field>
+                              </div>
+                              <div class="col-xl-3 col-lg6">
+                                <mat-form-field class="w-100 " appearance="outline">
+                                  <mat-label>Phone Number</mat-label>
+                                  <input matInput  placeholder="Ex.000-000-0000" formControlName="PhoneNumber" maxlength="12" minlength="12" appPhoneMask>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-xl-3 col-lg6">
+                                <mat-form-field class="w-100 " appearance="outline">
+                                  <mat-label>WhatsApp Number</mat-label>
+                                  <input  matInput placeholder="Ex.000-000-0000" formControlName="WhatsAppNumber" maxlength="12" minlength="12"  appPhoneMask>
+                                </mat-form-field>
+  
+                                <mat-checkbox class="pt-2" (click)="whatsapp()" formControlName="sameas">Same as Cell Number</mat-checkbox>
+  
+                              </div>
+                              <div class="col-xl-3 col-lg6">
+                                <mat-form-field class="w-100 " appearance="outline">
+                                  <mat-label>
+                                    <span class="required-asterisk"
+                                          *ngIf="(staffeditform.value.Email == '' || staffeditform.value.Email == null) ? true : false"></span>E-mail
+                                  </mat-label>
+                                  <input maxlength="75" matInput placeholder="demo@email.com" formControlName="Email">
+                                </mat-form-field>
+                              </div>
+  
+                              <h5 class="py-3  pt-3 col-xl-12">Emergency Contact Information</h5>
+  
+  
+                              <div class="d-flex col-xl-3 col-lg-6 p-0">
+                                <div class="col-xl-4 col-lg-6 pr-0">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Salutation</mat-label>
+                                    <mat-select formControlName="SalutationContact">
+                                      <mat-option *ngFor="let Salutation of salutation" [value]="Salutation.SalutationID">{{Salutation.SalutationCode}}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-xl-8 col-lg-6 pl-0">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>First Name</mat-label>
+                                    <input maxlength="50" matInput placeholder="Enter" formControlName="FirstnameConatct">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="col-xl-3 col-lg6">
+                                <mat-form-field class="w-100 " appearance="outline">
+                                  <mat-label>Last Name</mat-label>
+                                  <input maxlength="50" matInput placeholder="Enter" formControlName="LastName">
+                                </mat-form-field>
+                              </div>
+                              <div class="d-flex col-xl-3 col-lg-6 p-0">
+                                <div class="col-xl-4 col-lg-6 pr-0">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Cell No</mat-label>
+                                    <mat-select formControlName="cellNoContact">
+                                      <mat-option *ngFor="let ContactType of contactType" [value]="ContactType.ContactTypeId">{{ContactType.ContactTypeDesc}}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-xl-8 col-lg-6 pl-0">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Emergency Contact No</mat-label>
+                                    <input  matInput  placeholder="Ex.000-000-0000" formControlName="EmergencyNoContact" maxlength="12" minlength="12" appPhoneMask>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="col-xl-3 col-lg6">
+                                <mat-form-field class="w-100 " appearance="outline">
+                                  <mat-label>Telephone Number</mat-label>
+                                  <input  matInput  placeholder="Ex.000-000-0000" formControlName="TelephoneNoContact"  maxlength="12"  minlength="12" appPhoneMask>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-xl-3 col-lg6">
+                                <mat-form-field class="w-100 " appearance="outline">
+                                  <mat-label>Fax</mat-label>
+                                  <input matInput maxlength="20" placeholder="Enter" formControlName="Fax">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-xl-3 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>Relationship to Employee</mat-label>
+                                  <mat-select formControlName="RelationshiptoEmployee">
+                                    <mat-option *ngFor="let Relation of relation" [value]="Relation.RSPId">{{Relation.RSPDescription}}</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                            </div>
+  
+  
+                          </div>
+                          <!--       <div class="row" formGroupName="Addprofile">
+                  <div class="col-lg-3">
+                    <mat-checkbox formControlName="IsActive"> Active</mat-checkbox>
+                  </div>
+                </div>-->
+                          <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                            <div>
+                              <button type="button" mat-flat-button color="" class="custome-button mat-primary" matStepperNext>Next</button>
+                            </div>
+                          </div>
+  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                </mat-card>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="contactFormGroup">
+              <form [formGroup]="Address">
+  
+                <ng-template matStepLabel>Address</ng-template>
+                <mat-card class="mb-4">
+                  <!--<h5 class="py-3 pl-0 pt-3 col-xl-12">Contact Information</h5>
+  
+        <div class="row">
+  
+  
+        <div class="col-xl-3 col-lg6">
+          <mat-form-field class="w-100 " appearance="outline">
+            <mat-label>Cell Number</mat-label>
+            <input numeric maxlength="10" matInput placeholder="Enter" formControlName="CellNumber">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg6">
+          <mat-form-field class="w-100 " appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input numeric maxlength="10" matInput placeholder="Enter" formControlName="PhoneNumber">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg6">
+          <mat-form-field class="w-100 " appearance="outline">
+            <mat-label>WhatsApp Number</mat-label>
+            <input numeric maxlength="10" matInput placeholder="Enter" formControlName="WhatsAppNumber">
+          </mat-form-field>
+  
+          <mat-checkbox class="pt-2" (click)="whatsapp()" formControlName="Drug">Same as Cell Number</mat-checkbox>
+  
+        </div>
+        <div class="col-xl-3 col-lg6">
+          <mat-form-field class="w-100 " appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input maxlength="75" matInput placeholder="Enter" formControlName="Email">
+          </mat-form-field>
+        </div>
+  
+        <h5 class="py-3  pt-3 col-xl-12">Emergency Contact Information</h5>
+  
+  
+        <div class="d-flex col-xl-3 col-lg-6 p-0">
+          <div class="col-xl-4 col-lg-6 pr-0">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Salutation</mat-label>
+              <mat-select formControlName="SalutationContact">
+                <mat-option *ngFor="let Salutation of salutation" [value]="Salutation.SalutationID">{{Salutation.SalutationCode}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-8 col-lg-6 pl-0">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input maxlength="50" matInput placeholder="Enter" formControlName="FirstnameConatct">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg6">
+          <mat-form-field class="w-100 " appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input maxlength="50" matInput placeholder="Enter" formControlName="LastName">
+          </mat-form-field>
+        </div>
+        <div class="d-flex col-xl-3 col-lg-6 p-0">
+          <div class="col-xl-4 col-lg-6 pr-0">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Cell No</mat-label>
+              <mat-select formControlName="cellNoContact">
+                <mat-option *ngFor="let ContactType of contactType" [value]="ContactType.ContactTypeId">{{ContactType.ContactTypeDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-8 col-lg-6 pl-0">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Emergency Contact No</mat-label>
+              <input numeric maxlength="50" matInput placeholder="Enter" formControlName="EmergencyNoContact">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg6">
+          <mat-form-field class="w-100 " appearance="outline">
+            <mat-label>Telephone Number</mat-label>
+            <input matInput maxlength="15" placeholder="Enter" formControlName="TelephoneNoContact">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg6">
+          <mat-form-field class="w-100 " appearance="outline">
+            <mat-label>Fax</mat-label>
+            <input matInput maxlength="20" placeholder="Enter" formControlName="Fax">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Relationship to Employee</mat-label>
+            <mat-select formControlName="RelationshiptoEmployee">
+              <mat-option *ngFor="let Relation of relation" [value]="Relation.RSPId">{{Relation.RSPDescription}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        </div>-->
+                  <div formArrayName="AddressArray" *ngFor="let Address of getdynamicProblemListControls().controls;  let i = index ">
+                    <div [formGroupName]="i">
+                      <div class="row">
+  
+                        <div class="col-xl-3 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>
+                              <span class="required-asterisk"
+                                    *ngIf="(Address.value.AddressTypeDescription == '' || Address.value.AddressTypeDescription == null) ? true : false"></span>Address Type
+                            </mat-label>
+                            <mat-select formControlName="AddressType">
+                              <mat-option *ngFor="let AddressType of addresstype" (click)="AddressTypeEvent(AddressType.AddressTypeDescription)" [value]="AddressType.AddressTypeId">
+                                <input hidden formControlName="AddressTypeDescription" />
+                                {{AddressType.AddressTypeDescription}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+  
+                        </div>
+                        <div class="col-xl-3 col-lg6">
+                          <mat-form-field class="w-100 " appearance="outline">
+                            <mat-label>Address1</mat-label>
+                            <input maxlength="50" matInput placeholder="Enter" formControlName="Address1">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-3 col-lg6">
+                          <mat-form-field class="w-100 " appearance="outline">
+                            <mat-label>Address2</mat-label>
+                            <input maxlength="50" matInput placeholder="Enter" formControlName="Address2">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-3 col-lg6">
+                          <mat-form-field class="w-100 " appearance="outline">
+                            <mat-label>Town/city</mat-label>
+                            <input maxlength="50" matInput placeholder="Enter" formControlName="Town">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-3 col-lg6">
+                          <mat-form-field class="w-100 " appearance="outline">
+                            <mat-label>District</mat-label>
+                            <input maxlength="25" matInput placeholder="Enter" formControlName="District">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-3 col-lg6">
+                          <mat-form-field class="w-100 " appearance="outline">
+                            <mat-label>PIN code</mat-label>
+                            <input numeric maxlength="6" matInput placeholder="Enter" formControlName="PINcode">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-3 col-lg6">
+                          <mat-form-field class="w-100 " appearance="outline">
+                            <mat-label>State</mat-label>
+                            <input maxlength="25" matInput placeholder="Enter" formControlName="State">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-3 col-lg6">
+                          <mat-form-field class="w-100 " appearance="outline">
+                            <mat-label>Country</mat-label>
+                            <input maxlength="25" matInput placeholder="Enter" formControlName="Country">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-3 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Valid From</mat-label>
+                            <input matInput [matDatepicker]="pickery" placeholder="Valid From" formControlName="ValidFrom">
+                            <mat-datepicker-toggle matSuffix [for]="pickery"></mat-datepicker-toggle>
+                            <mat-datepicker #pickery></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-3 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Valid To</mat-label>
+                            <input matInput [matDatepicker]="pickerm" placeholder="Valid To" formControlName="ValidTo">
+                            <mat-datepicker-toggle matSuffix [for]="pickerm"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerm></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-xl-12 text-right pb-4">
+                      
+                          <button type="button" mat-flat-button (click)="onConatctAddRow('submit')" class="custome-button w-auto mat-primary"> Add Address</button>
+                       
+                      </div>
+                    </div>
+                    <div class="row mb-2 pt-4" *ngIf="AddressInfoShow" style="border-top: 3px solid #58bdbd;">
+                      <div class="col-12 pt-2" *ngFor="let address of addressModelCollection; let i=index;">
+                        <div class="row m-0 border-bottom">
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold pl-0">AddressType :</div>
+                              <div>{{address.AddressTypeDesc}} </div>
+                            </div>
+                          </div>
+  
+  
+  
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Address1 :</div>
+                              <div>{{address.Address1}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Address2 :</div>
+                              <div>{{address.Address2}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Town :</div>
+                              <div>{{address.City}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">District :</div>
+                              <div>{{address.District}}</div>
+                            </div>
+                          </div>
+  
+                        </div>
+                        <div class="row m-0 border-bottom">
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">PINcode :</div>
+                              <div>{{address.Pincode}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">State :</div>
+                              <div>{{address.State}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Country :</div>
+                              <div>{{address.Country}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Valid From :</div>
+                              <div>{{address.ValidFrom|date:"dd/MM/yyyy"}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Valid To :</div>
+                              <div>{{address.ValidTo|date:"dd/MM/yyyy"}}</div>
+                            </div>
+                          </div>
+  
+  
+                          <div class="col-lg-auto pr-0">
+                            <!--<i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true"></i>-->
+                            <!--<i *ngIf="hide[i]" class="fa fa-floppy-o f-25 cursor-pointer " (click)="setConatctUpdate(i)"></i>-->
+                            <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openAddressStaff(address,i)"></i>
+                            <i *ngIf="addressModelCollection.length>1" class="fa fa-trash f-25 ml-2" (click)="deleteContact(address)" aria-hidden="true"></i>
+                          </div>
+                        </div>
+  
+                      </div>
+                    </div>
+  
+             
+                    <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                      <div>
+                        <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                        <button type="button" (click)="onConatctAddRow()" mat-flat-button color="" class="custome-button mat-primary" matStepperNext>Next</button>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card>
+  
+  
+  </form>
+            </mat-step>
+            <mat-step [stepControl]="educationFormGroup">
+              <form [formGroup]="Education">
+                <ng-template matStepLabel>
+                  Education Qualification
+  
+  
+                </ng-template>
+                <mat-card class="mb-4">
+                  <div formArrayName="educationArray" *ngFor="let education of getdynamiceducationArray().controls;  let i = index ">
+  
+                    <div class="row" [formGroupName]="i">
+                      <!--<div class="col-xl-3 col-lg6">
+      <mat-form-field class="w-100 " appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="EducationType" placeholder="EducationType">
+          <ng-container *ngFor="let EducationType of Educationtype">
+            <mat-option value="{{EducationType.id}}" (click)="setEducationType(EducationType.Value)"> {{EducationType.Value}}</mat-option>
+            <input hidden  formControlName="EducationTypeValue" />
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>-->
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>
+  
+                            <span class="required-asterisk"
+                                  *ngIf="(education.value.University == '' || education.value.University == null) ? true : false"></span>Board/university
+                          </mat-label>
+                          <input matInput placeholder="Enter" formControlName="University">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-50" appearance="outline">
+                          <mat-label><span class="required-asterisk"
+        *ngIf="(education.value.Month == '' || education.value.Month == null) ? true : false"></span>Month</mat-label>
+                          <mat-select formControlName="Month" placeholder="Month">
+  
+  
+                            <mat-option *ngFor="let monthvalue of Month" [value]="monthvalue.id" (click)="Monthvalue(monthvalue.month)"> {{monthvalue.month}}</mat-option>
+                            <input hidden formControlName="MonthValue" />
+                          </mat-select>
+                        </mat-form-field>
+  
+                        <mat-form-field class="w-50" appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(education.value.Year == '' || education.value.Year == null) ? true : false"></span>
+                        Year</mat-label>
+                          <mat-select formControlName="Year">
+                            <mat-option *ngFor="let gender of Yeardata" [value]="gender">
+                              {{gender}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(education.value.InstituteName == '' || education.value.InstituteName == null) ? true : false"></span>School/CollegeName
+                          </mat-label>
+                          <input matInput placeholder="Enter" formControlName="InstituteName">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Percentage Marks/Div</mat-label>
+                          <input matInput maxlength="30" placeholder="Enter" formControlName="Percentage" numeric>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(education.value.Branch == '' || education.value.Branch == null) ? true : false"></span>Group/Branch
+                          </mat-label>
+                          <input matInput placeholder="Enter" formControlName="Branch">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>MainSubjects</mat-label>
+                          <input matInput placeholder="Enter" formControlName="MainSubject">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Honorary Scholorship Details</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Scholorship">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Qualification</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Qualification">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Duration</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Duration">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Place of Institution</mat-label>
+                          <input matInput maxlength="50" placeholder="Enter" formControlName="PlaceOfInstitute">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Registration Authory</mat-label>
+                          <input matInput placeholder="Enter" formControlName="RegistrationAuthority">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Registration Number</mat-label>
+                          <input matInput placeholder="Enter" formControlName="RegistrationNo" numeric>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>Registration Expiry Date</mat-label>
+                          <input matInput [matDatepicker]="pickerrr" placeholder="RegistrationExpiryDate" formControlName="RegistrationExpiryDate">
+                          <mat-datepicker-toggle matSuffix [for]="pickerrr"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerrr></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Additional Information</mat-label>
+                          <input matInput placeholder="Enter" formControlName="AdditionalInfo">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-12 text-right pb-4">
+                        <button type="button" mat-flat-button (click)="onRowEducationAdd('submit')" class="custome-button w-auto mat-primary"> Add Education </button>
+                      </div>
+                    </div>
+                    <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;"  *ngIf="QualificationInfoShow">
+                      <div class="col-12" *ngFor="let qualification of qualificationmodelCollection; let i = index;">
+                        <div class="row m-0 border-bottom">
+  
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold pl-0">Board :</div>
+                              <div>{{qualification.University}} </div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold pl-0">Month :</div>
+                              <div>{{qualification.Month}} </div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold pl-0">Year :</div>
+                              <div>{{qualification.Year}} </div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Percentage :</div>
+                              <div>{{qualification.Percentage}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Group :</div>
+                              <div>{{qualification.Branch}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">MainSubjects :</div>
+                              <div>{{qualification.MainSubject}}</div>
+                            </div>
+                          </div>
+                        </div>
+  
+                        <div class="row border-bottom">
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">HonoraryScholorshipDetails :</div>
+                              <div>{{qualification.Scholorship}}</div>
+                            </div>
+                          </div>
+  
+  
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">SchoolCollegeName :</div>
+                              <div>{{qualification.InstituteName}}</div>
+                            </div>
+                          </div>
+  
+  
+                          <!--<div class="col">
+                  <div class="row pb-1">
+                    <div class="col-lg-auto font-weight-bold">PhoneNumber :</div>
+                    <div>{{address.PhoneNumber}}</div>
+                  </div>
+                </div>-->
+  
+  
+                          <div class="col">
+  
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">MainSubjects :</div>
+                              <div>{{qualification.MainSubject}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Qualification :</div>
+                              <div>{{qualification.Qualification}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Duration :</div>
+                              <div>{{qualification.Duration}}</div>
+                            </div>
+                          </div>
+  
+                        </div>
+  
+                        <div class="row border-bottom">
+  
+  
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">PlaceOfInstitution :</div>
+                              <div>{{qualification.PlaceOfInstitute}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">RegistrationAuthory :</div>
+                              <div>{{qualification.RegistrationAuthority}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">RegistrationNumber :</div>
+                              <div>{{qualification.RegistrationNo}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">RegistrationExpiryDate :</div>
+                              <div>{{qualification.RegistrationExpiryDate|date:"dd/MM/yyyy"}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">AdditionalInformation :</div>
+                              <div>{{qualification.AdditionalInfo}}</div>
+                            </div>
+                          </div>
+                          <!-- <div class="col">
+                  <div class="row pb-1">
+                    <div class="col-lg-auto font-weight-bold">Relationship to patient :</div>
+                    <div class="col p-0">{{address.ValidFrom}}</div>
+                  </div>
+                </div> -->
+                          <!-- <div class="col">
+                  <div class="row pb-1">
+                    <div class="col-lg-auto font-weight-bold">Relationship to patient :</div>
+                    <div class="col p-0">{{address.ValidTo}}</div>
+                  </div>
+  
+                </div> -->
+  
+  
+                          <div class="col-lg-auto pr-0">
+  
+                            <!--<i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true"></i>-->
+                            <!--<i *ngIf="hideeducation[i]" class="fa fa-floppy-o f-25 cursor-pointer " (click)="setEducationUpdate(i)"></i>-->
+  
+                            <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openEducationStaff(qualification,i)"></i>
+                            <i *ngIf="qualificationmodelCollection.length>1 " class="fa fa-trash f-25 ml-2" (click)="deleteAddressqualification(qualification)" aria-hidden="true"></i>
+                          </div>
+                        </div>
+  
+                      </div>
+                    </div>
+              
+                    <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                      <div>
+                        <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                        <button type="button" (click)="onRowEducationAdd()" mat-flat-button color="" class="custome-button mat-primary" matStepperNext>Next</button>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card>
+  
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="workFormGroup">
+              <form [formGroup]="WorkHistory">
+  
+                <ng-template matStepLabel>Work History</ng-template>
+                <mat-card class="mb-4">
+                  <div formArrayName="WorkArray" *ngFor="let work of getworkmodel().controls;  let i = index ">
+  
+  
+                    <div class="row" [formGroupName]="i">
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(work.value.EmployerName == '' || work.value.EmployerName == null) ? true : false"></span>Employer Name
+                          </mat-label>
+                          <input matInput placeholder="Enter" formControlName="EmployerName">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(work.value.ContactPerson == '' || work.value.ContactPerson == null) ? true : false"></span>Contact Person
+                          </mat-label>
+                          <input matInput placeholder="Enter" formControlName="ContactPerson">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Email</mat-label>
+                          <input matInput placeholder="demo@email.com" formControlName="Email">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Cell Phone</mat-label>
+                          <input matInput placeholder="Ex.000-000-0000" formControlName="CellPhone"  maxlength="12"  minlength="12" appPhoneMask >
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Phone No</mat-label>
+                          <input  matInput placeholder="Ex.000-000-0000" formControlName="PhoneNo"  maxlength="12"  minlength="12" appPhoneMask  >
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Address 1</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Address1">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Address 2</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Address2">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Town</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Town">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>City</mat-label>
+                          <input matInput placeholder="Enter" formControlName="City">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>District</mat-label>
+                          <input matInput placeholder="Enter" formControlName="District">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>State</mat-label>
+                          <input matInput placeholder="Enter" formControlName="State">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Country</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Country">
+                        </mat-form-field>
+                      </div>
+  
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>PIN</mat-label>
+                          <input maxlength="6" matInput placeholder="Enter" formControlName="PIN" numeric>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>From Date</mat-label>
+                          <input matInput [matDatepicker]="pickerrt" placeholder="From Date" formControlName="FromDate">
+                          <mat-datepicker-toggle matSuffix [for]="pickerrt"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerrt></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>To Date</mat-label>
+                          <input matInput [matDatepicker]="pickerrm" placeholder="To Date" formControlName="ToDate">
+                          <mat-datepicker-toggle matSuffix [for]="pickerrm"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerrm></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Additional Information</mat-label>
+                          <input matInput placeholder="Enter" formControlName="AdditionalInformation">
+                        </mat-form-field>
+                      </div>
+  
+                        <div class="col-xl-12 text-right pb-4">
+                          <button type="button" mat-flat-button (click)="onRowAddWork('submit')" class="custome-button w-auto mat-primary"> Add Work </button>
+                        </div>
+                    </div>
+                    <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;"  *ngIf="workInfoShow">
+                      <div class="col-12" *ngFor="let WorkHistory of workModelCollection; let i=index;">
+                        <div class="row m-0 border-bottom">
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold pl-0">EmployerName :</div>
+                              <div>{{WorkHistory.EmployerName}} </div>
+                            </div>
+                          </div>
+  
+  
+  
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">ContactPerson :</div>
+                              <div>{{WorkHistory.ContactPerson}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Email :</div>
+                              <div>{{WorkHistory.EMail}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">CellPhone :</div>
+                              <div>{{WorkHistory.CellNo}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">PhoneNo :</div>
+                              <div>{{WorkHistory.PhoneNo}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Address1 :</div>
+                              <div>{{WorkHistory.Address1}}</div>
+                            </div>
+                          </div>
+  
+  
+  
+  
+                        </div>
+  
+                        <div class="row border-bottom">
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Address2 :</div>
+                              <div>{{WorkHistory.Address2}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Town :</div>
+                              <div>{{WorkHistory.Town}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">City :</div>
+                              <div>{{WorkHistory.City}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">District :</div>
+                              <div>{{WorkHistory.District}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">State :</div>
+                              <div>{{WorkHistory.State}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Country :</div>
+                              <div>{{WorkHistory.Country}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">PIN :</div>
+                              <div>{{WorkHistory.Pincode}}</div>
+                            </div>
+                          </div>
+  
+  
+  
+                        </div>
+                        <div class="row border-bottom">
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">FromDate :</div>
+                              <div>{{WorkHistory.FromDate|date:"dd/MM/yyyy"}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">ToDate :</div>
+                              <div>{{WorkHistory.ToDate|date:"dd/MM/yyyy"}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">AdditionalInformation :</div>
+                              <div>{{WorkHistory.AdditionalInfo}}</div>
+                            </div>
+                          </div>
+  
+  
+  
+  
+  
+  
+                          <div class="col-lg-auto pr-0">
+                            <!--<i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true"></i>-->
+                            <!--<i *ngIf="hidework[i]" class="fa fa-floppy-o f-25 cursor-pointer " (click)="setWorkUpdate(i)"></i>-->
+                            <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openWorkStaff(WorkHistory,i)"></i>
+                            <i *ngIf="workModelCollection.length>1" class="fa fa-trash f-25 ml-2" (click)="deleteEducationwork(WorkHistory)" aria-hidden="true"></i>
+                          </div>
+                        </div>
+  
+                      </div>
+                    </div>
+  
+                    <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                      <div>
+                        <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                        <button type="button" (click)="onRowAddWork()" mat-flat-button color="" class="custome-button mat-primary" matStepperNext>Next</button>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card>
+  
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="familyFormGroup">
+              <form [formGroup]="FamilyDetail">
+  
+                <ng-template matStepLabel> Family Details</ng-template>
+  
+                <mat-card class="mb-4">
+                  <div formArrayName="FamilyArray" *ngFor="let family of getFamilyArray().controls;  let i = index ">
+  
+                    <div class="row" [formGroupName]="i">
+                      <div class="d-flex col-xl-3 col-lg-6 p-0">
+                        <div class="col-xl-4 col-lg-6 pr-0">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Salutation</mat-label>
+                            <mat-select formControlName="Salutation">
+                              <mat-option *ngFor="let Salutation of salutation" [value]="Salutation.SalutationID" (click)="salutationdescription(Salutation.SalutationCode)">{{Salutation.SalutationCode}}</mat-option>
+                              <input hidden formControlName="Salutationdescription" />
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-8 col-lg-6 pl-0">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>
+                              <span class="required-asterisk"
+                                    *ngIf="(family.value.Firstname == '' || family.value.Firstname == null) ? true : false"></span>First Name
+                            </mat-label>
+                            <input matInput placeholder="Enter" formControlName="Firstname">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(family.value.MiddleName == '' || family.value.MiddleName == null) ? true : false"></span>Middle Name
+                          </mat-label>
+                          <input matInput placeholder="Enter" formControlName="MiddleName">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(family.value.LastName == '' || family.value.LastName == null) ? true : false"></span>Last Name
+                          </mat-label>
+                          <input matInput placeholder="Enter" formControlName="LastName">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>Gender</mat-label>
+                          <mat-select formControlName="Gender">
+  
+                            <mat-option *ngFor="let Gender of gender" [value]="Gender.GenderID" (click)="genderdescription(Gender.GenderDesc)">{{Gender.GenderDesc}}</mat-option>
+                            <input hidden formControlName="GenderValue" />
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(family.value.Age == '' || family.value.Age == null) ? true : false"></span>Age
+                          </mat-label>
+                          <input maxlength="3" matInput placeholder="Enter" formControlName="Age" numeric>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Cell Number</mat-label>
+                          <input  matInput  placeholder="Ex.000-000-0000" formControlName="CellNumber"  maxlength="12"  minlength="12" appPhoneMask  >
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Phone Number</mat-label>
+                          <input matInput  placeholder="Ex.000-000-0000" formControlName="PhoneNumber"  maxlength="12"  minlength="12" appPhoneMask   >
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>WhatsApp Number</mat-label>
+                          <input  matInput  placeholder="Ex.000-000-0000" formControlName="WhatsAppNumber" maxlength="12"  minlength="12" appPhoneMask  >
+                        </mat-form-field>
+  
+                        <mat-checkbox class="pt-2" (change)="samecell()" formControlName="samecellno">Same as Cell Number</mat-checkbox>
+  
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Email</mat-label>
+                          <input matInput placeholder="demo@email.com" formControlName="Email">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Relationship to patient</mat-label>
+                          <mat-select formControlName="Relationshiptopatient">
+                            <mat-option *ngFor="let Relation of relation" (click)="RelationshipToPatient(Relation.RSPDescription)" [value]="Relation.RSPId">{{Relation.RSPDescription}}</mat-option>
+                            <input hidden formControlName="RelationshiptopatientValue" />
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Occupation</mat-label>
+                          <input matInput maxlength="50" placeholder="Enter" formControlName="Occupation">
+                        </mat-form-field>
+                      </div>
+  
+                      <div class="col-xl-6 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Additional Information</mat-label>
+                          <input matInput placeholder="Enter" formControlName="AdditionalInformation">
+                        </mat-form-field>
+                      </div>
+                        <div class="col-xl-12 text-right pb-4">
+                          <button type="button" mat-flat-button (click)="onAddFamilyRow('submit')" class="custome-button w-auto mat-primary"> Add Family</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;"  *ngIf="FamilyInfoShow">
+                      <div class="col-12" *ngFor="let FamilyDetail of familyModelCollection; let i=index;">
+                        <div class="row m-0 border-bottom">
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold pl-0">Salutation :</div>
+                              <div>{{FamilyDetail.SalutationDesc}}   </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold pl-0">First Name :</div>
+                              <div>{{FamilyDetail.FirstName}} {{FamilyDetail.MiddleName}} {{FamilyDetail.LastName}}  </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Gender :</div>
+                              <div>{{FamilyDetail.GenderDesc}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Age :</div>
+                              <div>{{FamilyDetail.Age}}</div>
+                            </div>
+                          </div>
+  
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Cell No :</div>
+                              <div>{{FamilyDetail.CellNo}}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row border-bottom">
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Phone No :</div>
+                              <div>{{FamilyDetail.PhoneNo}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Whatsapp No :</div>
+                              <div>{{FamilyDetail.WhatsAppNo}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Email :</div>
+                              <div>{{FamilyDetail.EMail}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Relationship to patient :</div>
+                              <div>{{FamilyDetail.RelationshipToEmployeeDesc}}</div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Occupation :</div>
+                              <div>{{FamilyDetail.Occupation}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Additional Information :</div>
+                              <div>{{FamilyDetail.AdditionalInfo}}</div>
+                            </div>
+                          </div>
+  
+  
+                          <div class="col-lg-auto pr-0">
+                            <!--<i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true"></i>-->
+                            <!--<i *ngIf="hidefamily[i]" class="fa fa-floppy-o f-25 cursor-pointer " (click)="setFamilyupdate(i)"></i>-->
+                            <i class="fa fa-pencil-square f-25 cursor-pointer" (click)="openFamilyStaff(FamilyDetail,i)"></i>
+                            <i *ngIf=" familyModelCollection.length>1 " class="fa fa-trash f-25 ml-2" (click)="deleteFamilyInfo(FamilyDetail)" aria-hidden="true"></i>
+                          </div>
+  
+  
+                        </div>
+                      </div>
+                    </div>
+         
+                    <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                      <div>
+                        <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                        <button type="button" (click)="onAddFamilyRow()" mat-flat-button color="" class="custome-button mat-primary" matStepperNext>Next</button>
+                      </div>
+                    </div>
+                  </div>
+  
+                </mat-card>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="otherFormGroup">
+              <form [formGroup]="LanguageDetail">
+  
+                <ng-template matStepLabel>Others</ng-template>
+  
+                <mat-card class="mb-4">
+                  <div formArrayName="languagemodel" *ngFor="let languages of getlanguagemodel().controls;  let i = index; ">
+                    <h5 class="py-3 pl-0 pt-3 col-xl-12">Employee Language Skills:</h5>
+  
+                    <div class="row" [formGroupName]="i">
+                      <div class="col-xl-3 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(languages.value.Language == '' || languages.value.Language == null) ? true : false"></span>Language
+                          </mat-label>
+                          <mat-select formControlName="Language">
+                            <mat-option *ngFor="let language of language" [value]="language.LanguageDescription" (click)="languagedescription(language.LanguageDescription)">{{language.LanguageDescription}}</mat-option>
+                            <input hidden formControlName="LanguageDescription" />
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6 d-flex align-items-center">
+                        <mat-checkbox (change)="onspeak()" class="pr-2" formControlName="IsSpeak">Speak</mat-checkbox>
+                        <mat-form-field class="w-50" appearance="outline">
+                          <mat-label>
+                            Level
+                          </mat-label>
+                          <mat-select formControlName="speaktext">
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                            <mat-option value="4">4</mat-option>
+                            <mat-option value="5">5</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6 d-flex align-items-center">
+                        <mat-checkbox (change)="onread()" class="pr-2" formControlName="Read">Read</mat-checkbox>
+                        <mat-form-field class="w-50" appearance="outline">
+                          <mat-label>
+                            Level
+                          </mat-label>
+                          <mat-select formControlName="Readtext">
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                            <mat-option value="4">4</mat-option>
+                            <mat-option value="5">5</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg6 d-flex align-items-center">
+                        <mat-checkbox (change)="onwrite()" class="pr-2" formControlName="Write">Write</mat-checkbox>
+                        <mat-form-field class="w-50" appearance="outline">
+                          <mat-label>
+                            Level
+                          </mat-label>
+                          <mat-select formControlName="Writetext">
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                            <mat-option value="4">4</mat-option>
+                            <mat-option value="5">5</mat-option>
+                          </mat-select>
+  
+                        </mat-form-field>
+                      </div>
+                        <div class="col-xl-12 text-right pb-4">
+                          <button type="button" mat-flat-button (click)="onRowLanguage('submit')" class="custome-button w-auto mat-primary"> Add Language </button>
+                        </div>
+                    </div>
+                    <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;"  *ngIf="otherLanguageShow">
+                      <div class="col-12" *ngFor="let  language of languageModelCollection; let i=index;">
+                        <div class="row m-0 border-bottom">
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold pl-0">Language :</div>
+                              <div>{{language.Language}}   </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">speak text :</div>
+                              <div>{{language.SpeakingLevel}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Read text :</div>
+                              <div>{{language.ReadingLevel}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Write text :</div>
+                              <div>{{language.WritingLevel}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col-lg-auto pr-0">
+                            <!--<i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true"></i>-->
+                            <!--<i *ngIf="hidelanguage[i]" class="fa fa-floppy-o f-25 cursor-pointer " (click)="setLanguageUpdate(i)"></i>-->
+                            <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openLanguageStaff(language,i)"></i>
+                            <i *ngIf="languageModelCollection.length >1" class="fa fa-trash f-25 ml-2" (click)="deletelanguage(language)" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                      </div>
+  
+                    </div>
+             
+  
+  
+                  </div>
+                </mat-card>
+              </form>
+              <form [formGroup]="CampusDetail">
+  
+                <mat-card class="mb-4">
+                  <div formArrayName="campusmodel" *ngFor="let campus of getcampusmodel().controls;  let i = index ">
+  
+                    <h5 class="py-3 pl-2 pt-3 col-xl-12">Campus & other Activity:</h5>
+                    <div class="row" [formGroupName]="i">
+  
+                      <div class="col-xl-3 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(campus.value.Name == '' || campus.value.Name == null) ? true : false"></span>Name
+                          </mat-label>
+                          <input matInput placeholder="Enter" formControlName="Name">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-lg-3">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>Date</mat-label>
+                          <input matInput [matDatepicker]="date" placeholder="Date of Birth" formControlName="Date">
+                          <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                          <mat-datepicker #date></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Details</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Details">
+                        </mat-form-field>
+                      </div>
+                        <div class="col-xl-12 text-right pb-4">
+                          <button type="button" mat-flat-button (click)="onRowcampus('submit')" class="custome-button w-auto mat-primary"> Add Campus</button>
+                        </div>
+                     
+                    </div>
+                    <div class="row mb-2 pt-4"  style="border-top: 3px solid #58bdbd;"  *ngIf="otherCampusshow">
+                      <div class="col-12" *ngFor="let campus of campusCollection; let i=index;">
+                        <div class="row m-0 border-bottom">
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Name:</div>
+                              <div>{{campus.Name}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Date:</div>
+                              <div>{{campus.CampusDate|date:"dd/MM/yyyy"}}</div>
+                            </div>
+                          </div>
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Details :</div>
+                              <div>{{campus.Details}}</div>
+                            </div>
+                          </div>
+                          <div class="col-lg-auto pr-0">
+                            <!--<i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true"></i>-->
+                            <!--<i *ngIf="hidecampus[i]" class="fa fa-floppy-o f-25 cursor-pointer " (click)="SetCampusUpdate(i)"></i>-->
+                            <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openCampusStaff(campus,i)"></i>
+                            <i *ngIf="campusCollection.length >1" class="fa fa-trash f-25 ml-2" (click)="deletecampus(campus)" aria-hidden="true"></i>
+                          </div>
+  
+                        </div>
+                      </div>
+  
+                    </div>
+                
+  
+                  </div>
+                </mat-card>
+              </form>
+              <form [formGroup]="ExtraActivity">
+                <mat-card class="mb-4">
+                  <div formArrayName="hobbies" *ngFor="let hobby of gethobbymodel().controls;  let i = index ">
+  
+                    <h5 class="py-3 pl-2 pt-3 col-xl-12">Employee Hobbies & Extracurricular Activities</h5>
+                    <div class="row" [formGroupName]="i">
+  
+                      <div class="col-xl-3 col-lg-6">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>
+                            <span class="required-asterisk"
+                                  *ngIf="(hobby.value.ActivityTypeDescription == '' || hobby.value.ActivityTypeDescription == null) ? true : false"></span>Activity Type
+                          </mat-label>
+                          <mat-select formControlName="ActivityType">
+                            <mat-option *ngFor="let extracurricularActivitiesType of ExtracurricularActivitiesType" [value]="extracurricularActivitiesType.ActivityTypeId" (click)="ActivityType(extracurricularActivitiesType.ActivityTypeCode)">{{extracurricularActivitiesType.ActivityTypeCode}}</mat-option>
+                            <input hidden formControlName="ActivityTypeDescription" />
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg6">
+                        <mat-form-field class="w-100 " appearance="outline">
+                          <mat-label>Details</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Detailsname">
+                        </mat-form-field>
+                      </div>
+                        <div class="col-xl-12 text-right pb-4">
+                          <button type="button" mat-flat-button (click)="onRowhobbies('submit')" class="custome-button w-auto mat-primary"> Add Hobbies</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;"  *ngIf="otherhobbiesShow">
+                      <div class="col-12" *ngFor="let hobby of hobbiesmodelCollection; let i=index;">
+                        <div class="row m-0 border-bottom">
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">ActivityType:</div>
+                              <div>{{hobby.ActivityTypeDescription}}</div>
+                            </div>
+                          </div>
+  
+  
+                          <div class="col">
+                            <div class="row pb-1">
+                              <div class="col-lg-auto font-weight-bold">Detailsname :</div>
+                              <div>{{hobby.Details}}</div>
+                            </div>
+                          </div>
+                          <div class="col-lg-auto pr-0">
+                            <!--<i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true"></i>-->
+                            <!--<i *ngIf="hideExtraActivity[i]" class="fa fa-floppy-o f-25 cursor-pointer " (click)="sethobbies(i)"></i>-->
+                            <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openHobbyStaff(hobby,i)"></i>
+                            <i *ngIf=" hobbiesmodelCollection.length >1 " class="fa fa-trash f-25 ml-2" (click)="deletehobbies(hobby)" aria-hidden="true"></i>
+                          </div>
+  
+                        </div>
+                      </div>
+  
+                    </div>
+                  </div>
+          
+                  <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                    <div>
+                      <button type="button" (click)="languageprevious()" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                    </div>
+                  </div>
+  
+                </mat-card>
+  </form>
+            </mat-step>
+          </mat-horizontal-stepper>
+        </div>
+      </div>
+      <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center schedbtn mt-3">
+  
+        <div>
+          <button mat-flat-button color="" (click)="submit()" class="custome-button mr-2  mat-primary vissub schedbtn">Submit</button>
+          <button type="button" mat-stroked-button class="transperent-button mr-2 schedbtn"
+                  (click)="stepper.reset()" (change)="clear()" color="primary">
+            Clear
+          </button>
+        </div>
+      </div>
+  </div>
+  
+  

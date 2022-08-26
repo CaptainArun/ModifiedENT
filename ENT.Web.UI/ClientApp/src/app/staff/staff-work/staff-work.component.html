@@ -1,0 +1,123 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="staffworkform">
+ 
+    <h5 cdkDragHandle class="p-3 title-bg"> Staff Work <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+  <span aria-hidden="true">X</span>
+</button></h5>
+    <div class="row pb-3 pt-3">
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(staffworkform.value.EmployerName == '' || staffworkform.value.EmployerName == null) ? true : false"></span>Employer Name</mat-label>
+          <input matInput placeholder="Enter" formControlName="EmployerName">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(staffworkform.value.ContactPerson == '' || staffworkform.value.ContactPerson == null) ? true : false"></span>Contact Person</mat-label>
+          <input matInput placeholder="Enter" formControlName="ContactPerson">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="demo@email.com" formControlName="Email">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Cell Phone</mat-label>
+          <input matInput placeholder="Ex.000-000-0000"  formControlName="CellPhone"  maxlength="12"  minlength="12" appPhoneMask>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Phone No</mat-label>
+          <input matInput  placeholder="Ex.000-000-0000"  formControlName="PhoneNo"  maxlength="12"  minlength="12" appPhoneMask >
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Address 1</mat-label>
+          <input matInput placeholder="Enter" formControlName="Address1">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Address 2</mat-label>
+          <input matInput placeholder="Enter" formControlName="Address2">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Town</mat-label>
+          <input matInput placeholder="Enter" formControlName="Town">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="Enter" formControlName="City">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>District</mat-label>
+          <input matInput placeholder="Enter" formControlName="District">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>State</mat-label>
+          <input matInput placeholder="Enter" formControlName="State">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Country</mat-label>
+          <input matInput placeholder="Enter" formControlName="Country">
+        </mat-form-field>
+      </div>
+
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>PIN</mat-label>
+          <input maxlength="6" matInput placeholder="Enter" formControlName="PIN" numeric>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>From Date</mat-label>
+          <input matInput [matDatepicker]="pickerrt" placeholder="From Date" formControlName="FromDate">
+          <mat-datepicker-toggle matSuffix [for]="pickerrt"></mat-datepicker-toggle>
+          <mat-datepicker #pickerrt></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>To Date</mat-label>
+          <input matInput [matDatepicker]="pickerrm" placeholder="To Date" formControlName="ToDate">
+          <mat-datepicker-toggle matSuffix [for]="pickerrm"></mat-datepicker-toggle>
+          <mat-datepicker #pickerrm></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-6 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Additional Information</mat-label>
+          <input matInput placeholder="Enter" formControlName="AdditionalInformation">
+        </mat-form-field>
+      </div>
+
+
+    </div>
+    <div class="pull-right">
+      <button mat-flat-button color="" (click)="submit()" class="custome-button mr-2  mat-primary vissub schedbtn">Submit</button>
+      <button type="button" mat-stroked-button class="transperent-button mr-2 schedbtn"
+              (click)="clear()" color="primary">
+        Clear
+      </button>
+    </div>
+  </form>
+</div>
+

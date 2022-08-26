@@ -1,0 +1,122 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="stafffamilyform">
+
+    <h5 cdkDragHandle class="p-3 title-bg">
+      Staff Family <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+    <div class="row pb-3 pt-3">
+      <div class="d-flex col-xl-3 col-lg-6 p-0">
+        <div class="col-xl-4 col-lg-6 pr-0">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Salutation</mat-label>
+            <mat-select formControlName="Salutation">
+              <mat-option *ngFor="let Salutation of salutation" [value]="Salutation.SalutationID" (click)="salutationdescription(Salutation.SalutationCode)">{{Salutation.SalutationCode}}</mat-option>
+              <input hidden formControlName="Salutationdescription" />
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-8 col-lg-6 pl-0">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>
+              <span class="required-asterisk"
+                    *ngIf="(stafffamilyform.value.Firstname == '' || stafffamilyform.value.Firstname == null) ? true : false"></span>
+              First Name
+            </mat-label>
+            <input matInput placeholder="Enter" formControlName="Firstname">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(stafffamilyform.value.MiddleName == '' || stafffamilyform.value.MiddleName == null) ? true : false"></span>Middle Name</mat-label>
+          <input matInput placeholder="Enter" formControlName="MiddleName">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(stafffamilyform.value.LastName == '' || stafffamilyform.value.LastName == null) ? true : false"></span>Last Name</mat-label>
+          <input matInput placeholder="Enter" formControlName="LastName">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="Gender">
+
+            <mat-option *ngFor="let Gender of gender" [value]="Gender.GenderID" (click)="genderdescription(Gender.GenderDesc)">{{Gender.GenderDesc}}</mat-option>
+            <input hidden formControlName="GenderValue" />
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(stafffamilyform.value.Age == '' || stafffamilyform.value.Age == null) ? true : false"></span>Age</mat-label>
+          <input maxlength="3" matInput placeholder="Enter" formControlName="Age">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Cell Number</mat-label>
+          <input  matInput  placeholder="Ex.000-000-0000" formControlName="CellNumber"  maxlength="12" minlength="12" appPhoneMask  >
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input  matInput placeholder="Ex.000-000-0000" formControlName="PhoneNumber"  maxlength="12"  minlength="12" appPhoneMask >
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>WhatsApp Number</mat-label>
+          <input  matInput placeholder="Ex.000-000-0000" formControlName="WhatsAppNumber"  maxlength="12"  minlength="12" appPhoneMask >
+        </mat-form-field>
+
+        <mat-checkbox class="pt-2" (change)="samecell()" formControlName="samecellno">Same as Cell Number</mat-checkbox>
+
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="demo@email.com" formControlName="Email">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Relationship to patient</mat-label>
+          <mat-select formControlName="Relationshiptopatient">
+            <mat-option *ngFor="let Relation of relation" (click)="RelationshipToPatient(Relation.RSPDescription)" [value]="Relation.RSPId">{{Relation.RSPDescription}}</mat-option>
+            <input hidden formControlName="RelationshiptopatientValue" />
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Occupation</mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="Occupation">
+        </mat-form-field>
+      </div>
+
+      <div class="col-xl-6 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Additional Information</mat-label>
+          <input matInput placeholder="Enter" formControlName="AdditionalInformation">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="pull-right">
+      <button mat-flat-button color="" (click)="submit()" class="custome-button mr-2  mat-primary vissub schedbtn">Submit</button>
+      <button type="button" mat-stroked-button class="transperent-button mr-2 schedbtn"
+              (click)="clear()" color="primary">
+        Clear
+      </button>
+    </div>
+  </form>
+</div>
+

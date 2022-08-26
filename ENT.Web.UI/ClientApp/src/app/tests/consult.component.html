@@ -1,0 +1,86 @@
+<div class="p-4 side-pages-content">
+  <mat-card>
+    <div class="row">
+      <div class="col">
+        <div class="wp">
+          Work in Progress
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="p-4 d-none">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12">
+        <div class="table-responsive shroff-table reduce-field">
+          <table class="table table-bordered table-hover w-100">
+            <thead>
+              <tr class="font-weight-bold">
+                <th>Action</th>
+                <th>Recorded Date</th>
+                <th>Recorded During</th>
+                <th>Allergy Descript..</th>
+                <th>ICD 10</th>
+                <th>SNOMED Code</th>
+                <th>Allergy Onset</th>
+                <th>Alleviated by</th>
+                <th>Reaction</th>
+                <th>Status</th>
+                <th>Severity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <mat-form-field class=" w-100 " appearance="outline">
+                    <mat-label>Select</mat-label>
+                    <mat-select>
+                      <mat-option value="">Edit</mat-option>
+                      <mat-option value="">Save</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </td>
+                <td>
+                  16-02-2019
+                </td>
+                <td></td>
+                <td>Food Allergy</td>
+                <td></td>
+                <td>E23T63687</td>
+                <td>16-6-2019</td>
+                <td>Spice</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class=" w-100 " appearance="outline">
+                    <mat-label>Select</mat-label>
+                    <mat-select>
+                      <mat-option value="">Edit</mat-option>
+                      <mat-option value="">Save</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td>7-02-2019</td>
+                <td></td>
+                <td>Dust Allergy</td>
+                <td></td>
+                <td>E00T63617</td>
+                <td>2-6-2010</td>
+                <td>Cleaning</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div><!--end of .table-responsive-->
+      </div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </mat-card>
+</div>

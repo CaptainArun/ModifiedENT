@@ -1,0 +1,14 @@
+.body {
+    padding-top: 65px;
+    padding-left: 50px;
+}
+.example-chip-list {
+  width: 60%;
+}
+/*.mat-chip-list-wrapper .mat-standard-chip, .mat-chip-list-wrapper input.mat-input-element{
+    margin:0px;
+}*/
+.mat-chip.mat-standard-chip {
+  background: #09b9ac !important;
+  color:#fff;
+}

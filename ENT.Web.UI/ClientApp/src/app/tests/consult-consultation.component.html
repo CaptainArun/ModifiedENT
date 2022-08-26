@@ -1,0 +1,1435 @@
+<mat-tab-group>
+    <mat-tab label="Triage Consultation-Case-Assessment Sheet">
+        <mat-card>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+                    <form>
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-card>
+                                    <h5 class="pb-2 pt-2">Visit Details</h5>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <mat-form-field class=" w-100 " appearance="outline">
+                                                <mat-label>Recorded during</mat-label>
+                                                <mat-select [(value)]="selected" [disabled]="disableSelect">
+                                                    <mat-option value="option1">OPD, Visit
+                                                    </mat-option>
+                                                    <mat-option value="option2">Inpatient Admission </mat-option>
+                                                    <mat-option value="option3">Surgical Admission </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-sm">
+                                            <mat-form-field class=" w-100 " appearance="outline">
+                                                <mat-label>6/13/2019 10.50 AM</mat-label>
+                                                <input matInput [matDatepicker]="d10" placeholder="6/13/2019" disabled>
+                                                <mat-datepicker-toggle matSuffix [for]="d10" disabled></mat-datepicker-toggle>
+                                                <mat-datepicker #d10 disabled></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+
+                                        <div class="col-sm col-lg">
+                                            <mat-form-field class=" w-100 " appearance="outline">
+                                                <mat-label>6/14/2019</mat-label>
+                                                <input matInput [matDatepicker]="d20" placeholder="Visit date" disabled>
+                                                <mat-datepicker-toggle matSuffix [for]="d20" disabled></mat-datepicker-toggle>
+                                                <mat-datepicker #d20 disabled></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-sm timepick">
+                                            <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                                <input matInput [ngxTimepicker]="toggleTimepicker10" [disableClick]="true" required>
+                                                <mat-label>01:50 pm</mat-label>
+                                                <ngx-material-timepicker-toggle [for]="toggleTimepicker10"></ngx-material-timepicker-toggle>
+                                                <ngx-material-timepicker #toggleTimepicker10></ngx-material-timepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="white mt-3 mb-4 p-1">
+                        <mat-card class="p-0">
+                            <h5 class="p-3 title-bg">Triage Consultation</h5>
+                            <div class="scroll-x">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <div class="col-lg-6">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                                        Chief Complaint</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-7 col-lg-7 col-md-7">Ear Pain
+                                                    </div>
+                                                </div>
+
+                                                <div class="row  pb-1">
+                                                    <div class="col font_color">Problem Area</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7">Ear</div>
+                                                </div>
+
+                                                <div class="row  pb-1">
+                                                    <div class="col font_color">Symptoms</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7">Fever</div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col font_color">Duration</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7">1 Weeks</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col font_color">Pain</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7">7/10</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col font_color">Etiology</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7">Unknown</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 v-line">
+                                        <div class="pt-3 col flex-grow-1 w-auto">
+                                            <div class="row pb-1">
+                                                <div class="col pl-4 font_color">Observation</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col">Swelling in Ear drum</div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="col pl-4 font_color">Additional info</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col">None</div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="col pl-4 font_color">Prognosis</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col">Seems like Otitis media</div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="col pl-4 font_color">Diagnosis Notes</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col">Otitis Medical</div>
+                                            </div>
+                                            <div class="row pb-1">
+                                                <div class="col pl-4 font_color">Recommeded Procedure</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col">Syringiy</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                    <div class="white mt-3 mb-4 p-1">
+                        <mat-card class="p-0">
+                            <h5 class="p-3 title-bg">Assessment</h5>
+                            <div class="scroll-x">
+                        <mat-card class="p-0 mb-2">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <h5 class="col p-3 title-bg">Ears</h5>
+                                    <div class="col-lg-12 bg-odd">
+                                        <h5 class="mb-0"><b>External</b></h5>
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Size</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L = R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Shape</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L = R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Lesions</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">No</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">No</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Tragus</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">L</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Mobile:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Tender:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">R</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Mobile:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Tender:</span> No</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Meatus</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">L</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Patent:</span> No</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Discharge:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">R</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Patent:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Discharge:</span> No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 bg-even pt-1">
+                                        <h5 class="mb-0"><b>Internal</b></h5>
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Canal</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Clear:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Clear:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Cerumen</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Present:</span>No</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Present:</span>Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Soft:</span>Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Color:</span>Orange</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Soft:</span>No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Color:</span>Orange</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Lesions</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Tympanic membrane</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">L</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Gray:</span> No</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">R</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Gray:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">L</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Lesions:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">R</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Lesions:</span> No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 bg-odd pt-1">
+                                        <h5 class="mb-0"><b>SINUSES</b></h5>
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Follows Directions</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Answers Questions</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Whisper</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L = R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Rinne</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">AC . BC:</span>Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">AC . BC:</span>No</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Weber</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L = R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 bg-even pt-1">
+                                        <h5 class="mb-0"><b>Romberg</b></h5>
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Maintains Balance</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        </mat-card>
+
+                        <mat-card class="p-0 mb-2">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <h5 class="col p-3 title-bg">Nose</h5>
+                                    <div class="col-lg-12 bg-odd">
+                                        <h5 class="mb-0"><b>External</b></h5>
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Midline</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Discharge</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Nares</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Patent:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Patent:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 bg-even pt-1">
+                                        <h5 class="mb-0"><b>Internal</b></h5>
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">L mucosa</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Pink:</span> No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Moist:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Lesions:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">R mucosa</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Pink:</span> No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Moist:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-2 col-md-2"><span class="font_color">Lesions:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Septum</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Midline:</span>No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Intact:</span>No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">Yes</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        </mat-card>
+
+                        <mat-card class="p-0 mb-2">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <h5 class="col p-3 title-bg">SINUSES</h5>
+                                    <div class="col-lg-12 bg-odd">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Frontal</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Tender:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Tender:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Maxillary</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Tender:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Tender:</span> Yes</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        </mat-card>
+                            <mat-card class="p-0 mb-2">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <h5 class="col p-3 title-bg">MOUTH</h5>
+                                    <div class="col-lg-12 bg-even">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Lips</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Symmetrical:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Moist:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Lesions:</span> No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Teeth</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Intact:</span> No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">L</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Dentures:</span> No</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Tongue</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Mobile:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Pink:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Moist:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Papillar:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Dorsum Smooth:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Lesions:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Gums</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Pink:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Smooth:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Lesions:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Salivary Glands</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color"> Wharton’s—Visible:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Patent:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Inflammation:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Stensen’s—Visible:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Patent:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Inflammation:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Hard Palate</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Intact:</span> Yes</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        </mat-card>
+                            <mat-card class="p-0 mb-2">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <h5 class="col p-3 title-bg">THROAT</h5>
+                                    <div class="col-lg-12 bg-odd">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Uvula</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Midline:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Rise with “ah”:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Soft Palate</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Intact:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Rise with “ah”:</span> Yes</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Tonsils</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Present:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Absent:</span> No</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3">R</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Inflammation:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3">-</div>
+                                                </div>
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color">Color</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Uvula, Pharynx—Pink:</span> Yes</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        </mat-card>
+                            <mat-card class="p-0 mb-2">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <h5 class="col p-3 title-bg">ODOR</h5>
+                                    <div class="col-lg-12 bg-even">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-2 col-lg-2 col-md-2 font_color"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-3"></div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Absent:</span> Yes</div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-3"><span class="font_color">Present:</span> No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                        </mat-card>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                    <div class="white mt-3 mb-4 p-1">
+                        <mat-card class="p-0">
+                            <h5 class="p-3 title-bg">Otoscope</h5>
+                            <div class="scroll-x">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <div class="col-lg-6">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                                        Otoscope Make/Model</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-7 col-lg-7 col-md-7">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row  pb-1">
+                                                    <div class="col font_color">Otoscope Operational Model</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7"></div>
+                                                </div>
+
+                                                <div class="row  pb-1">
+                                                    <div class="col font_color">Ear</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7">Left</div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 v-line">
+                                        <div class="pt-3 col flex-grow-1 w-auto">
+                                            <div class="row">
+                                                <div class="col font_color">Otoscopy Findings</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col-lg-7"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col font_color">Otoscopy Notes</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col-lg-7"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                    <div class="white mt-3 mb-4 p-1">
+                        <mat-card class="p-0">
+                            <h5 class="p-3 title-bg">Laryngoscopy</h5>
+                            <div class="scroll-x">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <div class="col-lg-6">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                                        Laryngoscopy Make/Model</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-7 col-lg-7 col-md-7">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row  pb-1">
+                                                    <div class="col font_color">Laryngoscopy Operational Model</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7"></div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 v-line">
+                                        <div class="pt-3 col flex-grow-1 w-auto">
+                                            <div class="row">
+                                                <div class="col font_color">Laryngoscopy Findings</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col-lg-7"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col font_color">Laryngoscopy Notes</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col-lg-7"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                    <div class="white mt-3 mb-4 p-1">
+                        <mat-card class="p-0">
+                            <h5 class="p-3 title-bg">Medication</h5>
+                            <div class="scroll-x">
+                                <mat-card class="p-0">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-lg-12">
+                                            <div class="table-responsive reduce-field">
+                                                <table class="table table-bordered table-hover w-100">
+                                                    <thead>
+                                                        <tr class="font-weight-bold">
+                                                            <th>Item/Drug Name</th>
+                                                            <th>Dispense Form</th>
+                                                            <th>Diagnosis</th>
+                                                            <th>Qty</th>
+                                                            <th>Medication Time</th>
+                                                            <th>SIG</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Ceftibuten</td>
+                                                            <td>Ear</td>
+                                                            <td>H60.331 Swimmer's ear, right ear</td>
+                                                            <td>10</td>
+                                                            <td>Morning, Noon, Night</td>
+                                                            <td>3 times per day</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ofloxacin</td>
+                                                            <td>Ear</td>
+                                                            <td>H60.333 Swimmer's ear, bilateral</td>
+                                                            <td>10</td>
+                                                            <td>Morning, Noon, Night</td>
+                                                            <td>3 times per day</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--end of .table-responsive-->
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                    <div class="white mt-3 mb-4 p-1">
+                        <mat-card class="p-0">
+                            <h5 class="p-3 title-bg">Lab Order</h5>
+                            <div class="scroll-x">
+                                <mat-card class="p-0">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-lg-12">
+                                            <div class="table-responsive reduce-field">
+                                                <table class="table table-bordered table-hover w-100">
+                                                    <thead>
+                                                        <tr class="font-weight-bold">
+                                                            <th>Test Name</th>
+                                                            <th>Instruction</th>
+                                                            <th>Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Ear</td>
+                                                            <td>Sonagram</td>
+                                                            <td>14-02-2019</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ear</td>
+                                                            <td>Otoscope</td>
+                                                            <td>14-02-2019</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--end of .table-responsive-->
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                    <div class="white mt-3 mb-4 p-1">
+                        <mat-card class="p-0">
+                            <h5 class="p-3 title-bg">Tests</h5>
+                            <div class="scroll-x">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <div class="col-lg-6">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                                        Recommeded Tests</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-7 col-lg-7 col-md-7">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row  pb-1">
+                                                    <div class="col font_color">Notes</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                    <div class="white mt-3 mb-4 p-1">
+                        <mat-card class="p-0">
+                            <h5 class="p-3 title-bg">OT Orders</h5>
+                            <div class="scroll-x">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <div class="col-lg-6">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                                        Recommeded OT Orders</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-7 col-lg-7 col-md-7">Tonsillecfomy
+                                                    </div>
+                                                </div>
+
+                                                <div class="row  pb-1">
+                                                    <div class="col font_color">Pre Procedure Notes</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7">Unknown</div>
+                                                </div>
+
+                                                <div class="row  pb-1">
+                                                    <div class="col font_color">Patient Instruction</div>
+                                                    <div class="col-lg-1">:</div>
+                                                    <div class="col-lg-7"></div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 v-line">
+                                        <div class="pt-3 col flex-grow-1 w-auto">
+                                            <div class="row">
+                                                <div class="col font_color">Recommeded Date</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col-lg-7">16-06-2019</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col font_color">Urgency</div>
+                                                <div class="col-lg-1">:</div>
+                                                <div class="col-lg-7">Elective</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                    <div class="white mt-3 mb-4 p-1">
+                        <mat-card class="p-0">
+                            <h5 class="p-3 title-bg">Referral</h5>
+                            <div class="scroll-x">
+                                <div class="row p-0 m-0 scroll-md">
+                                    <div class="col-lg-6">
+                                        <div class="v-line">
+                                            <div class="pt-3 pb-2">
+                                                <div class="row pb-1">
+                                                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                                        Referral Notes</div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                                    <div class="col-xl-7 col-lg-7 col-md-7">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="white mt-0 mb-4 p-1">
+                <mat-card class="p-0">
+                    <div class="scroll-x">
+                        <div class="row p-0 m-0 font-bold scroll-md">
+                            <div class="col-sm-6">
+                                <div class="v-line">
+                                    <div class="pt-3 pb-2">
+                                        <div class="row pb-1">
+                                            <div class="col-xl-4 col-lg-4 col-md-4 ">
+                                                Submitted By</div>
+                                            <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                            <div class="col-xl-7 col-lg-7 col-md-7">Mr.Raj
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 w-auto v-line">
+                                <div class="pt-3 col flex-grow-1 w-auto">
+                                    <div class="row pb-1">
+                                        <div class="col pl-4  ">Date & Time</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col">14/06/2019 : 12:55 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </mat-card>
+
+    </mat-tab>
+    <mat-tab label="Audiology">
+        <mat-card>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+                    <form>
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-card>
+                                    <h5 class="pb-2 pt-2">Visit Details</h5>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <mat-form-field class=" w-100 " appearance="outline">
+                                                <mat-label>Recorded during</mat-label>
+                                                <mat-select [(value)]="selected" [disabled]="disableSelect">
+                                                    <mat-option value="option1">OPD, Visit
+                                                    </mat-option>
+                                                    <mat-option value="option2">Inpatient Admission </mat-option>
+                                                    <mat-option value="option3">Surgical Admission </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-sm">
+                                            <mat-form-field class=" w-100 " appearance="outline">
+                                                <mat-label>6/13/2019 10.50 AM</mat-label>
+                                                <input matInput [matDatepicker]="d1" placeholder="6/13/2019" disabled>
+                                                <mat-datepicker-toggle matSuffix [for]="d1" disabled></mat-datepicker-toggle>
+                                                <mat-datepicker #d1 disabled></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+
+                                        <div class="col-sm col-lg">
+                                            <mat-form-field class=" w-100 " appearance="outline">
+                                                <mat-label>6/13/2019</mat-label>
+                                                <input matInput [matDatepicker]="d2" placeholder="Visit date" disabled>
+                                                <mat-datepicker-toggle matSuffix [for]="d2" disabled></mat-datepicker-toggle>
+                                                <mat-datepicker #d2 disabled></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-sm timepick">
+                                            <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                                <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" required>
+                                                <mat-label>01:50 pm</mat-label>
+                                                <ngx-material-timepicker-toggle [for]="toggleTimepicker1"></ngx-material-timepicker-toggle>
+                                                <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <div class="row">
+                <img src="assets/images/consult03.png" class="m-auto">
+            </div>
+            <div class="white mt-0 mb-4 p-1">
+                <mat-card class="p-0">
+                    <div class="scroll-x">
+                        <div class="row p-0 m-0 font-bold scroll-md">
+                            <div class="col-sm-6">
+                                <div class="v-line">
+                                    <div class="pt-3 pb-2">
+                                        <div class="row pb-1">
+                                            <div class="col-xl-4 col-lg-4 col-md-4 ">
+                                                Submitted By</div>
+                                            <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                            <div class="col-xl-7 col-lg-7 col-md-7">Mr.Rahul Sharma
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 w-auto v-line">
+                                <div class="pt-3 col flex-grow-1 w-auto">
+                                    <div class="row pb-1">
+                                        <div class="col pl-4  ">Date & Time</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col">11/06/2019 : 12:55 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Speech Therapy">
+        <div class="overflow-auto">
+            <mat-card>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+                        <form>
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-card>
+                                        <h5 class="pb-2 pt-2">Visit Details</h5>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                    <mat-label>Recorded during</mat-label>
+                                                    <mat-select [(value)]="selected" [disabled]="disableSelect">
+                                                        <mat-option value="option1">OPD, Visit
+                                                        </mat-option>
+                                                        <mat-option value="option2">Inpatient Admission </mat-option>
+                                                        <mat-option value="option3">Surgical Admission </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-sm">
+                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                    <mat-label>6/13/2019 10.50 AM</mat-label>
+                                                    <input matInput [matDatepicker]="d3" placeholder="Visit date" disabled>
+                                                    <mat-datepicker-toggle matSuffix [for]="d3" disabled></mat-datepicker-toggle>
+                                                    <mat-datepicker #d3 disabled></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+
+
+                                            <div class="col-sm col-lg">
+                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                    <mat-label>6/13/2019</mat-label>
+                                                    <input matInput [matDatepicker]="d4" placeholder="Visit date" disabled>
+                                                    <mat-datepicker-toggle matSuffix [for]="d4" disabled></mat-datepicker-toggle>
+                                                    <mat-datepicker #d4 disabled></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm timepick">
+                                                <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                                    <input matInput [ngxTimepicker]="toggleTimepicker3" [disableClick]="true" required>
+                                                    <mat-label>01:50 pm</mat-label>
+                                                    <ngx-material-timepicker-toggle [for]="toggleTimepicker3"></ngx-material-timepicker-toggle>
+                                                    <ngx-material-timepicker #toggleTimepicker3></ngx-material-timepicker>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </mat-card>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </mat-card>
+            <mat-card>
+                <div class="overflow-hidden pt-4">
+                    <h5 class="pb-2 pt-2">SPEECH</h5>
+                    <div class="row">
+                        <div class="col-xs-12 p-3 w-100">
+                            <div class="table-responsive-lg shroff-table title-bg-table">
+                                <table class="table w-100">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>SRT (dBHL)</th>
+                                            <th>WD S (%)</th>
+                                            <th>LEAVE(dBHL)</th>
+                                            <th>MA$K(dBHL)</th>
+                                            <th>UCL(UCL(dBHL))</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="bg-white rounded shadow-sm">
+                                            <td>Right</td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8" height="8" class="p-0"></td>
+                                        </tr>
+
+                                        <tr class="bg-white rounded shadow-sm">
+                                            <td>Left</td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8" height="8" class="p-0"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--end of .table-responsive-->
+                        </div>
+                    </div>
+                    <h5 class="pb-2 pt-2">IMPEDANCE</h5>
+                    <div class="row">
+                        <div class="col-xs-12 p-3 w-100">
+                            <div class="table-responsive-lg shroff-table title-bg-table">
+                                <table class="table w-100">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>TYPE</th>
+                                            <th>PRE $ SURE(daPA)</th>
+                                            <th>VOLUME(ml)</th>
+                                            <th>COMPLIANCE(ml)</th>
+                                            <th>REFLEX</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="bg-white rounded shadow-sm">
+                                            <td>Right</td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8" height="8" class="p-0"></td>
+                                        </tr>
+                                        <tr class="bg-white rounded shadow-sm">
+                                            <td>Left</td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field appearance="outline" class="matBox">
+                                                    <input matInput placeholder="Enter" disabled>
+                                                </mat-form-field>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--end of .table-responsive-->
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-0 mt-2 upload-da">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6">
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                    <mat-label>Observations</mat-label>
+                                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" disabled></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                    <mat-label>Recommendations</mat-label>
+                                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" disabled></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-0 mb-4 p-1">
+            <mat-card class="p-0">
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 font-bold scroll-md">
+                        <div class="col-sm-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 ">
+                                            Submitted By</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">Mr.Raj
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 w-auto v-line">
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row pb-1">
+                                    <div class="col pl-4  ">Date & Time</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">14/06/2019 : 12:55 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+<button mat-flat-button color="" class="custome-button mat-primary mr-2 mt-3" (click)="onNoClick()">Close</button>

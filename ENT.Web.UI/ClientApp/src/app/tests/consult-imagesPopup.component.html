@@ -1,0 +1,179 @@
+<div class="row m-4 bg-white">
+	<mat-card class="p-0">
+		<h5 class="p-3 title-bg col-xl-12">Images</h5>
+
+			<div class="col-xl-6 col-lg-6 f-l">
+				<div class="col-xl-6 col-lg-6 f-l">
+					<mat-form-field class="w-100" appearance="outline">
+						<mat-label>Filter</mat-label>
+						<mat-select>
+							<mat-option value="" (click)="openImage()">Image</mat-option>
+							<mat-option value="" (click)="openReport()">Report</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="col-xl-6 col-lg-6 f-l">
+					<mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Visit date & time</mat-label>
+                    <mat-select>
+                      <mat-option value="option1">14/01/2019 11.55 pm</mat-option>
+                      <mat-option value="option2">21/05/2019 1.40 pm</mat-option>
+                      <mat-option value="option3">03/07/2019 9.05 am</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 f-l">
+				<div class="col-xl-6 col-lg-6 f-l">
+					<mat-form-field class="w-100" appearance="outline">
+						<mat-label>Filter</mat-label>
+						<mat-select>
+							<mat-option value="" (click)="openImage1()">Image</mat-option>
+							<mat-option value="" (click)="openReport1()">Report</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="col-xl-6 col-lg-6 f-l">
+					<mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Visit date & time</mat-label>
+                    <mat-select>
+                      <mat-option value="option1">14/01/2019 11.55 pm</mat-option>
+                      <mat-option value="option2">21/05/2019 1.40 pm</mat-option>
+                      <mat-option value="option3">03/07/2019 9.05 am</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+				</div>
+			</div>
+			<div class="row col-lg-12">
+			<div class="row col-xl-6 m-0" *ngIf="image">
+				
+			<div class="col-xl-12 col-lg-12 border-black f-l">
+				<div class="col-lg-4 leftSideImage f-l">
+					<div class="col-lg-12">
+						<img src="assets/images/ent-1.jpg" class="w-100 p-1" (click)="img1()">
+						<img src="assets/images/ent-2.jpg" class="w-100 p-1" (click)="img2()">
+						<img src="assets/images/ent-3.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-4.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-5.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-7.jpg" class="w-100 p-1">
+					</div>
+				</div>
+
+				<div class="col-lg-8 f-l h-100">
+					<div class="col-lg-12 img-middle">
+						<img src="assets/images/ent-1.jpg" class="w-100" *ngIf="show1">
+						<img src="assets/images/ent-2.jpg" class="w-100" *ngIf="show2">
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="row col-xl-6 m-0" *ngIf="image1">
+			<div class="col-xl-12 col-lg-12 border-black f-l">
+				<div class="col-lg-8 f-l h-100">
+					<div class="col-lg-12 img-middle">
+						<img src="assets/images/ent-7.jpg" class="w-100" *ngIf="show3">
+						<img src="assets/images/ent-5.jpg" class="w-100" *ngIf="show4">
+					</div>
+				</div>
+
+				<div class="col-lg-4 rightSideImage f-l">
+					<div class="col-lg-12">
+						<img src="assets/images/ent-7.jpg" class="w-100 p-1" (click)="img3()">
+						<img src="assets/images/ent-5.jpg" class="w-100 p-1" (click)="img4()">
+						<img src="assets/images/ent-4.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-3.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-2.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-1.jpg" class="w-100 p-1">
+					</div>
+				</div>
+				</div>
+			</div>
+
+			<div class="row col-xl-6 m-0" *ngIf="report">
+				<div class="col-xl-12 col-lg-12 border-black f-l">
+				<div class="col-lg-4 leftSideImage f-l">
+					<div class="col-lg-12">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1" (click)="img1()">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1" (click)="img2()">
+						<img src="assets/images/ent-report-3.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1">
+					</div>
+				</div>
+
+				<div class="col-lg-8 f-l h-100">
+					<div class="col-lg-12 img-middle">
+						<img src="assets/images/ent-report-1.png" class="w-100" *ngIf="show1">
+						<img src="assets/images/ent-report-3.jpg" class="w-100" *ngIf="show2">
+					</div>
+				</div>
+				</div>
+			</div>
+			<div class="row col-xl-6 m-0" *ngIf="report1">
+			<div class="col-xl-12 col-lg-12 border-black f-l">
+				<div class="col-lg-8 f-l h-100">
+					<div class="col-lg-12 img-middle">
+						<img src="assets/images/ent-report-3.jpg" class="w-100" *ngIf="show3">
+						<img src="assets/images/ent-report-1.png" class="w-100" *ngIf="show4">
+					</div>
+				</div>
+
+				<div class="col-lg-4 rightSideImage f-l">
+					<div class="col-lg-12">
+						<img src="assets/images/ent-report-3.jpg" class="w-100 p-1" (click)="img3()">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1" (click)="img4()">
+						<img src="assets/images/ent-report-3.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1">
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+
+			
+			<!-- <div class="row col-lg-12">
+			<div class="row col-xl-6 m-0" *ngIf="report">
+				<div class="col-xl-12 col-lg-12 border-black f-l">
+				<div class="col-lg-4 border-black leftSideImage f-l">
+					<div class="col-lg-12">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1" (click)="img1()">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1" (click)="img2()">
+						<img src="assets/images/ent-report-3.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1">
+					</div>
+				</div>
+
+				<div class="col-lg-8 border-black f-l">
+					<div class="col-lg-12">
+						<img src="assets/images/ent-report-1.png" class="w-100" *ngIf="show1">
+						<img src="assets/images/ent-report-3.jpg" class="w-100" *ngIf="show2">
+					</div>
+				</div>
+				</div>
+			</div>
+			<div class="row col-xl-6 m-0" *ngIf="report1">
+			<div class="col-xl-12 col-lg-12 border-black f-l">
+				<div class="col-lg-8 border-black f-l">
+					<div class="col-lg-12">
+						<img src="assets/images/ent-report-3.jpg" class="w-100" *ngIf="show3">
+						<img src="assets/images/ent-report-1.png" class="w-100" *ngIf="show4">
+					</div>
+				</div>
+
+				<div class="col-lg-4 border-black rightSideImage f-l">
+					<div class="col-lg-12">
+						<img src="assets/images/ent-report-3.jpg" class="w-100 p-1" (click)="img3()">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1" (click)="img4()">
+						<img src="assets/images/ent-report-3.jpg" class="w-100 p-1">
+						<img src="assets/images/ent-report-1.png" class="w-100 p-1">
+					</div>
+				</div>
+				</div>
+			</div>
+			</div> -->
+
+	
+
+	</mat-card>
+</div>
+<button mat-flat-button color="" class="custome-button mat-primary mr-2 mt-3" (click)="onNoClick()">Close</button>

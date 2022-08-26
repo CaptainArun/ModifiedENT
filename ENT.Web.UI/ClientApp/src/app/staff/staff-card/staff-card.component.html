@@ -1,0 +1,58 @@
+<div class="white mt-4">
+  <mat-card class="p-0">
+    <div class="scroll-x">
+      <div class="row p-0 m-0 scroll-md" *ngIf="staffCard">
+          <div *ngIf="staffCard.StaffImage == null" class="col-xl-1 p-0">
+            <img src="assets/images/No-Image.png" class="img-fluid" width="136" />
+          </div>
+          <div *ngIf="staffCard.StaffImage != null" class="col-xl-1 p-0">
+            <img src={{profilePics}} class="img-fluid" style="height:125px;width: 125px;" />
+          </div>
+        <div class="col-xl-5">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1">
+                <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                  Staff Name
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{staffCard.EmployeeFullname}}
+                </div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">DOB/ Age</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{staffCard.EmployeeDOB|date:'dd-MM-yyyy'}}</div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">Cell Number</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{staffCard.CellNo}}</div>
+              </div>
+              <div class="row">
+                <div class="col font_color">Email Address</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{staffCard.EMail}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="pt-3 col flex-grow-1 w-auto">
+            <div class="row pb-1">
+              <div class="col pl-4 font_color">State</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">{{staffCard.State}}</div>
+            </div>
+            <div class="row pb-1">
+              <div class="col pl-4 font_color">Pincode</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">{{staffCard.Pincode}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

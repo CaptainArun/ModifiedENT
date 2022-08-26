@@ -1,0 +1,142 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <h5 class="p-3 title-bg mt-4">Patient Visit Timeline</h5>
+    <div class="white mt-0 mb-4">
+      <mat-card class="p-0">
+        <div class="scroll-x">
+          <div class="row p-0 m-0 scroll-md">
+            <div class="col-sm-1 p-0 ">
+              <img src="assets/images/patient-img.png" class="img-fluid" height="136" />
+            </div>
+
+            <div class="col-sm-4">
+              <div class="v-line">
+                <div class="pt-3 pb-2">
+                  <div class="row pb-1">
+                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                      Patient Name</div>
+                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                    <div class="col-xl-7 col-lg-7 col-md-7">Mr.Rahul Sharma
+                    </div>
+                  </div>
+
+                  <div class="row  pb-1">
+                    <div class="col font_color">DOB/ Age</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">25-08-1994(25 Years)</div>
+                  </div>
+
+                  <div class="row  pb-1">
+                    <div class="col font_color">Cell Number</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">+91-123456789</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col font_color">Next of kin</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">Mr.Roshan Sharma (Father)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4 v-line">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color ">Primary Physician</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">Dr.Nithin Parmar</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color ">Last Visit Date</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">14-02-2019</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color ">Diabetic</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">NO</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 red">Allergies</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col red">Hives</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-3 w-auto v-line">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row">
+                  <div class="col pl-4 font_color ">Bill Amount</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">5000</div>
+                </div>
+                <div class="row">
+                  <div class="col pl-4 font_color ">Paid</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">2500</div>
+                </div>
+                <div class="row">
+                  <div class="col pl-4 font_color ">Balance</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">2500</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+        <form>
+          <div class="row mb-4">
+            <div class="col-12">
+              <mat-card>
+                <div class="row d-flex align-items-center">
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <input matInput [matDatepicker]="pickers" placeholder="Enter Date">
+                      <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                      <mat-datepicker #pickers></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-3">
+                    <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                      <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" required>
+                      <mat-label>Start Time</mat-label>
+                      <ngx-material-timepicker-toggle [for]="toggleTimepicker1"></ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-3">
+                    <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                      <input matInput [ngxTimepicker]="toggleTimepicker2" [disableClick]="true" required>
+                      <mat-label>End Time</mat-label>
+                      <ngx-material-timepicker-toggle [for]="toggleTimepicker2"></ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #toggleTimepicker2></ngx-material-timepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-3 text-right">
+                    <button mat-flat-button color="" class="custome-button mr-2  mat-primary vissub schedbtn" routerLink="/home/opds/patientlist">Submit</button>
+                    <button mat-stroked-button class="transperent-button schedbtn" color="primary">Cancel</button>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <img src="assets/images/timeline-vertical.png" width="100%">
+  </div>
+</div>
+<!-- <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center schedbtn">
+
+      <div>
+        <button mat-stroked-button class="transperent-button mr-2 schedbtn" color="primary">Cancel</button>
+        <button mat-flat-button color="" class="custome-button mr-2  mat-primary vissub schedbtn" routerLink="/home/opds/patientlist">Submit</button>
+      </div>
+    </div> -->

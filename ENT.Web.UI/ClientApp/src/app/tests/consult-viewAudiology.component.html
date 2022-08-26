@@ -1,0 +1,99 @@
+<div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+ <form>
+                        <div class="row">
+                                <div class="col-12">
+                                        <mat-card>
+                                                <h5 class="pb-2 pt-2">Visit Details</h5>
+                                                <div class="row">
+                                                        <div class="col-sm">
+                                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                                        <mat-label>Recorded during</mat-label>
+                                                                        <mat-select [(value)]="selected" [disabled]="disableSelect">
+                                                                                <mat-option value="option1" >OPD, Visit
+                                                                                </mat-option>
+                                                                                <mat-option value="option2">Inpatient
+                                                                                        Admission </mat-option>
+                                                                                <mat-option value="option3">Surgical
+                                                                                        Admission </mat-option>
+                                                                        </mat-select>
+                                                                </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm">
+                                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                                        <mat-label>6/13/2019 10.50 AM</mat-label>
+                                                                        <input matInput [matDatepicker]="d10" placeholder="6/13/2019" disabled> 
+                                                                        <mat-datepicker-toggle matSuffix [for]="d10" disabled></mat-datepicker-toggle>
+                                                                        <mat-datepicker #d10 disabled></mat-datepicker>
+                                                                </mat-form-field>
+                                                        </div>
+
+
+                                                        <div class="col-sm col-lg">
+                                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                                        <mat-label>6/14/2019</mat-label>
+                                                                        <input matInput [matDatepicker]="d20" placeholder="Visit date" disabled>
+                                                                        <mat-datepicker-toggle matSuffix [for]="d20" disabled></mat-datepicker-toggle>
+                                                                        <mat-datepicker #d20 disabled></mat-datepicker>
+                                                                </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm timepick">
+                                                                <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                                                        <input matInput [ngxTimepicker]="toggleTimepicker10" disabled>
+                                                                        <mat-label>01:50 pm</mat-label>
+                                                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker10" disabled></ngx-material-timepicker-toggle>
+                                                                        <ngx-material-timepicker #toggleTimepicker10 disabled></ngx-material-timepicker>
+                                                                </mat-form-field>
+                                                        </div>
+                                                </div>
+                                        </mat-card>
+                                </div>
+                        </div>
+                </form>
+        </div>
+</div>
+    <div class="bg-white p-4 upload-da">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+              <div class="row">
+                  <mat-card class="w-100">
+                <div class="row">
+                <div id="demo" class="carousel slide img_slide" data-ride="carousel" data-interval="5000">
+
+                        <!-- Indicators -->
+                        <ul class="carousel-indicators">
+                                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                                <li data-target="#demo" data-slide-to="1"></li>
+                                <li data-target="#demo" data-slide-to="2"></li>
+                        </ul>
+
+                        <!-- The slideshow -->
+                        <div class="carousel-inner slider_img">
+                                <div class="carousel-item active">
+                                        <img src="assets/images/consult01.png" width="100%">
+                                </div>
+                                <div class="carousel-item">
+                                        <img src="assets/images/consult02.png" width="100%">
+                                </div>
+                                <div class="carousel-item">
+                                        <img src="assets/images/consult03.png" width="100%">
+                                </div>
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                <span class="carousel-control-prev-icon slide-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                                <span class="carousel-control-next-icon slide-next-icon"></span>
+                        </a>
+
+                </div>
+        </div>
+                  </mat-card>
+              </div>
+          </div>
+        </div>
+      </div>
+                    

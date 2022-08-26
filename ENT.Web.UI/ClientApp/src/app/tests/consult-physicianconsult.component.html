@@ -1,0 +1,950 @@
+<div class="overflow-hidden p-4">
+<h5 class="p-3 title-bg mt-4">Physician Case-Assessment Sheet</h5>
+      <!--<consult-common></consult-common>-->
+      <div class="row">
+        <div class="col d-flex scroll-x mt-4">
+          <button color="" class="w-auto mat-primary mr-4 ml-0 mb-4 mb-custome-btn imgBtn triage-icon-bg" (click)="openVisitSummary()">
+       <img src="assets/images/summary.png" class="imgBtnImg" title="Intake Summary"/>
+        <span class="pl-1 imgBtnSpan">Visit Summary</span>
+        </button>
+          <button color="" class="w-auto mat-primary mr-4 ml-0 mb-4 mb-custome-btn imgBtn triage-icon-bg" (click)="openConsultation()">
+        <img src="assets/images/consultation.png" class="imgBtnImg" title="Intake Summary" />
+        <span class="pl-1 imgBtnSpan">Consultation</span>
+      </button>
+          <button color="" class="w-auto mat-primary mr-4 mb-custome-btn imgBtn triage-icon-bg" (click)="openProgressNotes()">
+      <img src="assets/images/notes.png" class="imgBtnImg" title="Progress Notes" />
+        <span class="pl-1 imgBtnSpan">Progress Notes</span>
+      </button>
+          <button color="" class="w-auto mat-primary mr-4 mb-custome-btn imgBtn triage-icon-bg" (click)="openorders()">
+      <img src="assets/images/choice.png" class="imgBtnImg" title="Orders" />
+        <span class="pl-1 imgBtnSpan">Orders</span></button>
+          <button color="" class="w-auto mat-primary mr-4 mb-custome-btn imgBtn triage-icon-bg" (click)="openImages()">
+      <img src="assets/images/image.png" class="imgBtnImg" title="Images" />
+        <span class="pl-1 imgBtnSpan">Images</span>
+        </button>
+          <!-- <button color="" class="custome-button w-auto mat-primary mr-4 shadow  mb-custome-btn imgBtn triage-icon-bg" (click)="openClinicalTrials()">
+      <img src="assets/images/clinic.png" class="imgBtnImg" title="Clinical Trials" />
+        <span class="pl-1 imgBtnSpan">Clinical Trials</span>
+        </button> -->
+          <button color="" class="w-auto mat-primary mr-4 mb-custome-btn imgBtn triage-icon-bg" (click)="openSummary()">
+      <img src="assets/images/ot_summary.png" class="imgBtnImg" title="OT Summary" />
+        <span class="pl-1 imgBtnSpan">OT Summary</span></button>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 mt-4 upload-da">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+            <h5 class="pb-2 pt-2">Visit History</h5>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Visit History
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12">
+                    <div class="table-responsive shroff-table reduce-field">
+                      <table class="table table-bordered table-hover w-100">
+                        <thead>
+                          <tr class="font-weight-bold">
+                            <th>Action</th>
+                            <th>Record During</th>
+                            <th>Visit date & time</th>
+                            <th>Record Date</th>
+                            <th>Record Time</th>
+                            <th>Diagnosis(ICD10)</th>
+                            <th>Submitted by</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div>
+                                <i class="cursor-pointer fa fa-pencil-square f-25" title="Edit" aria-hidden="true" (click)="openEditReport()"></i>
+                                <i class="cursor-pointer fa fa-eye f-25 ml-2" title="View" aria-hidden="true" (click)="openViewReport()"></i>
+                                <i class="cursor-pointer fa fa-trash f-25 ml-2" title="View" aria-hidden="true"></i>
+                                <i class="cursor-pointer fa fa-refresh f-25 ml-2" title="View" aria-hidden="true" (click)="openTimeline()"></i>
+                              </div>
+                            </td>
+                            <td>OPD, Visit</td>
+                            <td>14-06-2019 11.55 PM</td>
+                            <td>10-06-2019</td>
+                            <td>1.30 PM</td>
+                            <td>H60.331 Swimmer's ear, right ear</td>
+                            <td>Mrs.Neha Sharma</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div>
+                                <i class="cursor-pointer fa fa-pencil-square f-25 cursor-pointer" title="Edit" aria-hidden="true"></i>
+                                <i class="cursor-pointer fa fa-eye f-25 ml-2" title="View" aria-hidden="true"></i>
+                                <i class="cursor-pointer fa fa-trash f-25 ml-2" title="View" aria-hidden="true"></i>
+                                <i class="cursor-pointer fa fa-refresh f-25 ml-2" title="View" aria-hidden="true" (click)="openTimelineV()"></i>
+                              </div>
+                            </td>
+                            <td>OPD, Visit</td>
+                            <td>16-06-2019 11.55 PM</td>
+                            <td>01-06-2019</td>
+                            <td>10.25 AM</td>
+                            <td>H92.01 Otalgia, right ear</td>
+                            <td>Mr.Rahul </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--end of .table-responsive-->
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+
+          </div>
+        </div>
+      </div>
+     
+ <div class="bg-white p-4 mt-4 upload-da">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+              <mat-tab-group>
+                <mat-tab label="Diagnosis">
+            <form>
+              <div class="row mt-4">
+                <!-- <h5 class="pb-2 pt-2">Diagnosis</h5> -->
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Chief Complaint</mat-label>
+                        <input matInput value="Ear Pain" disabled>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Problem Area/Location</mat-label>
+                        <mat-select multiple>
+                          <mat-option value="">Left Ear</mat-option>
+                          <mat-option value="">Right Ear</mat-option>
+                          <mat-option value="">Nose</mat-option>
+                          <mat-option value="">Throat</mat-option>
+                          <mat-option value="">Head</mat-option>
+                          <mat-option value="">Neck</mat-option>
+                          <mat-option value="1" (click)="textField()">Others</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6" *ngIf="show1">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Others Notes</mat-label>
+                        <input matInput placeholder="Enter">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Problem Duration</mat-label>
+                        <input matInput placeholder="Enter">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Previous History</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Symptoms</mat-label>
+                        <mat-select multiple>
+                          <mat-option value="">Nausea</mat-option>
+                          <mat-option value="">Vomiting</mat-option>
+                          <mat-option value="">Fever</mat-option>
+                          <mat-option value="">Shortness of breath</mat-option>
+                          <mat-option value="">Throbbing</mat-option>
+                          <mat-option value="">Burning</mat-option>
+                          <mat-option value="">Shooting</mat-option>
+                          <mat-option value="">Squeezing</mat-option>
+                          <mat-option value="">Stinging</mat-option>
+                          <mat-option value="">Soreness</mat-option>
+                          <mat-option value="">Feeling very tired or wiped out</mat-option>
+                          <mat-option value="">Not feeling hungry</mat-option>
+                          <mat-option value="">Trouble sleeping</mat-option>
+                          <mat-option value="">Mood changes</mat-option>
+                          <mat-option value="">Weakness</mat-option>
+                          <mat-option value="">A lack of energy</mat-option>
+                          <mat-option value="1" (click)="textField2()">Others</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6" *ngIf="show2">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Others Symptoms</mat-label>
+                        <input matInput placeholder="Enter">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Pain/Discomfort level (0-10)</mat-label>
+                        <mat-select>
+                          <mat-option value="">0</mat-option>
+                          <mat-option value="">1</mat-option>
+                          <mat-option value="">2</mat-option>
+                          <mat-option value="">3</mat-option>
+                          <mat-option value="">4</mat-option>
+                          <mat-option value="">5</mat-option>
+                          <mat-option value="">6</mat-option>
+                          <mat-option value="">7</mat-option>
+                          <mat-option value="">8</mat-option>
+                          <mat-option value="">9</mat-option>
+                          <mat-option value="">10</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Pain Notes</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Timings</mat-label>
+                        <input matInput placeholder="Enter">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Problem Type</mat-label>
+                        <mat-select multiple>
+                          <mat-option value="">Chronic</mat-option>
+                          <mat-option value="">Acute</mat-option>
+                          <mat-option value="">Post Surgical Procedure</mat-option>
+                          <mat-option value="">Infection</mat-option>
+                          <mat-option value="1" (click)="textField3()">Others</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6" *ngIf="show3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Problem Notes</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Aggravated by</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Alliviated by</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Observation Notes</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Interaction Summary</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Additional Notes</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 mt-4">
+                        <mat-label (click)="openAssessment()" class="blue pointer">Assessment Form</mat-label>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 mt-4">
+                        <mat-label  class="blue pointer">Otoscope</mat-label>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 mt-4">
+                        <mat-label  class="blue pointer">Laryngoscopy</mat-label>
+                    </div>
+                      <div class="col-xl-3 col-lg-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Prognosis</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>ICD10</mat-label>
+                  <mat-select multiple>
+                    <mat-option value="">H60.331 Swimmer's ear, right ear</mat-option>
+                    <mat-option value="">H60.332 Swimmer's ear, left ear</mat-option>
+                    <mat-option value="">H60.333 Swimmer's ear, bilateral</mat-option>
+                    <mat-option value="">H60.339 Swimmer's ear, unspecified ear</mat-option>
+                    <mat-option value="">H60.391 Other infective otitis externa, right ear</mat-option>
+                    <mat-option value="">H60.392 Other infective otitis externa, left ear</mat-option>
+                    <mat-option value="">H60.393 Other infective otitis externa, bilateral</mat-option>
+                    <mat-option value="">H60.399 Other infective otitis externa, unspecified ear</mat-option>
+                    <mat-option value="">H60.40 Cholesteatoma of external ear, unspecified ear</mat-option>
+                    <mat-option value="">H60.41 Cholesteatoma of right external ear</mat-option>
+                    <mat-option value="">H60.42 Cholesteatoma of left external ear</mat-option>
+                    <mat-option value="">H60.43 Cholesteatoma of external ear, bilateral</mat-option>
+                    <mat-option value="">H61.20 Impacted cerumen, unspecified ear</mat-option>
+                    <mat-option value="">H61.21 Impacted cerumen, right ear</mat-option>
+                    <mat-option value="">H61.22 Impacted cerumen, left ear</mat-option>
+                    <mat-option value="">H61.23 Impacted cerumen, bilateral</mat-option>
+                    <mat-option value="">H92.01 Otalgia, right ear</mat-option>
+                    <mat-option value="">H92.02 Otalgia, left ear</mat-option>
+                    <mat-option value="">H92.03 Otalgia, bilateral</mat-option>
+                    <mat-option value="">H92.09 Otalgia, unspecified ear</mat-option>
+                    <mat-option value="">H93.11 Tinnitus, right ear</mat-option>
+                    <mat-option value="">H93.12 Tinnitus, left ear</mat-option>
+                    <mat-option value="">H93.13 Tinnitus, bilateral</mat-option>
+                    <mat-option value="">H93.19 Tinnitus, unspecified ear</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Diagnosis Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Etiology</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <button mat-flat-button color="primary" (click)="openDiagnosis()" class="custome-button mat-primary draw_btn mb-5">Draw</button>
+              </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+                </mat-tab>
+          <mat-tab label="Procedure">
+              <div class="row mt-4">
+              <div class="col-xl-3 col-lg-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Requested Procedure</mat-label>
+                  <mat-select multiple>
+                    <mat-option value="">Syringing</mat-option>
+                    <mat-option value="">Laryngoscopy</mat-option>
+                    <mat-option value="">Otoscopy</mat-option>
+                    <mat-option value="">Speech theraphy</mat-option>
+                    <mat-option value="">Tympanogram</mat-option>
+                    <mat-option value="">OAE Test</mat-option>
+                    <mat-option value="">BERA Test</mat-option>
+                    <mat-option value="">Electrocochleography</mat-option>
+                    <mat-option value="">Tuning Fork Test</mat-option>
+                    <mat-option value="">Others</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Procedure Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <mat-form-field class=" w-100 " appearance="outline">
+                  <mat-label>Procedure Suggested Date</mat-label>
+                  <input matInput [matDatepicker]="proceduredate" placeholder="Visit date">
+                  <mat-datepicker-toggle matSuffix [for]="proceduredate">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #proceduredate></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Tests">
+            <div class="p-4">
+              <mat-card style="height:170px">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Recommended Tests</mat-label>
+                      <mat-select multiple>
+                        <mat-option value="">Audiology</mat-option>
+                        <mat-option value="">Speech theraphy</mat-option>
+                        <mat-option value="">Tympanogram</mat-option>
+                        <mat-option value="">OAE Test</mat-option>
+                        <mat-option value="">BERA Test</mat-option>
+                        <mat-option value="">Electrocochleography</mat-option>
+                        <mat-option value="">Tuning Fork Test</mat-option>
+                        <mat-option value="">Others</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Notes & Instruction</mat-label>
+                      <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 mt-3 " style="text-align: right">
+                    <button mat-flat-button color="primary" class="custome-button mat-primary">Submit</button>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </mat-tab>
+              </mat-tab-group>
+          </div>
+        </div>
+      </div>
+
+       <div class="bg-white p-4 mt-4 upload-da">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+            <h5 class="pb-2 pt-2">Medication</h5>
+      <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Medication
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row mt-4">
+                <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12">
+                        <div class="table-responsive shroff-table reduce-field">
+                          <table class="table table-bordered table-hover w-100">
+                            <thead>
+                              <tr class="font-weight-bold">
+                                <th>S.No</th>
+                                <th>Item/Drug Name</th>
+                                <th>Dispense Form</th>
+                                <th>Diagnosis</th>
+                                <th>Qty</th>
+                                <th>Medication Time</th>
+                                <th>SIG</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>
+                                  <mat-form-field class=" w-100 " appearance="outline">
+                                    <mat-label>Item/Drug Name</mat-label>
+                                    <mat-select>
+                                      <mat-option value="">Ceftibuten</mat-option>
+                                      <mat-option value="">Ofloxacin</mat-option>
+                                      <mat-option value="">Fluticasone</mat-option>
+                                      <mat-option value="">Azelastine</mat-option>
+                                      <mat-option value="">Amifostine</mat-option>
+                                      <mat-option value="">Cefdinir</mat-option>
+                                      <mat-option value="">Amoxicillin</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field class=" w-100 " appearance="outline">
+                                    <mat-label>Dispense Form</mat-label>
+                                    <mat-select>
+                                      <mat-option value="">Oral</mat-option>
+                                      <mat-option value="">External</mat-option>
+                                      <mat-option value="">Nasal</mat-option>
+                                      <mat-option value="">Ear</mat-option>
+                                      <mat-option value="">Eye</mat-option>
+                                      <mat-option value="">Other</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field class=" w-100 " appearance="outline">
+                                    <mat-label>Diagnosis</mat-label>
+                                    <mat-select multiple>
+                                      <mat-option value="">H60.331 Swimmer's ear, right ear</mat-option>
+                                      <mat-option value="">H60.332 Swimmer's ear, left ear</mat-option>
+                                      <mat-option value="">H60.333 Swimmer's ear, bilateral</mat-option>
+                                      <mat-option value="">H60.339 Swimmer's ear, unspecified ear</mat-option>
+                                      <mat-option value="">H60.391 Other infective otitis externa, right ear</mat-option>
+                                      <mat-option value="">H60.392 Other infective otitis externa, left ear</mat-option>
+                                      <mat-option value="">H60.393 Other infective otitis externa, bilateral</mat-option>
+                                      <mat-option value="">H60.399 Other infective otitis externa, unspecified ear</mat-option>
+                                      <mat-option value="">H60.40 Cholesteatoma of external ear, unspecified ear</mat-option>
+                                      <mat-option value="">H60.41 Cholesteatoma of right external ear</mat-option>
+                                      <mat-option value="">H60.42 Cholesteatoma of left external ear</mat-option>
+                                      <mat-option value="">H60.43 Cholesteatoma of external ear, bilateral</mat-option>
+                                      <mat-option value="">H61.20 Impacted cerumen, unspecified ear</mat-option>
+                                      <mat-option value="">H61.21 Impacted cerumen, right ear</mat-option>
+                                      <mat-option value="">H61.22 Impacted cerumen, left ear</mat-option>
+                                      <mat-option value="">H61.23 Impacted cerumen, bilateral</mat-option>
+                                      <mat-option value="">H92.01 Otalgia, right ear</mat-option>
+                                      <mat-option value="">H92.02 Otalgia, left ear</mat-option>
+                                      <mat-option value="">H92.03 Otalgia, bilateral</mat-option>
+                                      <mat-option value="">H92.09 Otalgia, unspecified ear</mat-option>
+                                      <mat-option value="">H93.11 Tinnitus, right ear</mat-option>
+                                      <mat-option value="">H93.12 Tinnitus, left ear</mat-option>
+                                      <mat-option value="">H93.13 Tinnitus, bilateral</mat-option>
+                                      <mat-option value="">H93.19 Tinnitus, unspecified ear</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field class="" appearance="outline">
+                                    <input matInput placeholder="Enter">
+                                  </mat-form-field>
+                                </td>
+                                <td>
+                                  <div class="col-lg-2 f-l">
+                                    <mat-label>Morning</mat-label>
+                                    <section class="example-section">
+                                      <mat-checkbox class="example-margin"></mat-checkbox>
+                                    </section>
+                                  </div>
+                                  <div class="col-lg-2 f-l">
+                                    <mat-label>Brunch</mat-label>
+                                    <section class="example-section">
+                                      <mat-checkbox class="example-margin"></mat-checkbox>
+                                    </section>
+                                  </div>
+                                  <div class="col-lg-2 f-l">
+                                    <mat-label>Noon</mat-label>
+                                    <section class="example-section">
+                                      <mat-checkbox class="example-margin"></mat-checkbox>
+                                    </section>
+                                  </div>
+                                  <div class="col-lg-2 f-l">
+                                    <mat-label>Evening</mat-label>
+                                    <section class="example-section">
+                                      <mat-checkbox class="example-margin"></mat-checkbox>
+                                    </section>
+                                  </div>
+                                  <div class="col-lg-2 f-l">
+                                    <mat-label>Night</mat-label>
+                                    <section class="example-section">
+                                      <mat-checkbox class="example-margin"></mat-checkbox>
+                                    </section>
+                                  </div>
+                                  <div class="col-lg-2 f-l">
+                                    <mat-form-field class=" w-100 " appearance="outline">
+                                      <mat-select>
+                                        <mat-option value="">Before</mat-option>
+                                        <mat-option value="">After</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </div>
+                                </td>
+                                <td>
+                                  <mat-form-field class="" appearance="outline">
+                                    <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                                  </mat-form-field>
+                                </td>
+                                <tr>
+                                  <td>2</td>
+                                  <td>
+                                    <mat-form-field class=" w-100 " appearance="outline">
+                                      <mat-label>Item/Drug Name</mat-label>
+                                      <mat-select>
+                                        <mat-option value="">Ceftibuten</mat-option>
+                                        <mat-option value="">Ofloxacin</mat-option>
+                                        <mat-option value="">Fluticasone</mat-option>
+                                        <mat-option value="">Azelastine</mat-option>
+                                        <mat-option value="">Amifostine</mat-option>
+                                        <mat-option value="">Cefdinir</mat-option>
+                                        <mat-option value="">Amoxicillin</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </td>
+                                  <td>
+                                    <mat-form-field class=" w-100 " appearance="outline">
+                                      <mat-label>Dispense Form</mat-label>
+                                      <mat-select>
+                                        <mat-option value="">Oral</mat-option>
+                                        <mat-option value="">External</mat-option>
+                                        <mat-option value="">Nasal</mat-option>
+                                        <mat-option value="">Ear</mat-option>
+                                        <mat-option value="">Eye</mat-option>
+                                        <mat-option value="">Other</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </td>
+                                  <td>
+                                    <mat-form-field class=" w-100 " appearance="outline">
+                                      <mat-label>Diagnosis</mat-label>
+                                      <mat-select multiple>
+                                        <mat-option value="">H60.331 Swimmer's ear, right ear</mat-option>
+                                        <mat-option value="">H60.332 Swimmer's ear, left ear</mat-option>
+                                        <mat-option value="">H60.333 Swimmer's ear, bilateral</mat-option>
+                                        <mat-option value="">H60.339 Swimmer's ear, unspecified ear</mat-option>
+                                        <mat-option value="">H60.391 Other infective otitis externa, right ear</mat-option>
+                                        <mat-option value="">H60.392 Other infective otitis externa, left ear</mat-option>
+                                        <mat-option value="">H60.393 Other infective otitis externa, bilateral</mat-option>
+                                        <mat-option value="">H60.399 Other infective otitis externa, unspecified ear</mat-option>
+                                        <mat-option value="">H60.40 Cholesteatoma of external ear, unspecified ear</mat-option>
+                                        <mat-option value="">H60.41 Cholesteatoma of right external ear</mat-option>
+                                        <mat-option value="">H60.42 Cholesteatoma of left external ear</mat-option>
+                                        <mat-option value="">H60.43 Cholesteatoma of external ear, bilateral</mat-option>
+                                        <mat-option value="">H61.20 Impacted cerumen, unspecified ear</mat-option>
+                                        <mat-option value="">H61.21 Impacted cerumen, right ear</mat-option>
+                                        <mat-option value="">H61.22 Impacted cerumen, left ear</mat-option>
+                                        <mat-option value="">H61.23 Impacted cerumen, bilateral</mat-option>
+                                        <mat-option value="">H92.01 Otalgia, right ear</mat-option>
+                                        <mat-option value="">H92.02 Otalgia, left ear</mat-option>
+                                        <mat-option value="">H92.03 Otalgia, bilateral</mat-option>
+                                        <mat-option value="">H92.09 Otalgia, unspecified ear</mat-option>
+                                        <mat-option value="">H93.11 Tinnitus, right ear</mat-option>
+                                        <mat-option value="">H93.12 Tinnitus, left ear</mat-option>
+                                        <mat-option value="">H93.13 Tinnitus, bilateral</mat-option>
+                                        <mat-option value="">H93.19 Tinnitus, unspecified ear</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </td>
+                                  <td>
+                                    <mat-form-field class="" appearance="outline">
+                                      <input matInput placeholder="Enter">
+                                    </mat-form-field>
+                                  </td>
+                                  <td>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Morning</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Brunch</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Noon</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Evening</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Night</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-form-field class=" w-100 " appearance="outline">
+                                        <mat-select>
+                                          <mat-option value="">Before</mat-option>
+                                          <mat-option value="">After</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <mat-form-field class="" appearance="outline">
+                                      <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                                    </mat-form-field>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>
+                                    <mat-form-field class=" w-100 " appearance="outline">
+                                      <mat-label>Item/Drug Name</mat-label>
+                                      <mat-select>
+                                        <mat-option value="">Ceftibuten</mat-option>
+                                        <mat-option value="">Ofloxacin</mat-option>
+                                        <mat-option value="">Fluticasone</mat-option>
+                                        <mat-option value="">Azelastine</mat-option>
+                                        <mat-option value="">Amifostine</mat-option>
+                                        <mat-option value="">Cefdinir</mat-option>
+                                        <mat-option value="">Amoxicillin</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </td>
+                                  <td>
+                                    <mat-form-field class=" w-100 " appearance="outline">
+                                      <mat-label>Dispense Form</mat-label>
+                                      <mat-select>
+                                        <mat-option value="">Oral</mat-option>
+                                        <mat-option value="">External</mat-option>
+                                        <mat-option value="">Nasal</mat-option>
+                                        <mat-option value="">Ear</mat-option>
+                                        <mat-option value="">Eye</mat-option>
+                                        <mat-option value="">Other</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </td>
+                                  <td>
+                                    <mat-form-field class=" w-100 " appearance="outline">
+                                      <mat-label>Diagnosis</mat-label>
+                                      <mat-select multiple>
+                                        <mat-option value="">H60.331 Swimmer's ear, right ear</mat-option>
+                                        <mat-option value="">H60.332 Swimmer's ear, left ear</mat-option>
+                                        <mat-option value="">H60.333 Swimmer's ear, bilateral</mat-option>
+                                        <mat-option value="">H60.339 Swimmer's ear, unspecified ear</mat-option>
+                                        <mat-option value="">H60.391 Other infective otitis externa, right ear</mat-option>
+                                        <mat-option value="">H60.392 Other infective otitis externa, left ear</mat-option>
+                                        <mat-option value="">H60.393 Other infective otitis externa, bilateral</mat-option>
+                                        <mat-option value="">H60.399 Other infective otitis externa, unspecified ear</mat-option>
+                                        <mat-option value="">H60.40 Cholesteatoma of external ear, unspecified ear</mat-option>
+                                        <mat-option value="">H60.41 Cholesteatoma of right external ear</mat-option>
+                                        <mat-option value="">H60.42 Cholesteatoma of left external ear</mat-option>
+                                        <mat-option value="">H60.43 Cholesteatoma of external ear, bilateral</mat-option>
+                                        <mat-option value="">H61.20 Impacted cerumen, unspecified ear</mat-option>
+                                        <mat-option value="">H61.21 Impacted cerumen, right ear</mat-option>
+                                        <mat-option value="">H61.22 Impacted cerumen, left ear</mat-option>
+                                        <mat-option value="">H61.23 Impacted cerumen, bilateral</mat-option>
+                                        <mat-option value="">H92.01 Otalgia, right ear</mat-option>
+                                        <mat-option value="">H92.02 Otalgia, left ear</mat-option>
+                                        <mat-option value="">H92.03 Otalgia, bilateral</mat-option>
+                                        <mat-option value="">H92.09 Otalgia, unspecified ear</mat-option>
+                                        <mat-option value="">H93.11 Tinnitus, right ear</mat-option>
+                                        <mat-option value="">H93.12 Tinnitus, left ear</mat-option>
+                                        <mat-option value="">H93.13 Tinnitus, bilateral</mat-option>
+                                        <mat-option value="">H93.19 Tinnitus, unspecified ear</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </td>
+                                  <td>
+                                    <mat-form-field class="" appearance="outline">
+                                      <input matInput placeholder="Enter">
+                                    </mat-form-field>
+                                  </td>
+                                  <td>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Morning</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Brunch</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Noon</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Evening</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-label>Night</mat-label>
+                                      <section class="example-section">
+                                        <mat-checkbox class="example-margin"></mat-checkbox>
+                                      </section>
+                                    </div>
+                                    <div class="col-lg-2 f-l">
+                                      <mat-form-field class=" w-100 " appearance="outline">
+                                        <mat-select>
+                                          <mat-option value="">Before</mat-option>
+                                          <mat-option value="">After</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <mat-form-field class="" appearance="outline">
+                                      <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                                    </mat-form-field>
+                                  </td>
+                                </tr>
+
+
+                            </tbody>
+                          </table>
+                        </div>
+                        <!--end of .table-responsive-->
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="col-lg-6 f-l">
+                          <button mat-stroked-button color="" class="transperent-button light-sky primary mr-2 schedbtn">Add Row</button>
+                        </div>
+                        <div class="col-lg-6 f-l">
+                          <button mat-flat-button color="" class="custome-button mat-primary mr-2 schedbtn pull-right">Submit</button>
+                          <button mat-stroked-button color="" class="transperent-button light-sky primary schedbtn pull-right">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+    </div>
+    </div>
+    </div>
+
+    <div class="bg-white p-4 mt-4 upload-da">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+            <h5 class="pb-2 pt-2">Lab Order</h5>
+      <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Lab Order
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12">
+                    <div class="table-responsive shroff-table reduce-field">
+                      <table class="table table-bordered table-hover w-100">
+                        <thead>
+                          <tr class="font-weight-bold">
+                            <th>S.No</th>
+                            <th>Test Name</th>
+                            <th>Notes</th>
+                            <th>Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>
+                              <mat-form-field class=" w-100 " appearance="outline">
+                                <mat-label>Test Name</mat-label>
+                                <input matInput placeholder="Enter">
+                              </mat-form-field>
+                            </td>
+                            <td>
+                              <mat-form-field class="w-100" appearance="outline">
+                                <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                              </mat-form-field>
+                            </td>
+                            <td>
+                              <mat-form-field class=" w-100 " appearance="outline">
+                                <mat-label>Select Date</mat-label>
+                                <input matInput [matDatepicker]="d1" placeholder="Visit date">
+                                <mat-datepicker-toggle matSuffix [for]="d1">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #d1></mat-datepicker>
+                              </mat-form-field>
+                            </td>
+                            <tr>
+                              <td>2</td>
+                              <td>
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Test Name</mat-label>
+                                  <input matInput placeholder="Enter">
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Select Date</mat-label>
+                                  <input matInput [matDatepicker]="d2" placeholder="Visit date">
+                                  <mat-datepicker-toggle matSuffix [for]="d2">
+                                  </mat-datepicker-toggle>
+                                  <mat-datepicker #d2></mat-datepicker>
+                                </mat-form-field>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>3</td>
+                              <td>
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Test Name</mat-label>
+                                  <input matInput placeholder="Enter">
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Select Date</mat-label>
+                                  <input matInput [matDatepicker]="d3" placeholder="Visit date">
+                                  <mat-datepicker-toggle matSuffix [for]="d3">
+                                  </mat-datepicker-toggle>
+                                  <mat-datepicker #d3></mat-datepicker>
+                                </mat-form-field>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>4</td>
+                              <td>
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Test Name</mat-label>
+                                  <input matInput placeholder="Enter">
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Select Date</mat-label>
+                                  <input matInput [matDatepicker]="d4" placeholder="Visit date">
+                                  <mat-datepicker-toggle matSuffix [for]="d4">
+                                  </mat-datepicker-toggle>
+                                  <mat-datepicker #d4></mat-datepicker>
+                                </mat-form-field>
+                              </td>
+                            </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--end of .table-responsive-->
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="col-lg-6 f-l">
+                      <button mat-stroked-button color="" class="transperent-button light-sky primary mr-2 schedbtn">Add Row</button>
+                    </div>
+                    <div class="col-lg-6 f-l">
+                      <button mat-flat-button color="" class="custome-button mat-primary mr-2 schedbtn pull-right">Submit</button>
+                      <button mat-stroked-button color="" class="transperent-button light-sky primary schedbtn pull-right">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+    </div>
+    </div>
+    </div>
+
+
+      <div class="p-4 mt-4 upload-da">
+        <div class="row">
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Enter">
+            </mat-form-field>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Enter">
+            </mat-form-field>
+          </div>
+          <div class="col-xl-6 col-lg-6 mt-3">
+            <button mat-stroked-button class="transperent-button mr-2" color="primary">Cancel</button>
+            <button mat-flat-button color="primary" class="custome-button mat-primary">SignOff</button>
+          </div>
+        </div>
+      </div>
+    </div>

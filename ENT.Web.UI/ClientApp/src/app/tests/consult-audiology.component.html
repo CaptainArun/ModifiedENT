@@ -1,0 +1,358 @@
+<!-- <mat-tab-group>
+  <mat-tab label="Audiology">     -->
+<div class="overflow-hidden px-4 py-2">
+  <!--<consult-common></consult-common>-->
+  <!-- <h5 class="p-3 title-bg mt-4">Audiology</h5> -->
+  <!-- slide show -->
+  <form [formGroup]="audiologyForm">
+    <div class="bg-white p-4 mt-2">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="col-lg-8 pull-left">
+            <!-- <div class="col-lg-12">
+            <mat-label class="pull-left col-lg-2 mt-4">Audiometer Used:</mat-label>
+            <mat-form-field class="w-100 pull-left col-lg-5" appearance="outline">
+              <input matInput placeholder="Enter">
+            </mat-form-field>
+          </div> -->
+            <img src="assets/images/audiology-graph.png" class="w-100">
+
+            <div class="col-xl-10 col-lg-10 mt-3 ml-5 pointer">
+              <span class="mat-primary blue" (click)="openGraph()">Sample Graph</span>
+            </div>
+          </div>
+          <div class="col-lg-3 pull-left pt-4 mt-5">
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3"><img src="assets/images/circle.png" class="icon-size"></span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>AC</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3"><img src="assets/images/wrong.png" class="icon-size"></span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3"><img src="assets/images/triangle.png" class="icon-size"></span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>AC</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3"><img src="assets/images/box.png" class="icon-size"></span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3"><img src="assets/images/left-arrow.png" class="icon-size"></span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>BC</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3"><img src="assets/images/right-arrow.png" class="icon-size"></span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3"><img src="assets/images/left_square_bracket.png"
+                      class="icon-size"></span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>BC</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3"><img src="assets/images/right_square_bracket.png"
+                      class="icon-size"></span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3"><img src="assets/images/round-arrow.png" class="icon-size"></span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>AC</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3"><img src="assets/images/cross-arrow.png" class="icon-size"></span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3"><img src="assets/images/arrow-tri.png" class="icon-size"></span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>AC</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3"><img src="assets/images/arrow-square.png" class="icon-size"></span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3"><img src="assets/images/zig-left.png" class="icon-size"></span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>BC</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3"><img src="assets/images/zig-right.png" class="icon-size"></span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3"><img src="assets/images/zig-rect-left.png" class="icon-size"></span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>BC</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3"><img src="assets/images/zig-rect-right.png" class="icon-size"></span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3">M</span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>MCL</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3">M</span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3">M</span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>UCL</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3">M</span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3">S</span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>SF</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3">S</span>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="p-0 mb-2">
+              <div class="row text-center">
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block ml-3">A</span>
+                </div>
+                <div class="col-lg-6 p-2 bg-grey">
+                  <span>SF-A</span>
+                </div>
+                <div class="col-lg-3 p-2 pointer">
+                  <span class="dis-block mr-3">A</span>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white p-4 mt-2">
+      <h5 class="p-3 title-bg">Tuning Fork Test</h5>
+      <div class="row col-lg-12 mt-2">
+        <div class="row col-xl-6">
+          <div class="col-xl-1 mt-2">
+            <h5 class="h-100" style="line-height:7">Weber:</h5>
+          </div>
+          <div class="col-xl-10 mt-2">
+            <table border="1" cellpadding="20" class="w-100">
+              <tr>
+                <th>R</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>L</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-xl-1" style="bottom: 10px;">
+            <div class="row text-center">
+              <div class="col-xl-12 mt-2"><b>Symbol</b></div>
+              <div class="col-xl-12">
+                <h1>&#8592;</h1>
+              </div>
+              <!--&#8592; code for leftward arrow-->
+              <div class="col-xl-12">
+                <h1>&#8594;</h1>
+              </div>
+              <!--&#8594; code for rightward arrow-->
+              <div class="col-xl-12">
+                <h3>C</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row col-xl-6">
+          <div class="col-xl-1 mt-2">
+            <h5 class="h-100" style="line-height:7">Rinner's:</h5>
+          </div>
+          <div class="col-xl-10 mt-2">
+            <table border="1" cellpadding="20" class="w-100">
+              <tr>
+                <th>R</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>L</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-xl-1" style="bottom: 10px;">
+            <div class="row text-center">
+              <div class="col-xl-12 mt-2"><b>Symbol</b></div>
+              <div class="col-xl-12 mt-2 ml-3">
+                <h1>-</h1>
+              </div>
+              <div class="col-xl-12 mt-2 ml-3">
+                <h2>+</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<span class="px-4 pt-3">Pure Tone Average</span>
+    <div class="col-xl-3 col-lg-3">
+      <mat-label class="pull-left col-lg-3 mt-3 blue pr-0"><b>LT EAR:</b></mat-label>
+      <mat-form-field class="w-100 pull-left col-lg-9 pl-0" appearance="outline">
+        <textarea matInput placeholder="Enter" rows="1" cols="1" class="blue"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="col-xl-3 col-lg-3">
+      <mat-label class="pull-left col-lg-3 mt-3 red pr-0"><b>RT EAR:</b></mat-label>
+      <mat-form-field class="w-100 pull-left col-lg-9 pl-0" appearance="outline">
+        <textarea matInput placeholder="Enter" rows="1" cols="1" class="red"></textarea>
+      </mat-form-field>
+    </div>-->
+    </div>
+    <div class="bg-white p-4 mt-2">
+      <div class="row">
+        <div class="col-xl-2 col-lg-2">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker1" formControlName="Starttime">
+            <mat-label>Start Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker1>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-2">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker2" formControlName="Endtime">
+            <mat-label>End Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker2">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker2>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-2">
+          <mat-form-field class=" w-100 " appearance="outline">
+            <mat-label>Total Duration</mat-label>
+            <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="Totalduration"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-3">
+          <mat-form-field class=" w-100 " appearance="outline">
+            <mat-label>Findings</mat-label>
+            <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="Findings"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-3">
+          <div class="col-xl-4 col-lg-4 pull-left mt-3 pl-0 pr-0">
+            <mat-checkbox class="example-margin" (change)="onChange($event)">Next Follow Up</mat-checkbox>
+          </div>
+          <div class="col-xl-8 col-lg-8 pull-left">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Date</mat-label>
+              <input matInput [matDatepicker]="date2" [disabled]="!isFollowUp" placeholder="Visit date"
+                formControlName="Nextfollowupdate">
+              <mat-datepicker-toggle matSuffix [for]="date2">
+              </mat-datepicker-toggle>
+              <mat-datepicker #date2></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- slide show End-->
+    <div class="row d-flex align-items-center mt-4">
+      <div class="col-xl-3 col-lg-3">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>UserName</mat-label>
+          <input matInput placeholder="Enter">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg-3">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Enter">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-6 col-lg-6 text-right">
+        <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="back()">Back</button>
+        <button mat-flat-button color="primary" class="custome-button mat-primary mr-2"
+          (click)="addUpdateTuningForkTest()">Save</button>
+        <button mat-stroked-button class="transperent-button mr-2" color="primary">Cancel</button>
+        <button mat-flat-button color="primary" class="custome-button mat-primary">SignOff</button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- </mat-tab>
+</mat-tab-group> -->

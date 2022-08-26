@@ -1,0 +1,133 @@
+<div class="bg-white p-4 upload-da">
+        <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+                        <form>
+                                <div class="row">
+                                        <div class="col-12">
+                                                <mat-card>
+                                                        <h5 class="pb-2 pt-2">Visit Details</h5>
+                                                        <div class="row">
+                                                                <div class="col-lg-3">
+                                                                        <mat-form-field class=" w-100 "
+                                                                                appearance="outline">
+                                                                                <mat-label>Recorded during</mat-label>
+                                                                                <mat-select [(value)]="selected"
+                                                                                        [disabled]="disableSelect">
+                                                                                        <mat-option value="option1">OPD,
+                                                                                                Visit
+                                                                                        </mat-option>
+                                                                                        <mat-option value="option2">
+                                                                                                Inpatient
+                                                                                                Admission </mat-option>
+                                                                                        <mat-option value="option3">
+                                                                                                Surgical
+                                                                                                Admission </mat-option>
+                                                                                </mat-select>
+                                                                        </mat-form-field>
+                                                                </div>
+
+                                                                <div class="col-lg-3">
+                                                                        <mat-form-field class="w-100"
+                                                                                appearance="outline">
+                                                                                <mat-label>Visit date & time</mat-label>
+                                                                                <mat-select [(value)]="selected">
+                                                                                        <mat-option value="option1">
+                                                                                                6/14/2019 11.55 pm
+                                                                                        </mat-option>
+                                                                                        <mat-option value="option2">
+                                                                                                6/11/2019 1.40 pm
+                                                                                        </mat-option>
+                                                                                        <mat-option value="option3">
+                                                                                                6/01/2019 9.05 am
+                                                                                        </mat-option>
+                                                                                </mat-select>
+                                                                        </mat-form-field>
+                                                                </div>
+
+
+                                                                <div class="col-lg-3">
+                                                                        <mat-form-field class=" w-100 "
+                                                                                appearance="outline">
+                                                                                <mat-label>Record Date</mat-label>
+                                                                                <input matInput [matDatepicker]="d2"
+                                                                                        placeholder="Visit date">
+                                                                                <mat-datepicker-toggle matSuffix
+                                                                                        [for]="d2">
+                                                                                </mat-datepicker-toggle>
+                                                                                <mat-datepicker #d2></mat-datepicker>
+                                                                        </mat-form-field>
+                                                                </div>
+                                                                <div class="col-lg-3 timepick">
+                                                                        <mat-form-field
+                                                                                class="input-full-width timer w-100"
+                                                                                appearance="outline">
+                                                                                <input matInput
+                                                                                        [ngxTimepicker]="toggleTimepicker1"
+                                                                                        [disableClick]="true" required>
+                                                                                <mat-label>Record Time</mat-label>
+                                                                                <ngx-material-timepicker-toggle
+                                                                                        [for]="toggleTimepicker1">
+                                                                                </ngx-material-timepicker-toggle>
+                                                                                <ngx-material-timepicker
+                                                                                        #toggleTimepicker1>
+                                                                                </ngx-material-timepicker>
+                                                                        </mat-form-field>
+                                                                </div>
+                                                        </div>
+                                                </mat-card>
+                                        </div>
+                                </div>
+                        </form>
+                </div>
+        </div>
+</div>
+<div class="bg-white p-4 upload-da">
+        <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+                        <div class="row">
+                                <mat-card class="w-100">
+                                        <div class="row">
+                                                <div id="demo" class="carousel slide img_slide" data-ride="carousel"
+                                                        data-interval="5000">
+
+                                                        <!-- Indicators -->
+                                                        <ul class="carousel-indicators">
+                                                                <li data-target="#demo" data-slide-to="0"
+                                                                        class="active"></li>
+                                                                <li data-target="#demo" data-slide-to="1"></li>
+                                                                <li data-target="#demo" data-slide-to="2"></li>
+                                                        </ul>
+
+                                                        <!-- The slideshow -->
+                                                        <div class="carousel-inner slider_img">
+                                                                <div class="carousel-item active">
+                                                                        <img src="assets/images/consult01.png"
+                                                                                width="100%">
+                                                                </div>
+                                                                <div class="carousel-item">
+                                                                        <img src="assets/images/consult02.png"
+                                                                                width="100%">
+                                                                </div>
+                                                                <div class="carousel-item">
+                                                                        <img src="assets/images/consult03.png"
+                                                                                width="100%">
+                                                                </div>
+                                                        </div>
+
+                                                        <!-- Left and right controls -->
+                                                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                                                <span
+                                                                        class="carousel-control-prev-icon slide-prev-icon"></span>
+                                                        </a>
+                                                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                                                                <span
+                                                                        class="carousel-control-next-icon slide-next-icon"></span>
+                                                        </a>
+
+                                                </div>
+                                        </div>
+                                </mat-card>
+                        </div>
+                </div>
+        </div>
+</div>
