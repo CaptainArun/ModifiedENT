@@ -1,0 +1,211 @@
+<div class="bg-white upload-da" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+      <h5 class="p-3 title-bg" cdkDragHandle>
+        <b>Patient Visit</b>
+        <span class="mr-4 ml-4">Order No: {{visitOrderNumber}}</span>
+        <button style="color:white" class="close" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+      </h5>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+          <form [formGroup]="patientVisitEditForm">
+            <input type="hidden" formControlName="VisitId">
+            <input type="hidden" formControlName="PatientId">
+            <div class="row mb-4">
+              <div class="col-12">
+                <mat-card>
+
+                  <div class="row d-flex align-items-center">
+                    <div class="col-lg-3 mb-4">
+                      <mat-label><h4>Facility Name</h4></mat-label>
+                      <mat-label><h5><i>{{data.FacilityName}}	</i> </h5></mat-label> 
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Visit date</mat-label>
+                        <input matInput  placeholder="Visit date"  formControlName="VisitDate"
+                          readonly >
+                 
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                        <mat-label>Visit time</mat-label>
+                        <input matInput placeholder="Visit time" formControlName="Visittime" readonly>
+                    </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <div class="col-lg-6 f-l mt-2 h-70p p-0">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>Visit Type</mat-label>
+                          <mat-select formControlName="VisitTypeID">
+                            <mat-option *ngFor="let visit of visitType" (click)="showfield1(visit.VisitTypeId)"
+                              [value]="visit.VisitTypeId">{{visit.VisitTypeDescription}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-lg-6 f-l pr-0 pt-2" [hidden]="showfield">
+                        <mat-form-field [matTooltip]="patientVisitEditForm.get('VisitDateandTime').value" matTooltipPosition="above"  matTooltipClass ="Tooltip-sm" class="w-100" appearance="outline">
+                          <mat-label>Visit Date & Time</mat-label>
+                          <mat-select formControlName="VisitDateandTime">
+                            <mat-option *ngFor="let VT of VisitDateandTimeType" [value]="VT.VisitDateandTime">
+                              {{VT.VisitDateandTime}}
+                            </mat-option>
+
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Recorded during</mat-label>
+                        <mat-select formControlName="RecordedDuringID">
+                          <mat-option *ngFor="let RD of recordedDuring" [value]="RD.RecordedDuringId">
+                            {{RD.RecordedDuringDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Urgency</mat-label>
+                        <mat-select formControlName="UrgencyTypeID">
+                          <mat-option *ngFor="let urgency of urgencyType" [value]="urgency.UrgencyTypeId">
+                            {{urgency.UrgencyTypeDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Patient Arrival Condition</mat-label>
+                        <mat-select formControlName="PatientArrivalConditionID">
+                          <mat-option *ngFor="let PAC of patientArraivalCondition"
+                            [value]="PAC.PatientArrivalConditionId">
+                            {{PAC.PatientArrivalconditionDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>To Consult</mat-label>
+                        <mat-select formControlName="ToConsult">
+                          <mat-option *ngFor="let toConsult of toConsultData"
+                            [value]="toConsult.FirstName +' '+toConsult.MiddleName+' '+toConsult.LastName">
+                            {{toConsult.FirstName}} {{toConsult.MiddleName}} {{toConsult.LastName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Consulting Doctor</mat-label>
+                        <mat-select formControlName="ProviderID">
+                          <mat-option *ngFor="let consultDoctor of toConsultData" [value]="consultDoctor.ProviderID">
+                            {{consultDoctor.FirstName}}
+                            {{consultDoctor.MiddleName}} {{consultDoctor.LastName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Referring Hospital</mat-label>
+                        <input matInput placeholder="Enter" formControlName="ReferringFacility" maxlength="75">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Referring Doctor</mat-label>
+                        <input matInput placeholder="Enter" formControlName="ReferringProvider" maxlength="75">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Consultation type</mat-label>
+                        <mat-select formControlName="ConsultationType">
+                          <mat-option *ngFor="let CT of ConsultationType" [value]="CT.ConsultationTypeDescription">
+                            {{CT.ConsultationTypeDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Chief Complaint</mat-label>
+                        <input matInput placeholder="Watery Eyes" formControlName="ChiefComplaint" maxlength="75">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-6">
+                      <mat-form-field [matTooltip]="patientVisitEditForm.get('AccompaniedBy').value" matTooltipPosition="above"  matTooltipClass ="Tooltip-lg"  class=" w-100 " appearance="outline">
+                        <mat-label>Accompained by</mat-label>
+                        <input matInput placeholder="Father" formControlName="AccompaniedBy" maxlength="500">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Token Number</mat-label>
+                        <input  matInput placeholder="Token Number" formControlName="TokenNumber" maxlength="75">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field  class="w-100" appearance="outline">
+                        <mat-label>Appointment</mat-label>
+                        <mat-select formControlName="Appointment">
+                          <mat-option *ngFor="let AT of AppointmentType" [value]="AT.AppointmentBookedDescription">
+                            {{AT.AppointmentBookedDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Visit Status</mat-label>
+                        <mat-select formControlName="VisitStatusID">
+                          <mat-option *ngFor="let VS of visitStatus" [value]="VS.VisitStatusId">
+                            {{VS.VisitStatusDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-6">
+                      <mat-form-field [matTooltip]="patientVisitEditForm.get('AdditionalInformation').value" matTooltipPosition="above"  matTooltipClass ="Tooltip-lg"  class=" w-100 " appearance="outline">
+                        <mat-label>Additional Information</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"
+                          formControlName="AdditionalInformation" maxlength="500"></textarea>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <mat-checkbox formControlName="TransitionOfCarePatient">Transition of Care Patient</mat-checkbox>
+                    </div>
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-xl-6 mt-3">
+                    </div>
+                    <div class="col-xl-6 text-right">
+                      <button mat-flat-button color="" class="custome-button mr-2 mat-primary "
+                        (click)="updatePatientVisitData()">
+                        Save
+                      </button>
+                      <button mat-stroked-button class="transperent-button" type="button" color="primary" (click)="clear()">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

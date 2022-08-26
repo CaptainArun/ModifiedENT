@@ -1,0 +1,28 @@
+input[type="search"] {
+    text-indent: 8px;
+}
+
+.paddingvstbtn {
+    padding: 9px 20px;
+    margin-left: -15px;
+}
+
+.paddingappbtn {
+    padding: 8px 14px;
+    margin-left: -15px;
+}
+
+.common_submenu .mat-icon img {
+    width: 25px;
+    margin-right: 10px;
+    align-items: center;
+    display: inline-flex;
+}
+
+#List {
+    width: 120px;
+}
+
+#Requests {
+    width: 180px;
+}

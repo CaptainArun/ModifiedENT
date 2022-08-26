@@ -1,0 +1,107 @@
+<div class="bmstable">
+    <div class="table-settings btn-group" placement="bottom-right" ngbDropdown [autoClose]="true">
+        <button class="btn btn-settings mat-primary-bg" id="bmsTblSettings" ngbDropdownToggle>
+            <i class="fa fa-gear"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="bmsTblSettings" ngbDropdownMenu>
+            <li *ngFor="let column of config.columnConfig" class="dropdown-item settings-item">
+                <input type="checkbox" [attr.id]="'tblView'+ column.PropertyName " [(ngModel)]="column.isVisible" />
+                <label [for]="'tblView'+ column.PropertyName ">{{column.DisplayName}}</label>
+            </li>
+        </ul>
+    </div>
+    <div class="table-wrapper">
+        <div class="table hover" [ngClass]="{'loadingTable' : showLoading==true}">
+            <div class="tableHeader mat-primary-bg">
+                <div class="tableRow dark-bg dark-border">
+                    <div class="tableCell"
+                        *ngIf="config.showView || config.showEdit || config.showAnaesthesia || config.showOpeningItem || config.showIntake  || config.showCaseSheet"
+                        style="width:125px">
+                        Action
+                    </div>
+                    <div class="tableCell icon-cell text-left checkbox" *ngIf="config.showSelection">
+                        <input type="checkbox" id="tblCheckbox" (change)="onSelectAll($event)" [ngModel]="selectAll" />
+                        <label for="tblCheckbox"></label>
+                    </div>
+                    <div class="tableCell icon-cell" *ngIf="config.showIcon">
+
+                    </div>
+
+                    <div class="tableCell col-header" [style.width]="column.width"
+                        *ngFor="let column of config.columnConfig"
+                        [ngClass]="{'sort-asc': column.PropertyName==orderBy && ascending, 'sort-desc': column.PropertyName==orderBy && !ascending, 'hideColumn' : !column.isVisible  }">
+                        <div class="dropdown filter-btn" [ngClass]="{'show': column.showFilters }" ngbDropdown>
+                            <button class="dropdown-toggle filter-icons" [ngClass]="{'filtered': column.filtered }"
+                                type="button" [id]="column.PropertyName" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" (click)="showFilter(column)" ngbDropdownToggle>
+                                <i class="fa fa-filter" aria-hidden="true"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="column.PropertyName" *ngIf="column.filtered"
+                                ngbDropdownMenu>
+                                <li class="dropdown-item filter-item" style="cursor:pointer"
+                                    (click)="clearFilter(column)">Clear
+                                    :: {{column.filterValue}}</li>
+                            </ul>
+                            <ul class="dropdown-menu" aria-labelledby="column.PropertyName" *ngIf="!column.filtered"
+                                ngbDropdownMenu>
+                                <li class="dropdown-item  filter-item"
+                                    *ngFor="let val of column.filters  | orderBy: value:true;"
+                                    (click)="filterData(column, val.value)">{{val.value}}</li>
+
+                            </ul>
+                        </div>
+                        {{column.DisplayName}}
+                        <div class="sort-icons" (click)="setOrder(column)">
+                            <span class="fa fa-long-arrow-down" aria-hidden="true"></span>
+                            <span class="fa fa-long-arrow-up" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- <div class="tableRow loadingRow" *ngIf="showLoading">
+                    Loading
+            </div> -->
+            <div class="tableRow dark-border" *ngFor="let data of currentData; let i = index">
+                <app-bms-tablerow [data]="data" [config]="config" [index]="i" (viewItem)="goToDetail($event)"
+                    (editItem)="goToEdit($event)"
+                    (selectItem)="onSelect($event)" 
+                    (bindItem)="onBindItem($event)"
+                    (openItem)="goToOpen($event)"
+                    (cancelItem)="goToCancel($event)"
+                    (paymentItem)="goToPayment($event)"
+                    (openingItem)="goToopeningItem($event)"
+                    (historyItem)="goToHistory($event)"
+                    (scheduleItem)="goToSchedule($event)" 
+                    (anaesthesiaItem)="goToAnaesthesia($event)"
+                    (intakeItem)="goToIntake($event)"
+                    (caseSheetItem)="goToCaseSheet($event)"
+                    (drugChartItem)="goToDrugChart($event)" 
+                    (drugAdminChartItem)="goToDrugAdminChart($event)"
+                    (emailItem)="goToEmail($event)"
+                    (reportItem)="goToReport($event)"
+                    (deleteItem)="goToDelete($event)">
+                </app-bms-tablerow>
+            </div>
+            <div class="loadingOverlay">
+                <div class="loadingAnimationContainer">
+                    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-tool" *ngIf="showPager || config.showAdd ">
+
+        <div class="pull-left" *ngIf="showPager">
+            <mat-paginator color="accent" [length]="totalRows" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                [pageIndex]="page" (page)=onPageChange($event)>
+            </mat-paginator>
+
+        </div>
+        <div class="pull-right" *ngIf="config.showAdd">
+            <button mat-raised-button (click)="goToAdd()" *ngIf="config.showAdd"><i
+                    class="fa fa-fw fa-plus"></i>Add</button>
+        </div>
+    </div>
+</div>

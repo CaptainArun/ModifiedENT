@@ -1,0 +1,119 @@
+<mat-card class="WholeCard">
+
+    <div class="cardTotal">
+
+<!-- Section - Header -->
+
+      <div class="header wrapperHeader">
+
+         <div class="headerbox col-12">
+           <div class="HeaderPadding" *ngFor="let Headdata of headerData;let i=index">
+
+            <span class="disImgNone"><img mat-card-avatar class="example-header-image" *ngIf="i==0" [src]="(Headdata | filterimg : listParticularData)"> </span>
+
+            <div  *ngIf="Headdata.DisplayType!='Image'"><span class="boldProperty">{{Headdata.DisplayName}} :</span><div (HoverdataEvent)="hoverobjData($event)" HoverDataAttri class="headerInline"  [matTooltip]="HoverData" matTooltipPosition="above" matTooltipClass="Tooltip-Card" >
+                  <span hidden="true" class="spanning">{{Headdata.PropertyName | filterHoverData: index : listParticularData: Headdata.DisplayMode : Headdata.FormatString }}</span>
+                  <span [hidden]="showarrow"></span>
+                  <span [ngClass]="Headdata.PropertyName | filterDatacolor: Headdata.ApplyStatusFontcolor : listParticularData" class="Propertyfont">{{Headdata.PropertyName | filter: index : listParticularData : Headdata.DisplayMode : Headdata.FormatString  }}</span>
+            </div>
+            </div>
+
+           </div>
+         </div>
+         
+      </div>
+        
+ <!-- Section - Content -->
+
+      <div class="MainProperty wrapper">
+
+        <div class="MainPropertyPadding" *ngFor="let ContentData of ContentData">
+
+           <div ><span class="boldProperty">{{ContentData.DisplayName}} :</span><div (HoverdataEvent)="hoverobjData($event)" HoverDataAttri [matTooltip]="HoverData" matTooltipPosition="above" matTooltipClass="Tooltip-Card">
+               <span hidden="true" class="spanning">{{ContentData.PropertyName | filterHoverData: index : listParticularData: ContentData.DisplayMode : ContentData.FormatString }}</span>
+               <span [hidden]="showarrow"></span>
+               <span [ngClass]="ContentData.PropertyName | filterDatacolor: ContentData.ApplyStatusFontcolor : listParticularData " class="Propertyfont">{{ContentData.PropertyName | filter: index : listParticularData : ContentData.DisplayMode : ContentData.FormatString}}</span>
+           </div>
+           </div>
+
+        </div>
+
+      </div>
+
+<!-- Section - Footer -->
+
+      <div class="footer">
+
+            <span  class="footerIcons" *ngIf="listParticularData.showView" (click)="goToDetail(event,listParticularData)"> <i class="IconsizingPx fa fa-eye"></i> </span>
+
+            <span  class="footerIcons" *ngIf="listParticularData.showEdit" (click)="goToEdit(event,listParticularData)"> <i class="IconsizingPx fa fa-pencil-square" aria-hidden="true"></i> </span>
+
+            <span  class="footerIcons" *ngIf="listParticularData.showOpen" (click)="goToOpen(event,listParticularData)"> <i class="IconsizingPx fa fa-openid" aria-hidden="true"></i> </span>
+
+            <!-- -->
+            
+            <div *ngIf="listParticularData.showCancel" (click)="goToCancel(event,listParticularData)"> 
+                <img class="footerIcons" src="assets/images/BMSGridIcons/appointment_cancel.png">
+            </div>
+
+            <div *ngIf="listParticularData.showPayment" (click)="goToPayment($event,listParticularData)"> 
+                <img class="footerIcons" src="assets/images/BMSGridIcons/admission_payment.png">
+            </div>
+
+            <div *ngIf="listParticularData.showOpeningItem" (click)="goToopeningItem(event,listParticularData)"> 
+                <img class="footerIcons" src="assets/images/BMSGridIcons/open_item.png">
+            </div>
+
+            <div *ngIf="listParticularData.showSchedule" (click)="goToSchedule(event,listParticularData)"> 
+                <img class="footerIcons" src="assets/images/BMSGridIcons/Schedule.png">
+            </div>
+
+            <div *ngIf="listParticularData.showAnaesthesia" (click)="goToAnaesthesia(event,listParticularData)"> 
+                <img class="footerIcons" src="assets/images/BMSGridIcons/anaesthisia.png">
+            </div>
+
+            <div *ngIf="listParticularData.showHistory" (click)="goToHistory(event,listParticularData)"> 
+                <img class="footerIcons" src="assets/images/BMSGridIcons/Visit_history.png">
+            </div>
+
+            <div *ngIf="listParticularData.showIntake" (click)="goToIntake(event,listParticularData)">
+                <img class="footerIcons" src="assets/images/BMSGridIcons/visit_intake.png">
+            </div>
+
+            <div *ngIf="listParticularData.showCaseSheet" (click)="goToCaseSheet(event,listParticularData)">
+                <img class="footerIcons" src="assets/images/BMSGridIcons/visit_casesheet.png">
+            </div>
+
+            <div *ngIf="listParticularData.showDrugChart" (click)="goToDrugChart(event,listParticularData)">
+                <img class="footerIcons" src="assets/images/BMSGridIcons/drug_chart.png">
+            </div>
+
+            <div *ngIf="listParticularData.showDrugAdminChart" (click)="goToDrugAdminChart(event,listParticularData)"> 
+                <img class="footerIcons" src="assets/images/BMSGridIcons/drug_adminChart.png">
+            </div>
+
+            <div *ngIf="listParticularData.showReport" (click)="goToReport(event,listParticularData)"> 
+                <img class="footerIcons" src="assets/images/BMSGridIcons/update_report.png">
+            </div>
+
+            <div *ngIf="listParticularData.showEmail" (click)="goToEmail(event,listParticularData)">
+                <img class="footerIcons" src="assets/images/BMSGridIcons/Email.png">
+            </div>
+
+            <!---->
+            
+            <span *ngIf="listParticularData.showDelete" (click)="goToDelete(event,listParticularData)"> 
+                <i class="IconsizingPx fa fa-trash" aria-hidden="true"></i>
+            </span>
+            
+
+      </div>
+
+    </div>
+
+</mat-card>
+
+
+
+
+    

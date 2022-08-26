@@ -1,0 +1,478 @@
+<div class="overflow-hidden px-4 pb-4">
+
+  <form [formGroup]="patientVisitForm">
+    <div class="row col-xl-12 ml-0 pl-0">
+
+      <mat-card class="col-xl-3 ml-0 my-2">
+
+        <div class="col-xl-12">
+          <div class="row justify-content-md-left" *ngIf="selectionTypeData !='Appointment'">
+            <div class="col-xl-12 text-center p-2 pb-5">
+              <h3>
+                <span class="pull-left">Today's Visits Status</span>
+              </h3>
+            </div>
+            <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-2">
+              <p class="m-0">Total No of Visits : <b>{{visitCount.TotalVisitCount}}</b></p>
+            </div>
+            <div class="col-xl-6 p-2 m-2 text-center rounded dash-box-1">
+              <p class="m-0">Total No of Visits ( by Appointments ) : <b>{{visitCount.AppointCount}}</b></p>
+            </div>
+            <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-3">
+              <p class="m-0">Walk-in Visit : <b>{{visitCount.WalkinCount}}</b></p>
+            </div>
+            <div class="col-xl-6 p-2 m-2 text-center rounded dash-box-4">
+              <p class="m-0">Completed Visits : <b>{{visitCount.CompletedCount}}</b></p>
+            </div>
+          </div>
+
+          <div class="row justify-content-md-left" *ngIf="appointmentList || selectionTypeData=='Appointment'">
+            <div class="col-xl-12 text-center p-2 pb-5">
+              <h3>
+                <span class="pull-left">Today's Appointments Status</span>
+              </h3>
+            </div>
+            <div class="col-xl-6 p-2 m-2 text-center rounded dash-box-1">
+              <p class="m-0">Total No of Appointments : <b>{{visitAppointmentCount.totalCount}}</b></p>
+            </div>
+            <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-2">
+              <p class="m-0">Total No of Visit converts: <b>{{visitAppointmentCount.VisitConvertedAppointmentCount}}</b></p>
+            </div>
+            <div class="col-xl-6 p-2 m-2 text-center rounded dash-box-3">
+              <p class="m-0">Total No of Pending Appointments : <b>{{visitAppointmentCount.PendingAppointmentCount}}</b></p>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+
+      <div class="ml-1">
+      </div>
+
+      <mat-card class="row col-xl-6 ml-0 my-2">
+        <visitSearchList (patientVisitDataCollection)="VisitDataCollection($event)" [selectionType]="selectionTypeData">
+        </visitSearchList>
+      </mat-card>
+
+      <div class="ml-4">
+      </div>
+
+      <mat-card class="row col-xl-3 ml-0 my-2">
+        <div class="col-xl-12">
+
+          <!-- <div class="col-xl-12 text-center pt-3"> -->
+
+          <div class="col-xl-12 text-center ml-3 pt-3">
+            <!-- <h3>
+              <span class="pull-right text-primary btn pointer mt-1" (click)="openAddUpdateform()">+ Add Patient</span>
+            </h3> -->
+            <button type="button" mat-flat-button class="pull-right custome-button mat-primary w-auto"
+              (click)="openAddUpdateform()">+ Add Patient</button>
+          </div>
+          <div class="row w-100 opdstop pt-2">
+
+            <!-- <div class="col-xl-4 opdstopres pl-0">
+              <button mat-flat-button class="custome-button mat-primary barbtn">
+                Submit
+              </button>
+            </div> -->
+
+            <div class="col-xl-12 opdstopres pt-0">
+
+              <input type="search" aria-label="Number" placeholder="Search & Add Visit" matInput
+                [matAutocomplete]="auto" class="mt-3 col-xl-4" formControlName="searchPatientList">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let patList of filteredOptions"
+                  [value]="patList.PatientFirstName+' '+ patList.PatientMiddleName +' '+patList.PatientLastName"
+                  (onSelectionChange)="getPatientId(patList.PatientId)">
+                  {{patList.PatientFirstName}}
+                  {{patList.PatientMiddleName}} {{patList.PatientLastName}}
+                </mat-option>
+              </mat-autocomplete>
+            </div>
+
+          </div>
+        </div>
+      </mat-card>
+
+    </div>
+
+
+
+    <div [hidden]="showingNewVisit">
+
+      <div class="row col-xl-12 ml-0 pl-0">
+
+        <div class="w-100" *ngIf="patientCardId && show">
+          <app-patient-demographic [PatID]="patientCardId"></app-patient-demographic>
+        </div>
+
+        <div class="col-xl-12 bg-white my-3 upload-da">
+          <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Visit History
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="row" *ngIf="showParticularRes">
+                  <mat-card>
+                    <app-bms-table [config]="VisitHistoryTable" [datas]="patientVisitHistory"
+                      (viewItem)="openVisitViewReport($event)"></app-bms-table>
+                  </mat-card>
+                </div>
+
+                <div class="w-100">
+                  <mat-card *ngIf="!showParticularRes">
+                    <h3>No Record Found</h3>
+                  </mat-card>
+                </div>
+
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+
+      <h5 class="p-3 title-bg mt-0">New Patient Visit
+        <span class="mr-4 ml-4">Order No: {{OrderNumber}}</span>
+      </h5>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+          <div class="row mb-4">
+            <div class=" col-xl-12">
+              <mat-card>
+                <div class="row d-flex align-items-center">
+
+                  <!-- <div class="col-lg-3" *ngIf="!Appointmentbtn">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Facility</mat-label>
+                      <mat-select formControlName="Facility">
+                        <mat-option *ngFor="let facilities of facilitiesVisitData" [value]="facilities.FacilityName"
+                          (click)="getfacilitiesIdValue(facilities)">
+                          {{facilities.FacilityName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="col-lg-3">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Facility</mat-label>
+                      <input matInput placeholder="Facility Name" formControlName="Facility" maxlength="75" readonly>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.VisitDate == '' || patientVisitForm.value.VisitDate == null) ? true : false"></span>Visit
+                        Date</mat-label>
+                      <input matInput [matDatepicker]="pickers" placeholder="Visit date" formControlName="VisitDate" [min]="minDate" >
+                      <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                      <mat-datepicker #pickers></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.VisitTime == '' || patientVisitForm.value.VisitTime == null) ? true : false"></span>Visit
+                        Time</mat-label>
+                      <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" placeholder="Visit Time"
+                        formControlName="VisitTime">
+                      <ngx-material-timepicker-toggle [for]="toggleTimepicker1"></ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #toggleTimepicker1 defaultTime="{{time}}"></ngx-material-timepicker>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-lg-3">
+                    <div class="col-lg-6 f-l mt-2 h-70p p-0">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientVisitForm.value.VisitType == '' || patientVisitForm.value.VisitType == null) ? true : false"></span>Visit
+                          Type</mat-label>
+                        <mat-select formControlName="VisitType">
+                          <mat-option *ngFor="let VT of visitType" (click)="showfield1(VT.VisitTypeId)"
+                            [value]="VT.VisitTypeId">{{VT.VisitTypeDescription}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-6 f-l pr-0 pt-2" [hidden]="showfield">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Visit Date & Time</mat-label>
+                        <mat-select formControlName="VisitDateandTime">
+                          <mat-option *ngFor="let VT of VisitDateandTimeType" [value]="VT.VisitDateandTime">
+                            {{VT.VisitDateandTime}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.RecordedDuring == '' || patientVisitForm.value.RecordedDuring == null) ? true : false"></span>Recorded
+                        during</mat-label>
+                      <mat-select formControlName="RecordedDuring">
+                        <mat-option *ngFor="let recDuring of recordedDuring" [value]="recDuring.RecordedDuringId">
+                          {{recDuring.RecordedDuringDescription}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.UrgencyType == '' || patientVisitForm.value.UrgencyType == null) ? true : false"></span>Urgency
+                      </mat-label>
+                      <mat-select formControlName="UrgencyType">
+                        <mat-option *ngFor="let UT of urgencyType" [value]="UT.UrgencyTypeId">
+                          {{UT.UrgencyTypeDescription}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.PatientArrivalCondition == '' || patientVisitForm.value.PatientArrivalCondition == null) ? true : false"></span>Patient
+                        Arrival Condition</mat-label>
+                      <mat-select formControlName="PatientArrivalCondition">
+                        <mat-option *ngFor="let patArrCon of patientArraivalCondition"
+                          [value]="patArrCon.PatientArrivalConditionId">
+                          {{patArrCon.PatientArrivalconditionDescription}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.ToConsult == '' || patientVisitForm.value.ToConsult == null) ? true : false"></span>To
+                        Consult</mat-label>
+                      <mat-select formControlName="ToConsult">
+                        <mat-option *ngFor="let toConsult of toConsultData"
+                          [value]="toConsult.FirstName +' '+toConsult.MiddleName+' '+toConsult.LastName">
+                          {{toConsult.FirstName}} {{toConsult.MiddleName}} {{toConsult.LastName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.Provider == '' || patientVisitForm.value.Provider == null) ? true : false"></span>Consulting
+                        Doctor</mat-label>
+                      <mat-select formControlName="Provider">
+                        <mat-option *ngFor="let conDoc of toConsultData" [value]="conDoc.ProviderID">
+                          {{conDoc.FirstName}}
+                          {{conDoc.MiddleName}} {{conDoc.LastName}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Referring Hospital</mat-label>
+                      <input matInput placeholder="Enter" formControlName="ReferringHospital" maxlength="75">
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Referring Doctor</mat-label>
+                      <input matInput placeholder="Enter" formControlName="ReferringDoctor" maxlength="75">
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.ConsultationType == '' || patientVisitForm.value.ConsultationType == null) ? true : false"></span>Consultation
+                        type</mat-label>
+                      <mat-select formControlName="ConsultationType">
+                        <mat-option *ngFor="let CT of ConsultationType" [value]="CT.ConsultationTypeDescription">
+                          {{CT.ConsultationTypeDescription}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Chief Complaint</mat-label>
+                      <input matInput placeholder="Watery Eyes" formControlName="ChiefComplaint" maxlength="75">
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Accompained by</mat-label>
+                      <input matInput placeholder="Father" formControlName="AccompaniedBy" maxlength="500">
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Token Number</mat-label>
+                      <input matInput placeholder="Token Number" formControlName="TokenNumber" maxlength="75">
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.Appointment == '' || patientVisitForm.value.Appointment == null) ? true : false"></span>Appointment
+                      </mat-label>
+                      <mat-select formControlName="Appointment">
+                        <mat-option *ngFor="let AT of AppointmentType" [value]="AT.AppointmentBookedDescription">
+                          {{AT.AppointmentBookedDescription}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(patientVisitForm.value.VisitStatus == '' || patientVisitForm.value.VisitStatus == null) ? true : false"></span>Visit
+                        Status</mat-label>
+                      <mat-select formControlName="VisitStatus">
+                        <mat-option *ngFor="let visitSts of visitStatus" [value]="visitSts.VisitStatusId">
+                          {{visitSts.VisitStatusDescription}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Additional Information</mat-label>
+                      <textarea matInput placeholder="Enter" rows="1" formControlName="AdditionalInformation"
+                        maxlength="500"></textarea>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <mat-checkbox formControlName="TransitionOfCarePatient">Transition of Care Patient</mat-checkbox>
+                  </div>
+                </div>
+
+                <div class="row col-xl-12" *ngIf="!Appointmentbtn">
+                  <div class="col-xl-12 text-right">
+                    <button mat-flat-button color="" class="custome-button mr-2 mat-primary vissub schedbtn"
+                      (click)="addUpdatePatientVisitPayment('VisitRecord')">
+                      Visit Payment
+                    </button>
+
+                    <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary"
+                      (click)='reset()' color="primary">
+                      Close
+                    </button>
+                  </div>
+                </div>
+
+                <div class="row col-xl-12" *ngIf="Appointmentbtn">
+                  <div class="col-xl-12 text-right">
+                    <button mat-flat-button color="" class="custome-button mr-2 mat-primary vissub schedbtn"
+                      (click)="ConfirmVisit()">
+                      Visit Payment
+                    </button>
+
+                    <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary"
+                      (click)='reset()' color="primary">
+                      Close
+                    </button>
+                  </div>
+                </div>
+
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-2 mb-2 common_submenu p-1  d-flex  w-100">
+      <div class="d-flex scroll-x">
+        <div class="pr-4 my-2 ml-2">
+          <button type="button" mat-stroked-button id="List">
+            <span class="f-18 paddingvstbtn"  *ngIf="VisitUiData" (click)="VisitOpenList()"><mat-icon><img src='assets/images/MenuNewIcons/triage/visit_intake.png'/></mat-icon>Visits</span>
+            <span class="f-18 paddingvstbtn"  *ngIf="!VisitUiData"><mat-icon><img src='assets/images/MenuNewIcons/triage/visit_intake.png'/></mat-icon>Visits </span>
+          </button>
+        </div>
+
+        <div class="pr-4 my-2">
+          <button type="button" mat-stroked-button id="Requests">
+            <span class="f-18 paddingappbtn" *ngIf="AppUiData" (click)="AppointmentOpenList()"><mat-icon><img src='assets/images/MenuNewIcons/appointment/appointmentlist.png'/></mat-icon>Appointments</span>
+            <span class="f-18 paddingappbtn" *ngIf="!AppUiData"><mat-icon><img src='assets/images/MenuNewIcons/appointment/appointmentlist.png'/></mat-icon> Appointments </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="w-100 mb-5">
+
+      <div class="w-100">
+        <mat-card *ngIf="showResult">
+          <h3>No Record Found</h3>
+        </mat-card>
+      </div>
+
+      <div class="w-100">
+        <!-- <mat-card *ngIf="visitList && !showResult  &&  !appointmentList">
+          <h3 class="ml-3 mt-3">Visit List</h3>
+          <mat-card-content>
+            <div>
+              <app-bms-table [config]="VisitListTable" [datas]="patientVisitCollection"
+                (viewItem)="openVisitViewReport($event)" (editItem)="openVisitEditReport($event)"
+                (paymentItem)="visitpayment($event)" (historyItem)="deleteAdmissionRecord($event)"
+                ></app-bms-table>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card *ngIf="appointmentList && !showResult && !visitList ">
+          <h3 class="ml-3 mt-3">Appointment List</h3>
+          <mat-card-content>
+            <div>
+              <app-bms-table [config]="AppointmentListTable" [datas]="appointmentListData"
+                (editItem)="openappointmentEdit($event)"></app-bms-table>
+            </div>
+          </mat-card-content>
+        </mat-card> -->
+
+
+        <mat-card class="" *ngIf="visitList && !showResult && !appointmentList">
+          <app-cardContainer [configCard]="VisitListCard" [dataForContainer]="patientVisitCollection"
+            (viewItem)="openVisitViewReport($event)" (editItem)="openVisitEditReport($event)"
+            (paymentItem)="visitpayment($event)" (historyItem)="deleteAdmissionRecord($event)">
+          </app-cardContainer>
+        </mat-card>
+
+        <mat-card  class="" *ngIf="appointmentList && !showResult && !visitList ">
+          <app-cardContainer [configCard]="AppointmentListCard" [dataForContainer]="appointmentListData"
+            (editItem)="openappointmentEdit($event)"></app-cardContainer>
+        </mat-card>
+
+      </div>
+
+    </div>
+  </form>
+</div>

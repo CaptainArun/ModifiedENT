@@ -1,0 +1,5 @@
+<ul class="bmsmenu navbar-nav flex-sm-column" *ngIf="items" >
+    <li *ngFor="let item of items , let total of item1;let i=index"  class="bmsmenu-item nav-item" [ngClass]="{'submenu': item.Items, 'open' : item.isOpen}">
+        <bms-menuitem [item]="item" (onSelectItem)="onSelctItem($event)"  [ngClass]="'link-'+ i" ></bms-menuitem>
+     </li>
+</ul>

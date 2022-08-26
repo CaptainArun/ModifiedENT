@@ -1,0 +1,48 @@
+<!--<div class="common_submenu p-4 d-flex ">
+
+  <div class="d-flex">
+    <div class="pr-4" *ngIf="subMenuVals">
+      <button mat-raised-button mat-button [matMenuTriggerFor]="menu">Visits</button>
+      <mat-menu #menu="matMenu">
+        <div *ngFor="let item of subMenuVals">
+          <button mat-menu-item [routerLink]="item.Url">
+            <div class="menu-title" [innerHTML]="item.Title"></div>
+          </button>
+        </div>
+      </mat-menu>
+    </div>
+  </div>
+</div>-->
+<div class="common_submenu p-2 d-flex ">
+  <div class="d-flex scroll-x">
+    <div class="pr-4 ">
+      <button mat-button class="d-flex align-content-center" routerLink="/home/visits">
+        <!-- <mat-icon><img src='assets/images/common/add-appointment.png' /></mat-icon> -->
+        <!-- <span class="f-18 theme-text-color">Visit</span> -->
+      </button>
+    </div>
+    
+     <div class="pr-4 ">
+      <button mat-button class="d-flex align-content-center" routerLink="/home/visits/visitpayment">
+        <!-- <mat-icon><img src='assets/images/common/appointment.png' /></mat-icon>
+        <span class="f-18 theme-text-color">Visit Payment</span> -->
+      </button>
+    </div>     
+
+    <!--<div class="pr-4 ">
+      <button mat-button class="d-flex align-content-center" routerLink="/home/appointments/appointmentslist">
+        <mat-icon><img src='assets/images/opd/patient-list.png' /></mat-icon>
+        <span class="f-18 theme-text-color">Appointment List</span>
+      </button>
+    </div>
+-->
+    <!-- <div>
+      <button mat-button class="d-flex align-content-center" routerLink="/home/appointments/callcenter">
+        <mat-icon><img src='assets/images/appointments/call-center.png' /></mat-icon>
+        <span class="f-18 theme-text-color">Call Center</span>
+      </button>
+    </div> -->
+  </div>
+</div>
+
+<router-outlet></router-outlet>

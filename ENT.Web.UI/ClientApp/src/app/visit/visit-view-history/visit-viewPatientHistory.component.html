@@ -1,0 +1,91 @@
+<div class="white mt-3 mb-4 p-1" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <mat-card class="p-0">
+    <h5 cdkDragHandle class="p-3 title-bg">
+      <b>Visit Details</b>
+      <button style="color:white" class="close" (click)="close()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+    <div class="scroll-x">
+      <div class="row p-0 m-0 scroll-md">
+
+        <div class=" col-lg-6 v-line">
+          <div class="pt-2 pb-3 ">
+
+            <div class="row  pb-1 pt-3">
+              <div class="col font_color">Visit No</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.VisitNo}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col-xl-4 col-lg-4 col-md-4 font_color">Visit Date</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-xl-7 col-lg-7 col-md-7">
+                {{data.VisitDate | date:'dd-MM-yyyy'}}
+              </div>
+            </div>
+
+            <div class="row  pb-1 pt-3">
+              <div class="col font_color">Visit Time</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.Visittime}}</div>
+            </div>
+
+            <div class="row  pb-1 pt-3">
+              <div class="col font_color">Recorded During</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.recordedDuring}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Urgency</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.urgencyType}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Patient Arrival Condition</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.patientArrivalCondition}}</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-6 v-line">
+          <div class="pt-2 col flex-grow-1 w-auto">
+            <div class="row pb-1 pt-3">
+              <div class="col pl-4 font_color">To Consult</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">{{data.ToConsult}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col pl-4 font_color">Consulting Doctor</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">{{data.ProviderName}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col pl-4 font_color">Consultation Type</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">{{data.ConsultationType}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col pl-4 font_color">Additional Information</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">{{data.AdditionalInformation}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col pl-4 font_color">Visit Status</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">{{data.visitStatus}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

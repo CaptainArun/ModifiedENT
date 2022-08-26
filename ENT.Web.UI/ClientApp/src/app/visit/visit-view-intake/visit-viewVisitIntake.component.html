@@ -1,0 +1,456 @@
+
+  <div class="white mt-3 mb-4 p-1">
+    <div class="white mt-2">
+      <mat-card class="p-0">
+        <h5 class="p-3 title-bg">Vitals</h5>
+        <div class="scroll-x">
+          <div class="row p-0 m-0 scroll-md">
+            <div class="col-sm-4">
+              <div class="v-line">
+                <div class="pt-3 pb-2">
+                  <div class="row pb-1">
+                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                      Height
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                    <div class="col-xl-7 col-lg-7 col-md-7">
+                      {{data.vitalModel.Height}}
+                    </div>
+                  </div>
+
+                  <div class="row  pb-1">
+                    <div class="col font_color">Weight</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">
+                      {{data.vitalModel.Weight}}kg
+                    </div>
+                  </div>
+                  <div class="row  pb-1">
+                    <div class="col font_color">BMI</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7"> {{data.vitalModel.Bmi}} kg/m<sub>2</sub></div>
+                  </div>
+                  <div class="row">
+                    <div class="col font_color">Temp</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7"> {{data.vitalModel.Temperature}} F</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 v-line">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">BP(s)</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col"> {{data.vitalModel.BpSystolic}} mm Hg</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">BP(D)</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col"> {{data.vitalModel.BpDiastolic}} mm Hg</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">HR</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col"> {{data.vitalModel.HeartRate}}/Bpm</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">O2</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col"> {{data.vitalModel.O2Saturation}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Last Meal Taken On</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col"> {{data.vitalModel.LastMealtakenon}} AM</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 w-auto v-line">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Pain Scale</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col"> {{data.vitalModel.painScale}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">RR</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.vitalModel.respiratoryRate}}/Bpm</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Pain Area</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.vitalModel.painArea}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Last Meal Details</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.vitalModel.lastMealdetails}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="white mt-2">
+      <mat-card class="p-0">
+        <h5 class="p-3 title-bg">Allergies</h5>
+        <table class="table w-100 mb-0 problemListTable">
+          <thead>
+            <tr>
+              <th>S.no</th>
+              <th>Allergy Type</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Aggravated By</th>
+              <th>Alleviated By</th>
+              <th>Severity</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let allergies of data.allergiesModel;let i=index">
+            <tr class="rounded shadow-sm c-white bg-red">
+              <td>{{i+1}}</td>
+              <td>{{allergies.AllergyTypeDesc}}</td>
+              <td>{{allergies.Name}}</td>
+              <td>{{allergies.Allergydescription}}</td>
+              <td>{{allergies.Aggravatedby}}</td>
+              <td>{{allergies.Allivatedby}}</td>
+              <td>{{allergies.AllergySeverityDesc}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card>
+    </div>
+    <div class="white mt-2">
+      <mat-card class="p-0">
+        <h5 class="p-3 title-bg">Problem List</h5>
+        <table class="table w-100 mb-0 problemListTable">
+          <thead>
+            <tr>
+              <th>S.no</th>
+              <th>Problem Type</th>
+              <th>Problem </th>
+              <th>Diagonsis Date</th>
+              <th>Physician Name</th>
+              <th>status</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let problemList of data.problemCollection;let i=index">
+            <tr class=" rounded shadow-sm">
+              <td>{{i+1}}</td>
+              <td>{{problemList.ProblemTypeDesc}}</td>
+              <td>{{problemList.ProblemDescription}}</td>
+              <td>{{problemList.DiagnosedDate|date:'dd-MM-yyyy'}}</td>
+              <td>{{problemList.AttendingPhysican}}</td>
+              <td>{{problemList.Status}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card>
+    </div>
+    <div class="white mt-2">
+      <mat-card class="p-0">
+        <h5 class="p-3 title-bg">Medication</h5>
+        <table class="table w-100 mb-0 problemListTable">
+          <thead>
+            <tr>
+              <th>S.no</th>
+              <th>Drug Name</th>
+              <th>Prescribed Date</th>
+              <th>Prescribed by</th>
+              <th>Frequency</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let medication of data.medicationModel;let index=i">
+            <tr class=" rounded shadow-sm">
+              <td>{{i+1}}</td>
+              <td>Riluxlmab</td>
+              <td>15/02/2015</td>
+              <td>Dr. Mukesh Sharma</td>
+              <td>3 Tablets per day</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card>
+    </div>
+    <div class="white mt-2">
+      <mat-card class="p-0">
+        <h5 class="p-3 title-bg">Social History</h5>
+        <div class="scroll-x">
+          <div class="row p-0 m-0 scroll-md">
+            <div class="col-sm-6">
+              <div class="v-line">
+                <div class="pt-3 pb-2">
+                  <div class="row pb-1">
+                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                      Smoking
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                    <div class="col-xl-7 col-lg-7 col-md-7">
+                      {{data.socialModel.Smoking}}
+                    </div>
+                  </div>
+                  <div class="row  pb-1">
+                    <div class="col font_color">Notes</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7"> {{data.socialModel.SmokingDetails}}</div>
+                  </div>
+                  <div class="row  pb-1">
+                    <div class="col font_color">Drinking</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7"> {{data.socialModel.Drinking}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col font_color">Notes</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7"> {{data.socialModel.DrinkingDetails}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 v-line">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Drug Habits</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col"> {{data.socialModel.DrugHabitsDetails}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Life style</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col"> {{data.socialModel.LifeStyleDetails}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Others</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col"> {{data.socialModel.Others}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="white mt-2">
+      <mat-card class="p-0">
+        <h5 class="p-3 title-bg">ROS</h5>
+        <div class="scroll-x">
+          <div class="row p-0 m-0 scroll-md">
+            <div class="col-sm-4">
+              <div class="v-line">
+                <div class="pt-3 pb-2">
+                  <div class="row pb-1">
+                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                      General
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                    <div class="col-xl-7 col-lg-7 col-md-7">
+                      {{data.rosModel.GeneralothersComments}}
+                    </div>
+                  </div>
+                  <div class="row  pb-1">
+                    <div class="col font_color">Skin</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">{{data.rosModel.SkinothersComments}}</div>
+                  </div>
+                  <div class="row  pb-1">
+                    <div class="col font_color">Head</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">{{data.rosModel.HeadothersComments}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col font_color">Ears</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">{{data.rosModel.EarothersComments}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 v-line">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Eyes</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.rosModel.EyesothersComments}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Nose</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.rosModel.NoseothersComments}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Throat</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.rosModel.ThroatothersComments}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Neck</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.rosModel.NeckothersComments}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3 w-auto v-line">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Respiratory</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.rosModel.Respiratoryotherscomments}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Neurologic</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.rosModel.Neurologicotherscomments}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Hematologic</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.rosModel.Hematologicotherscomments}}</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Psychiatric</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">{{data.rosModel.Psychiatricotherscomments}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="white mt-2">
+      <mat-card class="p-0">
+        <h5 class="p-3 title-bg">Nutrition Assessment</h5>
+        <div class="scroll-x">
+          <div class="row p-0 m-0 scroll-md">
+            <!--<div class="col-sm-6">
+              <div class="v-line">
+                <div class="pt-3 pb-2">
+                  <div class="row pb-1">
+                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                      Food Intake Type
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                    <div class="col-xl-7 col-lg-7 col-md-7">
+                      Veg Food
+                    </div>
+                  </div>
+                  <div class="row  pb-1">
+                    <div class="col font_color">Do you/ patient eat reguarly</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">Yes</div>
+                  </div>
+                  <div class="row  pb-1">
+                    <div class="col font_color">Food Allergies</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">Potato</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 v-line">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Which Meals do you eat regularly?</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">All Meals</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color">Carvings</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">Noodles</div>
+                </div>
+              </div>
+            </div>-->
+            <table class="table w-100 mb-0 problemListTable">
+              <thead>
+                <tr>
+                  <th>S.no</th>
+                  <th>Intake Type</th>
+                  <th>Eat Regularly</th>
+                  <th>Regular Meals</th>
+                  <th>Carvings</th>
+                  <th>Food Allergies</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let nutrition of data.nutritionCollection;let i=index">
+                <tr class=" rounded shadow-sm">
+                  <td>{{i+1}}</td>
+                  <td>{{nutrition.FoodIntakeTypeDesc}}</td>
+                  <td>{{nutrition.EatRegularly}}</td>
+                  <td>{{nutrition.RegularMeals}}</td>
+                  <td>{{nutrition.Carvings}}</td>
+                  <td>{{nutrition.FoodAllergies}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="white mt-2">
+      <mat-card class="p-0">
+        <h5 class="p-3 title-bg">Nursing Notes</h5>
+        <div class="scroll-x">
+          <div class="row p-0 m-0 scroll-md">
+            <div class="col-sm-12">
+              <div class="pt-3 pb-2">
+                <div class="row pb-1">
+                  <div class="col-xl-4 col-lg-4 col-md-4 ">
+                    Observation Notes
+                  </div>
+                  <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                  <div class="col-xl-7 col-lg-7 col-md-7">
+                    Drainage in left Ear
+                  </div>
+                </div>
+                <div class="row  pb-1">
+                  <div class="col ">First aid Dressing </div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">None</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="white mt-2">
+      <mat-card class="p-0">
+        <div class="scroll-x">
+          <div class="row p-0 m-0 font-bold scroll-md">
+            <div class="col-sm-6">
+              <div class="v-line">
+                <div class="pt-3 pb-2">
+                  <div class="row pb-1">
+                    <div class="col-xl-4 col-lg-4 col-md-4 ">
+                      Submitted By
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                    <div class="col-xl-7 col-lg-7 col-md-7">
+                      Mrs.Neha Sharma
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 w-auto v-line">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row pb-1">
+                  <div class="col pl-4  ">Date & Time</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">11/06/2019 : 12:55 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+

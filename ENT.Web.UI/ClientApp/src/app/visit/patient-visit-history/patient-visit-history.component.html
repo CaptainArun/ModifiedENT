@@ -1,0 +1,121 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    <mat-card class="p-0">
+        <h5 cdkDragHandle class="p-3 title-bg">
+            <b>Patient Name : {{data.PatientName}}</b><button style="color:white" class="close" (click)="close()" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </h5>
+
+        <div class="container">
+            <img src="assets/images/Patient_Visit_History/visit history.png" style="width: 80%;">
+            
+            <div class="start-title">
+                <span><h3>Start</h3></span>
+            </div>
+           
+            <!-- Heading -->
+            <div class="visit-entry-h">
+                <span><h3>Visit Entry</h3></span>
+            </div>
+            <div class="intake-h">
+                <span><h3>Intake</h3></span>
+            </div>
+            <div class="triage-h">
+                <span><h3>Triage</h3></span>
+            </div>
+            <div class="special-test-h">
+                <span><h3>Special Test</h3></span>
+            </div>
+            <div class="lab-test-h">
+                <span><h3>Lab Test</h3></span>
+            </div>
+            <div class="physician-consult-h">
+                <span><h3>Physician Consult</h3></span>
+            </div>
+            <div class="test-results-h">
+                <span><h3>Test Results</h3></span>
+            </div>
+            <div class="consult-h">
+                <span><h3>Consult</h3></span>
+            </div>
+            <div class="pharmacy-h">
+                <span><h3>Pharmacy</h3></span>
+            </div>
+            <!-- End heading -->
+    
+            <!-- Icon -->
+            <div class="visit-entry-img">
+                <img src="assets/images/Patient_Visit_History/visit entry.png" style="width: 50%; height: 55%;">
+            </div>
+            <div class="intake-img">
+                <img src="assets/images/Patient_Visit_History/intake.png" style="width: 50%; height: 55%;">
+            </div>
+            <div class="triage-img">
+                <img src="assets/images/Patient_Visit_History/triage.png" style="width: 50%; height: 55%;">
+            </div>
+            <div class="special-test-img">
+                <img src="assets/images/Patient_Visit_History/special test.png" style="width: 50%; height: 55%;">
+            </div>
+            <div class="lab-test-img">
+                <img src="assets/images/Patient_Visit_History/lab test.png" style="width: 50%; height: 55%;">
+            </div>
+            <div class="physician-consult-img">
+                <img src="assets/images/Patient_Visit_History/physician consult.png" style="width: 50%; height: 55%;">
+            </div>
+            <div class="test-results-img">
+                <img src="assets/images/Patient_Visit_History/test results.png" style="width: 50%; height: 55%;">
+            </div>
+            <div class="consult-img">
+                <img src="assets/images/Patient_Visit_History/consult.png" style="width: 50%; height: 55%;">
+            </div>
+            <div class="pharmacy-img">
+                <img src="assets/images/Patient_Visit_History/pharmacy.png" style="width: 50%; height: 55%;">
+            </div>
+            <!-- End Icon -->
+            
+            <!-- Time -->
+            <div class="visit-entry">
+                <span>{{data.VisitHistory.EntryDate}}</span> <br>
+                <span>{{data.VisitHistory.EntryTime}}</span>
+            </div>
+            <div class="intake">
+                <span>{{data.VisitHistory.IntakeDate}}</span> <br>
+                <span>{{data.VisitHistory.IntakeTime}}</span>
+            </div>
+            <div class="triage">
+                <span>{{data.VisitHistory.TriageDate}}</span> <br>
+                <span>{{data.VisitHistory.TriageTime}}</span>
+            </div>
+            <div class="special-test">
+                <span>01-07-2022</span> <br>
+                <span>12:30 PM</span>
+            </div>
+            <div class="lab-test">
+                <span>{{data.VisitHistory.LabDate}}</span> <br>
+                <span>{{data.VisitHistory.LabTime}}</span>
+            </div>
+            <div class="physician-consult">
+                <span>09-09-2022</span> <br>
+                <span>01:44 PM</span>
+            </div>
+            <div class="test-results">
+                <span>18-10-2022</span> <br>
+                <span>02:55 PM</span>
+            </div>
+            <div class="consult">
+                <span>20-11-2022</span> <br>
+                <span>03:15 PM</span>
+            </div>
+            <div class="pharmacy">
+                <span>28-12-2022</span> <br>
+                <span>04:10 PM</span>
+            </div>
+            <!-- End Time -->
+            
+            <div class="end-title">
+                <span><h3>End Visit</h3></span>
+            </div>
+            
+        </div> <br><br><br>
+    </mat-card>
+</div>

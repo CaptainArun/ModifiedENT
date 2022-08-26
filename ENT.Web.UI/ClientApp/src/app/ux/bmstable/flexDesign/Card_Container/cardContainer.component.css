@@ -1,0 +1,16 @@
+.total {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    display: inline-block;
+}
+
+.sort {
+    font-size: 1.5em;
+}
+
+.sortalign {
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 50px;
+}

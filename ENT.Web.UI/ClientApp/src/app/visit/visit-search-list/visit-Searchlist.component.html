@@ -1,0 +1,144 @@
+<div class="col-xl-12">
+  <form [formGroup]="visitSearchListForm">
+
+    <div class="col-xl-12 text-center">
+      <h3>
+        <span class="pull-left">Search</span>
+      </h3>
+    </div>
+
+    <div class="row justify-content-between  opdstop pt-2">
+
+      <div class="col-xl-12 opdstopres pl-0">
+        <!-- <div class=" barcode-scan">
+          <div class="barcode">
+            <img src="assets/images/opd/barcode.png" />
+          </div>
+          <span>1234567</span>
+        </div> -->
+
+        <div class="row justify-content-between w-100 opdstop pt-2">
+
+          <div class="col-xl-4">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label> From Date</mat-label>
+
+              <input matInput [matDatepicker]="from" placeholder="From Date" formControlName="FromDate">
+              <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+              <mat-datepicker #from></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label> To Date</mat-label>
+
+              <input matInput [matDatepicker]="to" placeholder="To Date" formControlName="ToDate">
+              <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+              <mat-datepicker #to></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- <div class="col-xl-4" *ngIf="VisitUI"> -->
+          <div class="col-xl-4" [hidden]="!VisitUI">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Visit Number</mat-label>
+              <mat-icon matSuffix
+                *ngIf="(visitSearchListForm.value.VisitNo == '' || visitSearchListForm.value.VisitNo == null) ? true : visitSearchListForm.value.VisitNo.length > 2 ? false : true">
+                search</mat-icon>
+              <input maxlength="12" matInput placeholder="Type and Select"  #autoCompleteVisitNumInput="matAutocompleteTrigger"  [matAutocomplete]="autoVisit"
+                formControlName="VisitNo">
+              <mat-autocomplete autoActiveFirstOption #autoVisit="matAutocomplete">
+                <mat-option *ngFor="let  Visitnumber of VisitNumber" [value]="Visitnumber">{{Visitnumber}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <!-- <div class="col-xl-4" *ngIf="AppointmentUI"> -->
+            <div class="col-xl-4" [hidden]="!AppointmentUI">
+
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Appointment Number</mat-label>
+              <mat-icon matSuffix
+                *ngIf="(visitSearchListForm.value.AppointmentNumber == '' || visitSearchListForm.value.AppointmentNumber == null) ? true : visitSearchListForm.value.AppointmentNumber.length > 2 ? false : true">
+                search</mat-icon>
+              <input maxlength="12" matInput placeholder="Type and Select"  [matAutocomplete]="appointmentNumber"
+                formControlName="AppointmentNumber" #autoCompleteAppointNumInput="matAutocompleteTrigger">
+              <mat-autocomplete autoActiveFirstOption #appointmentNumber="matAutocomplete">
+                <mat-option *ngFor="let number of AppointmentNumber" [value]="number">{{number}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Facility</mat-label>
+              <mat-select formControlName="Facility">
+                <mat-option *ngFor="let value of facilityData" [value]="value.FacilityId">
+                  {{value.FacilityName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="providerTooltip" matTooltipPosition="above"
+              matTooltipClass="Tooltip-sm">
+              <mat-label>Doctor</mat-label>
+              <mat-icon matSuffix
+                *ngIf="(visitSearchListForm.value.DoctorName == '' || visitSearchListForm.value.DoctorName == null) ? true : visitSearchListForm.value.DoctorName.length > 2 ? false : true">
+                search</mat-icon>
+              <input maxlength="35" matInput placeholder="Type and Select"  [matAutocomplete]="autoProvider"
+                formControlName="DoctorName" #autoCompletePhysicianInput="matAutocompleteTrigger">
+              <mat-autocomplete autoActiveFirstOption #autoProvider="matAutocomplete">
+                <mat-option *ngFor="let provider of doctorNameList" [value]="provider.ProviderName"
+                  (onSelectionChange)="setDoctorProviderID(provider.ProviderID,provider.ProviderName)">
+                  {{provider.ProviderName}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="patientTooltip" matTooltipPosition="above"
+              matTooltipClass="Tooltip-sm">
+              <mat-label>Patient</mat-label>
+              <mat-icon matSuffix
+                *ngIf="(visitSearchListForm.value.PatientName == '' || visitSearchListForm.value.PatientName == null) ? true : visitSearchListForm.value.PatientName.length > 2 ? false : true">
+                search</mat-icon>
+              <input maxlength="35" matInput [matAutocomplete]="autoPatient" placeholder="Type and Select" #autoCompletePatientInput="matAutocompleteTrigger"
+                formControlName="PatientName">
+              <mat-autocomplete autoActiveFirstOption #autoPatient="matAutocomplete">
+                <mat-option *ngFor="let patList of patientNameList"
+                  [value]="patList.PatientFirstName+' '+patList.PatientMiddleName+' '+patList.PatientLastName"
+                  (onSelectionChange)="setPatientID(patList.PatientId,patList.PatientFirstName,patList.PatientMiddleName,patList.PatientLastName)">
+                  {{patList.PatientFirstName}}&nbsp;
+                  {{patList.PatientMiddleName}}&nbsp; {{patList.PatientLastName}}&nbsp;- {{patList.MRNo}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-8"></div>
+
+          <div class="col-xl-4">
+            <div class="pull-right">
+              <button type="button" mat-flat-button [disabled]="DateChecker"
+                class="pull-left mr-2 custome-button mat-primary w-auto"
+                (click)="searchPatientVisitSearch()">Search</button>
+              <button type="button" mat-stroked-button class="pull-left transperent-button light-sky primary w-auto"
+                (click)="ClearPatientVisitSearch()">Clear</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- <div class="col-xl-4 opdstopres pl-0">
+        <button mat-flat-button class="custome-button mat-primary barbtn">
+          Submit
+        </button>
+      </div> -->
+
+    </div>
+
+  </form>
+</div>

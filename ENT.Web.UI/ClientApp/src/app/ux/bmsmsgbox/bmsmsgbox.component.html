@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{msgBoxTitle}}</h1>
+<mat-dialog-content>
+  <span [innerHTML]="message"></span>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <span *ngIf="mode == 0" style="padding-left:93px;">
+    <button type="button" mat-raised-button color="primary" [ngClass]="{'mb-info': isInfo, 'mb-danger': isDanger, 'mb-warning' : isWarning }" (click)="closeDialog(true)">Close</button>
+  </span>
+  <span *ngIf="mode == 1" style="padding-left:93px;">
+    <button type="button" mat-raised-button color="primary" [ngClass]="{'mb-info': isInfo, 'mb-danger': isDanger, 'mb-warning' : isWarning }" (click)="closeDialog(true)">Yes</button>
+    <button type="button" mat-raised-button color="primary" [ngClass]="{'mb-info': isInfo, 'mb-danger': isDanger, 'mb-warning' : isWarning }" (click)="closeDialog(false)">No</button>
+  </span>
+</mat-dialog-actions>

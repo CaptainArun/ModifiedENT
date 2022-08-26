@@ -1,0 +1,87 @@
+<div class="tableCell text-center tableCell-tools"
+  *ngIf="data.showView || data.showEdit  || config.showAnaesthesia || data.showCaseSheet || data.showOpeningItem  || data.showIntake">
+
+  <a (click)="goToDetail(event,data)" class="dark-color pointer fa-2x" *ngIf="data.showView" title="View Item">
+    <i class="fa fa-eye"></i>
+  </a>
+
+  <a (click)="goToEdit(event,data)" class="dark-color pointer fa-2x" *ngIf="data.showEdit" title="Edit Item">
+    <i class="fa fa-pencil-square" aria-hidden="true"></i>
+  </a>
+
+
+  <a (click)="goToOpen(event,data)" class="dark-color pointer fa-2x" *ngIf="data.showOpen">
+    <i class="fa fa-openid" aria-hidden="true"></i>
+  </a>
+
+
+  <!-- *********** -->
+
+  <a (click)="goToCancel(event,data)" *ngIf="data.showCancel" class="pr-1">
+    <img src="assets/images/BMSGridIcons/appointment_cancel.png"   class="iconsHeight" />
+  </a>
+
+  <a (click)="goToPayment(event,data)" *ngIf="data.showPayment" class="pr-1">
+    <img src="assets/images/BMSGridIcons/admission_payment.png"  class="iconsHeight" />
+  </a>
+
+  <a (click)="goToopeningItem(event,data)"  *ngIf="data.showOpeningItem" class="pr-1">
+    <img src="assets/images/BMSGridIcons/open_item.png"  class="iconsHeight" />
+  </a>
+
+  <a (click)="goToSchedule(event,data)"  *ngIf="data.showSchedule" class="pr-1">
+    <img src="assets/images/BMSGridIcons/Schedule.png"  class="iconsHeight" />
+  </a>
+
+  <a (click)="goToAnaesthesia(event,data)" *ngIf="data.showAnaesthesia" class="pr-1">
+    <img src="assets/images/BMSGridIcons/anaesthisia.png"  class="iconsHeight" />
+  </a>
+
+  <a (click)="goToHistory(event,data)" *ngIf="data.showHistory" class="pr-1">
+    <img src="assets/images/BMSGridIcons/Visit_history.png"  class="iconsHeight"  />
+  </a>
+
+  <a (click)="goToIntake(event,data)" *ngIf="data.showIntake" class="pr-1">
+    <img src="assets/images/BMSGridIcons/visit_intake.png"  class="iconsHeight" />
+  </a>
+
+  <a (click)="goToCaseSheet(event,data)" *ngIf="data.showCaseSheet" class="pr-1 ml-2">
+    <img src="assets/images/BMSGridIcons/visit_casesheet.png"  class="iconsHeight" />
+  </a>
+
+  <a (click)="goToDrugChart(event,data)" *ngIf="data.showDrugChart" class="pr-1">
+    <img src="assets/images/BMSGridIcons/drug_chart.png"  class="iconsHeight" />
+  </a>
+
+  <a (click)="goToDrugAdminChart(event,data)" *ngIf="data.showDrugAdminChart" class="pr-1">
+    <img src="assets/images/BMSGridIcons/drug_adminChart.png"  class="iconsHeight" />
+  </a>
+
+  <a (click)="goToReport(event,data)" *ngIf="data.showReport" class="pr-1">
+    <img src="assets/images/BMSGridIcons/update_report.png"  class="iconsHeight"/>
+  </a>
+
+  <a (click)="goToEmail(event,data)" *ngIf="data.showEmail" class="pr-1">
+    <img src="assets/images/BMSGridIcons/Email.png"  class="iconsHeight" />
+  </a>
+
+
+  <a (click)="goToDelete(event,data)" class="dark-color pointer fa-2x" *ngIf="data.showDelete" title="Delete Item">
+    <i class="fa fa-trash" aria-hidden="true"></i>
+  </a>
+
+  <!-- ************** -->
+</div>
+
+<div class="tableCell icon-cell checkbox" *ngIf="config.showSelection">
+  <input type="checkbox" [attr.id]="'tablCheckbox'+index" (change)="onSelect($event, data)" [ngModel]="data.checked" />
+  <label [for]="'tablCheckbox'+index"></label>
+</div>
+<div class="tableCell icon-cell" *ngIf="config.showIcon">
+  <img src="{{getProperty(data,config.IconField)}}" class="img-ppl-md">
+</div>
+<div class="tableCell" *ngFor="let column of config.columnConfig" [ngClass]="{'hideColumn' : !column.isVisible}">
+  <!--<div class="tableLabel dark-color">{{column.DisplayName}}</div>-->
+  <!--<div class="tableData"> {{getProperty(data,column.PropertyName)}} </div>-->
+  <app-bms-tablecell [data]="data" [config]="column"></app-bms-tablecell>
+</div>

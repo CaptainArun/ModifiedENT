@@ -1,0 +1,21 @@
+/*div.div1, div.div2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  outline: solid 1px #ccc;*/ /* just for making the divs visible */
+  /*margin: 5px;*/ /* just for making the divs visible */
+/*}*/
+
+/*div.div1 {
+  height: 100px;
+  top: 0;
+}
+
+div.div2 {
+  top: 20px;
+  bottom: 0;
+}*/
+
+.side {
+  margin-left: 1030px;
+}

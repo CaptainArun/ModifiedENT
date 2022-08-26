@@ -1,0 +1,6 @@
+<a href="" class="nav-link" [routerLink]="item.Url" routerLinkActive="active"  (click)="selected(item)">
+     <div class="menu-icon" [innerHTML]="item.Icon"></div>
+     <div class="menu-title" [innerHTML]="item.Title" *ngIf="valueShowTitle"></div>
+</a>
+<button class="drpButton" *ngIf="item.Items.length" (click)="selected(item)"><i class="fa fa-arrow-circle-down"></i></button>
+<bms-menu [items]="item.Items" *ngIf="item.Items.length" (menuClick)="childClick($event)" ></bms-menu>

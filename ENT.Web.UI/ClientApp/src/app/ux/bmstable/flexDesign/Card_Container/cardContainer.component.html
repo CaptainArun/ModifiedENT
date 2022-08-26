@@ -1,0 +1,56 @@
+
+
+<!-- CardContainer -->
+
+<ng-container *ngFor="let Particulardata of currentData; let i = index">
+  <!-- <ng-container *ngFor="let Particulardata of currentData; let i = index ;trackBy: trackByFn;"> -->
+
+<!-- CardContent -->
+
+    <app-cardContent 
+        [configIcons]="config"
+        [ParticularCarddata]="Particulardata"
+        [HeaderSectionData]="Particulardata.headerList"
+        [ContentSectionData]="Particulardata.ContentList" 
+        [index]="i"
+        
+        (viewItem)="goToDetail($event)"
+        (editItem)="goToEdit($event)"
+        (selectItem)="onSelect($event)"
+        (bindItem)="onBindItem($event)"
+        (openItem)="goToOpen($event)"
+        (cancelItem)="goToCancel($event)"
+        (paymentItem)="goToPayment($event)"
+        (openingItem)="goToopeningItem($event)"
+        (historyItem)="goToHistory($event)"
+        (scheduleItem)="goToSchedule($event)"
+        (anaesthesiaItem)="goToAnaesthesia($event)"
+        (intakeItem)="goToIntake($event)"
+        (caseSheetItem)="goToCaseSheet($event)"
+        (drugChartItem)="goToDrugChart($event)"
+        (drugAdminChartItem)="goToDrugAdminChart($event)"
+        (emailItem)="goToEmail($event)"
+        (reportItem)="goToReport($event)"
+        (deleteItem)="goToDelete($event)" >
+
+    </app-cardContent>
+
+</ng-container>
+
+<!-- Card paginator -->
+
+  <div class="table-tool mt-5">
+    
+    <div class="pull-left">
+        <mat-paginator color="accent" 
+        [length]="totalRows"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="page"
+        (page)=onPageChange($event)>
+        </mat-paginator>
+    </div>
+
+  </div>
+
+

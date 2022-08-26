@@ -1,0 +1,253 @@
+.container {
+    position: relative;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin-top: 5%;
+}
+
+.start-title {
+    position: absolute;
+    top: 14%;
+    left: 17.3%;
+    transform: translate(-50%, -50%);
+    color: green;
+}
+
+/* ------ Heading ------ */
+.visit-entry-h {
+    position: absolute;
+    top: 8%;
+    left: 32.7%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 115, 0);
+}
+
+.intake-h {
+    position: absolute;
+    top: 20%;
+    left: 50.7%;
+    transform: translate(-50%, -50%);
+    color: orangered;
+}
+
+.triage-h {
+    position: absolute;
+    top: 8%;
+    left: 67.5%;
+    transform: translate(-50%, -50%);
+    color: brown;
+}
+
+.special-test-h {
+    position: absolute;
+    top: 44%;
+    left: 32%;
+    transform: translate(-50%, -50%);
+    color: hsl(180deg 89% 23%);
+}
+
+.lab-test-h {
+    position: absolute;
+    top: 56%;
+    left: 51%;
+    transform: translate(-50%, -50%);
+    color: #1691c3;
+}
+
+.physician-consult-h {
+    position: absolute;
+    top: 44%;
+    left: 67.3%;
+    transform: translate(-50%, -50%);
+    color: #65a207;
+}
+
+.test-results-h {
+    position: absolute;
+    bottom: 17.5%;
+    left: 27.5%;
+    color: rgb(138 5 138);
+}
+
+.consult-h {
+    position: absolute;
+    bottom: 6%;
+    right: 45.9%;
+    color: #380250;
+}
+
+.pharmacy-h {
+    position: absolute;
+    bottom: 17.5%;
+    right: 28.5%;
+    color: #343a40;
+}
+/* ------ Heading end ------ */
+
+/* ------ Icon ------ */
+.visit-entry-img {
+    position: absolute;
+    top: 23%;
+    left: 32.5%;
+    transform: translate(-50%, -50%);
+}
+
+.intake-img {
+    position: absolute;
+    top: 5%;
+    left: 50.7%;
+    transform: translate(-50%, -50%);
+}
+
+.triage-img {
+    position: absolute;
+    top: 23%;
+    left: 67.4%;
+    transform: translate(-50%, -50%);
+}
+
+.special-test-img {
+    position: absolute;
+    top: 59%;
+    left: 32.5%;
+    transform: translate(-50%, -50%);
+}
+
+.lab-test-img {
+    position: absolute;
+    top: 41%;
+    left: 50.7%;
+    transform: translate(-50%, -50%);
+}
+
+.physician-consult-img {
+    position: absolute;
+    top: 59%;
+    left: 67.4%;
+    transform: translate(-50%, -50%);
+}
+
+.test-results-img {
+    position: absolute;
+    bottom: 2.2%;
+    left: 29.9%;
+}
+
+.consult-img {
+    position: absolute;
+    bottom: 20%;
+    right: 46.2%;
+}
+
+.pharmacy-img {
+    position: absolute;
+    bottom: 2.2%;
+    right: 29.5%;
+}
+/* ------ Icon end ------ */
+
+/* ------ Time ------ */
+.visit-entry {
+    position: absolute;
+    top: 32.5%;
+    left: 32.5%;
+    transform: translate(-50%, -50%);
+    color: rgb(151 147 147);
+    font-size: larger;
+    font-weight: 550;
+    font-family: arial;
+}
+
+.intake {
+    position: absolute;
+    top: -4%;
+    left: 50.5%;
+    transform: translate(-50%, -50%);
+    color: rgb(151 147 147);
+    font-size: larger;
+    font-weight: 550;
+    font-family: arial;
+}
+
+.triage {
+    position: absolute;
+    top: 32.5%;
+    left: 67.5%;
+    transform: translate(-50%, -50%);
+    color: rgb(151 147 147);
+    font-size: larger;
+    font-weight: 550;
+    font-family: arial;
+}
+
+.special-test {
+    position: absolute;
+    top: 68.5%;
+    left: 32.5%;
+    transform: translate(-50%, -50%);
+    color: rgb(151 147 147);
+    font-size: larger;
+    font-weight: 550;
+    font-family: arial;
+}
+
+.lab-test {
+    position: absolute;
+    top: 32%;
+    left: 50.5%;
+    transform: translate(-50%, -50%);
+    color: rgb(151 147 147);
+    font-size: larger;
+    font-weight: 550;
+    font-family: arial;
+}
+
+.physician-consult {
+    position: absolute;
+    top: 68.3%;
+    left: 67.5%;
+    transform: translate(-50%, -50%);
+    color: rgb(151 147 147);
+    font-size: larger;
+    font-weight: 550;
+    font-family: arial;
+}
+
+.test-results {
+    position: absolute;
+    bottom: -49px;
+    left: 29.5%;
+    color: rgb(151 147 147);
+    font-size: larger;
+    font-weight: 550;
+    font-family: arial;
+}
+
+.consult {
+    position: absolute;
+    bottom: 28.7%;
+    right: 46%;
+    color: rgb(151 147 147);
+    font-size: larger;
+    font-weight: 550;
+    font-family: arial;
+}
+
+.pharmacy {
+    position: absolute;
+    bottom: -49px;
+    right: 29%;
+    color: rgb(151 147 147);
+    font-size: larger;
+    font-weight: 550;
+    font-family: arial;
+}
+/* ------ Time end ------- */
+
+.end-title {
+    position: absolute;
+    bottom: 11.5%;
+    right: 13.8%;
+    color: red;
+}
+

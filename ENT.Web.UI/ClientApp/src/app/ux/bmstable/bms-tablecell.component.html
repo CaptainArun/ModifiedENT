@@ -1,0 +1,30 @@
+<div class="tableLabel dark-color">{{config.DisplayName}}</div>
+
+<!--For Text and Multiline Fields-->
+<div class="tableData {{config.CssClass}}" *ngIf="config.DisplayMode == 'Text' || config.DisplayMode == 'Multiline'" [ngClass]="{'pre': isPre }"> {{getProperty(data,config.PropertyName)}} </div>
+
+<!--For HTML Fields-->
+<div class="tableData" *ngIf="config.DisplayMode == 'HTML'" [innerHTML]="getProperty(data,config.PropertyName)"></div>
+
+<!--For Number Fields -->
+<div class="tableData" *ngIf="config.DisplayMode == 'Numeric'" [ngClass]="{'text-right': isRight }">{{getProperty(data,config.PropertyName) |  number : config.FormatString }} </div>
+
+<!--For DateTime Fields -->
+<div class="tableData" *ngIf="config.DisplayMode == 'DateTime'" [ngClass]="{'text-right': isRight }">{{getProperty(data,config.PropertyName) | date : config.FormatString }} </div>
+
+<!--For Image Fields -->
+<div class="tableData" *ngIf="config.DisplayMode == 'Image'">
+    <img [src]="getProperty(data,config.PropertyName)">
+</div>
+
+<!--For ImageLink Fields -->
+<div class="tableData" *ngIf="config.DisplayMode == 'ImageLink'">
+    <a [href]="getProperty(data,config.LinkUrl)"><img [src]="getProperty(data,config.PropertyName)"></a>
+</div>
+
+<!--For Attachment Fields -->
+<div class="tableData" *ngIf="config.DisplayMode == 'Attachment'">
+    <a [href]="getProperty(data,config.PropertyName)" class="dark-color pointer fa-large" ><i class="fa fa-file-text"></i></a>
+</div>
+
+
