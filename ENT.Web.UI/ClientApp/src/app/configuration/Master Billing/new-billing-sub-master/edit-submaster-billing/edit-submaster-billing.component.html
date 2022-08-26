@@ -1,0 +1,118 @@
+
+<form [formGroup]="SubMasterEditBillingForm">
+  <mat-card class="px-3 py-1 card">
+
+    <h5 class="p-3 title-bg"> SubMaster Billing</h5>
+    <div class="row">
+
+      <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label> Department </mat-label>
+          <input type="text" matInput [matAutocomplete]="AutoDepartment" formControlName="DepartmentID">
+          <mat-autocomplete #AutoDepartment="matAutocomplete">
+            <mat-option *ngFor="let option of identify" [value]="option.DepartmentName">
+              {{option.DepartmentName}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label> Master Billing Type  </mat-label>
+          <input type="text" matInput [matAutocomplete]="BillingType" formControlName="MasterBillingType">
+          <mat-autocomplete #BillingType="matAutocomplete">
+            <mat-option *ngFor="let option of MasterBillingTypeCol" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+
+
+      <!--<div class="col-xl-3 col-lg-6 pb-3 pt-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label> Billing Type ID </mat-label>
+        <input type="text" matInput [matAutocomplete]="autoicd" formControlName="MasterBillingType">
+        <mat-autocomplete #autoicd="matAutocomplete">
+          <mat-option *ngFor="let option of MasterBillingType" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>-->
+
+
+
+      <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>SubMasterBillingType</mat-label>
+          <input matInput placeholder="Enter SubMasterBillingType" formControlName="SubMasterBillingType">
+        </mat-form-field>
+      </div>
+
+      <!--public DepartmentID: Number;
+
+    public OrderNo: Number;
+
+    public SubMasterBillingTypeDesc: String;
+    public MasterBillingType: Number;
+    public SubMasterBillingType: String;
+    public Status: String;-->
+
+      <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Enter Description" formControlName="SubMasterBillingTypeDesc">
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Status</mat-label>
+          <input matInput placeholder="Enter Status" formControlName="Status">
+        </mat-form-field>
+      </div>
+
+      <!--<div class="col-xl-3 col-lg-6 pb-3 pt-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let Sts of Status" [value]="Sts" formControlName="Status">
+            {{Sts}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>-->
+
+      <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Order Number</mat-label>
+          <input matInput placeholder="Enter OrderNumber" formControlName="OrderNo">
+        </mat-form-field>
+      </div>
+
+      <div class="col-xl-6 col-lg-6  pb-3 pt-3"></div>
+      <div class="col-xl-9 col-lg-6  pb-3 pt-3"></div>
+
+      <div class="row">
+        <div class=" pb-5 pt-5">
+          <div class=" text-right">
+            <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="submitData()">Submit</button>
+            <button mat-stroked-button class="transperent-button" color="primary">Reset</button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </mat-card>
+
+</form>
+
+
