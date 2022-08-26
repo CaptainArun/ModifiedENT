@@ -1,0 +1,77 @@
+<div class="overflow-hidden px-4 pb-4 my-2">
+  <div class="row ml-2 mt-2">
+    <mat-card class="row col-xl-12">
+      
+      <form [formGroup]="searchForm">
+        <div class="overflow-hidden px-4 pb-4">
+          <div class="row ml-2">
+            <mat-card class="row col-xl-12">
+              <div class="col-xl-12">
+                <div class="col-xl-12 text-center">
+                  <h3 class="text-left">Billing & Payment-Patient ledger</h3>
+                </div>
+                <div class="row justify-content-between w-100 opdstop pt-2">
+                  <div class="col-xl-4">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Patient</mat-label>
+                      <mat-icon matSuffix
+                      *ngIf="(searchForm.value.PatientName == '' || searchForm.value.PatientName == null) ? true : searchForm.value.PatientName.length > 2 ? false : true">
+                      search</mat-icon>
+                      <input type="text" matInput placeholder="Type and Select" [matAutocomplete]="autocpt" formControlName="PatientName">
+                      <mat-autocomplete autoActiveFirstOption #autocpt="matAutocomplete">
+                        <mat-option *ngFor="let patientdata of patient" [value]="patientdata.PatientFirstName+  ' ' +  patientdata.PatientMiddleName+  ' ' +  patientdata.PatientLastName " (onSelectionChange)="setpatient(patientdata.PatientId)">
+                          {{patientdata.PatientFirstName}}{{" "}} {{patientdata.PatientMiddleName}}{{" "}} {{patientdata.PatientLastName}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>From Date</mat-label>
+                      <input matInput [matDatepicker]="from" placeholder="From Date" formControlName="FromDate">
+                      <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                      <mat-datepicker #from></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>To Date</mat-label>
+                      <input matInput [matDatepicker]="to" placeholder="To Date" formControlName="ToDate">
+                      <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                      <mat-datepicker #to></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="text-right w-100 my-2">
+                    <button mat-flat-button color="" class="custome-button mat-primary w-auto mr-2" (click)="SearchDetails()" [disabled]="IsDateCorect">Search</button>
+                    <button mat-stroked-button color="" class="transperent-button light-sky primary w-auto" (click)="clearsearch()">Clear</button>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+          </div>
+          <div class="row col-xl-12 p-0 ml-0" *ngIf="this.patientId">
+
+            <div class="w-100">
+              <app-patient-demographic [PatID]="this.patientId"></app-patient-demographic>
+            </div>
+
+          </div>
+
+          <mat-card *ngIf="!show" class="table-wrapper  w-100 row">
+            <mat-card-content>
+              <h4>Billing & Payment</h4>
+              <div class="row">
+                <app-bms-table [config]="tableConfig" [datas]="patientLedger"></app-bms-table>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card *ngIf="show">
+            <h3>No Record Found</h3>
+          </mat-card>
+      </form>
+    </mat-card>
+
+  </div>
+</div>

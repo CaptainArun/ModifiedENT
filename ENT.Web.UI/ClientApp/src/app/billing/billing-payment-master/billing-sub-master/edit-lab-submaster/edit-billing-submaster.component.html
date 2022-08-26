@@ -1,0 +1,119 @@
+<div class="bg-white upload-da" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+
+      <h5 cdkDragHandle class="p-3 title-bg">
+        Billing Test(Sub-Master) <button style="color: white" class="close" (click)="dialogClose()" aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+      </h5>
+      <form [formGroup]="SubMasterEditBillingForm">
+        <mat-card class="px-3 py-1 card">
+
+          <div class="row">
+
+            <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                  *ngIf="(SubMasterEditBillingForm.value.DepartmentID == '' || SubMasterEditBillingForm.value.DepartmentID == null) ? true : false"></span> Department </mat-label>
+                  <mat-icon matSuffix
+                  *ngIf="(SubMasterEditBillingForm.value.DepartmentID == '' || SubMasterEditBillingForm.value.DepartmentID == null) ? true : SubMasterEditBillingForm.value.DepartmentID.length > 2 ? false : true">
+                  search</mat-icon>
+                <input type="text" matInput [matAutocomplete]="AutoDepartment" formControlName="DepartmentID" readonly
+                  placeholder="Type and Select">
+                <mat-autocomplete autoActiveFirstOption #AutoDepartment="matAutocomplete">
+                  <mat-option *ngFor="let option of DepartmentInfo"
+                    (onSelectionChange)="departmentID(option.DepartmentID)" [value]="option.DepartmentDesc">
+                    {{option.DepartmentDesc}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                  *ngIf="(SubMasterEditBillingForm.value.MasterBillingType == '' || SubMasterEditBillingForm.value.MasterBillingType == null) ? true : false"></span>Billing Type</mat-label>
+                  <mat-icon matSuffix
+                  *ngIf="(SubMasterEditBillingForm.value.MasterBillingType == '' || SubMasterEditBillingForm.value.MasterBillingType == null) ? true : SubMasterEditBillingForm.value.MasterBillingType.length > 2 ? false : true">
+                  search</mat-icon>
+                <input type="text" matInput [matAutocomplete]="BillingType" formControlName="MasterBillingType" readonly
+                  placeholder="Type and Select">
+                <mat-autocomplete autoActiveFirstOption #BillingType="matAutocomplete">
+                  <mat-option *ngFor="let option of MasterBillingTypInfo"
+                    (onSelectionChange)="masterbillingID(option.BillingMasterID)"
+                    [value]="option.MasterBillingType+' '+option.BillingTypeDesc">
+                    {{option.MasterBillingType}} {{option.BillingTypeDesc}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+
+
+            <!--<div class="col-xl-3 col-lg-6 pb-3 pt-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label> Billing Type ID </mat-label>
+          <input type="text" matInput [matAutocomplete]="autoicd" formControlName="MasterBillingType">
+          <mat-autocomplete autoActiveFirstOption #autoicd="matAutocomplete">
+            <mat-option *ngFor="let option of MasterBillingType" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>-->
+
+
+
+            <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                  *ngIf="(SubMasterEditBillingForm.value.SubMasterBillingType == '' || SubMasterEditBillingForm.value.SubMasterBillingType == null) ? true : false"></span> SubMaster BillingType</mat-label>
+                <input matInput placeholder="Enter SubMasterBillingType" formControlName="SubMasterBillingType" readonly>
+              </mat-form-field>
+            </div>
+
+
+
+            <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Enter Description" formControlName="SubMasterBillingTypeDesc">
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>  <span class="required-asterisk"
+                  *ngIf="(SubMasterEditBillingForm.value.Status == '' || SubMasterEditBillingForm.value.Status == null) ? true : false"></span>
+                  Status</mat-label>
+                <mat-select formControlName="Status">
+                  <mat-option *ngFor="let Sts of StatusData" [value]="Sts.BillingMasterStatusDescription">
+                    {{Sts.BillingMasterStatusDescription}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3 col-lg-6  pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Order Number</mat-label>
+                <input matInput placeholder="Enter OrderNumber" formControlName="OrderNo">
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-6 col-lg-6  pb-3 pt-3"></div>
+
+            <div class="col-xl-12 col-lg-6 text-right pb-3 pt-3">
+              <button mat-flat-button color="primary" class="custome-button mat-primary mr-2"
+                (click)="submitData()">Save</button>
+              <button mat-stroked-button class="transperent-button" color="primary" type="button" (click)="Clear()">Clear</button>
+            </div>
+          </div>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+</div>

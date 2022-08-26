@@ -1,0 +1,327 @@
+<div class="overflow-hidden px-4 my-3" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="masterBillingPaymentForm">
+    <div class="mt-1">
+      <h5 cdkDragHandle class="p-3 title-bg">Billing & Payment<button style="color:white" class="close"
+          (click)="dialogClose()" aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button></h5>
+      <div class="row justify-content-end w-100" *ngIf="showSearchField">
+        <div class="col-xl-3 d-flex flex-row-reverse opdstopres pt-3  pb-2">
+          <input type="search" placeholder="Search" formControlName="searchPatientList" class="ml-7 pl-5" matInput
+            [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let patList of filteredOptions"
+              [value]="patList.PatientFirstName+' '+ patList.PatientMiddleName +' '+patList.PatientLastName"
+              (onSelectionChange)="getPatientId(patList.PatientId)">
+              {{patList.PatientFirstName}}
+              {{patList.PatientMiddleName}} {{patList.PatientLastName}}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+      <div class="row col-xl-12 p-0 ml-0" *ngIf="show">
+
+        <div class="w-100">
+          <app-patient-demographic [PatID]="patientById.PatientId"></app-patient-demographic>
+        </div>
+      </div>
+
+      <div class="row pt-2"></div>
+      <div style="overflow: auto; overflow-x: hidden; height: 500px;">
+
+        <mat-card class="px-3 py-1 card">
+
+          <div class="row pt-2">
+
+            <div class="col-xl-3 mt-3 col-lg-6">
+              <mat-form-field class="w-100 " appearance="outline">
+                <mat-label><span class="required-asterisk"
+                    *ngIf="(masterBillingPaymentForm.value.ReceiptNo == '' || masterBillingPaymentForm.value.ReceiptNo == null) ? true : false"></span>Receipt
+                  Number</mat-label>
+                <input matInput placeholder="Enter Receipt Number" formControlName="ReceiptNo" readonly>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-2 mt-3 col-lg-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label><span class="required-asterisk"
+                    *ngIf="(masterBillingPaymentForm.value.ReceiptDate == '' || masterBillingPaymentForm.value.ReceiptDate == null) ? true : false"></span>Receipt
+                  Date</mat-label>
+                <input matInput [matDatepicker]="picker5" formControlName="ReceiptDate">
+                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                <mat-datepicker #picker5></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-2 mt-3 col-lg-6">
+              <mat-form-field class="w-100 " appearance="outline">
+                <mat-label>Bill Number</mat-label>
+                <input matInput placeholder="Enter Bill Number" formControlName="BillNo" readonly>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-2 mt-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Billing Type</mat-label>
+                <!-- <mat-select formControlName="BillingTypeName" #BillType [disabled]="!show"> 
+              <mat-option (click)="showingHiddenfields('visit')" value="Visit">Visit</mat-option>
+              <mat-option (click)="showingHiddenfields('Admission')" value="Admission">Admission</mat-option>
+            </mat-select> -->
+                <mat-select formControlName="BillingTypeName" #BillType [disabled]="!show">
+                  <mat-option *ngFor="let VT of BillingTypeNameData" [value]="VT" (click)="showingHiddenfields(VT)">
+                    {{VT}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-xl-3 mt-3 col-lg-6" *ngIf="showingVisit && show">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                    *ngIf="(masterBillingPaymentForm.value.VisitDateandTime == '' || masterBillingPaymentForm.value.VisitDateandTime == null) ? true : false"></span>Visit
+                  Date & Time</mat-label>
+                <mat-select formControlName="VisitDateandTime">
+                  <mat-option *ngFor="let VT of VisitDateandTimeType" [value]="VT.VisitDateandTime"
+                    (click)="showPatientVisitId(VT.VisitId)">
+                    {{VT.VisitDate | date: "dd/MM/yyyy hh:mm a "}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3 mt-3 col-lg-6" *ngIf="showingAdmission && show">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                    *ngIf="(masterBillingPaymentForm.value.AdmissionDateandTime == '' || masterBillingPaymentForm.value.AdmissionDateandTime == null) ? true : false"></span>Admission
+                  Date & Time</mat-label>
+                <mat-select formControlName="AdmissionDateandTime">
+                  <mat-option *ngFor="let VT of AdmissionDateandTimeType" [value]="VT.AdmissionDateTime"
+                    (click)="showPatientAdmissiontId(VT.AdmissionID)">
+                    {{VT.AdmissionDateTime | date: "dd/MM/yyyy hh:mm a"}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3 mt-3 col-lg-6" *ngIf="showingVisitEdit">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Visit Date & Time</mat-label>
+                <input matInput formControlName="VisitDateandTime" readonly>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3 mt-3 col-lg-6" *ngIf="showingAdmissionEdit">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Admission Date & Time</mat-label>
+                <input matInput formControlName="AdmissionDateandTime" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-xl-12 col-lg-3 pb-1">
+            <hr>
+          </div>
+
+
+          <div>
+            <div formArrayName="rows">
+              <div *ngFor="let row of masterBillingPaymentForm.get('rows')?.controls;let index = index;">
+                <div [formGroupName]="index">
+                  <div class="row pt-2">
+
+                    <div class="col-xl-3 col-lg-3">
+                      <mat-form-field [matTooltip]="masterBillingPaymentForm.controls['rows'].value[index]?.Department"
+                        matTooltipPosition="above" matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(row.get('Department').value == '' || row.get('Department').value == null) ? true : (row.get('Department').value.length > 2) ? false : true"></span>
+                          Department </mat-label>
+                        <mat-icon matSuffix
+                          *ngIf="(row.get('Department').value == '' || row.get('Department').value == null) ? true : (row.get('Department').value.length > 2) ? false : true">
+                          search</mat-icon>
+
+                        <input type="text" matInput [matAutocomplete]="AutoDepartment" formControlName="Department"  #autoCompleteDepartmentCode
+                          (keyup)="GetDepartmentCodeList(index)"   (blur)="autoCompleteDepartment(autoCompleteDepartmentCode.value, index)" placeholder="Type and Select">
+                          <input formControlName="DepartmentNumber" hidden>
+                        <mat-autocomplete autoActiveFirstOption #AutoDepartment="matAutocomplete">
+                          <mat-option *ngFor="let option of DepartmentInfo" [value]="option.DepartmentDesc"
+                            (onSelectionChange)="DepartmentId(option.DepartmentDesc,option.DepartmentID,index)">
+                            {{option.DepartmentDesc}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3">
+                      <mat-form-field
+                        [matTooltip]="masterBillingPaymentForm.controls['rows'].value[index]?.BillingParticulars"
+                        matTooltipPosition="above" matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(row.get('BillingParticulars').value == '' || row.get('BillingParticulars').value == null) ? true : (row.get('BillingParticulars').value.length > 2) ? false : true"></span>
+                          Billing Particulars </mat-label>
+                          <mat-icon matSuffix
+                          *ngIf="(row.get('BillingParticulars').value == '' || row.get('BillingParticulars').value == null) ? true : (row.get('BillingParticulars').value.length > 2) ? false : true">
+                          search</mat-icon>
+                        <input type="text" matInput [matAutocomplete]="autoicd" placeholder="Type and Select" formControlName="BillingParticulars" #autoCompleteBillingParticulars
+                          (keyup)="GetBillingtype(index)"  (blur)="autoCompleteBilling(autoCompleteBillingParticulars.value, index)" >
+                        <input type="text" matInput formControlName="BillingParticularsubNumber" hidden>
+                        <mat-autocomplete autoActiveFirstOption #autoicd="matAutocomplete">
+                          <mat-option *ngFor="let option of MasterBillingTypInfo" [value]="option.billingparticularName"
+                            (onSelectionChange)="billingCharges(option.billingparticularName,option.Charges,index,option)">
+                            {{option.billingparticularName}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(row.get('Charges').value == '' || row.get('Charges').value == null) ? true : false"></span>Charges
+                        </mat-label>
+                        <input matInput formControlName="Charges" (keyup)="calculateTotalCharges()" readonly>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-1 col-lg-2 pt-2">
+
+                      <button mat-flat-button type="button" color="warn" class="btn btn-danger" *ngIf="rows.length>1"
+                        [hidden]="hideButton" (click)="onRemoveRow(index)">
+                        Del
+                      </button>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-1 mt-2 side">
+              <button type="button" mat-flat-button color="primary" class="btn-rounded" [hidden]="hideButton"
+                (click)="onAddRow()">
+                +Add
+              </button>
+            </div>
+
+
+            <div class="row pt-2">
+              <div class="col-xl-3 col-lg-3"></div>
+              <div class="col-xl-3 col-lg-3"></div>
+              <div class="col-xl-2 col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Misc Charges</mat-label>
+                  <input numeric maxlength="10" matInput placeholder="Enter MiscCharges" formControlName="MiscAmount"
+                    (keyup)="calculateTotalCharges();" autocomplete="off">
+                </mat-form-field>
+              </div>
+              <div class="col-xl-1"></div>
+              <div class="col-xl-1"></div>
+            </div>
+
+            <div class="row pt-2">
+              <div class="col-xl-3 col-lg-3"></div>
+              <div class="col-xl-3 col-lg-3"></div>
+              <div class="col-xl-2 col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Total Charges</mat-label>
+                  <input matInput [value]="totalCharges" formControlName="GrandTotal" readonly>
+                  <!-- <input matInput formControlName="GrandTotalshow"  [hidden]="!GrandTotalfield" readonly> -->
+                </mat-form-field>
+              </div>
+              <div class="col-xl-1"></div>
+              <div class="col-xl-1"></div>
+            </div>
+
+          </div>
+
+          <div class="col-xl-12 col-lg-6 pb-1">
+            <hr>
+          </div>
+
+          <div class="row pt-3">
+
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Discount (%)</mat-label>
+                <input matInput placeholder="Enter Discount" formControlName="DiscountPercentage"
+                  (keyup)="calculateDiscount()">
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Discount Amount </mat-label>
+                <input matInput placeholder="Enter Discount" formControlName="DiscountAmount"
+                  (keyup)="calculateDiscountamount()">
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                    *ngIf="(masterBillingPaymentForm.value.NetAmount == '' || masterBillingPaymentForm.value.NetAmount == null) ? true : false"></span>Net
+                  Total</mat-label>
+                <input matInput placeholder="Enter NetTotal" formControlName="NetAmount" readonly>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                    *ngIf="(masterBillingPaymentForm.value.PaidAmount == '' || masterBillingPaymentForm.value.PaidAmount == null) ? true : false"></span>
+                  Amount after Paid </mat-label>
+                <input matInput placeholder="Enter Amount after Paid" formControlName="PaidAmount"
+                  (keyup)="amountAfterPaid()">
+                <mat-hint style="color: red;" class="pt-2" [hidden]="mismatch">Enter the Correct Amount</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                    *ngIf="(masterBillingPaymentForm.value.PaymentMode == '' || masterBillingPaymentForm.value.PaymentMode == null) ? true : false"></span>Accepted
+                  Payment Method</mat-label>
+                <mat-select formControlName="PaymentMode">
+                  <mat-option *ngFor="let Payment of PaymentM" [value]="Payment.PaymentTypeDescription">
+                    {{Payment.PaymentTypeDescription}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4 col-lg-6">
+              <mat-form-field [matTooltip]="masterBillingPaymentForm.get('Notes').value" matTooltipPosition="above"
+              matTooltipClass="Tooltip-lg" class="example-full-width  column- 70 w-100" appearance="outline">
+                <mat-label>Notes</mat-label>
+                <textarea matInput placeholder="Enter Notes" rows="1" formControlName="Notes"></textarea>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3 col-lg-6"></div>
+            <div class="col-xl-2 col-lg-6"></div>
+            <div class="col-xl-3 col-lg-6"></div>
+            <div class="col-xl-3 col-lg-6"></div>
+
+            <div class="col-xl-6 col-lg-6 text-right pb-2">
+
+              <button type="button" mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="backToVisit()">
+                Back
+              </button>
+
+              <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" [hidden]="hideButton"
+                [disabled]="disableSave" (click)="submitData()">
+                Save
+              </button>
+              <button type="button" mat-stroked-button class="transperent-button" color="primary" [hidden]="hideButton"
+                (click)="ResetData()">
+                Clear
+              </button>
+            </div>
+
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </form>
+
+</div>

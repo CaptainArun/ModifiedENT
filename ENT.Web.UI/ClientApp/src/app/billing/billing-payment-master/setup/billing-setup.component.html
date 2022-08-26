@@ -1,0 +1,43 @@
+
+<div  class="overflow-hidden px-4">
+
+  <!-- <div class="row">
+    <div class="col-xl-4"></div>
+    <div class="col-xl-4 ml-5"></div>
+
+    <div class="col-xl-1  ml-1">
+      <button class="custome-button mat-primary btn btn-info" (click)="addBillingSetup()">Add New</button>
+    </div>
+    <div class="col-xl-2">
+      <input type="search" placeholder="Search" matInput [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let patList of filteredOptions"  (onSelectionChange)="master()"> {{}}</mat-option> 
+      </mat-autocomplete>
+    </div>
+  </div> -->
+  <div class="text-right">
+    <div class="row justify-content-end w-100">
+      <!-- <div class="col-xl-3 d-flex flex-row-reverse opdstopres pt-5 pb-2">
+        <input type="search"placeholder="Search" matInput [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+   <mat-option *ngFor="let patList of filteredOptions"  (onSelectionChange)="master()"> {{}}</mat-option>  
+    </mat-autocomplete>
+      </div> -->
+      <div class="pt-3 pb-2">
+        <button class="custome-button mat-primary btn btn-info" (click)="addBillingSetup()">Add New</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+  <mat-card class="table-wrapper">
+      <h4>Billing&Payment (Setup)</h4>
+      <mat-card-content>
+        <app-bms-table [config]="tableConfig" [datas]="SetupIdentify"  (viewItem)="ViewSetupBilling($event)" (editItem)="EditSetupBilling($event)"  (bindItem)="onBindItem($event)"></app-bms-table>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+</div>

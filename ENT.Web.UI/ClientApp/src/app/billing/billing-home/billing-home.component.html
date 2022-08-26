@@ -1,0 +1,40 @@
+<div class="common_submenu d-flex p-2 mb-2">
+  <div class="d-flex scroll-x m-2">
+    <div class="pr-4">
+      <button mat-button class="d-flex align-content-center" id="bill" (click)="openbilling()">
+        <mat-icon class="menu-icon"><img src='assets\images\MenuNewIcons\billing & payments\payments.png' /></mat-icon>
+        <span class="f-18">Billing & Payment</span>
+      </button>
+    </div>
+
+    <div class="pr-4">
+      <button mat-button class="d-flex align-content-center"id="refund" (click)="openbillingPaymentRefund()">
+        <mat-icon class="menu-icon"><img src='assets\images\MenuNewIcons\billing & payments\refund.png' /></mat-icon>
+        <span class="f-18 ">Billing & Payment(Refund)</span>
+      </button>
+    </div>
+
+    <div class="pr-4">
+      <button mat-button class="d-flex align-content-center" id="ledger" (click)="openbillingledgerDetails()">
+        <mat-icon class="menu-icon"><img src='assets\images\MenuNewIcons\billing & payments\Ledger.png' /></mat-icon>
+        <span class="f-18 ">Billing & Payment(patient-ledger)</span>
+      </button>
+    </div>
+
+    <div class="pr-4">
+      <button mat-button class="d-flex align-content-center" id="master" (click)="openbillingMastersubmaster()">
+        <mat-icon class="menu-icon"><img src='assets\images\MenuNewIcons\billing & payments\master.png' /></mat-icon>
+        <span class="f-18 ">Billing & Payment(Master & SubMaster)</span>
+      </button>
+    </div>
+
+    <div class="pr-4">
+      <button mat-button class="d-flex align-content-center" id="setup" (click)="openbillingSetup()">
+        <mat-icon class="menu-icon"><img src='assets\images\MenuNewIcons\billing & payments\setup.png' /></mat-icon>
+        <span class="f-18 ">Billing & Payment(Setup)</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-billing></app-billing>

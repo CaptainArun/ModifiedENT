@@ -1,0 +1,58 @@
+<div class="white mt-3 mb-4 p-1" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+
+  <mat-card class="p-0">
+
+    <h5 cdkDragHandle class="p-3 title-bg">
+      <b>Master Billing</b>
+      <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span></button>
+    </h5>
+    <div class="scroll-x">
+      <div class="row p-0 m-0 scroll-md">
+        <div class=" col-lg-6 v-line">
+
+            <div class="row  pb-1 pt-3">
+              <div class="col-xl-4 col-lg-4 col-md-4 font_color">DepartmentID</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.DepartmentName}}</div>
+            </div>
+
+            <div class="row  pb-2 pt-3">
+              <div class="col-xl-4 col-lg-4 col-md-4 font_color">Description</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.BillingTypeDesc}}</div>
+            </div>
+
+            <div class="row  pb-2 pt-3">
+              <div class="col-xl-4 col-lg-4 col-md-4 font_color">MasterBillingType</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.MasterBillingType}}</div>
+            </div>
+          </div>
+
+
+          <div class=" col-lg-6 v-line">
+
+            <div class="row  pb-1 pt-3">
+              <div class="col-xl-4 col-lg-4 col-md-4 font_color">Status</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.Status}}</div>
+            </div>
+
+            <div class="row  pb-1 pt-3">
+              <div class="col-xl-4 col-lg-4 col-md-4 font_color">AllowSubMaster</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.AllowSubMaster}}</div>
+            </div>
+
+            <div class="row  pb-1 pt-3">
+              <div class="col-xl-4 col-lg-4 col-md-4 font_color">OrderNo</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.OrderNo}}</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </mat-card>
+</div>

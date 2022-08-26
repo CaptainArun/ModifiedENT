@@ -1,0 +1,19 @@
+<div class="overflow-hidden px-4 py-1">
+  <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+    <div class="row">
+      <div class="text-right pt-3 w-100 my-2">
+        <button class="custome-button mat-primary btn btn-info" style="height:32px;width:140px" (click)="addPatient()">Add Billing & Payment</button>
+     </div>
+    </div>
+  </div>
+  <div class="pt-3">
+  <mat-card class="table-wrapper  w-100 row">
+            <mat-card-content>
+          <h4>Billing & Payment</h4>
+          <div class="row">
+            <app-bms-table [config]="tableConfig" [datas]="allPaymentList" (viewItem)="openVisitViewReport($event)" (editItem)="openEditBillingPaymentRecord($event)"  (deleteItem)="DeleteRecord($event)" (bindItem)="onBindItem($event)"></app-bms-table>
+          </div>
+        </mat-card-content>
+       </mat-card>
+</div>
+</div>

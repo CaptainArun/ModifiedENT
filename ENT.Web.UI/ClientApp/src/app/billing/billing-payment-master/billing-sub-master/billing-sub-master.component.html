@@ -1,0 +1,39 @@
+<div class="overflow-hidden px-4">
+  <!--  <div class="row">
+  <div class="col-xl-4"></div>
+  <div class="col-xl-4 ml-5"></div>
+  <div class="col-xl-1 ml-1">
+  <button class="custome-button mat-primary btn btn-info"(click)="addNew()">Add New</button>
+</div>
+<div class="col-xl-2">
+  <input type="search"placeholder="Search" matInput [matAutocomplete]="auto">
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+<mat-option *ngFor="let patList of filteredOptions"  (onSelectionChange)="master()"> {{}}</mat-option> 
+  </mat-autocomplete>
+</div> 
+</div>-->
+
+<div class="text-right">
+  <div class="row justify-content-end w-100">
+    <!-- <div class="col-xl-3 d-flex flex-row-reverse opdstopres pt-5 pb-2">
+      <input type="search" (keyup)="searchPatientdata()" placeholder="Search" formControlName="searchPatient"
+             class=" ml-7 pl-5 ">
+    </div> -->
+    <div class="pt-5 pb-2">
+      <button class="custome-button mat-primary btn btn-info" (click)="addNew()">Add New</button>
+    </div>
+  </div>
+</div>
+<div class="row mt-2">
+<div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+  <mat-card class="table-wrapper">
+    <mat-card-content>
+      <h4>Billing&Payment (SubMaster)</h4>
+      <div class="row">
+        <app-bms-table [config]="tableConfig" [datas]="subIdentify"  (viewItem)="ViewSubMasterBilling($event)" (editItem)="EditSubMasterBilling($event)"></app-bms-table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+</div>
