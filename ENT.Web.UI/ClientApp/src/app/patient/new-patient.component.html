@@ -1,0 +1,38 @@
+
+<div class="overflow-hidden px-4">
+  <form [formGroup]="searchForm">
+   
+    <div class="text-right">
+      <div class="row justify-content-end w-100">
+        <div class="col-xl-3 d-flex flex-row-reverse opdstopres pt-5 pb-2">
+          <input type="search" (keyup)="searchPatientdata()" placeholder="Search" formControlName="searchPatient"
+                 class=" ml-7 pl-5 ">
+        </div>
+        <div class=" pt-5 pb-2">
+          <button class="custome-button mat-primary btn btn-info" (click)="openAddUpdateform()">Add New Patient</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- <mat-card class="table-wrapper">
+        <app-bms-table [config]="tableConfig" [datas]="searchData" (viewItem)="openPatientViewRecord($event)"
+          (editItem)="openPatientEditRecord($event)" (openingItem)="patientHist($event)"></app-bms-table>
+      </mat-card> -->
+      <mat-card *ngIf="!showCard" class="w-100 mt-2 mb-3">
+        <h3>No Record Found</h3>
+      </mat-card>
+
+      
+      <mat-card class="table-wrapper" *ngIf="showCard">
+        <app-cardContainer [configCard]="PatientListCard" [dataForContainer]="searchData"
+        (viewItem)="openPatientViewRecord($event)"
+        (editItem)="openPatientEditRecord($event)" (openingItem)="patientHist($event)"></app-cardContainer>
+      </mat-card>
+
+    </div>
+  </form>
+</div>
+
+
+

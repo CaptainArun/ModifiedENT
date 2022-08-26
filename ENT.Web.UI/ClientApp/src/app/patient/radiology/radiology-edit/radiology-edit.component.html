@@ -1,0 +1,208 @@
+<div class="overflow-hidden" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Radiology <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+
+  <form [formGroup]="RadiologyOrderEditForm">
+    <mat-card class=" px-3 py-1 my-2">
+      <div class="row w-100">
+        <div class="col-xl-3 col-lg-6 pb-4 pt-4">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Visit Date & Time</mat-label>
+            <input matInput formControlName="visitDateandTime">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pb-4 pt-4">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="RecordedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-2 timepick pb-4 pt-4">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" formControlName="RecordedTime">
+            <mat-label>Recorded Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker1>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pb-4 pt-4">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input matInput placeholder="Enter" formControlName="recordedDuring">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 pb-4 pt-4">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <mat-select formControlName="RecordedBy">
+              <mat-option *ngFor="let rcd of recordby" [value]="rcd">{{rcd}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+
+    <div class="overflow">
+      <mat-card>
+        <div class="row">
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="example-full-width w-100" appearance="outline" [matTooltip]="physicianTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+              <mat-label>Ordering Physician</mat-label>
+              <mat-icon matSuffix *ngIf="(RadiologyOrderEditForm.value.OrderingPhysician == '' || RadiologyOrderEditForm.value.OrderingPhysician == null) ? true : (RadiologyOrderEditForm.value.OrderingPhysician.length > 2) ? false : true">search</mat-icon>
+              <input matInput [matAutocomplete]="auto" placeholder="Type and Select" #autoCompletePhysicianInput="matAutocompleteTrigger" formControlName="OrderingPhysician">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let doctorList of providerName" (onSelectionChange)="setPhysicianTooltip(doctorList.ProviderName)" [value]="doctorList.ProviderName">{{doctorList.ProviderName}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="RadiologyOrderEditForm.get('NarrativeDiagnosis').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Narrating Diagnosis</mat-label>
+              <textarea matInput placeholder="Enter Additional notes" rows="1" cols="1" formControlName="NarrativeDiagnosis"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="example-full-width w-100" appearance="outline" [matTooltip]="icdTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Primary ICD Code</mat-label>
+              <mat-icon matSuffix *ngIf="(RadiologyOrderEditForm.value.PrimaryICD == '' || RadiologyOrderEditForm.value.PrimaryICD == null) ? true : (RadiologyOrderEditForm.value.PrimaryICD.length > 2) ? false : true">search</mat-icon>
+              <textarea type="text" matInput placeholder="Type and Select" rows="1" #autoCompleteICDInput="matAutocompleteTrigger" [matAutocomplete]="auto2" formControlName="PrimaryICD" maxlength="500"></textarea>
+              <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                <mat-option *ngFor="let value of icd" (onSelectionChange)="setICDTooltip(value.ICDCode, value.Description)" [value]="value.ICDCode + '-' + value.Description">{{value.ICDCode}} - {{ value.Description}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Radiology Procedure Requested</mat-label>
+              <mat-select formControlName="RadiologyProcedure">
+                <mat-option *ngFor="let radio of radiologyProcedure" [value]="radio.RadiologyProcedureRequestedDesc">{{radio.RadiologyProcedureRequestedDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="Type">
+                <mat-option *ngFor="let type of Type" [value]="type.RadiologyTypeDesc">{{type.RadiologyTypeDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Section</mat-label>
+              <mat-select formControlName="Section">
+                <mat-option *ngFor="let sec of bodySection" [value]="sec.BodySectionDesc">{{sec.BodySectionDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="RadiologyOrderEditForm.get('ContrastNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Contrast Notes</mat-label>
+              <textarea matInput placeholder="Enter Additional notes" rows="1" cols="1" formControlName="ContrastNotes"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="example-full-width w-100" appearance="outline" [matTooltip]="cptTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Primary CPT Code</mat-label>
+              <mat-icon matSuffix *ngIf="(RadiologyOrderEditForm.value.PrimaryCPT == '' || RadiologyOrderEditForm.value.PrimaryCPT == null) ? true : (RadiologyOrderEditForm.value.PrimaryCPT.length > 2) ? false : true">search</mat-icon>
+              <textarea type="text" matInput placeholder="Type and Select" rows="1" #autoCompleteCPTInput="matAutocompleteTrigger" [matAutocomplete]="auto3" formControlName="PrimaryCPT" maxlength="500"></textarea>
+              <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
+                <mat-option *ngFor="let value of cpt" (onSelectionChange)="setCPTTooltip(value.CPTCode, value.Description)" [value]="value.CPTCode + '-' + value.Description">{{value.CPTCode}} - {{ value.Description}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Procedure Requested Date</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="ProcedureRequestedDate">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-2 timepick">
+            <mat-form-field class="input-full-width timer w-100" appearance="outline">
+              <input matInput [ngxTimepicker]="toggleTimepicker2" [disableClick]="true" formControlName="ProcedureRequestTime">
+              <mat-label>Procedure Requested Time</mat-label>
+              <ngx-material-timepicker-toggle [for]="toggleTimepicker2">
+              </ngx-material-timepicker-toggle>
+              <ngx-material-timepicker #toggleTimepicker2>
+              </ngx-material-timepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-12">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="RadiologyOrderEditForm.get('InstructionsToPatient').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Instructions to Patient</mat-label>
+              <textarea matInput placeholder="Enter Additional notes" rows="1" cols="1" formControlName="InstructionsToPatient"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Procedure Status</mat-label>
+              <mat-select formControlName="ProcedureStatus">
+                <mat-option *ngFor="let proStatus of procedureStatus" [value]="proStatus.ProcedureStatusDesc">{{proStatus.ProcedureStatusDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-2 col-lg-2">
+            <section class="example-section">
+              <mat-checkbox class="example-margin" formControlName="ReferredLab" (change)="isRefered($event)">Referred Lab</mat-checkbox>
+            </section>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Hospital Lab</mat-label>
+              <mat-select formControlName="ReferredLabValue" [disabled]="!isReferedLab">
+                <mat-option *ngFor="let lab of referredLabValue" [value]="lab.ReferredLabDesc">{{lab.ReferredLabDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Report Format</mat-label>
+              <mat-select formControlName="ReportFormat">
+                <mat-option *ngFor="let report of reportFormat" [value]="report.ReportFormatDesc">{{report.ReportFormatDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-12">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="RadiologyOrderEditForm.get('AdditionalInfo').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Additional Notes</mat-label>
+              <textarea matInput placeholder="Enter Additional notes" rows="1" cols="1" formControlName="AdditionalInfo"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-12 text-right mt-2">
+            <button mat-flat-button class="custome-button mr-2 mat-primary" (click)="updateData()">Save</button>
+            <button type="button" mat-stroked-button class="transperent-button" color="primary" (click)="clear()">Clear</button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </form>
+</div>
