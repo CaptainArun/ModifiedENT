@@ -1,0 +1,10 @@
+.shroff-table .table tr td {
+  /* padding: 0.5em .75rem !important; */
+  /* color: #4d4f5a !important; */
+  padding: 6px 10px !important;
+  font-size: 15px;
+}
+
+.cur {
+  cursor: pointer;
+}

@@ -1,0 +1,42 @@
+﻿.ht-2 {
+    height: 35px;
+}
+
+.ft {
+    font-size: 1rem;
+}
+
+.ht-1 {
+    height: 200px;
+}
+
+.pd {
+    padding-left: 80px;
+}
+
+:host ::ng-deep .validate .mat-radio-group.ng-invalid .mat-radio-outer-circle {
+    border-color: #f73a2c;
+}
+
+:host ::ng-deep .validate .mat-radio-group.ng-invalid .mat-radio-label-content {
+    color: #f44336;
+}
+
+.invalid  {
+    color: #f44336;
+}
+  
+:host ::ng-deep .invalid .mat-checkbox-frame {
+    border-color: #f73a2c;
+}
+
+.capture {
+    text-decoration: underline; 
+    cursor: pointer;
+}
+
+.wrapper {
+    overflow: auto;
+    max-height: 250px;
+    overflow-x: hidden;
+}

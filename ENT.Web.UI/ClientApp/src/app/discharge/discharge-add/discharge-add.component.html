@@ -1,0 +1,514 @@
+<form [formGroup]="dischargeProcedureForm" #ngForm="ngForm">
+  <div class="overflow-hidden p-4">
+    <app-patient-demographic [PatID]="patientId"></app-patient-demographic>
+    <div class="row mt-0 mb-4 mt-4">
+      <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+        <div class="row">
+          <div class="col-12">
+            <mat-card class="mt-4">
+              <h5 class="p-3 title-bg">Recommended Procedure</h5>
+              <div class="row">
+                <div class="row col-lg-12">
+                  <div class="col-xl-6 ht-2">
+                    <mat-label>Admission Number : </mat-label>
+                    <mat-form-field class="col-lg-9" appearance="none">
+                      <input matInput class="ft" formControlName="AdmissionNumber" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 ht-2">
+                    <mat-label>Requested Date : </mat-label>
+                    <mat-form-field class="col-lg-9" appearance="none">
+                      <input matInput class="ft" formControlName="RequestedDate" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 ht-2">
+                    <mat-label>Recommended Procedure : </mat-label>
+                    <mat-form-field class="col-lg-9" appearance="none">
+                      <input matInput class="ft" formControlName="RecommendedProcedure" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 ht-2">
+                    <mat-label>Admitting Physician / Surgeon : </mat-label>
+                    <mat-form-field class="col-lg-9" appearance="none">
+                      <input matInput class="ft" formControlName="AdmittingPhysician" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+
+            <mat-card class="mt-4">
+              <h5 class="p-3 title-bg">Pre-Procedure Diagnosis</h5>
+              <div class="row">
+                <div class="row col-lg-12">
+                  <div class="col-xl-6 ht-2">
+                    <mat-label>Pre-Procedure Diagnosis : </mat-label>
+                    <mat-form-field class="col-lg-9" appearance="none">
+                      <input matInput class="ft" formControlName="PreProcedureDiagnosis" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 ht-2">
+                    <mat-label>Planned Procedure : </mat-label>
+                    <mat-form-field class="col-lg-9" appearance="none">
+                      <input matInput class="ft" formControlName="PlannedProcedure" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 ht-2">
+                    <mat-label>Urgency : </mat-label>
+                    <mat-form-field class="col-lg-9" appearance="none">
+                      <input matInput class="ft" formControlName="Urgency" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 ht-2">
+                    <mat-label>Anesthesia fitness cleared : </mat-label>
+                    <mat-form-field class="col-lg-9" appearance="none">
+                      <input matInput class="ft" formControlName="AnesthesiaFitness" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 ht-2">
+                    <mat-label>Other consults : </mat-label>
+                    <mat-form-field class="col-lg-9" appearance="none">
+                      <input matInput class="ft" formControlName="OtherConsults" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+
+            <mat-card class="mt-4">
+              <h5 class="p-3 title-bg">Post-Procedure Diagnosis</h5>
+              <div class="row">
+                <div class="row col-lg-9">
+                  <div class="col-lg-6 mt-3">
+                    <div class="mt-2"></div>
+                    <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('PostoperativeDiagnosis').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                      <mat-label>Postoperative Diagnosis</mat-label>
+                      <textarea matInput rows="1" cols="10" formControlName="PostoperativeDiagnosis" maxlength="500" readonly></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6 mt-3">
+                    <div class="mt-2"></div>
+                    <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('BloodLossInfo').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                      <mat-label>Blood Loss Info</mat-label>
+                      <textarea matInput rows="1" cols="10" formControlName="BloodLossInfo" maxlength="500" readonly></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('Specimens').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                      <mat-label>Specimens</mat-label>
+                      <textarea matInput rows="1" cols="10" formControlName="Specimens" maxlength="500" readonly></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-3">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Pain / Discomfort Level</mat-label>
+                      <input matInput formControlName="PainDiscomfortLevel" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('Complications').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                      <mat-label>Complications</mat-label>
+                      <textarea matInput rows="1" cols="10" formControlName="Complications" maxlength="500" readonly></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('Procedure').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                      <mat-label>Procedure</mat-label>
+                      <textarea matInput rows="1" cols="10" formControlName="Procedure" maxlength="500" readonly></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('AdditionalInfo').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                      <mat-label>Additional Info</mat-label>
+                      <textarea matInput placeholder="Enter" rows="1" cols="10" formControlName="AdditionalInfo" maxlength="500"></textarea>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 wrapper">
+                  <mat-list>
+                    <mat-list-item *ngFor="let file of listOfImgFiles; let index = index">
+                      <i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp;&nbsp;
+                      <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a> &nbsp; [{{file.Size}}] &nbsp;
+                      <button type="button" mat-mini-fab color="warn" (click)="removeImgFiles(file.FileName, index)" [hidden]="showIcon">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+
+                <span class="col-md-11 text-right">
+                  <input type="file" #image accept="image/*" (change)="onImageUpload($event)" multiple hidden>
+                  <button type="button" mat-raised-button color="primary" (click)="image.click()" [disabled]="uploadImg">Upload Images</button>
+                </span>
+
+                <!-- <ng-container *ngIf="!disableImg">
+                    <div class="col-lg-3" [hidden]="showImg">
+                      <div class="upload-content capture" (click)="image.click()">Capture / Upload Photo</div> <br>
+                      <input type="file" #image accept="image/*" value="upload" (change)="imageUpload($event)" style="display:none;">
+                      <div class="pl-5 ml-3">
+                        <span class="pl-5" *ngIf="ViewImageUpload">
+                          <img [src]="localUrl" style="width:200px; height:180px;"> &nbsp;&nbsp;
+                          <button mat-mini-fab color="warn" (click)="RemoveFile()">
+                            <span style="font-size: large;" aria-hidden="true"><b>X</b></span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </ng-container>
+                  
+                  <ng-template [ngIf]="disableImg">
+                    <div class="upload-content col-lg-3">Capture / Upload Photo</div>
+                  </ng-template>
+                  
+                  <div class="col-lg-3" [hidden]="!showImg">
+                    <div class="upload-content pt-4">
+                      <img src={{picture}} style="width:225px; height:215px;">
+                    </div>
+                  </div> -->
+              </div>
+            </mat-card>
+
+            <mat-card class="mt-4">
+              <h5 class="p-3 title-bg">e-Prescription</h5>
+              <!--  e-Prescription  -->
+              <div class="row mb-3">
+                <div class="col-lg-12 ">
+                  <div class="table-responsive shroff-table reduce-field">
+                    <table class="table table-bordered table-hover w-100 medications">
+                      <thead>
+                        <tr class="font-weight-bold">
+                          <th class="col-xl-4 text-center">Item/Drug Name</th>
+                          <th class="col-xl-4 text-center">Route</th>
+                          <th class="col-xl-4 text-center">Diagnosis</th>
+                          <th class="col-xl-3 text-center">Total Quantity</th>
+                          <th class="col-xl-3 text-center">No of Days</th>
+                          <th class="col-xl-6 text-center">Medication Time</th>
+                          <th class="col-xl-3 text-center">Before/After</th>
+                          <th class="col-xl-2 text-center">Status</th>
+                          <th class="col-xl-4 text-center">SIG</th>
+                          <th class="col-xl-1 text-center"></th>
+                        </tr>
+                      </thead>
+
+                      <tbody formArrayName="medication">
+                        <tr *ngFor="let rows of dischargeProcedureForm.get('medication')?.controls; let index = index;">
+                          <td [formGroupName]="index" class="col-xl-4 text-center">
+                            <mat-form-field class="col-xl-12 medileft" appearance="outline" [matTooltip]="(rows.get('ItemDrugName').value != null && rows.get('ItemDrugName').value != undefined)?rows.get('ItemDrugName').value:''" matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                              <mat-label><span class="required-asterisk" *ngIf="rows.get('ItemDrugName').value == '' ? true : rows.get('ItemDrugName').value.length > 2 ? false : true"></span>Item/Drug Name</mat-label>
+                              <mat-icon matSuffix *ngIf="rows.get('ItemDrugName').value == '' ? true : rows.get('ItemDrugName').value.length > 2 ? false : true">search</mat-icon>
+                              <textarea matInput placeholder="Type and Select" rows="3" cols="1" #autoCompleteDrugInput [matAutocomplete]="AutoDrugName" formControlName="ItemDrugName" (keyup)="getDrugList(index)" (blur)="autoResetDrug(autoCompleteDrugInput.value, index)" maxlength="500"></textarea>
+                              <mat-autocomplete autoActiveFirstOption #AutoDrugName="matAutocomplete">
+                                <mat-option *ngFor="let drug of drugName" [value]="drug.NDCCode + '/' + drug.Description" (onSelectionChange)="DrugId(drug.DrugCodeID, drug.NDCCode, drug.Description, index)">{{drug.NDCCode}} / {{drug.Description}}</mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </td>
+
+                          <td [formGroupName]="index" class="col-xl-4 text-center">
+                            <mat-form-field class="col-lg-12 medidropdown" appearance="outline" [matTooltip]="dischargeProcedureForm.controls['medication'].value[index].routeTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                              <mat-label><span class="required-asterisk" *ngIf="rows.get('Route').value == null ? true : false"></span>Route</mat-label>
+                              <input formControlName="routeTooltip" hidden>
+                              <mat-select formControlName="Route">
+                                <mat-option *ngFor="let route of routeName" (click)="setRouteTooltip(index)" [value]="route.RouteCode">{{route.RouteDescription}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </td>
+
+                          <td [formGroupName]="index" lass="col-xl-4 text-center">
+                            <mat-form-field class="col-lg-12 mediright" appearance="outline" [matTooltip]="(rows.get('Diagnosis').value != null && rows.get('Diagnosis').value != undefined)?rows.get('Diagnosis').value:''" matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                              <mat-label><span class="required-asterisk" *ngIf="rows.get('Diagnosis').value == '' ? true : rows.get('Diagnosis').value.length > 2 ? false : true"></span>Diagnosis</mat-label>
+                              <mat-icon matSuffix *ngIf="rows.get('Diagnosis').value == '' ? true : rows.get('Diagnosis').value.length > 2 ? false : true">search</mat-icon>
+                              <textarea matInput placeholder="Type and Select" rows="3" cols="1" #autoCompleteDiagnosisInput [matAutocomplete]="AutoDiagnosisName" formControlName="Diagnosis" (keyup)="getDiagnosisList(index)" (blur)="autoResetDiagnosis(autoCompleteDiagnosisInput.value, index)" maxlength="500"></textarea>
+                              <mat-autocomplete autoActiveFirstOption #AutoDiagnosisName="matAutocomplete">
+                                <mat-option *ngFor="let diagnosis of diagnosisName" [value]="diagnosis.ICDCode + '-' + diagnosis.Description" (onSelectionChange)="DiagnosisId(diagnosis.DiagnosisCodeID, diagnosis.ICDCode, diagnosis.Description, index)">{{diagnosis.ICDCode}} - {{diagnosis.Description}}</mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </td>
+
+                          <td [formGroupName]="index" class="col-xl-3 text-center">
+                            <mat-form-field class="col-lg-12 mediqty" appearance="outline" [matTooltip]="(rows.get('Qty').value != null && rows.get('Qty').value != undefined)?rows.get('Qty').value:''" matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                              <mat-label><span class="required-asterisk" *ngIf="rows.get('Qty').value == '' ? true : false"></span>Total Quantity</mat-label>
+                              <input matInput placeholder="Enter" formControlName="Qty" numeric autocomplete="off">
+                            </mat-form-field>
+                          </td>
+
+                          <td [formGroupName]="index" class="col-xl-3 text-center">
+                            <mat-form-field class="col-lg-12 medidays" appearance="outline" [matTooltip]="(rows.get('Days').value != null && rows.get('Days').value != undefined)?rows.get('Days').value:''" matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                              <mat-label><span class="required-asterisk" *ngIf="rows.get('Days').value == '' ? true : false"></span>No of Days</mat-label>
+                              <input matInput placeholder="Enter" formControlName="Days" numeric autocomplete="off">
+                            </mat-form-field>
+                          </td>
+
+                          <td [formGroupName]="index" class="col-xl-6 text-center">
+                            <span formGroupName="MedicationTime" [ngClass]="{'invalid': (rows.get('MedicationTime').touched || ngForm.submitted) && rows.get('MedicationTime').invalid}">
+                              <div class="col-lg-2 f-l my-3">
+                                <mat-label>Morning</mat-label>
+                                <section class="example-section">
+                                  <mat-checkbox class="example-margin" formControlName="Morning"></mat-checkbox>
+                                </section>
+                              </div>
+                              <div class="col-lg-2 f-l m-3">
+                                <mat-label>Brunch</mat-label>
+                                <section class="example-section">
+                                  <mat-checkbox class="example-margin" formControlName="Brunch"></mat-checkbox>
+                                </section>
+                              </div>
+                              <div class="col-lg-2 f-l my-3">
+                                <mat-label>Noon</mat-label>
+                                <section class="example-section">
+                                  <mat-checkbox class="example-margin" formControlName="Noon"></mat-checkbox>
+                                </section>
+                              </div>
+                              <div class="col-lg-2 f-l my-3">
+                                <mat-label>Evening</mat-label>
+                                <section class="example-section">
+                                  <mat-checkbox class="example-margin" formControlName="Evening"></mat-checkbox>
+                                </section>
+                              </div>
+                              <div class="col-lg-2 f-l my-3 m-2">
+                                <mat-label>Night</mat-label>
+                                <section class="example-section">
+                                  <mat-checkbox class="example-margin" formControlName="Night"></mat-checkbox>
+                                </section>
+                              </div>
+                            </span>
+                          </td>
+
+                          <td [formGroupName]="index" class="col-xl-3 text-center">
+                            <span formGroupName="MedicationIntake" [ngClass]="{'invalid': (rows.get('MedicationIntake').touched || ngForm.submitted) && rows.get('MedicationIntake').invalid}">
+                              <div class="col-lg-2 f-l mr-4">
+                                <mat-label>Before</mat-label>
+                                <section class="example-section">
+                                  <mat-checkbox class="example-margin" formControlName="Before"></mat-checkbox>
+                                </section>
+                              </div>
+                              <div class="col-lg-2 f-l">
+                                <mat-label>After</mat-label>
+                                <section class="example-section">
+                                  <mat-checkbox class="example-margin" formControlName="After"></mat-checkbox>
+                                </section>
+                              </div>
+                            </span>
+                          </td>
+
+                          <td [formGroupName]="index" class="col-xl-2 text-center" [ngClass]="{'validate': ngForm.submitted}">
+                            <div class="col-lg-2 f-l">
+                              <mat-label><span style="color: red;" *ngIf="rows.get('MedicationStatus').value == '' ? true : false">*</span>Status</mat-label>
+                              <mat-radio-group aria-label="Select an option" class="example-radio-group" formControlName="MedicationStatus">
+                                <mat-radio-button value="start">Start</mat-radio-button>
+                                <mat-radio-button value="hold">Hold</mat-radio-button>
+                                <mat-radio-button value="continue">Continue</mat-radio-button>
+                                <mat-radio-button value="discontinue">Discontinue</mat-radio-button>
+                              </mat-radio-group>
+                            </div>
+                          </td>
+
+                          <td [formGroupName]="index" class="col-xl-4 text-center">
+                            <mat-form-field class="col-xl-12 medisig" appearance="outline" [matTooltip]="(rows.get('SIG').value != null && rows.get('SIG').value != undefined)?rows.get('SIG').value:''" matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                              <mat-label>SIG</mat-label>
+                              <input matInput placeholder="Enter" formControlName="SIG" maxlength="500">
+                            </mat-form-field>
+                          </td>
+
+                          <td class="col-xl-1 text-center">
+                            <button style="color: red" class="close" (click)="onRemoveRowMedication(index)" *ngIf="dischargeProcedureForm.get('medication').length>1" [hidden]="isSignOff || isMedRequestconfirmed == true" aria-label="Close">
+                              <span aria-hidden="true">X</span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!--end of .table-responsive-->
+                </div>
+                <div class="col-lg-12 mt-3">
+                  <div class="col-lg-6 f-l pull-right">
+                    <!-- ADD ROW -->
+                    <button type="button" mat-stroked-button class="transperent-button light-sky primary schedbtn pull-right" (click)="onAddRowMedication()" [hidden]="isSignOff || isMedRequestconfirmed == true">Add Row</button>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <section class="example-section">
+                    <mat-checkbox class="example-margin" formControlName="Start">Take your other regular medications with this prescription</mat-checkbox>
+                  </section>
+                </div>
+                <div class="mr-4 m-4"></div>
+                <div class="mr-4 m-4"></div>
+                <div class="mr-4 m-2"></div>
+                <div class="col-xl-8 mr-4">
+                  <section class="example-section">
+                    <mat-checkbox class="example-margin" formControlName="Hold" (change)="isHold($event)">Hold your other regular medications while taking this prescription</mat-checkbox>
+                    <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('HoldMedication').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                      <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="HoldMedication" [readonly]="!hold" maxlength="500"></textarea>
+                    </mat-form-field>
+                  </section>
+                </div>
+                <div class="col-xl-6">
+                  <section class="example-section">
+                    <mat-checkbox class="example-margin" formControlName="Discontinue" (change)="isDiscontinue($event)">Discontinue the following drugs</mat-checkbox>
+                    <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('DiscontinueDrugs').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                      <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="DiscontinueDrugs" [readonly]="!discontinue" maxlength="500"></textarea>
+                    </mat-form-field>
+                  </section>
+                </div>
+                <div class="col-xl-6">
+                  <section class="example-section">
+                    <mat-checkbox class="example-margin" formControlName="Notes" (change)="isNotes($event)">Notes to Pharmacist</mat-checkbox>
+                    <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('NotesPharmacist').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                      <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="NotesPharmacist" [readonly]="!notes" maxlength="500"></textarea>
+                    </mat-form-field>
+                  </section>
+                </div>
+                <div class="col-xl-1 mr-4">
+                  <section class="example-section">
+                    <mat-checkbox class="example-margin" formControlName="Refill" (change)="isRefill($event)">Refill</mat-checkbox>
+                    <mat-form-field class="w-80" appearance="outline" [matTooltip]="dischargeProcedureForm.get('RefillNumber').value" matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                      <input matInput placeholder="Enter" formControlName="RefillNumber" [readonly]="!refill" numeric autocomplete="off">
+                    </mat-form-field>
+                  </section>
+                </div>
+                <div class="mr-4"></div>
+                <div class="mr-4"></div>
+                <div class="col-xl-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="date2" formControlName="Date" [disabled]="!refill" [readonly]="!refill" placeholder="Visit date" autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="date2"></mat-datepicker-toggle>
+                    <mat-datepicker #date2></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-5">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('RefillNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                    <mat-label>Refill Notes</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="RefillNotes" [readonly]="!refill" maxlength="500"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+
+            <mat-card class="mt-4">
+              <h5 class="p-3 title-bg">Lab Order</h5>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                  <div class="table-responsive shroff-table reduce-field">
+                    <table class="table table-bordered table-hover w-100 order">
+                      <thead>
+                        <tr class="font-weight-bold">
+                          <th class="w-100 text-center">Test Name</th>
+                          <th class="w-50 text-center">Urgency</th>
+                          <th class="w-50 text-center">Date</th>
+                          <th class="w-100 text-center">Notes</th>
+                          <th class="w-10 text-center"></th>
+                        </tr>
+                      </thead>
+
+                      <div class="mt-4"></div>
+                      <tbody formArrayName="eLab">
+                        <tr *ngFor="let rowsLab of dischargeProcedureForm.get('eLab')?.controls; let index = index;">
+                          <td [formGroupName]="index" class="w-100 text-center">
+                            <mat-form-field class="col-xl-12 mt-3 my-3 lab-test" appearance="outline" [matTooltip]="(rowsLab.get('TestName').value != null && rowsLab.get('TestName').value != undefined)?rowsLab.get('TestName').value:''" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                              <mat-label><span class="required-asterisk" *ngIf="rowsLab.get('TestName').value == '' ? true : rowsLab.get('TestName').value.length > 2 ? false : true"></span>Test Name</mat-label>
+                              <mat-icon matSuffix *ngIf="rowsLab.get('TestName').value == '' ? true : rowsLab.get('TestName').value.length > 2 ? false : true">search</mat-icon>
+                              <textarea matInput placeholder="Type and Select" rows="1" [matAutocomplete]="AutoTestName" formControlName="TestName" (keyup)="getTestNameList(index)" (blur)="toValidateTestName(index)" maxlength="200"></textarea>
+                              <input type="text" matInput formControlName="SetupMasterID" hidden>
+                              <mat-autocomplete autoActiveFirstOption #AutoTestName="matAutocomplete">
+                                <mat-option *ngFor="let test of testName" [value]="test.setupMasterDesc" (onSelectionChange)="SetupMasterID(index, test.SetupMasterID)">{{test.setupMasterDesc}}</mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </td>
+
+                          <td [formGroupName]="index" class="w-50 text-center">
+                            <mat-form-field class="col-lg-12 mt-3 my-3 lab-dropdown" appearance="outline">
+                              <mat-label><span class="required-asterisk" *ngIf="(rowsLab.get('Urgency').value == '' || rowsLab.get('Urgency').value == null) ? true : false"></span>Urgency</mat-label>
+                              <mat-select formControlName="Urgency">
+                                <mat-option *ngFor="let urgency of urgencyName" [value]="urgency.UrgencyTypeCode">{{urgency.UrgencyTypeDescription}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </td>
+
+                          <td [formGroupName]="index" class="w-50 text-center">
+                            <mat-form-field class="w-100 mt-3 my-3" appearance="outline">
+                              <mat-label><span class="required-asterisk" *ngIf="rowsLab.get('DateLab').value == '' ? true : false"></span>Select Date</mat-label>
+                              <input matInput [matDatepicker]="d1" placeholder="Visit date" formControlName="DateLab" autocomplete="off">
+                              <mat-datepicker-toggle matSuffix [for]="d1"></mat-datepicker-toggle>
+                              <mat-datepicker #d1></mat-datepicker>
+                            </mat-form-field>
+                          </td>
+
+                          <td [formGroupName]="index" class="w-100 text-center">
+                            <mat-form-field class="w-100 mt-3 my-3 lab-notes" appearance="outline" [matTooltip]="(rowsLab.get('Notes').value != null && rowsLab.get('Notes').value != undefined)?rowsLab.get('Notes').value:''" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                              <mat-label><span class="required-asterisk" *ngIf="rowsLab.get('Notes').value == '' ? true : false"></span>Notes</mat-label>
+                              <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="Notes" maxlength="500"></textarea>
+                            </mat-form-field>
+                          </td>
+
+                          <td class="w-10 text-center">
+                            <button style="color: red" class="close" (click)="onRemoveRowELabOrder(index)" *ngIf="dischargeProcedureForm.get('eLab').length>1" [hidden]="isSignOff || isLabRequestconfirmed == true" aria-label="Close">
+                              <span aria-hidden="true">X</span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!--end of .table-responsive-->
+                </div>
+                <div class="col-lg-12 mt-3">
+                  <div class="col-lg-6 f-l pull-right">
+                    <button type="button" mat-stroked-button class="transperent-button light-sky primary mr-2 schedbtn pull-right" (click)="onAddRowELabOrder()" [hidden]="isSignOff || isLabRequestconfirmed == true">Add Row</button>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+
+            <mat-card class="mt-4">
+              <h5 class="p-3 title-bg">Follow Up Review</h5>
+              <div class="row">
+                <div class="col-lg-2 mt-4">
+                  <mat-form-field class="w-110" appearance="outline">
+                    <mat-label>Follow Up Date</mat-label>
+                    <input matInput [matDatepicker]="d1" placeholder="Visit date" formControlName="FollowUpDate" autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="d1"></mat-datepicker-toggle>
+                    <mat-datepicker #d1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-5 mt-4">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="dischargeProcedureForm.get('FollowUpDetails').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Follow Up Details</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="10" formControlName="FollowUpDetails" maxlength="500"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white p-4 mt-4 upload-da">
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class=" w-100 " appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Enter" formControlName="Username">
+          </mat-form-field>
+        </div>
+        
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class=" w-100 " appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Enter" formControlName="Password">
+          </mat-form-field>
+        </div>
+
+        <div class="text-right my-2 col-xl-6 col-lg-6 mt-3">
+          <button type="button" mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="back()">Back</button>
+          <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="submitData()" [hidden]="isSignOff">Save</button>
+          <button type="button" mat-stroked-button class="transperent-button mr-2" color="primary" (click)="resetForm()" [hidden]="isSignOff">Clear</button>
+          <button type="button" mat-flat-button color="primary" class="custome-button mat-primary" (click)="signOff()" [hidden]="isSignOff">Sign Off</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
