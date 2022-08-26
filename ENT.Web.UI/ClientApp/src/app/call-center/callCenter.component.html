@@ -1,0 +1,365 @@
+<div class="overflow-hidden p-4">
+  <div class="row">
+    <div class="col-xl-12">
+      <p class="pull-right text-primary btn pointer" (click)="search()">Advance Search</p>
+    </div>
+  </div>
+
+  <mat-card *ngIf="show" class="mb-3">
+    <div class="row">
+      <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-6 col-lg-6 pull-left">
+          <mat-form-field class="w-100" appearance="outline">
+            <input matInput [matDatepicker]="from" placeholder="From Date">
+            <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+            <mat-datepicker #from></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 pull-left">
+          <mat-form-field class="w-100" appearance="outline">
+            <input matInput [matDatepicker]="to" placeholder="To Date">
+            <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+            <mat-datepicker #to></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-6">
+        <mat-form-field class=" w-100 " appearance="outline">
+          <mat-label>Doctor</mat-label>
+          <input matInput placeholder="Enter Doctor Name">
+        </mat-form-field>
+      </div>
+      
+      <div class="col-xl-3 col-lg-6">
+        <mat-form-field class=" w-100 " appearance="outline">
+          <mat-label>Patient</mat-label>
+          <input matInput placeholder="Enter Patient Name">
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-xl-3 col-lg-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Speciality</mat-label>
+          <mat-select>
+            <mat-option value="">ENT</mat-option>
+            <mat-option value="">EYE</mat-option>
+            <mat-option value="">Ortho</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+    </div>
+    <div class="d-flex align-items-lg-center justify-content-center pt-4">
+      <div>
+        <button mat-flat-button color="" class="custome-button mat-primary mr-2" routerLink="/home/appointments/callcenter">Submit</button>
+
+        <button mat-stroked-button color="" class="transperent-button light-sky primary">Cancel</button>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- <div class="white mt-0 mb-4">
+      <mat-card class="p-0">
+          <div class="row p-0 m-0 scroll-md">
+            <div class="col-xl-6">
+              <div class="v-line">
+                <div class="pt-3 pb-2">
+                  <div class="row pb-1">
+                    <div class="col-xl-4 col-lg-4 col-md-4 font_color">Physician Consult</div>
+                    <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                    <div class="col-xl-7 col-lg-7 col-md-7">Dr.Amit Vyas
+                    </div>
+                  </div>
+
+                  <div class="row  pb-1">
+                    <div class="col font_color">DOB/ Age</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">25-08-1994(25 Years)</div>
+                  </div>
+
+                  <div class="row  pb-1">
+                    <div class="col font_color">Cell Number</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">+91-123456789</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col font_color">Next of kin</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">Mr.Roshan Sharma (Father)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6">
+              <div class="pt-3 col flex-grow-1 w-auto">
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color ">Primary Physician</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">Dr.Nithin Parmar</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color ">Last Visit Date</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">14-02-2019</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 font_color ">Diabetic</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col">NO</div>
+                </div>
+                <div class="row pb-1">
+                  <div class="col pl-4 red">Allergies</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col red">Hives</div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </mat-card>
+    </div> -->
+   <div class="row m-auto text-center">
+    <table class="table w-100">
+          <thead>
+            <tr>
+              <th style="background-color: #165ec5;color: #fff;">Total Appointments<br>15</th>
+              <th style="background-color: #28a745;color: #fff;">Confirmed<br>4</th>
+              <th style="background-color: #6d64c3;color: #fff;">Arrived<br>4</th>
+              <th style="background-color: #dc3545;color: #fff;">Cancelled<br>1</th>
+              <th style="background-color: #0dc3b8;color: #fff;">Rescheduled<br>3</th>
+              <th style="background-color: #dba70a;color: #fff;">Waiting<br>3</th>
+              <th style="background-color: #956d01;color: #fff;">No Show<br>0</th>
+            </tr>
+          </thead>
+    </table>
+   
+  </div> 
+
+  <div class="row">
+    <div class="col-xs-12 p-3 w-100">
+      <div class="table-responsive-lg shroff-table">
+        <table class="table w-100">
+          <thead>
+            <tr>
+              <th>Action</th>
+              <th>Patient Name</th>
+              <th>Appointment Date</th>
+              <th>Appointment Time</th>
+              <th>To Consult</th>
+              <th>Purpose</th>
+              <th>Appointment Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white rounded shadow-sm" data-toggle="collapse" href="#collapseExample" role="button"
+              aria-expanded="false" aria-controls="collapseExample">
+              <td><a href="javascript:void(0)">Open</a></td>
+              <td><img src="assets/images/patient-profile.png" width="39px" /><span class="pl-2"> Mr.Rahul Sharma</span>
+              </td>
+              <td>01-02-2019</td>
+              <td>03:30 PM</td>
+              <td>Dr.Amit Vyas/ ENT Surgery</td>
+              <td>Sinus Surgery</td>
+              <td><span class="status-box btn-success">Confirmed</span></td>
+            </tr>
+            <tr class="collapse" id="collapseExample">
+              <td colspan="8" height="8" class="p-0">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none mt-2">
+                    <form>
+                      <div class="row">
+                        <div class="col-12">
+                          <mat-card class="pb-0 pt-0 appointcard">
+                            <div class="row d-flex patient-follow pb-3 pt-3">
+                              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 callcenbtn">
+                                <button mat-flat-button color="" class="transperent-button w-auto mb-custome-btn"><i
+                                    class="fa fa-commenting-o fa-lg pr-2" aria-hidden="true"></i>Send SMS</button>
+                              </div>
+                              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 callcenbtn">
+                                <button mat-flat-button color="" class="transperent-button  w-auto mb-custome-btn"><i
+                                    class="fa fa-envelope-o fa-lg pr-2" aria-hidden="true"></i>Send E-mail</button>
+                              </div>
+                              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 callcenbtn">
+                                <button mat-flat-button color="" class="transperent-button w-auto mb-custome-btn"><i
+                                    class="fa fa-calendar fa-lg pr-2" aria-hidden="true"></i>Rescheduled</button>
+                              </div>
+                              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 callcenbtn">
+                                <button mat-flat-button color="" class="transperent-button w-auto mb-custome-btn"><i
+                                    class="fa fa-times fa-lg pr-2" aria-hidden="true"></i>Cancel Appointment</button>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-xl-3 col-lg-3 col-md-12">
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Number Called</mat-label>
+                                  <input matInput placeholder="+91-123456789">
+                                </mat-form-field>
+                              </div>
+
+
+
+                              <div class="col-xl-3 col-lg-3 col-md-12">
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Call Answered</mat-label>
+                                  <input matInput placeholder="Answered">
+                                </mat-form-field>
+                              </div>
+
+
+                              <div class="col-xl-3 col-lg-3 col-md-12">
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Call Status</mat-label>
+                                  <input matInput placeholder="Answered">
+                                </mat-form-field>
+                              </div>
+
+
+                              <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>Appointments Status</mat-label>
+                                  <mat-select>
+                                    <mat-option value=""> Waiting List</mat-option>
+                                    <mat-option value="">Confirmed</mat-option>
+                                    <mat-option value="">Pending</mat-option>
+                                    <mat-option value="">Arrived</mat-option>
+                                    <mat-option value="">Re-scheduled</mat-option>
+                                    <mat-option value="">Cancelled</mat-option>
+                                    <mat-option value="">Registered</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+
+                              <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Message Delivered/ Taken</mat-label>
+                                  <input matInput placeholder="Answered">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                                <mat-form-field class=" w-100 " appearance="outline">
+                                  <mat-label>Additional Information</mat-label>
+                                  <input matInput placeholder="Enter">
+                                </mat-form-field>
+                              </div>
+                            </div>
+
+
+                            <div class="row d-flex align-items-center">
+                              <div class="col-lg-2">
+                                <mat-checkbox>Reminders</mat-checkbox>
+                              </div>
+
+                              <div class="col-lg-12 col-xl-3">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>Reminder Type</mat-label>
+                                  <mat-select>
+                                    <mat-option value=""> SMS</mat-option>
+                                    <mat-option value="">e-mail</mat-option>
+                                    <mat-option value="">call Center</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+
+                              <div class="col-lg-12 col-xl-3">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>Reminder Before</mat-label>
+                                  <mat-select>
+                                    <mat-option value=""> Day</mat-option>
+                                    <mat-option value="">Referral</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+
+                              <div class="col-lg-3 col-xl-1">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>Hours</mat-label>
+                                  <mat-select>
+                                    <mat-option value=""> Select</mat-option>
+                                    <mat-option value="">Referral</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+
+                              <div class="col-lg-6 col-xl-3">
+                                <mat-form-field class="w-100" appearance="outline">
+                                  <mat-label>Interval between messages</mat-label>
+                                  <mat-select>
+                                    <mat-option value="">1Hrs</mat-option>
+                                    <mat-option value="">2Hrs</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                            </div>
+
+                            <div class="row pt-4 pb-4">
+                              <div class="col-xl-6 ">
+                                <button mat-flat-button color="" class="custome-button mat-primary schedbtn" (click)="history()">History</button>
+                                <span class="ml-4"></span>
+                              </div>
+                              <div class="col-xl-6 text-right">
+                                <button mat-stroked-button color="" class="transperent-button light-sky primary mr-2 schedbtn">Cancel</button>
+                                <button mat-flat-button color="" class="custome-button mat-primary schedbtn">Submit</button>
+                              </div>
+                            </div>
+                          </mat-card>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="8" height="8" class="p-0"></td>
+            </tr>
+
+            <tr class="bg-white rounded shadow-sm">
+              <td><a href="javascript:void(0)">Open</a></td>
+              <td><img src="assets/images/patient-profile.png" width="39px" /><span class="pl-2"> Mr.Amit Singh</span>
+              </td>
+              <td>05-02-2019</td>
+              <td>10:00 AM</td>
+              <td>Dr.Amit Vyas/ ENT Surgery</td>
+              <td>Tonsillectomy</td>
+                          <td><span class="status-box btn-warning text-dark">Wait Listed</span></td>
+            </tr>
+            <tr>
+              <td colspan="8" height="8" class="p-0"></td>
+            </tr>
+            <tr class="bg-white rounded shadow-sm">
+              <td><a href="javascript:void(0)">Open</a></td>
+              <td><img src="assets/images/patient-profile.png" width="39px" /><span class="pl-2"> Mr.Ravi</span>
+              </td>
+              <td>09-02-2019</td>
+              <td>12:35 PM</td>
+              <td>Dr.Amit Vyas/ ENT Surgery</td>
+              <td>Sinus Surgery</td>
+              <td><span class="status-box btn-danger">Cancelled</span></td>
+            </tr>
+            <tr>
+              <td colspan="8" height="8" class="p-0"></td>
+            </tr>
+            <tr class="bg-white rounded shadow-sm">
+              <td><a href="javascript:void(0)">Open</a></td>
+              <td><img src="assets/images/patient-profile.png" width="39px" /><span class="pl-2"> Mrs. Meera</span>
+              </td>
+              <td>16-02-2019</td>
+              <td>01:45 PM</td>
+              <td>Dr.Amit Vyas/ ENT Surgery</td>
+              <td>Otitis Media Surgery</td>
+              <td><span class="status-box no-show">Arrived</span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <!--end of .table-responsive-->
+    </div>
+
+  </div>
+</div>

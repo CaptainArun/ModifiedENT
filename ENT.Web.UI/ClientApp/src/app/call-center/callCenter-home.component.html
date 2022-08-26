@@ -1,0 +1,21 @@
+<div class="common_submenu p-2 d-flex ">
+  <div class="d-flex scroll-x">
+    <div class="pr-4 ">
+      <button mat-button class="d-flex align-content-center" id="Appointment" (click)="openAppoinment()"
+        routerLink="/home/callCenter/callCenterAppointment">
+        <mat-icon><img src='assets/images/MenuNewIcons/appointment/appointment.png' /></mat-icon>
+        <span class="f-18 ">Appointment</span>
+      </button>
+    </div>
+
+    <div class="pr-4 ">
+      <button mat-button class="d-flex align-content-center" id="procedure" (click)="openProcedure()"
+        routerLink="/home/callCenter/otList">
+        <mat-icon><img src='assets/images/MenuNewIcons/triage/procedure_req.png' /></mat-icon>
+        <span class="f-18 ">Procedure/Surgery</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

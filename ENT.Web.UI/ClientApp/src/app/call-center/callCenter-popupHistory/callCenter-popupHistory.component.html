@@ -1,0 +1,173 @@
+<div class="overflow-hidden p-4" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+        <h5 cdkDragHandle class="p-3 title-bg">
+                <b class="mr-4">Call Center History</b>
+                <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close"><span
+                                aria-hidden="true">X</span></button>
+        </h5>
+        <div class="white mt-0 mb-4">
+                <div class="w-100">
+                        <app-patient-demographic [PatID]="this.particularPatientId"></app-patient-demographic>
+                </div>
+        </div>
+        <div class="row m-0">
+                <!-- <mat-card class="col-xl-12 ml-0 my-2">
+                        <div class="col-12">
+                                <div class="row justify-content-md-center">
+                                        <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-1">
+                                                <p class="m-0">Total Appointments : <b>15</b></p>
+                                        </div>
+                                        <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-2">
+                                                <p class="m-0">Visited : <b>8</b></p>
+                                        </div>
+                                        <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-3">
+                                                <p class="m-0">Rescheduled : <b>4</b></p>
+                                        </div>
+                                        <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-4">
+                                                <p class="m-0">Rescheduled : <b>3</b></p>
+                                        </div>
+                                        <div class="col-xl-2 p-2 m-2 text-center rounded"
+                                                style="background-color: #b3cb67;">
+                                                <p class="m-0">No Show : <b>0</b></p>
+                                        </div>
+                                </div>
+                        </div>
+                </mat-card> -->
+
+                <mat-card class="col-xl-12 ml-0 my-2">
+                        <div class="col-12">
+                                <div class="row justify-content-md-center" *ngIf="particularHisCountData">
+                                        <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-1">
+                                                <p class="m-0">Total Appointments :
+                                                        <b>{{particularHisCountData.totalCount}}</b>
+                                                </p>
+                                        </div>
+                                        <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-2">
+                                                <p class="m-0">Confirmed
+                                                        :<b>{{particularHisCountData.ConfirmedCount}}</b></p>
+                                        </div>
+
+                                        <!-- <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-3">
+                                                <p class="m-0"> Scheduled:
+                                                        <b>{{particularHisCountData.ScheduledCount}}</b>
+                                                </p>
+                                        </div> -->
+                                        
+                                        <div class="col-xl-2 p-2 m-2 text-center rounded dash-box-4">
+                                                <p class="m-0">Rescheduled :
+                                                        <b>{{particularHisCountData.ReScheduledCount}}</b>
+                                                </p>
+                                        </div>
+
+                                        <!-- <div class="col-xl-2 p-2 m-2 text-center rounded"
+                                                style="background-color: #b3cb67;">
+                                                <p class="m-0">Waiting :<b>{{particularHisCountData.waitCount}}</b></p>
+                                        </div> -->
+
+                                        <div class="col-xl-2 p-2 m-2 text-center rounded"
+                                                style="background-color: #ffaaaa;">
+                                                <p class="m-0">Cancelled :<b>{{particularHisCountData.CancelledCount}}</b></p>
+                                        </div>
+                                </div>
+                        </div>
+                </mat-card>
+        </div>
+
+        <div class="row">
+                <div class="col-xs-12 p-3 w-100">
+                        <!-- <div class="table-responsive-lg shroff-table">
+                                <table class="table w-100">
+                                        <thead>
+                                                <tr>
+                                                        <th>S.No</th>
+                                                        <th>Appointment Date</th>
+                                                        <th>Appointment Time</th>
+                                                        <th>To Consult</th>
+                                                        <th>Purpose</th>
+                                                        <th>Appointment Status</th>
+                                                </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr class="bg-white rounded shadow-sm">
+                                                        <td>1</td>
+                                                        <td>15-02-2019</td>
+                                                        <td>03:00 PM</td>
+                                                        <td>Dr.Amit Vyas/ ENT Surgery</td>
+                                                        <td>Watery Eyes</td>
+                                                        <td><span class="status-box btn-success">Visits</span></td>
+                                                </tr>
+                                                <tr class="bg-white rounded shadow-sm">
+                                                        <td>2</td>
+                                                        <td>17-02-2019</td>
+                                                        <td>10:00 AM</td>
+                                                        <td>Dr.Amit Vyas/ ENT Surgery</td>
+                                                        <td>Watery Eyes</td>
+                                                        <td><span class="status-box btn-warning text-dark">Rescheduled</span></td>
+                                                </tr>
+                                                <tr class="bg-white rounded shadow-sm">
+                                                        <td>3</td>
+                                                        <td>06-03-2019</td>
+                                                        <td>01:00 PM</td>
+                                                        <td>Dr.Amit Vyas/ ENT Surgery</td>
+                                                        <td>Watery Eyes</td>
+                                                        <td><span class="status-box no-show">No Show</span></td>
+                                                </tr>
+                                                <tr class="bg-white rounded shadow-sm">
+                                                        <td>4</td>
+                                                        <td>10-03-2019</td>
+                                                        <td>03:50 PM</td>
+                                                        <td>Dr.Amit Vyas/ ENT Surgery</td>
+                                                        <td>Watery Eyes</td>
+                                                        <td><span class="status-box btn-warning text-dark">Rescheduled</span></td>
+                                                </tr>
+                                                <tr class="bg-white rounded shadow-sm">
+                                                        <td>5</td>
+                                                        <td>18-03-2019</td>
+                                                        <td>06:45 PM</td>
+                                                        <td>Dr.Amit Vyas/ ENT Surgery</td>
+                                                        <td>Watery Eyes</td>
+                                                        <td><span class="status-box btn-danger">Cancelled</span></td>
+                                                </tr>
+                                                <tr class="bg-white rounded shadow-sm">
+                                                        <td>6</td>
+                                                        <td>23-03-2019</td>
+                                                        <td>03:10 PM</td>
+                                                        <td>Dr.Amit Vyas/ ENT Surgery</td>
+                                                        <td>Watery Eyes</td>
+                                                        <td><span class="status-box no-show">No Show</span></td>
+                                                </tr>
+                                                <tr class="bg-white rounded shadow-sm">
+                                                        <td>7</td>
+                                                        <td>30-03-2019</td>
+                                                        <td>07:40 PM</td>
+                                                        <td>Dr.Amit Vyas/ ENT Surgery</td>
+                                                        <td>Watery Eyes</td>
+                                                        <td><span class="status-box btn-success">Visits</span></td>
+                                                </tr>
+
+                                                <tr class="bg-white rounded shadow-sm">
+                                                        <td>8</td>
+                                                        <td>06-04-2019</td>
+                                                        <td>11:30 PM</td>
+                                                        <td>Dr.Amit Vyas/ ENT Surgery</td>
+                                                        <td>Watery Eyes</td>
+                                                        <td><span class="status-box btn-danger">Cancelled</span></td>
+                                                </tr>
+
+                                        </tbody>
+                                </table>
+                        </div> -->
+                        <!--end of .table-responsive-->
+                        <mat-card>
+                                <div class="mt-0">
+                                        <mat-card-content>
+                                                <div>
+                                                        <app-bms-table [config]="tableConfig"
+                                                                [datas]="particularPatientHistorydata"></app-bms-table>
+                                                </div>
+                                        </mat-card-content>
+                                </div>
+                        </mat-card>
+                </div>
+        </div>
+</div>
+

@@ -1,0 +1,17 @@
+<mat-menu #userMenu='matMenu' x-position="above">
+  <button mat-menu-item (click)="onLogout()">Logout</button>
+</mat-menu>
+
+<button mat-icon-button [matMenuTriggerFor]='userMenu' #menuTrigger="matMenuTrigger"
+        (mouseenter)="menuTrigger.openMenu()" style="margin-right: 200px">
+
+  <div>
+    <a class="nav-item nav-link dropdown-toggle  mr-md-2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img class="rounded-circle" src="assets/images/header/patient-profile2.png" width="50" />
+      <span class="pl-2 text-white font-weight-normal pr-2 f-25">
+        {{loginUserName}}
+      </span>
+    </a>
+  </div>
+
+</button>
