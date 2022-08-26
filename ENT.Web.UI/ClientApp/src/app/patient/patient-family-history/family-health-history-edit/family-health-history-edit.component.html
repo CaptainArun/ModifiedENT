@@ -1,0 +1,143 @@
+<div class="white mt-0" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Patient Family History<button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="familyHealthHistoryEditForm">
+    <mat-card class="px-3 py-1 my-2">
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 pb-1 pt-1">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(familyHealthHistoryEditForm.value.visitDateandTime == null || familyHealthHistoryEditForm.value.visitDateandTime == '') ? true : false"></span>Visit Date & Time</mat-label>
+            <mat-select formControlName="visitDateandTime">
+              <mat-option *ngFor="let visitDate of visitDateTime , index as i" (onSelectionChange)="RecordedDuring(i)" [value]="visitDate">
+                {{visitDate}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-6 pb-1 pt-1">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="RecordedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2 timepick pb-1 pt-1">
+          <mat-form-field  class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepickertime" [disableClick]="true" formControlName="RecordedTime">
+            <mat-label>Recorded Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepickertime">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepickertime>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-6 pb-1 pt-1">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input matInput placeholder="Enter" [value]="recordedDuring" formControlName="recordedDuring">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-1 pt-1">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(familyHealthHistoryEditForm.value.RecordedBy == null || familyHealthHistoryEditForm.value.RecordedBy == '') ? true : false"></span>Recorded By</mat-label>
+            <mat-select formControlName="RecordedBy">
+              <mat-option *ngFor="let val of recordby" [value]="val">
+                {{val}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card>
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 ">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(familyHealthHistoryEditForm.value.FamilyMemberName == null || familyHealthHistoryEditForm.value.FamilyMemberName == '') ? true : false"></span>Name</mat-label>
+            <input matInput placeholder="Enter Name" formControlName="FamilyMemberName">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(familyHealthHistoryEditForm.value.Relationship == null || familyHealthHistoryEditForm.value.Relationship == '') ? true : false"></span>Relationship to patient</mat-label>
+            <mat-select formControlName="Relationship">
+              <mat-option *ngFor="let relation of patientRelations" [value]="relation.RSPDescription">{{relation.RSPDescription}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 align-self-start ">
+          <mat-form-field [matTooltip]="familyHealthHistoryEditForm.get('DiagnosisNotes').value" matTooltipPosition="above"  matTooltipClass ="Tooltip-lg"  class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(familyHealthHistoryEditForm.value.DiagnosisNotes == null || familyHealthHistoryEditForm.value.DiagnosisNotes == '') ? true : false"></span>Diagnosis</mat-label>
+            <textarea rows="1" matInput placeholder="Diagnosis" formControlName="DiagnosisNotes"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6">
+          <mat-form-field [matTooltip]="icdtooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg" class="example-full-width w-100" appearance="outline">
+            <mat-label>ICD Code</mat-label>
+            <textarea type="text" rows="1" matInput placeholder="Type and Select" [matAutocomplete]="auto" #autoCompleteIcd="matAutocompleteTrigger" formControlName="ICDCode"></textarea>
+            <mat-icon matSuffix
+                      *ngIf="(familyHealthHistoryEditForm.value.ICDCode == '' || familyHealthHistoryEditForm.value.ICDCode == null) ? true : familyHealthHistoryEditForm.value.ICDCode.length > 2 ? false : true">
+              search
+            </mat-icon>
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let value of icd" (onSelectionChange)="setIcdCode(value.ICDCode, value.Description)" [value]="value.ICDCode + '-' + value.Description">
+                {{value.ICDCode}} - {{ value.Description}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(familyHealthHistoryEditForm.value.IllnessType == null || familyHealthHistoryEditForm.value.IllnessType == '') ? true : false"></span>Illness Type</mat-label>
+            <mat-select formControlName="IllnessType">
+              <mat-option *ngFor="let type of illnesstype" [value]="type.IllnessTypeDesc">
+                {{type.IllnessTypeDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(familyHealthHistoryEditForm.value.ProblemStatus == null || familyHealthHistoryEditForm.value.ProblemStatus == '') ? true : false"></span>Status</mat-label>
+            <mat-select formControlName="ProblemStatus">
+              <mat-option *ngFor="let type of familyhistory" [value]="type.FamilyHistoryStatusDesc">
+                {{type.FamilyHistoryStatusDesc}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Physician Name</mat-label>
+            <input matInput placeholder="Enter" formControlName="PhysicianName">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-12">
+          <mat-form-field [matTooltip]="familyHealthHistoryEditForm.get('AdditionalNotes').value" matTooltipPosition="above"  matTooltipClass ="Tooltip-lg"  class="w-100" appearance="outline">
+            <mat-label>Additional Notes</mat-label>
+            <textarea matInput placeholder="Enter Additional notes" cols="1" rows="1" formControlName="AdditionalNotes"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <div class="text-right my-2">
+          <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="updateFamilyHealthHistory()">Save</button>
+          <button mat-stroked-button class="transperent-button" color="primary" type="button" (click)="cancelForm()">Clear</button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+
+  </div>

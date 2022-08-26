@@ -1,0 +1,289 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Patient Nutrition Add<button
+      style="color: white"
+      class="close"
+      (click)="dialogClose()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="PatientNutritionForm">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="row">
+              <div
+                class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none"
+              >
+                <div class="row">
+                  <div class="col-12">
+                    <mat-card class="px-4 py-2 my-3">
+                      <div class="row">
+                        <div class="col-xl-3 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Visit Date & Time</mat-label>
+                            <mat-select formControlName="VisitDateandTime">
+                              <mat-option
+                                *ngFor="let vDate of visitDandt; index as i"
+                                [value]="vDate"
+                                (click)="RecordedDuring(i)"
+                              >
+                                {{ vDate }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Recorded Date</mat-label>
+                            <input
+                              matInput
+                              [matDatepicker]="Nutrition"
+                              formControlName="RecordedDate"
+                            />
+                            <mat-datepicker-toggle
+                              matSuffix
+                              [for]="Nutrition"
+                            ></mat-datepicker-toggle>
+                            <mat-datepicker #Nutrition></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-2 timepick">
+                          <mat-form-field
+                            class="input-full-width timer w-100"
+                            appearance="outline"
+                          >
+                            <input
+                              matInput
+                              [ngxTimepicker]="Nutrition1"
+                              [disableClick]="true"
+                              formControlName="RecordedTime"
+                            />
+                            <mat-label>Recorded Time</mat-label>
+                            <ngx-material-timepicker-toggle [for]="Nutrition1">
+                            </ngx-material-timepicker-toggle>
+                            <ngx-material-timepicker #Nutrition1>
+                            </ngx-material-timepicker>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Recorded During</mat-label>
+                            <input
+                              matInput
+                              placeholder="Enter"
+                              [value]="recordedDuring"
+                              formControlName="recordedDuring"
+                              readonly
+                            />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Recorded By</mat-label>
+                            <mat-select formControlName="RecordedBy">
+                              <mat-option
+                                *ngFor="let value of recordby"
+                                [value]="value"
+                              >
+                                {{ value }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-card>
+              <h5>Nutrition Assessment</h5>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Food Intake category</mat-label>
+                    <mat-select formControlName="IntakeCategory">
+                      <mat-option
+                      *ngFor="let type of IntakeCategoryValue"
+                      [value]="type.FoodIntakeMasterDesc"
+                      >{{type.FoodIntakeMasterDesc}}</mat-option
+                    >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Do you/patient eat regularly?</mat-label>
+                    <mat-select formControlName="EatRegularly">
+                      <mat-option
+                      *ngFor="let type of EatRegularlyvalue"
+                      [value]="type.PatientEatMasterDesc"
+                      >{{type.PatientEatMasterDesc}}</mat-option
+                    >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Regular Meals</mat-label>
+                    <input maxlength="75"
+                      matInput
+                      placeholder="Enter"
+                      formControlName="RegularMeals"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Carvings </mat-label>
+                    <input  maxlength="75"
+                      matInput
+                      placeholder="Enter"
+                      formControlName="Carvings"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Dislikes</mat-label>
+                    <input  maxlength="75"
+                      matInput
+                      placeholder="Enter"
+                      formControlName="DislikedIntake"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Food Allergies</mat-label>
+                    <textarea  maxlength="500"
+                      matInput
+                      placeholder="Enter"
+                      rows="1"
+                      cols="1"
+                      formControlName="FoodAllergies"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Notes</mat-label>
+                    <textarea maxlength="500"
+                      matInput
+                      placeholder="Enter"
+                      rows="1"
+                      cols="1"
+                      formControlName="Notes"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12" dark-color padding-none>
+        <div class="row mb-4">
+          <div class="col-12">
+            <mat-card>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Intake type</mat-label>
+                    <mat-select formControlName="FoodIntakeTypeID">
+                      <mat-option
+                        *ngFor="let foodIntake of foodIntakeTypes"
+                        [value]="foodIntake.FoodIntaketypeID"
+                        >{{ foodIntake.FoodIntakeTypeDescription }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Food Name</mat-label>
+                    <input maxlength="75"
+                      matInput
+                      placeholder="Enter"
+                      formControlName="FoodName"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Units</mat-label>
+                    <input maxlength="75"
+                      matInput
+                      placeholder="Enter"
+                      formControlName="Units"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Frequency</mat-label>
+                    <input maxlength="75"
+                      matInput
+                      placeholder="Enter"
+                      formControlName="Frequency"
+                      numeric
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Nutrition Notes </mat-label>
+                    <textarea maxlength="75"
+                      matInput
+                      placeholder="Enter"
+                      rows="1"
+                      cols="1"
+                      formControlName="NutritionNotes"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="text-right">
+                <div>
+                  <button
+                    mat-flat-button
+                    color="primary"
+                    class="custome-button mat-primary mr-2"
+                    (click)="addUpdateNutrition()"
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    mat-stroked-button
+                    class="transperent-button"
+                    color="primary"
+                    type="button"
+                    (click)="cancelForm()"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

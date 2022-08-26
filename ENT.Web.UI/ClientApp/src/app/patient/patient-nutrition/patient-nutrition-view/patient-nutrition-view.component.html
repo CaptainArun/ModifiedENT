@@ -1,0 +1,160 @@
+<div class="white mt-0" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Nutrition Assessment View<button
+      style="color: white"
+      class="close"
+      (click)="dialogClose()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="PatNutriForm">
+    <mat-card class="px-4 py-2 my-2">
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 pt-2">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Visit Date & Time</mat-label>
+            <input
+              matInput
+              placeholder="Enter"
+              formControlName="visitDateandTime"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pt-2">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="RecordedDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-2 timepick pt-2">
+          <mat-form-field 
+            class="input-full-width timer w-100"
+            appearance="outline"
+          >
+            <input
+              matInput
+              [ngxTimepicker]="toggleTimepicker1"
+              [disableClick]="true"
+              formControlName="RecordedTime"
+            />
+            <mat-label>Record Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker1>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pt-2">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input
+              matInput
+              placeholder="Enter"
+              formControlName="recordedDuring"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 pt-2">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <input matInput placeholder="Enter" formControlName="RecordedBy" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+  <mat-card class="p-1">
+    <div class="scroll-x">
+      <div class="row p-0 m-0 scroll-md">
+        <div class="col-xl-6">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Food Intake Category</div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{ data1.IntakeCategory }}
+                </div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Eat Regularly</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data1.EatRegularly }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Food Allergies</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data1.FoodAllergies }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">FoodIntake Type Desc</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data1.FoodIntakeTypeDesc }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Frequency</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data1.Frequency }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Disliked Intake</div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{ data1.DislikedIntake }}
+                </div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Units</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data1.Units }}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Regular Meals</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data1.RegularMeals }}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Nutrition Notes</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data1.NutritionNotes }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Food Name</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data1.FoodName }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Notes</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data1.Notes }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

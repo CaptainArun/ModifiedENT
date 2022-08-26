@@ -1,0 +1,29 @@
+export class newDiagnosisModel
+{
+  public HospitalizationID: number;
+  public VisitID: number;
+  public RecordedDate: Date;
+  public RecordedBy: string;
+  public AdmissionDate: Date;
+  public AdmissionType: string;
+  public InitialAdmissionStatus: string; 
+  public AdmittingPhysician: string;
+  public AttendingPhysician: string;
+  public ChiefComplaint: string;
+  public PrimaryDiagnosis: string; 
+  public ICDCode: string;
+  public ProcedureType: string; 
+  public PrimaryProcedure: string;
+  public CPTCode: string;
+  public ProblemStatus: string;
+  public DischargeDate: Date;
+  public DischargeStatusCode: string;
+  public AdditionalNotes: string;
+  public Createddate: Date;
+  public CreatedBy: string;
+  public ModifiedDate: Date;
+  public ModifiedBy: string;
+  public RecordedTime: string;
+  public visitDateandTime: string;
+  public RecordedDuring: string;
+}

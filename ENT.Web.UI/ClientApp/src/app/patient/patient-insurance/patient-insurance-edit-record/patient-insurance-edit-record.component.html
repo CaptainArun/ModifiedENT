@@ -1,0 +1,223 @@
+<div class="white mt-0" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Patient Insurance<button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <div class="white mt-0">
+
+    <div class="scroll-x">
+
+      <div class="row p-0 m-0 scroll-md">
+        <form [formGroup]="insuranceEditForm">
+          <div>
+            <div>
+              <mat-card class="my-3">
+                <div class="row">
+                  <div class="col-lg-6 col-xl-3">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.VisitDateandTime == null || insuranceEditForm.value.VisitDateandTime == '') ? true : false"></span>Visit Date & Time</mat-label>
+                      <mat-select formControlName="VisitDateandTime">
+                        <mat-option *ngFor="let data of visitDateTime, index as i" [value]="data" (click)="autoRecordedDuring(i)">
+                          {{data}}
+
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-6 col-xl-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Recorded date</mat-label>
+                      <input matInput formControlName="RecordedDate" [matDatepicker]="picker">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-6 col-xl-2 timepick">
+                    <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                      <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" formControlName="RecordedTime">
+                      <mat-label>Recorded Time</mat-label>
+                      <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+                      </ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #toggleTimepicker1>
+                      </ngx-material-timepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6 col-xl-2">
+                    <mat-form-field  appearance="outline" class="w-100">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.RecordedDuring == null || insuranceEditForm.value.RecordedDuring == '') ? true : false"></span>Recorded During</mat-label>
+                      <input matInput formControlName="RecordedDuring" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6 col-xl-3">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.RecordedBy == null || insuranceEditForm.value.RecordedBy == '') ? true : false"></span>Recorded By</mat-label>
+                      <mat-select formControlName="RecordedBy">
+                        <mat-option *ngFor="let recordBy of recordedBy" [value]="recordBy">{{recordBy}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card>
+                <div class="row">
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.InsuranceType == null || insuranceEditForm.value.InsuranceType == '') ? true : false"></span>
+                        Insurance Type
+                      </mat-label>
+                      <mat-select formControlName="InsuranceType">
+                        <mat-option *ngFor="let type of insuranceType" [value]="type.InsuranceTypeDesc">
+                          {{type.InsuranceTypeDesc}}
+                        </mat-option>
+
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.InsuranceCategory == null || insuranceEditForm.value.InsuranceCategory == '') ? true : false"></span>
+                        Insurance Category
+                      </mat-label>
+                      <mat-select formControlName="InsuranceCategory">
+                        <mat-option *ngFor="let cat of insurancecategory" [value]="cat.InsuranceCategoryDesc">
+                          {{cat.InsuranceCategoryDesc}}
+                        </mat-option>
+
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.InsuranceCompany == null || insuranceEditForm.value.InsuranceCompany == '') ? true : false"></span>
+                        Insurance Company
+                      </mat-label>
+                      <input matInput maxlength="100" placeholder="" formControlName="InsuranceCompany">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.Proposer == null || insuranceEditForm.value.Proposer == '') ? true : false"></span>Proposer</mat-label>
+                      <input matInput maxlength="50" placeholder="" formControlName="Proposer">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.RelationshipToPatient == null || insuranceEditForm.value.RelationshipToPatient == '') ? true : false"></span>
+                        Relationship to Patient
+                      </mat-label>
+                      <mat-select formControlName="RelationshipToPatient">
+                        <mat-option *ngFor="let data of patientRelationship" [value]="data">{{data}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.PolicyNo == null || insuranceEditForm.value.PolicyNo == '') ? true : false"></span>Policy No</mat-label>
+                      <input maxlength="35" matInput placeholder="" formControlName="PolicyNo">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>
+                        Group Policy No
+                      </mat-label>
+                      <input maxlength="35" matInput placeholder="" formControlName="GroupPolicyNo">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.CardNo == null || insuranceEditForm.value.CardNo == '') ? true : false"></span>
+                        Card No
+                      </mat-label>
+                      <input maxlength="35" matInput placeholder="" formControlName="CardNo">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6 col-xl-3">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.ValidFrom == null || insuranceEditForm.value.ValidFrom == '') ? true : false"></span>Valid from</mat-label>
+                      <input matInput formControlName="ValidFrom" [matDatepicker]="picker1">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6 col-xl-3">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(insuranceEditForm.value.ValidTo == null || insuranceEditForm.value.ValidTo == '') ? true : false"></span>Valid To</mat-label>
+                      <input matInput formControlName="ValidTo" [matDatepicker]="picker2">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6">
+                    <mat-form-field [matTooltip]="insuranceEditForm.get('AdditionalInfo').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg" appearance="outline" class="w-100">
+                      <mat-label>
+                        Additional Information
+                      </mat-label>
+                      <textarea rows="1"title="name" matInput formControlName="AdditionalInfo" placeholder="Enter your Complaint..."></textarea>
+                    </mat-form-field>
+                  </div>
+                  <!--<div class="col-xl-3 col-lg-3 text-left">
+    <button mat-raised-button color="primary">Upload Document</button>
+    <input type="file" #multiple placeholder="Choose file" (change)="uploadMultiple($event)" style="display:none;">
+    <mat-list>
+      <mat-list-item *ngFor="let file of requiredViewFile">
+        <span>
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;
+          <a href="{{file.FileUrl}}" target="_blank">{{file.FileName}}</a> [{{file.Size}}]
+          <button mat-mini-fab color="accent" (click)="RemoveRequiredFile(file.FileName)">
+
+            <mat-icon>X</mat-icon>
+          </button>
+        </span>
+      </mat-list-item>
+    </mat-list>
+  </div>-->
+                  <div class="col-xl-6 col-lg-6 pb-2 my-2 text-left">
+                    <input type="file" #multiple placeholder="Choose file" (change)="uploadMultiple($event)" style="display:none;" multiple>
+                    <button type="button" mat-raised-button color="primary" (click)="multiple.click()">Upload Documents</button>
+                    <mat-list>
+                      <mat-list-item *ngFor="let file of requiredViewFile;let index = index">
+                        <span>
+                          <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                          <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a> [{{file.Size}}] &nbsp;
+                          <!--<button mat-mini-fab color="accent" (click)="RemoveFile(file.FileName)"><mat-icon>X</mat-icon></button>-->
+                          <button mat-mini-fab color="warn" (click)="RemoveFile(file.FileName,index)">
+                            <mat-icon>close</mat-icon>
+                            </button>
+                        </span>
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                  <div class="col-md-12 text-right">
+                    <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="updateFormdata()">Save</button>
+                    <button mat-stroked-button class="transperent-button" color="primary" type="button" (click)="restFormData()">Clear</button>
+                  </div>
+
+
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  </div>

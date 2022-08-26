@@ -1,0 +1,122 @@
+<div class="white mt-4">
+  <mat-card class="p-1 card">
+    <div class="scroll-x">
+      <div class="row p-0 m-0 scroll-md">
+        <div *ngIf="demographicVal.PatientImage == null" class="col-xl-1 p-0">
+          <img src="assets/images/No-Image.png" class="img-fluid" width="136" />
+        </div>
+         <div *ngIf="demographicVal.PatientImage != null" class="col-xl-1 p-0">
+          <img src={{profilePics}} class="img-fluid"  style="height:125px;width: 125px;" />
+        </div> 
+        <div class="col-xl-3">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1">
+                <div class="col font_color">
+                  MR #
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{demographicVal.MRNo}}
+                </div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">Patient Name </div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{demographicVal.PatientFullName}}</div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">DOB / Age</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{demographicVal.PatientDOB |date:'dd-MM-yyyy'}} / {{demographicVal.PatientAge}}
+                  Yrs</div>
+              </div>
+              <div class="row">
+                <div class="col font_color">Gender</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{demographicVal.Gender}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1">
+                <div class="col font_color">
+                  Cell Number
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{demographicVal.PrimaryContactNumber}}
+                </div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">Emergency Contact</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{demographicVal.Emergencycontactnumber}}</div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">Identification<br /> Details</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{demographicVal.PatientIdentificationtype1details}}</div>
+              </div>
+              <div class="row">
+                <div class="col font_color">Blood Group</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{demographicVal.Bloodgroup}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-2">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row  pb-1">
+                <div class="col font_color">Diabetic</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-6">{{demographicVal.Diabetic}}</div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">High Bp</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-6">{{demographicVal.HighBP}}</div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col red">Allergies</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-6 red">{{demographicVal.Allergies}}</div>
+              </div>
+              <div class="row">
+                <div class="col font_color">Gait</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-6">{{demographicVal.Gait}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-3">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1">
+                <div class="col font_color">
+                  Next Of Kin Name & Contact
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{demographicVal.NKFirstname}} - {{demographicVal.NKPrimarycontactnumber}}
+                </div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">Address</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{demographicVal.Address1}}<br />{{demographicVal.Address2}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

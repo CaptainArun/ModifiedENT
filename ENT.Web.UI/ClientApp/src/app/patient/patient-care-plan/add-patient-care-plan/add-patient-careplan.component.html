@@ -1,0 +1,144 @@
+<div class="overflow-hidden" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <h5 class="p-3 title-bg">
+    Patient Care Plan <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="careplanform">
+    <mat-card class="px-3 py-1 ">
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Visit Date & Time</mat-label>
+            <mat-select formControlName="VisitDateandTime">
+              <mat-option *ngFor="let visitDate of visitDateTime , index as i" [value]="visitDate" (click)="RecordedDuring(i)">
+                {{visitDate}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="RecordedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2 timepick pb-3 pt-3">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" formControlName="RecordedTime">
+            <mat-label>Recorded Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker1>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input matInput placeholder="Enter" [value]="recordedDuring" formControlName="recordedDuring" readonly>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <mat-select formControlName="RecordedBy">
+              <mat-option *ngFor="let value of recordby" [value]="value">
+                {{value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="px-6 py-1  mt-1">
+      <h5 class="pb-3 pt-3">
+        Visit Details
+      </h5>
+      <div class="row">
+        <div class="row w-100">
+          <div class="col-xl-4">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Planned Activity</mat-label>
+              <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="PlanningActivity"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-4">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Duration</mat-label>
+              <input matInput placeholder="Enter" formControlName="Duration">
+            </mat-form-field>
+          </div>
+          <div class="col-xl-4">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Start Date</mat-label>
+              <input matInput [matDatepicker]="startDate" placeholder="Start Date" formControlName="StartDate">
+              <mat-datepicker-toggle matSuffix [for]="startDate">
+              </mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row w-100">
+          <div class="col-xl-4">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>End Date</mat-label>
+              <input matInput [matDatepicker]="endDate" placeholder="End Date" formControlName="EndDate">
+              <mat-datepicker-toggle matSuffix [for]="endDate">
+              </mat-datepicker-toggle>
+              <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-4">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="CarePlanStatus">
+                <mat-option *ngFor="let value of status" [value]="value.CarePlanStatusDesc">
+                  {{value.CarePlanStatusDesc}}
+                </mat-option>
+                </mat-select>
+                </mat-form-field>
+
+          </div>
+          <div class="col-xl-4">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Progress</mat-label>
+              <mat-select formControlName="Progress">
+
+                <mat-option *ngFor="let value of progress" [value]="value.CarePlanProgressDesc">
+                  {{value.CarePlanProgressDesc}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <h5 class="py-1 pt-3 col-xl-12">Schedule</h5>
+        <div class="row w-100">
+          <div class="col-xl-6">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Next Visit Date</mat-label>
+              <input matInput [matDatepicker]="nxtvisitDate" placeholder="End Date" formControlName="NextVisitDate">
+              <mat-datepicker-toggle matSuffix [for]="nxtvisitDate">
+              </mat-datepicker-toggle>
+              <mat-datepicker #nxtvisitDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-6">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Additional Notes</mat-label>
+              <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="Notes"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <div class="text-right w-3 col-xl-12 pb-2 pt-2 mt-3">
+
+      <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="addCareplanForm()">Save</button>
+      <button type="button" mat-stroked-button class="transperent-button" color="primary" (click)="Close()">Clear</button>
+
+    </div>
+  </form>
+</div>

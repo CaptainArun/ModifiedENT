@@ -1,0 +1,185 @@
+<div class="white mt-3" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Function & Cognitive<button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+
+  <form [formGroup]="funcForm">
+    <mat-card class="px-4 py-2 my-2">
+      <h5 class="py-1">Visit Details</h5>
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field [matTooltip]="this.funcForm.get('visitDateandTime').value" matTooltipPosition="below"  matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+            <mat-label>Visit Date & Time</mat-label>
+            <input matInput placeholder="Enter" formControlName="visitDateandTime">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+          <mat-form-field [matTooltip]="recordeddate" matTooltipPosition="below"  matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="RecordedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-2 timepick pb-3 pt-3">
+          <mat-form-field [matTooltip]="this.funcForm.get('RecordedTime').value" matTooltipPosition="below"  matTooltipClass="Tooltip-sm" class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" formControlName="RecordedTime">
+            <mat-label>Record Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker1>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+          <mat-form-field [matTooltip]="this.funcForm.get('recordedDuring').value" matTooltipPosition="below"  matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input matInput placeholder="Enter" formControlName="recordedDuring">
+          </mat-form-field>
+        </div>
+
+
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field [matTooltip]="this.funcForm.get('RecordedBy').value" matTooltipPosition="below"  matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <input matInput placeholder="Enter" formControlName="RecordedBy">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+
+  <mat-card class="p-1">
+    <div class="scroll-x">
+
+      <div class="row p-0 m-0 scroll-md">
+        <!--*ngFor="let phyName of physicianData"-->
+
+        <div class="col-xl-6">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">
+                  Gait
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{data1.Gait}}
+                </div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Gait Notes</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.GaitNotes}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Balance</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.Balance}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Balance Notes</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.BalanceNotes}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Neuromuscular Notes</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.NeuromuscularNotes}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Mobility</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.Mobility}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Mobility Support Device</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.MobilitySupportDevice}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Mobility Notes</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.MobilityNotes}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="col-xl-6">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">
+                  Functional status
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{data1.Functionalstatus}}
+                </div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Cognitive status</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.Cognitivestatus}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Primary Diagnosis Notes </div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.PrimaryDiagnosisNotes }}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">ICD Code </div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.ICD10 }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">CPT Code</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.CPT }}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Primary Procedure</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.PrimaryProcedure }}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Physician Name</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.Physicianname }}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Hospital Name</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data1.Hospital }}</div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

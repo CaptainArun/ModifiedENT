@@ -1,0 +1,134 @@
+
+<div class="white mt-0"  cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Family Health History <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="familyHealthHistoryViewForm">
+    <mat-card class=" px-3 py-1 my-2">
+      <div class="row">
+        
+        <div class="col-xl-3 col-lg-6 pt-2">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Visit Date & Time</mat-label>
+            <input matInput placeholder="Enter" formControlName="visitDateandTime">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pt-2">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="RecordedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-2 timepick pt-2">
+          <mat-form-field  class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepickertime" [disableClick]="true" formControlName="RecordedTime">
+            <mat-label>Recorded Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepickertime">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepickertime>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pt-2">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input matInput placeholder="Enter" formControlName="recordedDuring">
+          </mat-form-field>
+        </div>
+
+
+        <div class="col-xl-3 col-lg-6 pt-2">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <input matInput placeholder="Enter" formControlName="RecordedBy">
+          </mat-form-field>
+        </div>
+
+       
+      </div>
+    </mat-card>
+  </form>
+
+  <mat-card class="p-1">
+    <div class="scroll-x">
+
+      <div class="row p-0 m-0 scroll-md">
+               <div class="col-xl-6">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">
+                  Name
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{data.FamilyMemberName}}
+                </div>
+              </div>
+
+              <div class="row  pb-1 pt-3">
+                <div class="col font_color">Relationship to Patient</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Relationship}}</div>
+              </div>
+
+              <div class="row  pb-1 pt-3">
+                <div class="col font_color">Diagnosis</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.DiagnosisNotes}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">ICD Code</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.ICDCode}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-xl-6">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">
+                  Illness Type
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{data.IllnessType}}
+                </div>
+              </div>
+
+              <div class="row  pb-1 pt-3">
+                <div class="col font_color">Problem Status</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.ProblemStatus}}</div>
+              </div>
+
+              <div class="row  pb-1 pt-3">
+                <div class="col font_color">Physician Name</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.PhysicianName}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Additional Notes</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.AdditionalNotes}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

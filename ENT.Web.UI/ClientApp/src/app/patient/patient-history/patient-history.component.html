@@ -1,0 +1,81 @@
+<div class="overflow-hidden px-4">
+  <div>
+    <app-patient-demographic [PatID]="this.patientId"></app-patient-demographic>
+  </div>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="d-flex align-content-center scroll-x mt-2">
+        <!-- <ex></ex> -->
+        <!-- <ex></ex> -->
+        <div class="pr-4 mr-2 my-2">
+          <button mat-button [matMenuTriggerFor]="menu" #patientMenuTrigger="matMenuTrigger" class="drp-btn-bg">
+            <mat-icon class="menu-icon mb-2"><img src='assets/images/Patient_Icons/Demographics.png' /></mat-icon>&nbsp;&nbsp;
+            <span class="f-18 col-white">Demographics</span>
+            <a class="dropdown-toggle ml-2 col-white"></a>
+          </button>
+        </div>
+        <mat-menu #menu="matMenu">
+          <div *ngFor=" let subitem of subMenuVals">
+            <button class="submenuicons" mat-menu-item [routerLink]="subitem.Url">
+              <mat-icon [innerHTML]="subitem.Icon"></mat-icon>
+              <span class="menu-title" [innerHTML]="subitem.Title"></span>
+            </button>
+          </div>
+        </mat-menu>
+        <div class="pr-4 mr-2 my-2">
+          <button mat-button [matMenuTriggerFor]="menu1" #patientMenuTrigger="matMenuTrigger" class="drp-btn-bg">
+            <mat-icon class="menu-icon mb-2"><img src='assets/images/Patient_Icons/Health_history.png' /></mat-icon>&nbsp;&nbsp;
+            <span class="f-18 col-white">Health History</span>
+            <a class="dropdown-toggle ml-2 col-white"></a>
+          </button>
+        </div>
+        <mat-menu #menu1="matMenu">
+          <div *ngFor=" let subitem of subMenuVals1">
+            <button class="submenuicons" mat-menu-item [routerLink]="subitem.Url">
+              <mat-icon [innerHTML]="subitem.Icon"></mat-icon>
+              <span class="menu-title" [innerHTML]="subitem.Title"></span>
+            </button>
+          </div>
+        </mat-menu>
+        <div class="pr-4 mr-2 my-2">
+          <button mat-button [matMenuTriggerFor]="menu2" #patientMenuTrigger="matMenuTrigger" class="drp-btn-bg">
+            <mat-icon class="menu-icon mb-2"><img src='assets/images/MenuNewIcons/triage/visit_intake.png'/> </mat-icon> &nbsp;&nbsp;
+            <span class="f-18 col-white">Visit</span>
+            <a class="dropdown-toggle ml-2 col-white"></a>
+          </button>
+        </div>
+        <mat-menu #menu2="matMenu">
+          <div *ngFor=" let subitem of subMenuVals2">
+            <button class="submenuicons" mat-menu-item [routerLink]="subitem.Url">
+              <mat-icon [innerHTML]="subitem.Icon"></mat-icon>
+              <span class="menu-title" [innerHTML]="subitem.Title"></span>
+            </button>
+          </div>
+        </mat-menu>
+        <div class="pr-4 mr-2 my-2">
+          <button mat-button [matMenuTriggerFor]="menu3" #patientMenuTrigger="matMenuTrigger" class="drp-btn-bg">
+            <mat-icon class="menu-icon mb-2"><img src='assets/images/Patient_Icons/Hospitalization.png' /></mat-icon>&nbsp;&nbsp;
+            <span class="f-18 col-white">Hospitalization</span>
+            <a class="dropdown-toggle ml-2 col-white"></a>
+          </button>
+        </div>
+        <mat-menu #menu3="matMenu">
+          <div *ngFor=" let subitem of subMenuVals3">
+            <button class="submenuicons" mat-menu-item [routerLink]="subitem.Url">
+              <mat-icon [innerHTML]="subitem.Icon"></mat-icon>
+              <span class="menu-title" [innerHTML]="subitem.Title"></span>
+            </button>
+          </div>
+        </mat-menu>
+
+      </div>
+    </div>
+    <div class="col-xl-3">
+    </div>
+
+    <div class="col-xl-1">
+      <!--<button mat-stroked-button class="ml-4 mt-2 transperent-button schedbtn btn btn-info" (click)="back()">back</button>-->
+      <button mat-flat-button color="primary" class="ml-4 mt-2  schedbtn btn btn-info" (click)="back()">back</button>
+    </div>
+  </div>
+</div>

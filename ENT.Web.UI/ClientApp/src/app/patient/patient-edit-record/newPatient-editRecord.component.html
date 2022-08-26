@@ -1,0 +1,479 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Edit Patient<button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <div class="overflow-hidden px-4 pb-3">
+    <div class="row" style="overflow: auto; height: 600px;">
+      <form [formGroup]="patientRegistrationForm">
+        <div class="d-flex justify-content-between w-100">
+          <div class="col-xl-12">
+          </div>
+        </div>
+        <mat-card class="mb-4">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-xl-9 col-lg-12">
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-label>
+                        <h4>Facility Name</h4>
+                      </mat-label>
+                      <mat-label>
+                        <h5><i>{{FacilityName}} </i> </h5>
+                      </mat-label>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.PatientType == null || patientRegistrationForm.value.PatientType == '') ? true : false"></span>Patient
+                          Type</mat-label>
+                        <mat-select formControlName="PatientType">
+                          <mat-option *ngFor="let type of patientType" [value]="type.PatientTypeDesc">
+                            {{type.PatientTypeDesc}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Patient Category</mat-label>
+                        <mat-select formControlName="PatientCategory">
+                          <mat-option *ngFor="let category of patientCategory" [value]="category.PatientCategoryDesc">
+                            {{category.PatientCategoryDesc}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="d-flex col-xl-4 col-lg-6 p-0">
+                      <div class="col-xl-4 col-lg-6 pr-0">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label><span class="required-asterisk"
+                              *ngIf="(patientRegistrationForm.value.Salutation == null || patientRegistrationForm.value.Salutation == '') ? true : false"></span>Salutation
+                          </mat-label>
+                          <mat-select formControlName="Salutation">
+                            <mat-option *ngFor="let salute of salution" [value]="salute.SalutationCode">
+                              {{salute.SalutationCode}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-8 col-lg-6 pl-0">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label><span class="required-asterisk"
+                              *ngIf="(patientRegistrationForm.value.PatientFirstName == null || patientRegistrationForm.value.PatientFirstName == '') ? true : false"></span>First
+                            Name</mat-label>
+                          <input maxlength="50" matInput placeholder="Enter" formControlName="PatientFirstName">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.PatientLastName == null || patientRegistrationForm.value.PatientLastName == '') ? true : false"></span>Last
+                          Name</mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="PatientLastName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Middle Name</mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="PatientMiddleName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.Gender == null || patientRegistrationForm.value.Gender == '') ? true : false"></span>Sex
+                        </mat-label>
+                        <mat-select formControlName="Gender">
+                          <mat-option *ngFor="let gen of gender" [value]="gen.GenderDesc">
+                            {{gen.GenderDesc}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.PatientDOB == null || patientRegistrationForm.value.PatientDOB == '') ? true : false"></span>Patient
+                          DOB</mat-label>
+                        <input matInput [matDatepicker]="picker" placeholder="Date of Birth"
+                          (dateChange)="bindAgetoDOB()" formControlName="PatientDOB" [max]="maxDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.PatientAge == null || patientRegistrationForm.value.PatientAge == '') ? true : false"></span>Age
+                        </mat-label>
+                        <input matInput placeholder="Enter" (blur)="bindDOBtoAge()" formControlName="PatientAge"
+                          type="number">
+                      </mat-form-field>
+                    </div>
+                    <div class="d-flex col-xl-4 col-lg-6 p-0">
+                      <div class="col-xl-4 col-lg-6 pr-0">
+                        <mat-form-field [matTooltip]="identification" matTooltipPosition="above"
+                          matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+                          <mat-label><span class="required-asterisk"
+                              *ngIf="(patientRegistrationForm.value.IDTID1 == null || patientRegistrationForm.value.IDTID1 == '') ? true : false"></span>Identification
+                          </mat-label>
+                          <mat-select formControlName="IDTID1">
+                            <mat-option *ngFor="let identify1 of identificationType"
+                              (click)="setIdentification(identify1.IDTDescription)" [value]="identify1.IDTId">
+                              {{identify1.IDTDescription}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-8 col-lg-6 pl-0">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label><span class="required-asterisk"
+                              *ngIf="(patientRegistrationForm.value.PatientIdentificationtype1details == null || patientRegistrationForm.value.PatientIdentificationtype1details == '' || patientRegistrationForm.get('PatientIdentificationtype1details').hasError('pattern')) ? true : false"></span>Identification
+                            Details -1</mat-label>
+                          <input matInput placeholder="Enter" formControlName="PatientIdentificationtype1details"
+                            (keyup)="valid()" [readonly]="enableInput">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="d-flex col-xl-4 col-lg-6 p-0">
+                      <div class="col-xl-4 col-lg-6 pr-0">
+                        <mat-form-field [matTooltip]="identificationDetail" matTooltipPosition="above"
+                          matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+                          <mat-label>Identification</mat-label>
+                          <mat-select formControlName="IDTID2">
+                            <mat-option *ngFor="let identify2 of identificationType"
+                              (click)="setIdentificationdetail(identify2.IDTDescription)" [value]="identify2.IDTId">
+                              {{identify2.IDTDescription}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-8 col-lg-6 pl-0">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label><span class="required-asterisk"
+                              *ngIf="patientRegistrationForm.get('PatientIdentificationtype2details').hasError('pattern') ? true : false"></span>Identification
+                            Details -2</mat-label>
+                          <input matInput placeholder="Enter" formControlName="PatientIdentificationtype2details"
+                            (keyup)="valid1()" [readonly]="enableInput2">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Marital Status</mat-label>
+                        <mat-select formControlName="MaritalStatus">
+                          <mat-option *ngFor="let status of maritalStatus" [value]="status.MaritalStatusDesc">
+                            {{status.MaritalStatusDesc}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-lg-12">
+                  <div *ngIf="data?.PatientImage != null || !imageFlag"
+                    class="upload-file p-2 d-flex justify-content-center mb-2">
+                    <img src={{profilePics}} class="imageUpload" style="height: 200px;width: 200px;">
+                  </div>
+
+                  <div *ngIf="data?.PatientImage == null && imageFlag"
+                    class="upload-file p-2 d-flex justify-content-center mb-2">
+                    <img src="assets/images/No-Image.png" class="img-fluid" width="200" />
+                  </div>
+
+                  <div class="d-flex justify-content-center">
+                    <button type="button" mat-flat-button value="upload" (click)="openImageCropper()"
+                      class="custome-button mat-primary">Upload Image</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-xl-9 col-lg-12">
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Religion</mat-label>
+                        <mat-select formControlName="Religion">
+                          <mat-option *ngFor="let reg of religion" [value]="reg.ReligionDesc">
+                            {{reg.ReligionDesc}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Race</mat-label>
+                        <mat-select formControlName="Race">
+                          <mat-option *ngFor="let rc of race" [value]="rc.RaceDesc">
+                            {{rc.RaceDesc}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Occupation</mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="Occupation">
+                      </mat-form-field>
+                    </div>
+                    <div class="d-flex col-xl-4 col-lg-6 p-0">
+                      <div class="col-xl-4 col-lg-6 pr-0">
+                        <mat-form-field [matTooltip]="contact" matTooltipPosition="above" matTooltipClass="Tooltip-sm"
+                          class="w-100" appearance="outline">
+                          <mat-label>Primary Contact Number</mat-label>
+                          <mat-select formControlName="PrimaryContactType">
+                            <mat-option *ngFor="let contact of contactType"
+                              (click)="setcontact(contact.ContactTypeDesc)" [value]="contact.ContactTypeDesc">
+                              {{contact.ContactTypeDesc}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-8 col-lg-6 pl-0">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label><span class="required-asterisk"
+                              *ngIf="(patientRegistrationForm.value.PrimaryContactNumber == null || patientRegistrationForm.value.PrimaryContactNumber == '') ? true : false"></span>Primary
+                            Contact Number</mat-label>
+                          <input matInput placeholder="Ex.000-000-0000" formControlName="PrimaryContactNumber"
+                            maxlength="12" minlength="12" appPhoneMask (blur)="primaryNumberCheck()">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="d-flex col-xl-4 col-lg-6 p-0">
+                      <div class="col-xl-4 col-lg-6 pr-0">
+                        <mat-form-field [matTooltip]="secondarycontact" matTooltipPosition="above"
+                          matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+                          <mat-label>Secondary Contact Number</mat-label>
+                          <mat-select formControlName="SecondaryContactType">
+                            <mat-option *ngFor="let contact of contactType"
+                              (click)="setSecondarycontact(contact.ContactTypeDesc)" [value]="contact.ContactTypeDesc">
+                              {{contact.ContactTypeDesc}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-8 col-lg-6 pl-0">
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-label>Secondary Contact Number</mat-label>
+                          <input matInput placeholder="Ex.000-000-0000" formControlName="SecondaryContactNumber"
+                            maxlength="12" minlength="12" appPhoneMask>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.Emergencycontactnumber == null || patientRegistrationForm.value.Emergencycontactnumber == '') ? true : false"></span>Emergency
+                          Contact Number</mat-label>
+                        <input matInput placeholder="Ex.000-000-0000" formControlName="Emergencycontactnumber"
+                          maxlength="12" minlength="12" appPhoneMask (blur)="emergencyNumberCheck()">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="email">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Address Line 1</mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="Address1">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Address Line 2</mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="Address2">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Village</mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="Village">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Town / City</mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="Town">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.Pincode == null || patientRegistrationForm.value.Pincode == '') ? true : false"></span>PIN
+                          Code</mat-label>
+                        <input matInput placeholder="Enter" formControlName="Pincode">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-lg-12">
+                  <div class="row">
+                    <div class="col-lg-12 text-center">
+                      <!-- <div class="text-center dash-border p-5" (click)="openOcr()">
+                        <img src="assets/images/patientprofile/ocr.png" />
+                        <span class="d-block">Capture patient details using OCR</span>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-xl-9 col-lg-12">
+                  <div class="row">
+                    <!-- <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.State == null || patientRegistrationForm.value.State == '') ? true : false"></span>State
+                        </mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="State">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.Country == null || patientRegistrationForm.value.Country == '') ? true : false"></span>Country
+                        </mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="Country">
+                      </mat-form-field>
+                    </div> -->
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.State == null || patientRegistrationForm.value.State == '') ? true : false"></span>State
+                        </mat-label>
+                        <mat-select formControlName="State">
+                          <mat-option *ngFor="let option of stateValue" [value]="option.StateDescription">
+                            {{option.StateDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label><span class="required-asterisk"
+                            *ngIf="(patientRegistrationForm.value.Country == null || patientRegistrationForm.value.Country == '') ? true : false"></span>Country
+                        </mat-label>
+                        <mat-select formControlName="Country">
+                          <mat-option *ngFor="let option of countryValue" [value]="option.CountryDescription">
+                            {{option.CountryDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Bloodgroup</mat-label>
+                        <mat-select formControlName="Bloodgroup">
+                          <mat-option *ngFor="let bg of bloodGroup" [value]="bg.BloodGroupCode">
+                            {{bg.BloodGroupCode}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <mat-card class="px-3 py-1 pb-5 pt-5">
+                      <h5 class="pb-2 pt-2">Next of Kin</h5>
+                      <div class="row">
+                        <div class="d-flex col-xl-3 col-lg-6 p-0">
+                          <div class="col-xl-4 col-lg-6 pr-0">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label><span class="required-asterisk"
+                                  *ngIf="(patientRegistrationForm.value.NKSalutation == null || patientRegistrationForm.value.NKSalutation == '') ? true : false"></span>Salutation
+                              </mat-label>
+                              <mat-select formControlName="Salutation">
+                                <mat-option *ngFor="let salute of salution" [value]="salute.SalutationCode">
+                                  {{salute.SalutationCode}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-8 col-lg-6 pl-0">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label><span class="required-asterisk"
+                                  *ngIf="(patientRegistrationForm.value.NKFirstname == null || patientRegistrationForm.value.NKFirstname == '') ? true : false"></span>First
+                                Name</mat-label>
+                              <input maxlength="50" matInput placeholder="Enter" formControlName="NKFirstname">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label><span class="required-asterisk"
+                                *ngIf="(patientRegistrationForm.value.NKLastname == null || patientRegistrationForm.value.NKLastname == '') ? true : false"></span>Last
+                              Name</mat-label>
+                            <input maxlength="50" matInput placeholder="Enter" formControlName="NKLastname">
+                          </mat-form-field>
+                        </div>
+                        <div class="d-flex col-xl-3 col-lg-6 p-0">
+                          <div class="col-xl-4 col-lg-6 pr-0">
+                            <mat-form-field [matTooltip]="kinprimarycontact" matTooltipPosition="above"
+                              matTooltipClass="Tooltip-sm" class="w-100" appearance="outline">
+                              <mat-label>Primary Contact Number</mat-label>
+                              <mat-select formControlName="NKContactType">
+                                <mat-option *ngFor="let contact of contactType"
+                                  (click)="setkincontact(contact.ContactTypeDesc)" [value]="contact.ContactTypeDesc">
+                                  {{contact.ContactTypeDesc}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-8 col-lg-6 pl-0">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label><span class="required-asterisk"
+                                  *ngIf="(patientRegistrationForm.value.NKPrimarycontactnumber == null || patientRegistrationForm.value.NKPrimarycontactnumber == '') ? true : false"></span>Primary
+                                Contact Number</mat-label>
+                              <input matInput placeholder="Ex.000-000-0000" formControlName="NKPrimarycontactnumber"
+                                maxlength="12" minlength="12" appPhoneMask>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Relationship to patient</mat-label>
+                            <mat-select formControlName="Relationship">
+                              <mat-option *ngFor="let relation of patientRelations" [value]="relation.RSPId">
+                                {{relation.RSPDescription}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-sm-6">
+                  <div class=" barcode-scan">
+                    <div class="qrcode">
+                      <ngx-qrcode [width]="250" [value]="qrreader" cssClass="center" errorCorrectionLevel="L">
+                      </ngx-qrcode>
+                    </div>
+                    <button type="button" (click)="setqrcode()"
+                      class="custome-button w-auto  mat-primary font-weight-bold mb-custome-btn visitsbtn mt-3">
+                      Generate QR code
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+        <div class="text-right pb-4 pt-4">
+          <button mat-flat-button color="primary" class="custome-button mat-primary mr-2"
+            (click)="addNewPatientReg()">Save</button>
+          <button mat-stroked-button class="transperent-button" color="primary" type="button"
+            (click)="cancelData()">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
