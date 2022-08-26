@@ -1,0 +1,133 @@
+<div class="overflow-hidden px-4 pb-4">
+  <div class="row col-xl-12 ml-0 pl-0">
+    <mat-card class="col-xl-4 ml-0 my-2">
+      <div class="col-12">
+        <div class="row justify-content-md-left">
+          <div class="col-xl-12 text-center">
+            <h3 class="text-left">Triage Status</h3>
+          </div>
+          <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-1">
+            <p class="m-0">Total No. of Visits : <b>{{ TotalVisitCount }}</b></p>
+          </div>
+          <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-2">
+            <p class="m-0">Triage Completed : <b>{{ TriageCompletedCount }}</b></p>
+          </div>
+          <!-- <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-3">
+            <p class="m-0">No. of Triage : <b>{{ TriageWaitingCount }}</b></p>
+          </div> -->
+        </div>
+      </div>
+    </mat-card>
+
+    <div style="margin: 6px"></div>
+    <mat-card class="row col-xl-8 ml-0 my-2">
+      <form [formGroup]="triagePatientSearchForm">
+        <div class="col-xl-12">
+          <div class="col-xl-12 text-center">
+            <h3 class="text-left">Patient Search</h3>
+          </div>
+
+          <div class="row justify-content-between w-100 opdstop pt-2">
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label> From Date</mat-label>
+                <input formControlName="FromDate" matInput [matDatepicker]="from" placeholder="From Date">
+                <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                <mat-datepicker #from></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>To Date</mat-label>
+                <input formControlName="ToDate" matInput [matDatepicker]="to" placeholder="To Date">
+                <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                <mat-datepicker #to></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Visit Number</mat-label>
+                <mat-icon matSuffix *ngIf="(triagePatientSearchForm.value.VisitNumber == '' || triagePatientSearchForm.value.VisitNumber == null) ? true : triagePatientSearchForm.value.VisitNumber.length > 2 ? false : true">search</mat-icon>
+                <input matInput placeholder="Type and Select" #autoCompleteVisitInput="matAutocompleteTrigger" [matAutocomplete]="visitNumber" formControlName="VisitNumber" maxlength="12">
+                <mat-autocomplete autoActiveFirstOption #visitNumber="matAutocomplete">
+                  <mat-option *ngFor="let number of VisitNumber" [value]="number">{{number}}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Facility</mat-label>
+                <mat-select formControlName="Facility">
+                  <mat-option *ngFor="let value of facilityData" [value]="value.FacilityId">{{value.FacilityName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Doctor</mat-label>
+                <mat-icon matSuffix *ngIf="(triagePatientSearchForm.value.Doctor == '' || triagePatientSearchForm.value.Doctor == null) ? true : (triagePatientSearchForm.value.Doctor.length > 2) ? false : true">search</mat-icon>
+                <input type="text" placeholder="Type and Select" matInput #autoCompleteDoctorInput="matAutocompleteTrigger" [matAutocomplete]="autot1" formControlName="Doctor" />
+                <mat-autocomplete autoActiveFirstOption #autot1="matAutocomplete">
+                  <mat-option *ngFor="let option of doctorData" [value]="option.ProviderName" (onSelectionChange)="setdoctor(option.ProviderID)">
+                    {{option.ProviderName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Patient</mat-label>
+                <mat-icon matSuffix *ngIf="(triagePatientSearchForm.value.Patient == '' || triagePatientSearchForm.value.Patient == null) ? true : (triagePatientSearchForm.value.Patient.length > 2) ? false : true">search</mat-icon>
+                <input type="text" matInput placeholder="Type and Select" #autoCompletePatientInput="matAutocompleteTrigger" [matAutocomplete]="autot" formControlName="Patient" />
+                <mat-autocomplete autoActiveFirstOption #autot="matAutocomplete">
+                  <mat-option *ngFor="let option of patientData" [value]="option.PatientFirstName+ ' ' +  option.PatientMiddleName+' ' +  option.PatientLastName" (onSelectionChange)="setpatient(option.PatientId)">
+                    {{option.PatientFirstName}} {{" "}} {{option.PatientMiddleName}} {{" "}} {{option.PatientLastName}} {{ "-" }} {{option.MRNo}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4 mt-2">
+              <div class="pull-right">
+                <button mat-stroked-button color="" class="transperent-button light-sky primary w-auto" (click)="clearForm()">Clear</button>
+              </div>
+              <div class="pull-right mr-2">
+                <button mat-flat-button [disabled]="IsDateCorrect" class="custome-button mat-primary w-auto" (click)="getPatientsBySearch()">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+
+  <mat-card *ngIf="show">
+    <h3>No Record Found</h3>
+  </mat-card>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <!-- <mat-card *ngIf="!show">
+        <div class="col-xs-12 p-3 w-100">
+          <app-bms-table [config]="tableConfig" [datas]="allPatientVisitList" (intakeItem)="openIntake($event)" (caseSheetItem)="visitCaseSheet($event)">
+          </app-bms-table>
+        </div>
+      </mat-card> -->
+      
+      <mat-card  *ngIf="!show">
+        <app-cardContainer [configCard]="triageListCard" [dataForContainer]="allPatientVisitList"
+        (intakeItem)="openIntake($event)" (caseSheetItem)="visitCaseSheet($event)"></app-cardContainer>
+      </mat-card>
+
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,235 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Update Problem List <button style="color: white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <div class="overflow-hidden">
+    <form [formGroup]="problemListForm">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+          <div class="row mb-4">
+            <div class="col-12">
+              <mat-card class="px-4 py-2 my-3">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(problemListForm.get('VisitDateandTime').invalid) ? true : false"></span>Visit Date &
+                        Time</mat-label>
+                      <input formControlName="VisitDateandTime" matInput readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(problemListForm.get('RecordedDate').invalid) ? true : false"></span>Recorded Date
+                      </mat-label>
+                      <input matInput [matDatepicker]="Prob" formControlName="RecordedDate" />
+                      <mat-datepicker-toggle matSuffix [for]="Prob"></mat-datepicker-toggle>
+                      <mat-datepicker #Prob></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-6 timepick">
+                    <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                      <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true"
+                        formControlName="RecordedTime" />
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(problemListForm.get('RecordedTime').invalid) ? true : false"></span>Record Time
+                      </mat-label>
+                      <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+                      </ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #toggleTimepicker1>
+                      </ngx-material-timepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-2 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(problemListForm.get('recordedDuring').invalid) ? true : false"></span>Recorded During
+                      </mat-label>
+                      <input matInput placeholder="Enter" formControlName="recordedDuring" readonly />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                          *ngIf="(problemListForm.get('RecordedBy').invalid) ? true : false"></span>Recorded By
+                      </mat-label>
+                      <mat-select formControlName="RecordedBy">
+                        <mat-option *ngFor="let value of recordedBy" [value]="value">
+                          {{ value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-card>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Problem Type</mat-label>
+              <mat-select formControlName="ProblemTypeID">
+                <mat-option *ngFor="let problemType of problemTypes" [value]="problemType.ProblemTypeId">{{
+                  problemType.ProblemTypeDescription }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6 align-self-start">
+            <mat-form-field [matTooltip]="problemListForm.get('ProblemDescription').value" matTooltipPosition="above"
+              matTooltipClass="Tooltip-lg" class="w-100" appearance="outline">
+              <mat-label>Problem Description</mat-label>
+              <textarea matInput placeholder="Enter" formControlName="ProblemDescription" rows="1"
+                maxlength="500"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Problem Status </mat-label>
+              <mat-select formControlName="Status">
+                <mat-option *ngFor="let type of problemstatusvalue" [value]="type.ProblemStatusDesc">{{
+                  type.ProblemStatusDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+            <mat-form-field [matTooltip]="icdtootltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg"
+              class="w-100" appearance="outline">
+              <mat-label>ICD Code</mat-label>
+              <mat-icon matSuffix
+                *ngIf="(problemListForm.value.ICD10Code == '' || problemListForm.value.ICD10Code == null) ? true : problemListForm.value.ICD10Code.length > 2 ? false : true">
+                search</mat-icon>
+              <textarea matInput [matAutocomplete]="ICD10Code" placeholder="Type and Select" formControlName="ICD10Code"
+                #autoCompleteICDCode="matAutocompleteTrigger" rows="1" maxlength="500"></textarea>
+              <mat-autocomplete autoActiveFirstOption #ICD10Code="matAutocomplete">
+                <mat-option *ngFor="let ICD10 of diagnosisCode"
+                  (onSelectionChange)="setIcdCode(ICD10.ICDCode, ICD10.Description)"
+                  [value]="ICD10.ICDCode + '-' +  ICD10.Description">{{ ICD10.ICDCode }}-{{ ICD10.Description }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+            <mat-form-field [matTooltip]="snoomedtootltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg"
+              class="w-100" appearance="outline">
+              <mat-label>SNOMED Code</mat-label>
+              <mat-icon matSuffix
+                *ngIf="(problemListForm.value.SNOMEDCode == '' || problemListForm.value.SNOMEDCode == null) ? true : problemListForm.value.SNOMEDCode.length > 2 ? false : true">
+                search</mat-icon>
+              <textarea matInput placeholder="Type and Select" [matAutocomplete]="SNOMEDCode"
+                #autoCompleteSnomedCode="matAutocompleteTrigger" formControlName="SNOMEDCode" rows="1"
+                maxlength="500"></textarea>
+              <mat-autocomplete autoActiveFirstOption #SNOMEDCode="matAutocomplete">
+                <mat-option *ngFor="let SNOMEDCode of snomedCTCode"
+                  (onSelectionChange)="setSnoomedCode(SNOMEDCode.Code, SNOMEDCode.Description)"
+                  [value]="SNOMEDCode.Code + '-' +  SNOMEDCode.Description">{{ SNOMEDCode.Code }}-{{
+                  SNOMEDCode.Description }}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Aggravated by</mat-label>
+              <input matInput placeholder="Enter" formControlName="Aggravatedby" maxlength="75" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Alleviated by</mat-label>
+              <input matInput placeholder="Enter" formControlName="AlleviatedBy" maxlength="75" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Diagnosed Date</mat-label>
+              <input matInput [matDatepicker]="picker2" placeholder="Choose a date" formControlName="DiagnosedDate"
+                maxlength="10" />
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Resolved Date</mat-label>
+              <input matInput [matDatepicker]="picker3" placeholder="Choose a date" formControlName="ResolvedDate"
+                maxlength="10" />
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Attending Physician</mat-label>
+              <input matInput placeholder="Enter" formControlName="AttendingPhysican" />
+            </mat-form-field>
+          </div>
+          <div class="col-xl-6 col-lg-6 align-self-start">
+            <mat-form-field [matTooltip]="problemListForm.get('Notes').value" matTooltipPosition="above"
+              matTooltipClass="Tooltip-lg" class="w-100" appearance="outline">
+              <mat-label>Notes</mat-label>
+              <textarea matInput placeholder="Enter" formControlName="Notes" maxlength="500" rows="1"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-12 scroll">
+            <input type="file" #multipleProblemList placeholder="Choose file" value="upload"
+              (change)="FileUploadProblemListMethod($event)" style="display:none;" multiple>
+            <button type="button" mat-raised-button color="primary" (click)="multipleProblemList.click()">Upload
+              Documents</button>
+            <mat-list>
+              <mat-list-item *ngFor="let file of ViewFileProblemList;let index = index">
+
+                <span>
+                  <i class="fa fa-file-text-o mr-2" aria-hidden="true"></i>
+                  <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a> [{{file.Size}}]
+                  <button mat-mini-fab color="warn" (click)="RemoveFileProblemList(file.FileName,index)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+
+                </span>
+
+              </mat-list-item>
+              <!-- <mat-list-item *ngFor="let file of FileUploadProblemList;let index = index">
+
+                <span>
+                  <i class="fa fa-file-text-o mr-2" aria-hidden="true"></i>
+                  <a>{{file.name}}</a> [{{file.size/1024 | number: '1.0-0'}}KB]
+                  <button mat-mini-fab color="warn" (click)="RemoveFileUpload(file.name,index)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+
+                </span>
+
+              </mat-list-item> -->
+            </mat-list>
+          </div>
+
+
+
+        </div>
+        <div class="text-right justify-content-end">
+          <button mat-flat-button color="" class="custome-button mat-primary mr-2" (click)="updateProblemList()">
+            Save
+          </button>
+          <button type="button" mat-stroked-button class="transperent-button" color="primary" (click)="closeForm()">
+            Clear
+          </button>
+        </div>
+      </mat-card>
+    </form>
+  </div>
+</div>

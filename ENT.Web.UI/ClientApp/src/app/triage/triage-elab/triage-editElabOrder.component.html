@@ -1,0 +1,99 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg">
+    <span class="mr-4 ml-4">e-Lab</span>
+    <span class="mr-4 ml-4" *ngIf="data.record == null && (this.eLabDetails != null && this.eLabDetails != undefined)">Patient Name : {{this.eLabDetails.PatientName}}</span>
+    <span class="mr-4 ml-4" *ngIf="data.record == null && (this.eLabDetails != null && this.eLabDetails != undefined)">Visit Date & Time : {{this.eLabDetails.VisitDateandTime}}</span>
+    <span class="mr-4 ml-4" *ngIf="data.record == null && (this.eLabDetails != null && this.eLabDetails != undefined)">Physician Name : {{this.eLabDetails.ProviderName}}</span>
+    <span class="mr-4 ml-4" *ngIf="data.record != null">Patient Name : {{data.record.patientName}}</span>
+    <span class="mr-4 ml-4" *ngIf="data.record != null">Visit Date & Time : {{data.record.visitDateandTime}}</span>
+    <span class="mr-4 ml-4" *ngIf="data.record != null">Physician Name : {{data.record.RequestingPhysician}}</span>
+    <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+
+  <div>
+    <mat-card class="mt-2">
+      <form [formGroup]="eLabOrderForm">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12">
+            <div class="table-responsive shroff-table reduce-field">
+              <table class="table table-bordered table-hover w-100">
+                <thead>
+                  <tr class="font-weight-bold">
+                    <th class="w-100 text-center">Test Name</th>
+                    <th class="w-50 text-center">Urgency</th>
+                    <th class="w-50 text-center">Date</th>
+                    <th class="w-100 text-center">Notes</th>
+                    <th class="w-10 text-center"></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <!--end of .table-responsive-->
+          </div>
+
+          <div class="col-xl-12 col-lg-12 mt-4">
+            <div class="table-responsive shroff-table reduce-field overflow">
+              <table class="table table-bordered table-hover w-100">
+                <tbody formArrayName="eLab">
+                  <tr *ngFor="let eLabOrder of eLabOrderForm.get('eLab')?.controls; let index = index;">
+                    <td [formGroupName]="index" class="w-100 text-center">
+                      <mat-form-field class="w-100 mt-3 my-3" appearance="outline" [matTooltip]="(eLabOrder.get('TestName').value != null && eLabOrder.get('TestName').value != undefined)?eLabOrder.get('TestName').value:''" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                        <mat-label><span class="required-asterisk" *ngIf="eLabOrder.get('TestName').value == '' ? true : eLabOrder.get('TestName').value.length > 2 ? false : true"></span>Test Name</mat-label>
+                        <mat-icon matSuffix *ngIf="eLabOrder.get('TestName').value == '' ? true : eLabOrder.get('TestName').value.length > 2 ? false : true">search</mat-icon>
+                        <textarea matInput placeholder="Type and Select" rows="1" [matAutocomplete]="AutoTestName" formControlName="TestName" (keyup)="getTestNameList(index)" (blur)="toValidateTestName(index)" maxlength="200"></textarea>
+                        <input type="text" matInput formControlName="SetupMasterID" hidden>
+                        <mat-autocomplete autoActiveFirstOption #AutoTestName="matAutocomplete">
+                          <mat-option *ngFor="let test of testName" [value]="test.setupMasterDesc" (onSelectionChange)="SetupMasterID(index, test.SetupMasterID)">{{test.setupMasterDesc}}</mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </td>
+                    <td [formGroupName]="index" class="w-50 text-center">
+                      <mat-form-field class="w-100 mt-3 my-3" appearance="outline">
+                        <mat-label><span class="required-asterisk" *ngIf="(eLabOrder.get('Urgency').value == '' || eLabOrder.get('Urgency').value == null) ? true : false"></span>Urgency</mat-label>
+                        <mat-select formControlName="Urgency">
+                          <mat-option *ngFor="let urgency of urgencyName" [value]="urgency.UrgencyTypeCode">{{urgency.UrgencyTypeDescription}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td [formGroupName]="index" class="w-50 text-center">
+                      <mat-form-field class="w-100 mt-3 my-3" appearance="outline">
+                        <mat-label><span class="required-asterisk" *ngIf="eLabOrder.get('Date').value == '' ? true : false"></span>Select Date</mat-label>
+                        <input matInput [matDatepicker]="d1" placeholder="Visit date" formControlName="Date" autocomplete="off">
+                        <mat-datepicker-toggle matSuffix [for]="d1">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #d1></mat-datepicker>
+                      </mat-form-field>
+                    </td>
+                    <td [formGroupName]="index" class="w-100 text-center">
+                      <mat-form-field class="w-100 mt-3 my-3" appearance="outline" [matTooltip]="(eLabOrder.get('Notes').value != null && eLabOrder.get('Notes').value != undefined)?eLabOrder.get('Notes').value:''" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                        <mat-label><span class="required-asterisk" *ngIf="eLabOrder.get('Notes').value == '' ? true : false"></span>Notes</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="Notes" maxlength="500"></textarea>
+                      </mat-form-field>
+                    </td>
+                    <td class="w-10 text-center">
+                      <button style="color: red" class="close" (click)="onRemoveRowLabOrder(index)" *ngIf="eLabOrderForm.get('eLab').length>1" [hidden]="isLabRequestconfirmed == true" aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--end of .table-responsive-->
+          </div>
+          <div class="col-lg-12 mt-3">
+            <div class="col-lg-6 f-l pull-right">
+              <button type="button" mat-stroked-button class="transperent-button light-sky primary mr-2 schedbtn pull-right" (click)="onAddRowLabOrder()" [hidden]="isLabRequestconfirmed == true">Add Row</button>
+            </div>
+          </div>
+        </div>
+        <div class="text-right my-2 mt-3">
+          <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="submitData()" [hidden]="isLabRequestconfirmed == true">Save</button>
+          <button type="button" mat-stroked-button class="transperent-button" color="primary" (click)="resetForm()" [hidden]="isLabRequestconfirmed == true">Clear</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

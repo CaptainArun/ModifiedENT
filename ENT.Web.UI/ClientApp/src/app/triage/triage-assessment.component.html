@@ -1,0 +1,1417 @@
+<mat-card>
+ <form [formGroup]="triageAssessmentForm">
+   <mat-card-content [style.overflow]="'auto'" [style.height.px]="'600'">
+
+     <div class="white mb-3 mt-2 p-1">
+       <mat-card class="p-0 mb-4">
+         <h5 class="p-3 title-bg">EARS</h5>
+         <div class="scroll-x">
+           <div class="row p-0 m-0 scroll-md shadow-sm bg-odd">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <h5><b>External</b></h5>
+                 <div class="row pb-0 pt-4 ">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Size
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="pull-left">L = R</mat-label>
+                       <mat-form-field class="col-xl-6 w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="ExternalSize">
+                       </mat-form-field>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsExternalSize">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-1 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Shape
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="pull-left">L = R</mat-label>
+                       <mat-form-field class="col-xl-6 w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="ExternalShape">
+                       </mat-form-field>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsExternalShape">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-0 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Lesions
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                       <mat-form-field class="col-xl-6 w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LeftLesions">
+                       </mat-form-field>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLeftLesions">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                       <mat-form-field class="col-xl-6 w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="RightLesions">
+                       </mat-form-field>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRightLesions">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Tragus
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Mobile</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="LeftTragusMobile">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Tender</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="LeftTragusTender">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Mobile</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="RightTragusMobile">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Tender</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="RightTragusTender">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Meatus
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Patent</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="LeftMeatusPatent">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Discharge</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="LeftMeatusDischarge">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Patent</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="RightMeatusPatent">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Discharge</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="RightMeatusDischarge">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+
+
+               </div>
+             </div>
+
+           </div>
+           <div class="row p-0 m-0 scroll-md shadow-sm bg-even">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <h5><b>Internal</b></h5>
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Canal
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Clear</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLeftCanalClear">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LeftCanalClear">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Clear</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRightCanalClear">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="RightCanalClear">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-0 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Cerumen
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                     </div>
+                     <div class="col-xl-6 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLeftCerumen">
+                         <mat-radio-button value="1" class="mr-2">Present</mat-radio-button>
+                         <mat-radio-button value="2" class="mr-2">Small</mat-radio-button>
+                         <mat-radio-button value="3" class="mr-2">Medium</mat-radio-button>
+                         <mat-radio-button value="4">Large</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                     </div>
+                     <div class="col-xl-6 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRightCerumen">
+                         <mat-radio-button value="1" class="mr-2">Present</mat-radio-button>
+                         <mat-radio-button value="2" class="mr-2">Small</mat-radio-button>
+                         <mat-radio-button value="3" class="mr-2">Medium</mat-radio-button>
+                         <mat-radio-button value="4">Large</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Soft</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="LeftSoftCerumen">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-1 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Color</mat-label>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LeftColorCerumen">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Soft</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="RightSoftCerumen">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-1 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Color</mat-label>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="RightColorCerumen">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-0 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Tympanic Membrane
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Gray</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLeftGray">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LeftGray">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Grey</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRightGray">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="RightGray">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Lesions</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLeftTympanicLesions">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LeftTympanicLesions">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Lesions</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRightTympanicLesions">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="RightTympanicLesions">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+
+
+               </div>
+             </div>
+
+           </div>
+
+           <div class="row p-0 m-0 scroll-md shadow-sm bg-odd">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <h5><b>Hearing</b></h5>
+                 <div class="row pb-0 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Follows Directions
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsFollowsDirections">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="FollowsDirections">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-0 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Answers Directions
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsAnswersDirections">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="AnswersDirections">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-0 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Whisper
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="pull-left">L = R</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsWhisper">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="Whisper">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-0 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Rinne
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">AC.BC</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLeftRinne">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">AC.BC</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRightRinne">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-0 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Weber
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="pull-left">L = R</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsWeber">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="Weber">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+
+
+               </div>
+             </div>
+
+           </div>
+           <div class="row p-0 m-0 scroll-md shadow-sm bg-even">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <h5><b>Romberg</b></h5>
+                 <div class="row pb-0 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Maintains Balance
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="MaintainsBalance">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+         </div>
+
+       </mat-card>
+     </div>
+     <div class="white mb-3 mt-2 p-1">
+       <mat-card class="p-0 mb-4">
+         <h5 class="p-3 title-bg">NOSE</h5>
+         <div class="scroll-x">
+           <div class="row p-0 m-0 scroll-md shadow-sm bg-odd">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <h5><b>External</b></h5>
+                 <div class="row pb-1">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Midline
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsMidline">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="Midline">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-1">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Discharge
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsDischarge">
+                         <mat-radio-button value="1" class="mr-2">No</mat-radio-button>
+                         <mat-radio-button value="2">Yes</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="Discharge">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-1 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Nares
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">L</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Patent</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLeftNaresPatent">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LeftNaresPatent">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-2 pull-left">R</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Patent</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRightNaresPatent">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="RightNaresPatent">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+           <div class="row p-0 m-0 scroll-md shadow-sm bg-even">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <h5><b>Internal</b></h5>
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     L Mucosa
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Pink</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLMucosaPink">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LMucosaPink">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Moist</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLMucosaMoist">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LMucosaMoist">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Lesions</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLMucosaLesions">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LMucosaLesions">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     R Mucosa
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Pink</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRMucosaPink">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="RMucosaPink">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Moist</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRMucosaMoist">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="RMucosaMoist">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Lesions</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsRMucosaLesions">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="RMucosaLesions">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Septum
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Midline</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSeptumMidline">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SeptumMidline">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Intact</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSeptumIntact">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SpetumIntact">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </mat-card>
+     </div>
+
+     <div class="white mb-3 mt-2 p-1">
+       <mat-card class="p-0 mb-4">
+         <h5 class="p-3 title-bg">SINUSES</h5>
+         <div class="scroll-x">
+           <div class="row p-0 m-0 scroll-md shadow-sm">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <div class="row pb-1">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Frontal
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">L</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Tender</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="LeftFrontalTender">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">R</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Tender</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="RightFrontalTender">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-1">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Maxillary
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">L</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Tender</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="LeftMaxillaryTender">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">R</mat-label>
+                       <mat-label class="col-xl-4 pull-left">Tender</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="RightMaxillaryTender">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+
+         </div>
+
+       </mat-card>
+     </div>
+     <div class="white mb-3 mt-2 p-1">
+       <mat-card class="p-0 mb-4">
+         <h5 class="p-3 title-bg">MOUTH</h5>
+         <div class="scroll-x">
+           <div class="row p-0 m-0 scroll-md shadow-sm">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <div class="row pb-1 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Lips
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Symmetrical</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLipsSymmetrical">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LipsSymmetrical">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Moist</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLipsMoist">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LipsMoist">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Lesions</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsLipsLesions">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="LipsLesions">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-1 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Teeth
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TeethStatus1">
+                       </mat-form-field>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TeethStatus2">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Intact</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsTeethIntact">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TeethIntact">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Dentures</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsTeethDentures">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TeethDentures">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-1 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Tongue
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Mobile</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsTongueMobile">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TongueMobile">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Pink</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsTonguePink">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TonguePink">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Moist</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsTongueMoist">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TongueMoist">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Papillar</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsTonguePapillar">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TonguePapillar">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-12 pull-left">Dorsum Smooth</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsTongueDorsumSmooth">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TongueDorsumSmooth">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Lesions</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsTongueLesions">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="TongueLesions">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="row pb-1 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Gums
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Pink</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsGumsPink">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="GumsPink">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Smooth</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsGumsSmooth">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="GumsSmooth">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Lesions</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsGumsLesions">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="GumsLesions">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-1 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Salivary Glands
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-12 pull-left">Wharton’s—Visible</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSalivaryGlandsWhartons">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SalivaryGlandsWhartons">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Patent</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSalivaryGlandsPatent">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SalivaryGlandsPatent">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Inflammation</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSalivaryGlandsInflammation">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SalivaryGlandsInflammation">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-12 pull-left">Stensen’s—Visible</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSalivaryGlandsStensens">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SalivaryGlandsStensens">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Patent</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSalivaryGlandsPatent1">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SalivaryGlandsPatent1">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Inflammation</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSalivaryGlandsInflammation1">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SalivaryGlandsInflammation1">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-1 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Hard Palate
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Intact</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsHardPlateIntact">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="HardPlateIntact">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+
+         </div>
+
+       </mat-card>
+     </div>
+     <div class="white mb-3 mt-2 p-1">
+       <mat-card class="p-0 mb-4">
+         <h5 class="p-3 title-bg">THROAT</h5>
+         <div class="scroll-x">
+           <div class="row p-0 m-0 scroll-md shadow-sm">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Uvula
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Midline</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsUvulaMidline">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="UvulaMidline">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-12 pull-left">Rise with “ah”</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsUvulaRise">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="UvulaRise">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Soft Palate
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Intact</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSoftPalateIntact">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SoftPalateIntact">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-12 pull-left">Rise with “ah”</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsSoftPalateRise">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="SoftPalateRise">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Tonsils
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsTonsils">
+                         <mat-radio-button value="1" class="mr-2">Present</mat-radio-button>
+                         <mat-radio-button value="2">Absent</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7 offset-2">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-4 pull-left">Inflammation</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsInflammation">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="Inflammation">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                     Color
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-label class="col-xl-12 pull-left">Uvula, Pharynx—Pink</mat-label>
+                     </div>
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsColor">
+                         <mat-radio-button value="1" class="mr-2">Yes</mat-radio-button>
+                         <mat-radio-button value="2">No</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                     <div class="col-xl-5 pull-left">
+                       <mat-form-field class="w-100 pull-left box-size boxPos" appearance="outline">
+                         <input matInput placeholder="Enter" formControlName="Color">
+                       </mat-form-field>
+                     </div>
+                   </div>
+                 </div>
+
+
+
+               </div>
+             </div>
+
+           </div>
+
+         </div>
+
+       </mat-card>
+     </div>
+     <div class="white mb-3 mt-2 p-1">
+       <mat-card class="p-0 mb-4">
+         <h5 class="p-3 title-bg">ODOR</h5>
+         <div class="scroll-x">
+           <div class="row p-0 m-0 scroll-md shadow-sm">
+             <div class="col-lg-12">
+               <div class="pt-3 pb-0">
+                 <div class="row pb-2 pt-4 border-bt">
+                   <div class="col-xl-2 col-lg-4 col-md-4 font_color">
+                   </div>
+                   <div class="col-xl-9 col-lg-7 col-md-7">
+                     <div class="col-xl-3 pull-left">
+                       <mat-radio-group aria-label="Select an option" formControlName="IsODOR">
+                         <mat-radio-button value="1" class="mr-2">Present</mat-radio-button>
+                         <mat-radio-button value="2">Absent</mat-radio-button>
+                       </mat-radio-group>
+                     </div>
+                   </div>
+                 </div>
+
+
+               </div>
+             </div>
+
+           </div>
+
+         </div>
+
+       </mat-card>
+     </div>
+
+
+     <div class="col-xl-12 col-lg-6 mt-3 mb-3 text-center">
+       <button mat-flat-button color="primary" class="custome-button mat-primary mr-2">Save</button>
+       <button mat-stroked-button class="transperent-button" color="primary" (click)="closeDialog()">Cancel</button>
+     </div>
+   </mat-card-content>
+ </form>
+</mat-card>

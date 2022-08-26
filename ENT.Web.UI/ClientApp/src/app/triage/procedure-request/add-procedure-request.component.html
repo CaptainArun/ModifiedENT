@@ -1,0 +1,382 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="addProcedureRequestForm" #ngForm="ngForm">
+    <h5 cdkDragHandle class="p-3 title-bg">
+      Procedure Request
+      <button style="color: white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+
+    <mat-card>
+      <div class="row">
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.ProcedureRequestedDate == '' || addProcedureRequestForm.value.ProcedureRequestedDate == null) ? true : false"></span>Procedure
+              Request Date</mat-label>
+            <input matInput [matDatepicker]="proc3" formControlName="ProcedureRequestedDate" />
+            <mat-datepicker-toggle matSuffix [for]="proc3"></mat-datepicker-toggle>
+            <mat-datepicker #proc3></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 timepick">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="proc4" [disableClick]="true" formControlName="procedureRequestTime" />
+            <mat-label><span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.procedureRequestTime == '' || addProcedureRequestForm.value.procedureRequestTime == null) ? true : false"></span>Procedure
+              Request Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="proc4"></ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #proc4></ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Visit Date & Time</mat-label>
+            <input type="text" matInput readonly formControlName="VisitDateandTime" />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Request Physician</mat-label>
+            <input type="text" matInput readonly formControlName="ProviderName" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- <Body> -->
+
+    <mat-card class="my-3 overflow600px">
+      <div class="row mt-2">
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.ProcedureType == '' || addProcedureRequestForm.value.ProcedureType == null) ? true : false"></span>Procedure
+              Type</mat-label>
+            <mat-select formControlName="ProcedureType">
+              <mat-option *ngFor="let typ of procedureType" [value]="typ.ProcedureTypeID"> {{ typ.ProcedureTypeDesc }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.AdmittingPhysicianCheck == '' || addProcedureRequestForm.value.AdmittingPhysicianCheck == null) ? true : false"></span>Admiting
+              Physician/Surgeon</mat-label>
+            <input type="text" placeholder="Type and Select" matInput [matAutocomplete]="autoap"
+              #autoCompleteAdmittingPhysician="matAutocompleteTrigger" formControlName="AdmittingPhysicianCheck"
+              maxlength="50" />
+            <mat-icon matSuffix
+              *ngIf="(addProcedureRequestForm.value.AdmittingPhysicianCheck == '' || addProcedureRequestForm.value.AdmittingPhysicianCheck == null) ? true : addProcedureRequestForm.value.AdmittingPhysicianCheck.length > 2 ? false : true">
+              search</mat-icon>
+            <mat-autocomplete autoActiveFirstOption #autoap="matAutocomplete">
+              <mat-option *ngFor="let option of AdmittingPhysician" [value]="option.ProviderName"
+                (onSelectionChange)="setAdmittingPhysician(option.ProviderID)">
+                {{ option.ProviderName }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Approximate Duration</mat-label>
+            <input matInput placeholder="Enter Approximate Duration" formControlName="ApproximateDuration"
+              maxlength="50" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.UrgencyID == '' || addProcedureRequestForm.value.UrgencyID == null) ? true : false"></span>Urgency
+            </mat-label>
+            <mat-select formControlName="UrgencyID">
+              <mat-option *ngFor="let typ of UrgencyType" [value]="typ.UrgencyTypeId">
+                {{ typ.UrgencyTypeDescription }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+          <mat-form-field class="example-full-width column- 70 w-100" appearance="outline">
+            <mat-label> <span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.PreProcedureDiagnosis == '' || addProcedureRequestForm.value.PreProcedureDiagnosis == null) ? true : false"></span>Pre-Procedure
+              Diagnosis</mat-label>
+            <textarea matInput placeholder="Enter Additional Information" formControlName="PreProcedureDiagnosis"
+              rows="1" maxlength="1000"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline" [matTooltip]="icdTooltip" matTooltipPosition="above"
+            matTooltipClass="Tooltip-lg">
+            <mat-label>Primary ICD Code</mat-label>
+            <mat-icon matSuffix
+              *ngIf="(addProcedureRequestForm.value.ICDCode == '' || addProcedureRequestForm.value.ICDCode == null) ? true : addProcedureRequestForm.value.ICDCode.length > 2 ? false : true">
+              search</mat-icon>
+            <textarea matInput [matAutocomplete]="autoicd" formControlName="ICDCode" placeholder="Type and Select"
+              #autoCompleteICDCode="matAutocompleteTrigger" maxlength="500" rows="1"></textarea>
+            <mat-autocomplete autoActiveFirstOption #autoicd="matAutocomplete">
+              <mat-option *ngFor="let option of ICDCodes"
+                (onSelectionChange)="setICDTooltip(option.ICDCode, option.Description)"
+                [value]="option.ICDCode + '-' + option.Description">
+                {{ option.ICDCode }} - {{ option.Description }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+          <mat-form-field class="example-full-width column- 70 w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.PlannedProcedure == '' || addProcedureRequestForm.value.PlannedProcedure == null) ? true : false"></span>
+              Planned Procedure </mat-label>
+            <textarea matInput placeholder="Enter Planned Procedure" formControlName="PlannedProcedure" maxlength="1000"
+              rows="1"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.ProcedureNamecheck == '' || addProcedureRequestForm.value.ProcedureNamecheck == null) ? true : false"></span>Procedure
+              Name ( short )</mat-label>
+            <input type="text" matInput placeholder="Type and Select" [matAutocomplete]="autopn"
+              #autoCompleteProcedureName="matAutocompleteTrigger" formControlName="ProcedureNamecheck"
+              maxlength="200" />
+            <mat-icon matSuffix
+              *ngIf="(addProcedureRequestForm.value.ProcedureNamecheck == '' || addProcedureRequestForm.value.ProcedureNamecheck == null) ? true : addProcedureRequestForm.value.ProcedureNamecheck.length > 2 ? false : true">
+              search</mat-icon>
+            <mat-autocomplete autoActiveFirstOption #autopn="matAutocomplete">
+              <mat-option *ngFor="let option of ProcedureName" [value]="option.ProcedureDesc"
+                (onSelectionChange)="setProcedurename(option.ProcedureID, option.ProcedureDesc)">
+                {{ option.ProcedureDesc }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline" [matTooltip]="cptTooltip" matTooltipPosition="above"
+            matTooltipClass="Tooltip-lg">
+            <mat-label>Primary CPT Code</mat-label>
+            <mat-icon matSuffix
+              *ngIf="(addProcedureRequestForm.value.CPTCode == '' || addProcedureRequestForm.value.CPTCode == null) ? true : addProcedureRequestForm.value.CPTCode.length > 2 ? false : true">
+              search</mat-icon>
+            <textarea matInput [matAutocomplete]="cptCode" formControlName="CPTCode" placeholder="Type and Select"
+              #autoCompleteCPTCode="matAutocompleteTrigger" maxlength="500" rows="1"></textarea>
+            <mat-autocomplete autoActiveFirstOption #cptCode="matAutocomplete">
+              <mat-option *ngFor="let CPT of CPTCodes" (onSelectionChange)="setCPTTooltip(CPT.CPTCode, CPT.Description)"
+                [value]="CPT.CPTCode + '-' + CPT.Description">
+                {{ CPT.CPTCode }} - {{ CPT.Description }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 mt-3"
+          [ngClass]="{'validate': ngForm.submitted && addProcedureRequestForm.get('AnesthesiaFitnessRequiredCheck').invalid}">
+          <mat-label class="ml-5"><span class="required-asterisk"
+              *ngIf="(addProcedureRequestForm.value.AnesthesiaFitnessRequiredCheck == '' || addProcedureRequestForm.value.AnesthesiaFitnessRequiredCheck == null) ? true : false"></span><b>Anesthesia
+              Fitness Required :</b></mat-label>
+          <mat-radio-group class="ml-2 mr-3 pb-2 pt-2" aria-label="Anesthesia Fitness Required"
+            formControlName="AnesthesiaFitnessRequiredCheck" (change)="setAnesthesiaFitnessRequired()">
+            <mat-radio-button value="true">Yes</mat-radio-button>
+            <mat-radio-button value="false">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label> <span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.AnesthesiaFitnessRequiredDesc == '' || addProcedureRequestForm.value.AnesthesiaFitnessRequiredDesc == null) ? true : false"></span>Anesthesia
+              Fitness Required</mat-label>
+            <input class="w-100" matInput placeholder="Enter Anesthesia Fitness Details"
+              formControlName="AnesthesiaFitnessRequiredDesc" maxlength="200" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 mt-3"
+          [ngClass]="{'validate': ngForm.submitted && addProcedureRequestForm.get('BloodRequiredCheck').invalid}">
+          <mat-label class="ml-5 mr-2"><span class="required-asterisk"
+              *ngIf="(addProcedureRequestForm.value.BloodRequiredCheck == '' || addProcedureRequestForm.value.BloodRequiredCheck == null) ? true : false"></span><b>Blood
+              Required :</b></mat-label>
+          <mat-radio-group class="ml-2 mr-3 pb-2 pt-2" aria-label="Blood Required" formControlName="BloodRequiredCheck"
+            (change)="setBloodRequired()">
+            <mat-radio-button value="true">Yes</mat-radio-button>
+            <mat-radio-button value="false">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.BloodRequiredDesc == '' || addProcedureRequestForm.value.BloodRequiredDesc == null) ? true : false"></span>Blood
+              Required</mat-label>
+            <input matInput class="w-100" placeholder="Enter Blood Required Details" formControlName="BloodRequiredDesc"
+              maxlength="200" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <mat-label>
+          <h4 class="pb-2 pt-2 col-xl-12">
+            <u> Instructions:</u>
+          </h4>
+        </mat-label>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 pt-3 pl-4"
+          [ngClass]="{'validate': ngForm.submitted && addProcedureRequestForm.get('MedicineType').invalid}">
+
+          <mat-label class="ml-3 mr-2"><span class="required-asterisk"
+              *ngIf="(addProcedureRequestForm.value.MedicineType == '' || addProcedureRequestForm.value.MedicineType == null) ? true : false"></span>
+            <b> Medication :</b>
+          </mat-label>
+          <mat-radio-group formControlName="MedicineType" (change)="Medicine()">
+            <mat-radio-button value="ContinueMedication"> Continue All the Regular Medicine </mat-radio-button>
+            <mat-radio-button class="pl-5" value="StopMedication"> Stop All the Regular Medicine </mat-radio-button>
+          </mat-radio-group>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pt-3 pl-3">
+          <mat-checkbox class="ml-5" formControlName="SpecialPreparation">Special Preparation</mat-checkbox>
+        </div>
+
+        <div class="col-xl-4 col-lg-6">
+          <mat-form-field class="example-full-width w-100" appearance="outline">
+            <mat-label> Special Preparation </mat-label>
+            <textarea matInput placeholder="Enter Additional Information" formControlName="SpecialPreparationNotes"
+              maxlength="1000" rows="1"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pt-3 pl-3">
+          <mat-checkbox class="ml-5" formControlName="DietInstructions">Diet Instruction</mat-checkbox>
+        </div>
+
+        <div class="col-xl-4 col-lg-6">
+          <mat-form-field class="example-full-width column- 70 w-100" appearance="outline">
+            <mat-label>Diet Instructions </mat-label>
+            <textarea matInput placeholder="Enter Diet Instructions Information" rows="1"
+              formControlName="DietInstructionsNotes" maxlength="1000"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pt-3 pl-3">
+          <mat-checkbox class="ml-5" formControlName="OtherInstructions">Other Instruction</mat-checkbox>
+        </div>
+
+        <div class="col-xl-4 col-lg-6">
+          <mat-form-field class="example-full-width column- 70 w-100" appearance="outline">
+            <mat-label> Other Instructions </mat-label>
+            <textarea matInput placeholder="Enter Other Instructions " formControlName="OtherInstructionsNotes" rows="1"
+              maxlength="1000"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <mat-label>
+          <h4 class="pb-2 pt-2 col-xl-12">
+            <u> Other Consults:</u>
+          </h4>
+        </mat-label>
+      </div>
+      <div class="row">
+        <div class="col-xl-2 col-lg-6  pt-3 pl-4">
+          <mat-checkbox class="ml-5" formControlName="Cardiology">Cardiology</mat-checkbox>
+        </div>
+
+        <div class="col-xl-2 col-lg-6  pt-3 pl-4">
+          <mat-checkbox class="ml-5" formControlName="Nephrology">Nephrology</mat-checkbox>
+        </div>
+
+        <div class="col-xl-2 col-lg-6  pt-3 pl-4">
+          <mat-checkbox class="ml-5" formControlName="Neurology">Neurology</mat-checkbox>
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pt-3 pl-4">
+          <mat-checkbox class="ml-5" formControlName="OtherConsults">Other Consult</mat-checkbox>
+        </div>
+
+        <div class="col-xl-4 col-lg-6">
+          <mat-form-field class="example-full-width column- 70 w-100" appearance="outline">
+            <mat-label> Other Consult </mat-label>
+            <textarea matInput placeholder="Enter Other Consult" formControlName="OtherConsultsNotes" rows="1"
+              maxlength="1000"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <mat-label>
+          <h4 class="pb-2 pt-2 col-xl-12">
+            <u> Admission Request : </u>
+          </h4>
+        </mat-label>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(addProcedureRequestForm.value.AdmissionType == '' || addProcedureRequestForm.value.AdmissionType == null) ? true : false"></span>Admission
+              Type</mat-label>
+            <mat-select formControlName="AdmissionType">
+              <mat-option *ngFor="let typ of admissionType" [value]="typ.AdmissionTypeID">
+                {{ typ.AdmissionTypeDesc }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Patient's Expected Stay </mat-label>
+            <input matInput placeholder="Enter >Patient's Expected Stay" formControlName="PatientExpectedStay"
+              maxlength="100" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-8">
+          <mat-form-field class="example-full-width column- 70 w-100" appearance="outline">
+            <mat-label> Instructions to Patient </mat-label>
+            <textarea matInput placeholder="Enter Instructions to Patient" formControlName="InstructionToPatient"
+              rows="1" maxlength="1000"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-8">
+          <mat-form-field class="example-full-width column- 70 w-100" appearance="outline">
+            <mat-label> Additional Information </mat-label>
+            <textarea matInput placeholder="Enter Additional Information" formControlName="AdditionalInfo"
+              maxlength="1000" rows="1"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-card>
+
+    <div class="row mt-2 pull-right">
+      <button mat-flat-button color="primary" *ngIf="buttonHidden" class="custome-button mat-primary mr-2"
+        (click)="submitData()">
+        Save
+      </button>
+      <button type="button" mat-stroked-button *ngIf="buttonHidden" class="transperent-button mr-5"
+        (click)="CancelData()">
+        Clear
+      </button>
+      <button mat-flat-button type="button" *ngIf="!buttonHidden" color="primary"
+        class="custome-button mat-primary mr-5" (click)="dialogClose()">
+        Close
+      </button>
+    </div>
+    <!-- <ninthrow> -->
+    <!-- </Body> -->
+  </form>
+</div>

@@ -1,0 +1,2920 @@
+<div class="overflow-hidden px-2 mt-3" style="background: #eee !important">
+  <h5 class="p-1 title-bg">Visit Intake</h5>
+  <div class="white">
+    <mat-card class="p-0">
+      <app-patient-demographic [PatID]="this.patientId"></app-patient-demographic>
+    </mat-card>
+  </div>
+  <div class="bg-white px-4 py-2 my-3 upload-da">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Visit History </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row" *ngIf="showParticularRes">
+              <div class="col-xl-12 col-lg-12">
+                <div class="table-responsive shroff-table reduce-field">
+                  <div class="row">
+                    <app-bms-table [config]="tableConfig" [datas]="patientvisitHistoryList"
+                      (editItem)="openEditReport($event)" (viewItem)="openVisitViewReport($event)"></app-bms-table>
+                  </div>
+                </div>
+                <!--end of .table-responsive-->
+              </div>
+            </div>
+
+            <div class="w-100">
+              <mat-card *ngIf="!showParticularRes">
+                <h3>No Record Found</h3>
+              </mat-card>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <mat-horizontal-stepper #stepper (selectionChange)="stepChanged($event, stepper);">
+
+        <mat-step [stepControl]="vitalsFormGroup">
+          <form [formGroup]="vitalForm" #ngForm="ngForm">
+            <ng-template matStepLabel>Vitals</ng-template>
+            <div class="row">
+              <input hidden formControlName="PatientId" />
+              <input hidden formControlName="VisitId" />
+              <input hidden formControlName="VitalsId" />
+              <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+                <div class="row mb-4">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none ">
+                        <div class="row">
+                          <div class="col-12">
+                            <mat-card class="px-4 py-2 my-2">
+                              <h5 class="py-1">Visit Details</h5>
+                              <div class="row">
+                                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Visit Date & Time</mat-label>
+                                    <mat-select disabled [value]="vitalVisitDateandTime">
+                                      <mat-option *ngFor=" let vDate of visitDandt; index as i " [value]="vDate">
+                                        {{ vDate }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Recorded Date</mat-label>
+                                    <input matInput [matDatepicker]="vitals1" formControlName="RecordedDate" />
+                                    <mat-datepicker-toggle matSuffix [for]="vitals1"></mat-datepicker-toggle>
+                                    <mat-datepicker #vitals1></mat-datepicker>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-2 timepick pb-3 pt-3">
+                                  <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                    <input matInput [ngxTimepicker]="vitals2" [disableClick]="true"
+                                      formControlName="RecordedTime" />
+                                    <mat-label>Record Time</mat-label>
+                                    <ngx-material-timepicker-toggle [for]="vitals2">
+                                    </ngx-material-timepicker-toggle>
+                                    <ngx-material-timepicker #vitals2>
+                                    </ngx-material-timepicker>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Recorded During</mat-label>
+                                    <input disabled matInput placeholder="Enter" [value]="recordedDuringVital"
+                                      readonly />
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label><span class="required-asterisk"
+                                        *ngIf="(vitalForm.get('RecordedBy').invalid) ? true : false"></span>Recorded
+                                      By</mat-label>
+                                    <mat-select formControlName="RecordedBy">
+                                      <mat-option *ngFor="let value of recordby" [value]="value">
+                                        {{ value }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </mat-card>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-card>
+                      <div class="row d-flex">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Height</mat-label>
+                            <input matInput placeholder="in cms" maxlength="6" numeric formControlName="Height" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Weight</mat-label>
+                            <input matInput placeholder="in Kg" maxlength="6" numeric formControlName="Weight" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>BMI</mat-label>
+                            <input matInput placeholder="in kg/m&#178;" maxlength="6" numeric formControlName="BMI" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Waist Circumference</mat-label>
+                            <input matInput placeholder="in cms" maxlength="6" numeric
+                              formControlName="WaistCircumference" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Blood Pressure (Systolic)</mat-label>
+                            <input matInput placeholder="in mmHg" maxlength="3" numeric formControlName="BPSystolic" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Blood Pressure (Diastolic)</mat-label>
+                            <input matInput placeholder="in mmHg" maxlength="3" numeric formControlName="BPDiastolic" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Location (BP)</mat-label>
+                            <mat-select formControlName="BPLocationID">
+                              <mat-option *ngFor="let BP of BPLocation" [value]="BP.BPLocationId">{{
+                                BP.BPLocationDescription }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Patient Position (BP)</mat-label>
+                            <mat-select formControlName="PatientPosition">
+                              <mat-option *ngFor="let type of PatientPositionvalue" [value]="type.PatientPositionID">{{
+                                type.PatientPositionDesc }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label><span class="required-asterisk"
+                                *ngIf="(vitalForm.get('Temperature').invalid) ? true : false"></span>Temperature
+                            </mat-label>
+                            <input matInput placeholder="in F&#176;" maxlength="3" numeric
+                              formControlName="Temperature" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Temperature Location</mat-label>
+                            <mat-select formControlName="TemperatureLocation">
+                              <mat-option *ngFor="let type of TemperatureLocationvalue"
+                                [value]="type.TemperatureLocationID">{{ type.TemperatureLocationDesc }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Heart Rate</mat-label>
+                            <input matInput placeholder="in BPM " maxlength="5" numeric formControlName="HeartRate" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Respiratory Rate</mat-label>
+                            <input matInput placeholder="in BPM " maxlength="5" numeric
+                              formControlName="RespiratoryRate" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>O<sub class="mr-1">2</sub> Saturation</mat-label>
+                            <input matInput placeholder="in %" maxlength="5" numeric formControlName="O2Saturation" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Blood Sugar (Random)</mat-label>
+                            <input matInput placeholder="in mg/dl" maxlength="6" numeric
+                              formControlName="BloodsugarRandom" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Blood Sugar (Fasting)</mat-label>
+                            <input matInput placeholder="in mg/dl" maxlength="6" numeric
+                              formControlName="BloodsugarFasting" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Blood Sugar (Post Prandial)</mat-label>
+                            <input matInput placeholder="in mg/dl" maxlength="6" numeric
+                              formControlName="BloodSugarPostpardinal" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Pain Area</mat-label>
+                            <input matInput placeholder="Enter details" maxlength="50" formControlName="PainArea" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Pain Scale</mat-label>
+                            <mat-select formControlName="PainScale">
+                              <mat-option *ngFor="let type of PainScaleValue" [value]="type.PainScaleID">{{
+                                type.PainScaleDesc }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Head Circumference (cms)</mat-label>
+                            <input matInput placeholder="in cms" maxlength="5" numeric
+                              formControlName="HeadCircumference" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Last meal Taken on</mat-label>
+                            <input matInput [matDatepicker]="lastmealtakenon" placeholder="Choose a date"
+                              formControlName="LastMealtakenon" />
+                            <mat-datepicker-toggle matSuffix [for]="lastmealtakenon"></mat-datepicker-toggle>
+                            <mat-datepicker #lastmealtakenon></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-6 col-xl-6">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="vitalForm.get('LastMealdetails').value" matTooltipPosition="above"
+                            matTooltipClass="Tooltip-lg">
+                            <mat-label>Last meal details</mat-label>
+                            <textarea matInput placeholder="Enter details" maxlength="200" rows="1"
+                              formControlName="LastMealdetails"></textarea>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-3 col-lg-3"
+                          [ngClass]="{'validate': ngForm.submitted && vitalForm.get('IsDiabetic').invalid}">
+                          <mat-radio-group formControlName="IsDiabetic" class="w-100">
+                            <h5><span class="required-asterisk"
+                                *ngIf="(vitalForm.get('IsDiabetic').invalid) ? true : false"></span>Is
+                              Patient diabetic?</h5>
+                            <mat-radio-button class="pr-5" value="y">Yes</mat-radio-button>
+                            <mat-radio-button class="pr-5" value="n">No</mat-radio-button>
+                            <mat-radio-button class="pr-5" value="u">Unknown</mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+                        <div class="col-xl-3 col-lg-3"
+                          [ngClass]="{'validate': ngForm.submitted && vitalForm.get('IsBloodPressure').invalid}">
+                          <mat-radio-group formControlName="IsBloodPressure">
+                            <h5> <span class="required-asterisk"
+                                *ngIf="(vitalForm.get('IsBloodPressure').invalid) ? true : false"></span>Blood
+                              Pressure?</h5>
+                            <mat-radio-button class="pr-5" value="y">Yes</mat-radio-button>
+                            <mat-radio-button class="pr-5" value="n">No</mat-radio-button>
+                            <mat-radio-button class="pr-5" value="u">Unknown</mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+                        <div class="col-xl-6 align-self-start">
+                          <mat-form-field class="w-100" appearance="outline" [matTooltip]="vitalForm.get('Notes').value"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                            <mat-label>Notes</mat-label>
+                            <textarea matInput placeholder="Enter Notes" maxlength="500" rows="1"
+                              formControlName="Notes"></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="text-right justify-content-end">
+                        <div>
+                          <button mat-flat-button class="custome-button schedbtn mat-primary mr-2"
+                            (click)="addUpdateVitalsforVisit()" [hidden]="isShow">
+                            Save
+                          </button>
+                          <button type="button" mat-flat-button class="custome-button schedbtn mat-primary"
+                            matStepperNext>
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="allergiesFormGroup">
+          <form [formGroup]="allergyForm" #ngForm="ngForm">
+            <ng-template matStepLabel>Allergies</ng-template>
+            <div class="row" formArrayName="allergiesModel"
+              *ngFor=" let allergy of getdynamicAllergiesControls().controls;  let i = index ">
+              <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none" [formGroupName]="i">
+                <div class="row mb-4">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class=" col-md-12 col-sm-12 col-xs-12 dark-color padding-none ">
+                        <div class="row">
+                          <div class="col-12">
+                            <mat-card class="px-4 py-2 my-2">
+                              <h5 class="py-1">Visit Details</h5>
+                              <div class="row">
+                                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Visit Date & Time</mat-label>
+                                    <mat-select disabled [value]="allergyVisitDateandTime">
+                                      <mat-option *ngFor=" let vDate of visitDandt; index as i " [value]="vDate">
+                                        {{ vDate }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Recorded Date</mat-label>
+                                    <input matInput [matDatepicker]="Allergy" formControlName="RecordedDate" />
+                                    <mat-datepicker-toggle matSuffix [for]="Allergy"></mat-datepicker-toggle>
+                                    <mat-datepicker #Allergy></mat-datepicker>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-2 timepick pb-3 pt-3">
+                                  <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                    <input matInput [ngxTimepicker]="Allergy1" [disableClick]="true"
+                                      formControlName="RecordedTime" />
+                                    <mat-label>Record Time</mat-label>
+                                    <ngx-material-timepicker-toggle [for]="Allergy1">
+                                    </ngx-material-timepicker-toggle>
+                                    <ngx-material-timepicker #Allergy1>
+                                    </ngx-material-timepicker>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Recorded During</mat-label>
+                                    <input disabled matInput placeholder="Enter" [value]="allergyrecord" readonly />
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>
+                                      <span class="required-asterisk"
+                                        *ngIf="(allergy.get('RecordedBy').invalid) ? true : false"></span>
+                                      Recorded By
+                                    </mat-label>
+                                    <mat-select formControlName="RecordedBy">
+                                      <mat-option *ngFor="let value of recordby" [value]="value">
+                                        {{ value }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </mat-card>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-card>
+                      <div class="row">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Allergy Type</mat-label>
+                            <mat-select formControlName="AllergyTypeID">
+                              <input matInput formControlName="AllergyTypeDesc" hidden />
+                              <mat-option *ngFor="let allergy of allergyType" [value]="allergy.AllergyTypeID"
+                                (click)="toSetAllergyDesc(allergy.AllergyTypeDescription,i)"> {{
+                                allergy.AllergyTypeDescription }} </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Allergy Name</mat-label>
+                            <input matInput placeholder="Enter Allergy Name" maxlength="50" formControlName="Name" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Description</mat-label>
+                            <input matInput placeholder="Enter Description" maxlength="500"
+                              formControlName="Allergydescription" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Aggravated by</mat-label>
+                            <input matInput placeholder="Enter Aggravated by" maxlength="75"
+                              formControlName="Aggravatedby" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Alleviated by</mat-label>
+                            <input matInput placeholder="Enter Alleviated by" maxlength="75"
+                              formControlName="Alleviatedby" />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Onset Date</mat-label>
+                            <input matInput [matDatepicker]="onset" placeholder="Choose a date"
+                              formControlName="Onsetdate" />
+                            <mat-datepicker-toggle matSuffix [for]="onset"></mat-datepicker-toggle>
+                            <mat-datepicker #onset></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Severity</mat-label>
+                            <mat-select formControlName="AllergySeverityID">
+                              <input matInput formControlName="AllergySeverityDesc" hidden />
+                              <mat-option *ngFor="let severity of AllergySeverities"
+                                (click)="toSetAllergySeverity(severity.AllergySeverityDescription,i)"
+                                [value]="severity.AllergySeverityId">
+                                {{ severity.AllergySeverityDescription }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Reaction</mat-label>
+                            <input matInput placeholder="Enter Reaction" maxlength="75" formControlName="Reaction" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="Status">
+                              <mat-option *ngFor="let type of allergyStatusvalue"
+                                [value]="type.AllergyStatusMasterDesc">{{ type.AllergyStatusMasterDesc }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="(allergy.get('ICD10').value != null && allergy.get('ICD10').value != undefined)?allergy.get('ICD10').value:''"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                            <mat-label>ICD Code</mat-label>
+                            <mat-icon matSuffix
+                              *ngIf="(allergy.get('ICD10').value == '' || allergy.get('ICD10').value == null) ? true : allergy.get('ICD10').value.length > 2 ? false : true">
+                              search</mat-icon>
+                            <textarea matInput [matAutocomplete]="ICDCode" placeholder="Type and Select" maxlength="500"
+                              #autoCompleteICDCode="matAutocompleteTrigger" rows="1" formControlName="ICD10"></textarea>
+                            <mat-autocomplete autoActiveFirstOption #ICDCode="matAutocomplete">
+                              <mat-option *ngFor="let ICD10 of diagnosisCode"
+                                [value]=" ICD10.ICDCode + '-' + ICD10.Description ">
+                                {{ ICD10.ICDCode }}-{{ ICD10.Description }}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="(allergy.get('SNOMED').value != null && allergy.get('SNOMED').value != undefined)?allergy.get('SNOMED').value:''"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                            <mat-label>SNOMED Code</mat-label>
+                            <mat-icon matSuffix
+                              *ngIf="(allergy.get('SNOMED').value == '' || allergy.get('SNOMED').value == null) ? true : allergy.get('SNOMED').value.length > 2 ? false : true">
+                              search</mat-icon>
+                            <textarea matInput placeholder="Type and Select" [matAutocomplete]="SNOMED" maxlength="500"
+                              #autoCompleteSnomedCode="matAutocompleteTrigger" rows="1"
+                              formControlName="SNOMED"></textarea>
+                            <mat-autocomplete autoActiveFirstOption #SNOMED="matAutocomplete">
+                              <mat-option *ngFor="let SNOMED of snomedCTCode"
+                                [value]="SNOMED.Code+ '-' +SNOMED.Description">
+                                {{ SNOMED.Code }}-{{ SNOMED.Description }}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 align-self-start">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="(allergy.get('Notes').value != null && allergy.get('Notes').value != undefined)?allergy.get('Notes').value:''"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                            <mat-label>Notes</mat-label>
+                            <textarea matInput placeholder="Enter Notes" maxlength="500" rows="1"
+                              formControlName="Notes"></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="col-xl-12 text-right mt-2 mb-4">
+                        <button mat-flat-button class="custome-button mat-primary schedbtn" [hidden]="isShow1"
+                          [disabled]="AllergySaveBtn" (click)="allergyAddAnother()">
+                          Add Allergy
+                        </button>
+
+                      </div>
+
+
+                      <div class="row mb-2 pt-4 " style="border-top: 3px solid #58bdbd;" *ngIf="isAllergy">
+                        <div class="col-12" *ngFor="let allergies of allergiesCollection; index as i">
+                          <div class="row m-0 border-bottom">
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0"> Allergy Type : </div>
+                                <div class="col-6 p-0 text-allert">{{ allergies.AllergyTypeDesc }}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0">Name :</div>
+                                <div class="col-6 p-0">{{ allergies.Name }}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0"> Description : </div>
+                                <div class="col-6 p-0">{{ allergies.Allergydescription }}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0">Aggravated by : </div>
+                                <div class="col-6 p-0">{{ allergies.Aggravatedby }} </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0">Alleviatedby by :</div>
+                                <div class="col-6 p-0">{{ allergies.Alleviatedby }}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0"> Onsetdate :</div>
+                                <div class="col-6 p-0">{{ allergies.Onsetdate | date: "dd-MM-yyyy" }}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0">Allergy Severity :</div>
+                                <div class="col-6 p-0">{{ allergies.AllergySeverityDesc }}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0"> Reaction : </div>
+                                <div class="col-6 p-0"> {{ allergies.Reaction }} </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0"> ICD Code : </div>
+                                <div class="col-6 p-0"> {{ allergies.ICD10 }} </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0"> SNOMED Code : </div>
+                                <div class="col-6 p-0"> {{ allergies.SNOMED }} </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <div class="row pb-1">
+                                <div class="col-6 font-weight-bold pl-0">
+                                  Notes :
+                                </div>
+                                <div class="col-6 p-0"> {{ allergies.Notes }} </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-auto pr-0 pull-right-button">
+                              <i class="fa fa-pencil-square f-25 cursor-pointer " aria-hidden="true"
+                                *ngIf="!allergies.IsActive" (click)="EditAllergy(allergies,i)"></i>
+                              <i class="fa fa-trash f-25 ml-2 cursor-pointer" aria-hidden="true"
+                                *ngIf="allergiesCollection.length > 1 && !allergies.IsActive"
+                                (click)="deleteAllergy(allergies,i)"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="text-right justify-content-end mt-5">
+                        <button type="button" mat-flat-button class="custome-button mat-primary schedbtn"
+                          [hidden]="isShow1" (click)="allergySave()">
+                          save
+                        </button>
+                        <button type="button" mat-stroked-button
+                          class=" transperent-button schedbtn light-sky primary mr-2 " matStepperPrevious>
+                          Previous
+                        </button>
+                        <button type="button" mat-flat-button class="custome-button mat-primary schedbtn"
+                          matStepperNext>
+                          Next
+                        </button>
+                      </div>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="problemlistFormGroup">
+          <form [formGroup]="problemListForm" #ngForm="ngForm">
+            <ng-template matStepLabel>Problem list</ng-template>
+            <div class="row" formArrayName="problemCollection"
+              *ngFor="let PL of getdynamicProblemListControls().controls; let i = index">
+              <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none" [formGroupName]="i">
+                <div class="row">
+                  <div class=" col-md-12 col-sm-12 col-xs-12 dark-color padding-none ">
+                    <div class="row mb-4">
+                      <div class="col-12">
+                        <div class="row">
+                          <div class=" col-md-12 col-sm-12 col-xs-12 dark-color padding-none ">
+                            <div class="row">
+                              <div class="col-12">
+                                <mat-card class="px-4 py-2 my-2">
+                                  <h5 class="py-1">Visit Details</h5>
+                                  <div class="row">
+                                    <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                      <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Visit Date & Time</mat-label>
+                                        <mat-select disabled [value]="problemlistVisitDateandTime">
+                                          <mat-option *ngFor="let vDate of visitDandt; index as i " [value]="vDate">
+                                            {{ vDate }}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+
+                                    <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                      <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Recorded Date</mat-label>
+                                        <input matInput [matDatepicker]="Prob" formControlName="RecordedDate" />
+                                        <mat-datepicker-toggle matSuffix [for]="Prob"></mat-datepicker-toggle>
+                                        <mat-datepicker #Prob></mat-datepicker>
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-2 timepick pb-3 pt-3">
+                                      <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                        <input matInput [ngxTimepicker]="Prob1" [disableClick]="true"
+                                          formControlName="RecordedTime" />
+                                        <mat-label>Record Time</mat-label>
+                                        <ngx-material-timepicker-toggle [for]="Prob1">
+                                        </ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #Prob1>
+                                        </ngx-material-timepicker>
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                      <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Recorded During</mat-label>
+                                        <input disabled matInput placeholder="Enter" [value]="recordedDuringProblemList"
+                                          readonly />
+                                      </mat-form-field>
+                                    </div>
+
+                                    <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                      <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label><span class="required-asterisk"
+                                            *ngIf="(PL.get('RecordedBy').invalid) ? true : false"></span>Recorded By
+                                        </mat-label>
+                                        <mat-select formControlName="RecordedBy">
+                                          <mat-option *ngFor="let value of recordby" [value]="value">
+                                            {{ value }}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </mat-card>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <mat-card>
+                          <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Problem Type</mat-label>
+                                <mat-select formControlName="ProblemTypeID">
+                                  <input formControlName="ProblemTypeDesc" hidden>
+                                  <mat-option *ngFor="let problemType of problemTypes"
+                                    (click)="toSetProblemTypeDesc(problemType.ProblemTypeDescription)"
+                                    [value]="problemType.ProblemTypeId">
+                                    {{ problemType.ProblemTypeDescription }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 align-self-start">
+                              <mat-form-field class="w-100" appearance="outline"
+                                [matTooltip]="(PL.get('ProblemDescription').value != null && PL.get('ProblemDescription').value != undefined)?PL.get('ProblemDescription').value:''"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                                <mat-label>Problem Description</mat-label>
+                                <textarea matInput placeholder="Enter Description" maxlength="500" rows="1"
+                                  formControlName="ProblemDescription"></textarea>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                              <mat-form-field class="w-100" appearance="outline"
+                                [matTooltip]="(PL.get('ICD10Code').value != null && PL.get('ICD10Code').value != undefined)?PL.get('ICD10Code').value:''"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                                <mat-label>ICD Code</mat-label>
+                                <mat-icon matSuffix
+                                  *ngIf="(PL.get('ICD10Code').value == '' || PL.get('ICD10Code').value == null) ? true : PL.get('ICD10Code').value.length > 2 ? false : true">
+                                  search</mat-icon>
+                                <textarea matInput [matAutocomplete]="ICD10Code" placeholder="Type and Select" rows="1"
+                                  #autoCompleteICDCodeProblemList="matAutocompleteTrigger" maxlength="500"
+                                  formControlName="ICD10Code"></textarea>
+                                <mat-autocomplete autoActiveFirstOption #ICD10Code="matAutocomplete">
+                                  <mat-option *ngFor="let ICD10 of diagnosisCode"
+                                    [value]=" ICD10.DiagnosisCodeID + '-' + ICD10.Description ">
+                                    {{ ICD10.ICDCode }}-{{ ICD10.Description }}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                              <mat-form-field class="w-100" appearance="outline"
+                                [matTooltip]="(PL.get('SNOMEDCode').value != null && PL.get('SNOMEDCode').value != undefined)?PL.get('SNOMEDCode').value:''"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                                <mat-label>SNOMED Code</mat-label>
+                                <mat-icon matSuffix
+                                  *ngIf="(PL.get('SNOMEDCode').value == '' || PL.get('SNOMEDCode').value == null) ? true : PL.get('SNOMEDCode').value.length > 2 ? false : true">
+                                  search</mat-icon>
+                                <textarea matInput placeholder="Type and Select" [matAutocomplete]="SNOMEDCode" rows="1"
+                                  #autoCompleteSnomedCodeProblemList="matAutocompleteTrigger" maxlength="500"
+                                  formControlName="SNOMEDCode"></textarea>
+                                <mat-autocomplete autoActiveFirstOption #SNOMEDCode="matAutocomplete">
+                                  <mat-option *ngFor="let SNOMEDCode of snomedCTCode"
+                                    [value]=" SNOMEDCode.Code + '-' + SNOMEDCode.Description  ">
+                                    {{ SNOMEDCode.Code }}-{{ SNOMEDCode.Description }}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Aggravated by</mat-label>
+                                <input matInput placeholder="Enter Aggravated by" maxlength="75"
+                                  formControlName="Aggravatedby" />
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Alleviated by</mat-label>
+                                <input matInput placeholder="Enter Alleviated by" maxlength="75"
+                                  formControlName="AlleviatedBy" />
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Diagnosed Date</mat-label>
+                                <input matInput [matDatepicker]="picker2" placeholder="Choose a date"
+                                  formControlName="DiagnosedDate" />
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Problem Status</mat-label>
+                                <mat-select formControlName="Status">
+                                  <mat-option *ngFor="let type of problemstatusvalue" [value]="type.ProblemStatusDesc">
+                                    {{ type.ProblemStatusDesc }}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Resolved Date</mat-label>
+                                <input matInput [matDatepicker]="picker3" placeholder="Choose a date"
+                                  formControlName="ResolvedDate" />
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker3></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Attending Physician</mat-label>
+                                <input matInput placeholder="Enter Attending Physician name" maxlength="75"
+                                  formControlName="AttendingPhysican" />
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 align-self-start">
+                              <mat-form-field class="w-100" appearance="outline"
+                                [matTooltip]="(PL.get('Notes').value != null && PL.get('Notes').value != undefined)?PL.get('Notes').value:''"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                                <mat-label>Notes</mat-label>
+                                <textarea matInput placeholder="Enter Notes" maxlength="500" rows="1"
+                                  formControlName="Notes"></textarea>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-xl-6">
+
+                              <input type="file" #multipleProblemList placeholder="Choose file" value="upload"
+                                (change)="FileUploadProblemListMethod($event)" style="display:none;" multiple>
+                              <button type="button" mat-raised-button color="primary" [disabled]="isShow"
+                                (click)="multipleProblemList.click()">Upload Documents</button>
+
+                              <mat-list>
+                                <mat-list-item *ngFor="let file of ViewFileProblemList;let index = index">
+
+                                  <span>
+                                    <i class="fa fa-file-text-o mr-2" aria-hidden="true"></i>
+                                    <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a> [{{file.Size}}]
+                                    <button mat-mini-fab color="warn" [disabled]="isShow"
+                                      (click)="RemoveFileProblemList(file.FileName,index)">
+                                      <mat-icon>close</mat-icon>
+                                    </button>
+                                  </span>
+
+                                </mat-list-item>
+                              </mat-list>
+                            </div>
+
+                            <div class="col-xl-6 text-right">
+                              <button mat-flat-button class="custome-button mat-primary schedbtn"
+                                [disabled]="problemListSaveBtn" (click)="problemlistAddAnother()" [hidden]="isShow1">
+                                Add Problem
+                              </button>
+                            </div>
+
+                          </div>
+
+                          <div class="row mb-5 pt-4" style="border-top: 3px solid #58bdbd;" *ngIf="isProblemList">
+                            <div class="col-12 border-bottom" *ngFor="let problem of problemListCollection;index as i">
+                              <div class="row m-0 mt-4 ">
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Problem Type : </div>
+                                    <div class="col-6 p-0 text-allert"> {{ problem.ProblemTypeDesc }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Description : </div>
+                                    <div class="col-6 p-0"> {{ problem.ProblemDescription }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Diagnosis ICD Code </div>
+                                    <div class="col-6 p-0"> {{ problem.ICD10Code }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Aggravated by : </div>
+                                    <div class="col-6 p-0"> {{ problem.Aggravatedby }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> SNOMED Code : </div>
+                                    <div class="col-6 p-0"> {{ problem.SNOMEDCode }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> DiagnosedDate : </div>
+                                    <div class="col-6 p-0"> {{ problem.DiagnosedDate | date: "dd-MM-yyyy" }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> ResolvedDate : </div>
+                                    <div class="col-6 p-0"> {{ problem.ResolvedDate | date: "dd-MM-yyyy" }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Status : </div>
+                                    <div class="col-6 p-0"> {{ problem.Status }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> AttendingPhysican : </div>
+                                    <div class="col-6 p-0"> {{ problem.AttendingPhysican }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Alleviated by : </div>
+                                    <div class="col-6 p-0"> {{ problem.AlleviatedBy }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Notes : </div>
+                                    <div class="col-6 p-0"> {{ problem.Notes }} </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-lg-auto pr-0 pull-right-button">
+                                  <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true"
+                                    *ngIf="!problem.IsActive" (click)="EditProblemList(problem,i)"></i>
+                                  <i class="fa fa-trash f-25 ml-2 cursor-pointer"
+                                    *ngIf="problemListCollection.length > 1 && !problem.IsActive"
+                                    (click)="deleteProblemList(problem,i)" aria-hidden="true"></i>
+                                </div>
+                              </div>
+                              <div class="p-0 wrapper" *ngIf="problem.file">
+                                <div class="scroll-x">
+                                  <div class="row m-0 scroll-md">
+                                    <div class="col-sm-6 p-0">
+                                      <div class="v-line">
+                                        <mat-list-item *ngFor="let file of problem.file; let even=even">
+                                          <div class="pb-2 pt-3" *ngIf="even">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a>&nbsp;
+                                            [{{file.Size}}]
+                                          </div>
+                                        </mat-list-item>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-sm-6 p-1">
+                                      <div class="v-line">
+                                        <mat-list-item *ngFor="let file of problem.file ;let odd=odd">
+                                          <div class="pb-2 pt-3" *ngIf="odd">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a>&nbsp;
+                                            [{{file.Size}}]
+                                          </div>
+                                        </mat-list-item>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="p-0 wrapper" *ngIf="problem.ViewFileProblemList">
+                                <div class="scroll-x">
+                                  <div class="row m-0 scroll-md">
+                                    <div class="col-sm-6 p-0">
+                                      <div class="v-line">
+                                        <mat-list-item *ngFor="let file of problem.ViewFileProblemList; let even=even">
+                                          <div class="pb-2 pt-3" *ngIf="even">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a>&nbsp;
+                                            [{{file.Size}}]
+                                          </div>
+                                        </mat-list-item>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-sm-6 p-1">
+                                      <div class="v-line">
+                                        <mat-list-item *ngFor="let file of problem.ViewFileProblemList ;let odd=odd">
+                                          <div class="pb-2 pt-3" *ngIf="odd">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a>&nbsp;
+                                            [{{file.Size}}]
+                                          </div>
+                                        </mat-list-item>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="text-right justify-content-end mt-5">
+                            <button type="button" mat-flat-button class="custome-button mat-primary schedbtn mr-2"
+                              [disabled]="problemListSaveBtn" (click)="problemListSave()" [hidden]="isShow1">
+                              Save
+                            </button>
+                            <button type="button" mat-stroked-button
+                              class=" transperent-button schedbtn light-sky primary mr-2" matStepperPrevious>
+                              Previous
+                            </button>
+                            <button type="button" mat-flat-button class="custome-button schedbtn mat-primary"
+                              matStepperNext>
+                              Next
+                            </button>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="medicationFormGroup">
+          <form [formGroup]="medicationForm" #ngForm="ngForm">
+            <ng-template matStepLabel>Medication</ng-template>
+            <mat-card>
+              <div class="row">
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Visit Date & Time</mat-label>
+                    <mat-select disabled [value]="vitalVisitDateandTime">
+                      <mat-option *ngFor=" let vDate of visitDandt; index as i " [value]="vDate">
+                        {{ vDate }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Recorded Date</mat-label>
+                    <input matInput [matDatepicker]="medication" formControlName="RecordedDateMedication" />
+                    <mat-datepicker-toggle matSuffix [for]="medication"></mat-datepicker-toggle>
+                    <mat-datepicker #medication></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-2 timepick pb-3 pt-3">
+                  <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                    <input matInput [ngxTimepicker]="medication2" [disableClick]="true"
+                      formControlName="RecordedTimemedication" />
+                    <mat-label>Record Time</mat-label>
+                    <ngx-material-timepicker-toggle [for]="medication2">
+                    </ngx-material-timepicker-toggle>
+                    <ngx-material-timepicker #medication2>
+                    </ngx-material-timepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Recorded During</mat-label>
+                    <input disabled matInput placeholder="Enter" [value]="recordedDuringVital" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                        *ngIf="(medicationForm.get('RecordedByMedication').invalid) ? true : false"></span>Recorded By
+                    </mat-label>
+                    <mat-select formControlName="RecordedByMedication">
+                      <mat-option *ngFor="let value of recordby" [value]="value">
+                        {{ value }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+
+            <div class="col-lg-12 mt-3">
+              <div class="table-responsive shroff-table reduce-field">
+                <table class="table table-bordered table-hover w-100 medications">
+                  <thead>
+                    <tr class="font-weight-bold">
+                      <th class="col-xl-4 text-center">Item/Drug Name</th>
+                      <th class="col-xl-4 text-center">Route</th>
+                      <th class="col-xl-4 text-center">Diagnosis</th>
+                      <th class="col-xl-3 text-center">Total Quantity</th>
+                      <th class="col-xl-3 text-center">No of Days</th>
+                      <th class="col-xl-6 text-center">Medication Time</th>
+                      <th class="col-xl-3 text-center">Before/After</th>
+                      <th class="col-xl-2 text-center">Status</th>
+                      <th class="col-xl-4 text-center">SIG</th>
+                      <th class="col-xl-1 text-center"></th>
+                    </tr>
+                  </thead>
+
+                  <tbody formArrayName="medicationModel">
+                    <tr *ngFor="let row of  medicationForm.get('medicationModel')?.controls; let index = index;">
+                      <td [formGroupName]="index" class="col-xl-4 text-center">
+                        <mat-form-field class="col-xl-12 medileft" appearance="outline"
+                          [matTooltip]="(row.get('ItemDrugName').value != null && row.get('ItemDrugName').value != undefined)?row.get('ItemDrugName').value:''"
+                          matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                          <mat-label>Item/Drug Name</mat-label>
+                          <mat-icon matSuffix
+                            *ngIf="(row.get('ItemDrugName').value == '' || row.get('ItemDrugName').value == null) ? true : row.get('ItemDrugName').value.length > 2 ? false : true">
+                            search</mat-icon>
+                          <textarea matInput placeholder="Type and Select" [matAutocomplete]="AutoDrugName" rows="3"
+                            (blur)="autoResetDrug(autoCompleteDrugInput.value, index)" #autoCompleteDrugInput
+                            formControlName="ItemDrugName" (keyup)="getDrugList(index)" maxlength="500"></textarea>
+                          <mat-autocomplete autoActiveFirstOption #AutoDrugName="matAutocomplete">
+                            <mat-option *ngFor="let drug of drugName" [value]="drug.NDCCode + '/' + drug.Description"
+                              (onSelectionChange)="DrugId(drug.DrugCodeID, drug.NDCCode, drug.Description, index)">
+                              {{drug.NDCCode}} / {{drug.Description}}</mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </td>
+
+                      <td [formGroupName]="index" class="col-xl-4 text-center">
+                        <mat-form-field class="col-lg-12 medidropdown" appearance="outline"
+                          [matTooltip]="(row.get('routeTooltip').value != null && row.get('routeTooltip').value != undefined)?row.get('routeTooltip').value:''"
+                          matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                          <mat-label>Route</mat-label>
+                          <input formControlName="routeTooltip" hidden>
+                          <mat-select formControlName="Route">
+                            <mat-option *ngFor="let route of routeName" (click)="setRouteTooltip(index)"
+                              [value]="route.RouteCode">
+                              {{route.RouteDescription}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+
+                      <td [formGroupName]="index" class="col-xl-4 text-center">
+                        <mat-form-field class="col-lg-12 mediright1" appearance="outline"
+                          [matTooltip]="(row.get('Diagnosis').value != null && row.get('Diagnosis').value != undefined)?row.get('Diagnosis').value:''"
+                          matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                          <mat-label>Diagnosis</mat-label>
+                          <mat-icon matSuffix
+                            *ngIf="(row.get('Diagnosis').value == '' || row.get('Diagnosis').value == null) ? true : row.get('Diagnosis').value.length > 2 ? false : true">
+                            search</mat-icon>
+                          <textarea matInput placeholder="Type and Select" [matAutocomplete]="AutoDiagnosisName"
+                            #autoCompleteDiagnosisInput rows="3" formControlName="Diagnosis"
+                            (keyup)="getDiagnosisList(index)"
+                            (blur)="autoResetDiagnosis(autoCompleteDiagnosisInput.value, index)"
+                            maxlength="500"></textarea>
+                          <mat-autocomplete autoActiveFirstOption #AutoDiagnosisName="matAutocomplete">
+                            <mat-option *ngFor="let diagnosis of diagnosisName"
+                              (onSelectionChange)="DiagnosisId(diagnosis.DiagnosisCodeID, diagnosis.ICDCode, diagnosis.Description, index)"
+                              [value]="diagnosis.ICDCode + '-' + diagnosis.Description">{{diagnosis.ICDCode}} -
+                              {{diagnosis.Description}}</mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </td>
+
+                      <td [formGroupName]="index" class="col-xl-3 text-center"
+                        [matTooltip]="(row.get('Qty').value != null && row.get('Qty').value != undefined)?row.get('Qty').value:''"
+                        matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                        <mat-form-field class="col-lg-12 mediqty" appearance="outline">
+                          <mat-label>Total Quantity</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Qty" numeric autocomplete="off">
+                        </mat-form-field>
+                      </td>
+
+                      <td [formGroupName]="index" class="col-xl-3 text-center"
+                        [matTooltip]="(row.get('Days').value != null && row.get('Days').value != undefined)?row.get('Days').value:''"
+                        matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                        <mat-form-field class="col-lg-12 medidays" appearance="outline">
+                          <mat-label>No of Days</mat-label>
+                          <input matInput placeholder="Enter" formControlName="Days" numeric autocomplete="off">
+                        </mat-form-field>
+                      </td>
+
+                      <td [formGroupName]="index" class="col-xl-6 text-center">
+                        <div class="col-lg-2 f-l my-3">
+                          <mat-label>Morning</mat-label>
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" formControlName="Morning"></mat-checkbox>
+                          </section>
+                        </div>
+                        <div class="col-lg-2 f-l m-3">
+                          <mat-label>Brunch</mat-label>
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" formControlName="Brunch"></mat-checkbox>
+                          </section>
+                        </div>
+                        <div class="col-lg-2 f-l my-3">
+                          <mat-label>Noon</mat-label>
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" formControlName="Noon"></mat-checkbox>
+                          </section>
+                        </div>
+                        <div class="col-lg-2 f-l my-3">
+                          <mat-label>Evening</mat-label>
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" formControlName="Evening"></mat-checkbox>
+                          </section>
+                        </div>
+                        <div class="col-lg-2 f-l my-3 m-2">
+                          <mat-label>Night</mat-label>
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" formControlName="Night"></mat-checkbox>
+                          </section>
+                        </div>
+                      </td>
+
+                      <td [formGroupName]="index" class="col-xl-3 text-center">
+                        <div class="col-lg-2 f-l mr-4">
+                          <mat-label>Before</mat-label>
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" formControlName="Before"></mat-checkbox>
+                          </section>
+                        </div>
+                        <div class="col-lg-2 f-l">
+                          <mat-label>After</mat-label>
+                          <section class="example-section">
+                            <mat-checkbox class="example-margin" formControlName="After"></mat-checkbox>
+                          </section>
+                        </div>
+                      </td>
+
+                      <td [formGroupName]="index" class="col-xl-2 text-center"
+                        [ngClass]="{'validate': ngForm.submitted}">
+                        <div class="col-lg-2 f-l">
+                          <mat-label>Status</mat-label>
+                          <mat-radio-group aria-label="Select an option" class="example-radio-group"
+                            formControlName="MedicationStatus">
+                            <mat-radio-button value="start">Start</mat-radio-button>
+                            <mat-radio-button value="hold">Hold</mat-radio-button>
+                            <mat-radio-button value="continue">Continue</mat-radio-button>
+                            <mat-radio-button value="discontinue">Discontinue</mat-radio-button>
+                          </mat-radio-group>
+                        </div>
+                      </td>
+
+                      <td [formGroupName]="index" class="col-xl-4 text-center">
+                        <mat-form-field class="col-xl-12 medisig" appearance="outline"
+                          [matTooltip]="(row.get('SIG').value != null && row.get('SIG').value != undefined)?row.get('SIG').value:''"
+                          matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                          <mat-label>SIG</mat-label>
+                          <textarea matInput placeholder="Enter" formControlName="SIG" maxlength="500"
+                            rows="1"></textarea>
+                        </mat-form-field>
+                      </td>
+
+                      <td class="col-xl-1 text-center">
+                        <button type="button" style="color: red" class="close" (click)="onRemoveRow(index,row)"
+                          [hidden]="isShow1" *ngIf="getePrescriptionDynamic().controls.length>1" aria-label="Close">
+                          <span aria-hidden="true">X</span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!--end of .table-responsive-->
+
+            <div class="col-lg-12 mt-2 text-right">
+              <!-- ADD ROW -->
+              <button type="button" mat-flat-button class="custome-button mat-primary schedbtn text-right"
+                [hidden]="isShow1" (click)="onAddRow()">Add Medication</button>
+            </div>
+            <br><br>
+
+            <div class=" text-right justify-content-end">
+              <button mat-flat-button class="custome-button mat-primary schedbtn mr-2" [hidden]="isShow1"
+                (click)="submitDataMedication()">
+                Save
+              </button>
+              <button type="button" mat-stroked-button class=" transperent-button schedbtn light-sky primary mr-2 "
+                matStepperPrevious>
+                Previous
+              </button>
+              <button type="button" mat-flat-button class="custome-button mat-primary schedbtn" matStepperNext>
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="historyFormGroup">
+          <form [formGroup]="socialHistoryForm" #ngForm="ngForm">
+            <ng-template matStepLabel>Social History</ng-template>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+                <div class="row mb-4">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class=" col-md-12 col-sm-12 col-xs-12 dark-color  padding-none ">
+                        <div class="row">
+                          <div class="col-12">
+                            <mat-card class="px-4 py-2 my-2">
+                              <h5 class="py-1">Visit Details</h5>
+                              <div class="row">
+                                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Visit Date & Time</mat-label>
+                                    <input disabled matInput placeholder="Enter" [value]="socialVisitDateandTime" />
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Recorded Date</mat-label>
+                                    <input matInput [matDatepicker]="soc" formControlName="RecordedDate" />
+                                    <mat-datepicker-toggle matSuffix [for]="soc"></mat-datepicker-toggle>
+                                    <mat-datepicker #soc></mat-datepicker>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-2 timepick pb-3 pt-3">
+                                  <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                    <input matInput [ngxTimepicker]="soc1" [disableClick]="true"
+                                      formControlName="RecordedTime" />
+                                    <mat-label>Record Time</mat-label>
+                                    <ngx-material-timepicker-toggle [for]="soc1">
+                                    </ngx-material-timepicker-toggle>
+                                    <ngx-material-timepicker #soc1>
+                                    </ngx-material-timepicker>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Recorded During</mat-label>
+                                    <input disabled matInput placeholder="Enter" [value]="socialrecordedDuring" />
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>
+                                      <span class="required-asterisk"
+                                        *ngIf="(socialHistoryForm.get('RecordedBy').invalid) ? true : false"></span>
+                                      Recorded By
+                                    </mat-label>
+                                    <mat-select formControlName="RecordedBy">
+                                      <mat-option *ngFor="let value of recordby" [value]="value">
+                                        {{ value }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </mat-card>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-card>
+                      <input hidden formControlName="PatientId" />
+                      <input hidden formControlName="VisitId" />
+                      <input hidden formControlName="SocialHistoryId" />
+                      <div class="row d-flex">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Smoking Status</mat-label>
+                            <mat-select formControlName="Smoking">
+                              <mat-option *ngFor="let value of smoking" [value]="value.SmokingMasterID">
+                                {{ value.SmokingMasterDesc }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>No.of.Cigarettes per day</mat-label>
+                            <input matInput placeholder="Enter No.of.Cigarettes per day" maxlength="50" numeric
+                              formControlName="CigarettesPerDay" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Drinking Status</mat-label>
+                            <mat-select formControlName="Drinking">
+                              <mat-option *ngFor="let value of drinking" [value]="value.DrinkingMasterID">
+                                {{ value.DrinkingMasterDesc }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Consumption in (ml) per day</mat-label>
+                            <input matInput placeholder="Enter Consumption in (ml) per day" maxlength="50" numeric
+                              formControlName="ConsumptionPerDay" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Drug Habits</mat-label>
+                            <input matInput placeholder="Enter Drug Habits" maxlength="75"
+                              formControlName="DrugHabitsDetails" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Life Style</mat-label>
+                            <input matInput placeholder="Enter Life Style" maxlength="75"
+                              formControlName="LifeStyleDetails" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Countries Visited</mat-label>
+                            <textarea matInput placeholder="Enter Countries Visited" maxlength="75" rows="1"
+                              formControlName="CountriesVisited"></textarea>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Daily Activities</mat-label>
+                            <textarea matInput placeholder="Enter Daily Activities" rows="1" maxlength="75" rows="1"
+                              formControlName="DailyActivities"></textarea>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="socialHistoryForm.get('AdditionalNotes').value" matTooltipPosition="above"
+                            matTooltipClass="Tooltip-lg">
+                            <mat-label>Additional Notes</mat-label>
+                            <textarea matInput placeholder="Enter Additional Notes" maxlength="500" rows="1"
+                              formControlName="AdditionalNotes"></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="text-right justify-content-end">
+                        <button mat-flat-button class="custome-button mat-primary schedbtn mr-2"
+                          (click)="addUpdateSocialHistory()" [hidden]="isShow1">
+                          Save
+                        </button>
+                        <button type="button" mat-stroked-button
+                          class=" transperent-button schedbtn light-sky primary mr-2 " matStepperPrevious>
+                          Previous
+                        </button>
+                        <button type="button" mat-flat-button class="custome-button mat-primary schedbtn"
+                          matStepperNext>
+                          Next
+                        </button>
+                      </div>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </mat-step>
+
+        <mat-step [stepControl]="rosFormGroup">
+          <form [formGroup]="rosForm" #ngForm="ngForm">
+            <ng-template matStepLabel>ROS</ng-template>
+            <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+                  <div class="row">
+                    <div class="col-12">
+                      <mat-card class="px-4 py-2 my-2">
+                        <h5 class="py-1">Visit Details</h5>
+                        <div class="row">
+                          <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Visit Date & Time</mat-label>
+                              <mat-select [value]="RosVisitDate" disabled>
+                                <mat-option [value]="vDate" *ngFor="let vDate of visitDandt; index as i">
+                                  {{ vDate }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Recorded Date</mat-label>
+                              <input matInput [matDatepicker]="ros" formControlName="RecordedDate" />
+                              <mat-datepicker-toggle matSuffix [for]="ros"></mat-datepicker-toggle>
+                              <mat-datepicker #ros></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-lg-2 timepick pb-3 pt-3">
+                            <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                              <input matInput [ngxTimepicker]="ros1" [disableClick]="true"
+                                formControlName="RecordedTime" />
+                              <mat-label>Record Time</mat-label>
+                              <ngx-material-timepicker-toggle [for]="ros1">
+                              </ngx-material-timepicker-toggle>
+                              <ngx-material-timepicker #ros1>
+                              </ngx-material-timepicker>
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Recorded During</mat-label>
+                              <input disabled matInput placeholder="Enter" [value]="recordedDuringRos" readonly />
+                            </mat-form-field>
+                          </div>
+
+                          <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>
+                                <span class="required-asterisk"
+                                  *ngIf="(rosForm.get('RecordedBy').invalid) ? true : false"></span>
+                                Recorded By
+                              </mat-label>
+                              <mat-select formControlName="RecordedBy">
+                                <mat-option *ngFor="let value of recordby" [value]="value">
+                                  {{ value }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="overflow: auto; height: 600px">
+                <mat-card>
+                  <div>
+                    <input hidden formControlName="PatientID" />
+                    <input hidden formControlName="VisitID" />
+                    <input hidden formControlName="ROSID" />
+                    <h6 class="font-weight-bold pt-2">General:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Weightlossorgain">Weight loss or gain
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Feverorchills">Fever or chills</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Troublesleeping">Trouble sleeping</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Fatigue">Fatigue</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="GeneralWeakness">Weakness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros101()" formControlName="GeneralOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75"
+                              formControlName="GeneralothersComments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h6 class="font-weight-bold pt-2">Skin:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Rashes">Rashes</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="SkinItching">Itching</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Colorchanges">
+                              Color changes
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="SkinLumps">Lumps</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Dryness">Dryness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Hairandnailchanges">Hair and nail changes
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros2()" formControlName="SkinOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show4">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="SkinothersComments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Head:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Headache">Headache</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Headinjury">Head injury</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros3()" formControlName="Others">Others</mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show5">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="HeadothersComments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Ears:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Decreasedhearing">Decreased hearing
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Earache">Earache</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Ringinginears">Ringing in ears (tinnitus)
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Drainage">Drainage</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros4()" formControlName="EarOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show6">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="EarothersComments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Eyes:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Vision">Vision</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Blurryordoublevision">Blurry or double vision
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Cataracts">Cataracts</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Glassesorcontacts">Glasses or contacts
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Flashinglights">Flashing lights</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Lasteyeexam">Last eye exam</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="EyePain">Pain</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Specks">Specks</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Redness">Redness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Glaucoma">Glaucoma</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros5()" formControlName="EyeOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show7">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="EyesothersComments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Nose:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Stuffiness">Stuffiness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="NoseItching">Itching</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Nosebleeds">Nosebleeds</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Discharge">Discharge</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Hayfever">Hay fever</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Sinuspain">Sinus pain</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros6()" formControlName="NoseOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show8">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="NoseothersComments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Throat:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Teeth">Teeth</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Soretongue">Sore tongue</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Thrush">Thrush</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Gums">Gums</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Drymouth">Dry mouth</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Nonhealingsores">Non-healing sores
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Bleeding">Bleeding</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Sorethroat">Sore throat</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Sinus">Sinus</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Lastdentalexam">Last dental exam</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Dentures">Dentures</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Hoarseness">Hoarseness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros7()" formControlName="ThroatOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show9">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="ThroatothersComments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Neck:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="NeckLumps">Lumps</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="NeckPain">Pain</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Swollenglands">Swollen glands</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Stiffness">Stiffness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros8()" formControlName="NeckOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show10">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="NeckothersComments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Respiratory:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Cough">Cough (dry or wet,productive)
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Coughingupblood">
+                              Coughing up blood(hemoptysis)
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Wheezing">Wheezing</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Sputum">Sputum (color and amount)</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Shortnessofbreath">Shortness of breath(dyspnea)
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Painfulbreathing">Painful breathing
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros9()" formControlName="RespiratoryOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show11">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75"
+                              formControlName="Respiratoryotherscomments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Neurologic:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Dizziness">Dizziness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Weakness">Weakness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Tremor">Tremor</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Fainting">Fainting</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Numbness">Numbness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Seizures">Seizures</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Tingling">Tingling</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros10()" formControlName="NeurologicOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show12">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75"
+                              formControlName="Neurologicotherscomments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Hematologic:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Easeofbruising">Ease of bruising</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Easeofbleeding"> Ease of bleeding
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros11()" formControlName="HematologicOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show13">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75"
+                              formControlName="Hematologicotherscomments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="font-weight-bold pt-2">Psychiatric:</h6>
+                    <div class="row mb-3">
+                      <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Nervousness">Nervousness</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Memoryloss">
+                              Memory loss
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Stress">Stress</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" formControlName="Depression">Depression</mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <div class="align-items-center">
+                            <mat-checkbox class="mr-4" (click)="ros12()" formControlName="PsychiatricOthers">Others
+                            </mat-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                        <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show14">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Others</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75"
+                              formControlName="Psychiatricotherscomments" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right justify-content-end">
+                    <button mat-flat-button class="custome-button mat-primary mr-2 schedbtn" (click)="addUpdateROS()"
+                      [hidden]="isShow1">
+                      Save
+                    </button>
+                    <button type="button" mat-stroked-button class="transperent-button light-sky primary mr-2 schedbtn"
+                      matStepperPrevious>
+                      Previous
+                    </button>
+                    <button type="button" mat-flat-button class="custome-button mat-primary schedbtn" matStepperNext>
+                      Next
+                    </button>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="nutritionFormGroup">
+          <form [formGroup]="nutritionForm" #ngForm="ngForm">
+            <ng-template matStepLabel>Nutrition</ng-template>
+            <div class="row" formArrayName="nutritionCollection"
+              *ngFor="let NA of getdynamicNutritionControls().controls;let i = index">
+              <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none" [formGroupName]="i">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12 dark-color  padding-none">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="row">
+                          <div class=" col-md-12 col-sm-12 col-xs-12 dark-color  padding-none">
+                            <div class="row">
+                              <div class="col-12">
+                                <mat-card class="px-4 py-2 my-2">
+                                  <h5 class="py-1">Visit Details</h5>
+                                  <div class="row">
+                                    <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                      <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Visit Date & Time</mat-label>
+                                        <mat-select disabled [value]="nutritionVisitDateandTime">
+                                          <mat-option *ngFor=" let vDate of visitDandt; index as i " [value]="vDate">
+                                            {{ vDate }}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+
+                                    <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                      <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Recorded Date</mat-label>
+                                        <input matInput [matDatepicker]="Nutrition" formControlName="RecordedDate" />
+                                        <mat-datepicker-toggle matSuffix [for]="Nutrition"></mat-datepicker-toggle>
+                                        <mat-datepicker #Nutrition></mat-datepicker>
+                                      </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-2 timepick pb-3 pt-3">
+                                      <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                        <input matInput [ngxTimepicker]="Nutrition1" [disableClick]="true"
+                                          formControlName="RecordedTime" />
+                                        <mat-label>Record Time</mat-label>
+                                        <ngx-material-timepicker-toggle [for]="Nutrition1">
+                                        </ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #Nutrition1>
+                                        </ngx-material-timepicker>
+                                      </mat-form-field>
+                                    </div>
+
+                                    <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                      <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Recorded During</mat-label>
+                                        <input disabled matInput placeholder="Enter" [value]="recordedDuringNutrition"
+                                          readonly />
+                                      </mat-form-field>
+                                    </div>
+
+                                    <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                      <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>
+                                          <span class="required-asterisk"
+                                            *ngIf="(NA.get('RecordedBy').invalid) ? true : false"></span>
+                                          Recorded By
+                                        </mat-label>
+                                        <mat-select formControlName="RecordedBy">
+                                          <mat-option *ngFor="let value of recordby" [value]="value">
+                                            {{ value }}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </mat-card>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <mat-card>
+                          <h5>Nutrition Assessment</h5>
+                          <div class="row">
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-3 pb-1 pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Food Intake category</mat-label>
+                                <mat-select formControlName="IntakeCategory">
+                                  <mat-option *ngFor="let type of IntakeCategoryValue"
+                                    [value]="type.FoodIntakeMasterDesc">{{ type.FoodIntakeMasterDesc }}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-3 pb-1  pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Do you/patient eat regularly?</mat-label>
+                                <mat-select formControlName="EatRegularly">
+                                  <mat-option *ngFor="let type of EatRegularlyvalue"
+                                    [value]="type.PatientEatMasterDesc">{{ type.PatientEatMasterDesc }}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-3 pb-1 pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Regular Meals</mat-label>
+                                <input matInput placeholder="Enter" maxlength="75" formControlName="RegularMeals" />
+                              </mat-form-field>
+                            </div>
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-3 pb-1 pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Carvings </mat-label>
+                                <input matInput placeholder="Enter" maxlength="75" formControlName="Carvings" />
+                              </mat-form-field>
+                            </div>
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-3 pb-1 pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Dislikes</mat-label>
+                                <input matInput placeholder="Enter" maxlength="75" formControlName="DislikedIntake" />
+                              </mat-form-field>
+                            </div>
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-6  pb-1  pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline"
+                                [matTooltip]="(NA.get('FoodAllergies').value != null && NA.get('FoodAllergies').value != undefined)?NA.get('FoodAllergies').value:''"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                                <mat-label>Food Allergies</mat-label>
+                                <textarea matInput placeholder="Enter" maxlength="500" rows="1"
+                                  formControlName="FoodAllergies"></textarea>
+                              </mat-form-field>
+                            </div>
+
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-6  pb-1 pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline"
+                                [matTooltip]="(NA.get('Notes').value != null && NA.get('Notes').value != undefined)?NA.get('Notes').value:''"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                                <mat-label>Notes</mat-label>
+                                <textarea matInput placeholder="Enter" maxlength="500" rows="1"
+                                  formControlName="Notes"></textarea>
+                              </mat-form-field>
+                            </div>
+                            <hr />
+                            <hr />
+                          </div>
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12" dark-color padding-none>
+                    <div class="row">
+                      <div class="col-12">
+                        <mat-card>
+                          <div class="row">
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-3  pb-1  pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Intake type</mat-label>
+                                <mat-select formControlName="FoodIntakeTypeID">
+                                  <input formControlName="FoodIntakeTypeDesc" hidden>
+                                  <mat-option *ngFor="let foodIntake of foodIntakeTypes"
+                                    (click)="tosetFoodIntakeTypeDesc(foodIntake.FoodIntakeTypeDescription)"
+                                    [value]="foodIntake.FoodIntaketypeID">
+                                    {{ foodIntake.FoodIntakeTypeDescription }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-3  pb-1 pt-1  ">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Food Name</mat-label>
+                                <input matInput placeholder="Enter" maxlength="75" formControlName="FoodName" />
+                              </mat-form-field>
+                            </div>
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-3  pb-1  pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Units</mat-label>
+                                <input matInput placeholder="Enter" maxlength="10" numeric formControlName="Units" />
+                              </mat-form-field>
+                            </div>
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-3 pb-1 pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Frequency</mat-label>
+                                <input matInput placeholder="Enter" maxlength="10" numeric
+                                  formControlName="Frequency" />
+                              </mat-form-field>
+                            </div>
+                            <div class=" col-sm-12 col-md-4 col-lg-3 col-xl-6 pb-1 pt-1 ">
+                              <mat-form-field class="w-100" appearance="outline"
+                                [matTooltip]="(NA.get('NutritionNotes').value != null && NA.get('NutritionNotes').value != undefined)?NA.get('NutritionNotes').value:''"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                                <mat-label>Nutrition Notes </mat-label>
+                                <textarea matInput placeholder="Enter" rows="1" maxlength="75"
+                                  formControlName="NutritionNotes"></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class=" col-sm-12 text-right mt-2 mb-3">
+                            <button mat-flat-button class="custome-button mat-primary schedbtn"
+                              [disabled]="NutritionSaveBtn" (click)="nutritionAddAnother()" [hidden]="isShow1">
+                              Add Nutrition
+                            </button>
+                          </div>
+
+                          <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;" *ngIf="isNutrition">
+                            <div class="col-12" *ngFor="let nutrition of nutritionCollection;index as i">
+                              <div class="row m-0 border-bottom">
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> FoodIntakeType : </div>
+                                    <div class="col-6 p-0 text-allert"> {{ nutrition.FoodIntakeTypeDesc }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Do you/patient eat regularly? : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.EatRegularly }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Carvings : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.Carvings }} </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> DislikedIntake : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.DislikedIntake }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Food Allergies : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.FoodAllergies }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Notes : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.Notes }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Intake Type : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.IntakeCategory }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Name : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.FoodName }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Units : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.Units }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Frequency : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.Frequency }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                  <div class="row pb-1">
+                                    <div class="col-6 font-weight-bold pl-0"> Nutrition Notes : </div>
+                                    <div class="col-6 p-0"> {{ nutrition.NutritionNotes }} </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-auto pr-0 pull-right-button">
+                                  <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true"
+                                    *ngIf="!nutrition.IsActive" (click)="Editnutrition(nutrition,i)"></i>
+                                  <i class="fa fa-trash f-25 ml-2 cursor-pointer"
+                                    *ngIf="nutritionCollection.length > 1 && !nutrition.IsActive"
+                                    (click)="deleteNutrition(nutrition,i)" aria-hidden="true"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="text-right justify-content-end mt-5">
+                            <button mat-flat-button type="button" class="custome-button mat-primary schedbtn mr-2"
+                              [disabled]="NutritionSaveBtn" (click)="nutritionSave()" [hidden]="isShow1">
+                              Save
+                            </button>
+                            <button type="button" mat-stroked-button
+                              class="transperent-button  light-sky primary mr-2 schedbtn " matStepperPrevious>
+                              Previous
+                            </button>
+                            <button type="button" mat-flat-button class="custome-button mat-primary schedbtn"
+                              matStepperNext>
+                              Next
+                            </button>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="functionalFormGroup">
+          <form [formGroup]="functionCogForm" #ngForm="ngForm">
+            <ng-template matStepLabel>Functional & Cognitive</ng-template>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class=" col-md-12 col-sm-12 col-xs-12 dark-color padding-none ">
+                        <div class="row">
+                          <div class="col-12">
+                            <mat-card class="px-4 py-2 my-2">
+                              <h5 class="py-1">Visit Details</h5>
+                              <div class="row">
+                                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Visit Date & Time</mat-label>
+                                    <input disabled matInput placeholder="Enter" [value]="functionvisitDateTime"
+                                      readonly />
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Recorded Date</mat-label>
+                                    <input matInput [matDatepicker]="func" formControlName="RecordedDate" />
+                                    <mat-datepicker-toggle matSuffix [for]="func"></mat-datepicker-toggle>
+                                    <mat-datepicker #func></mat-datepicker>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-2 timepick pb-3 pt-3">
+                                  <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                    <input matInput [ngxTimepicker]="func1" [disableClick]="true"
+                                      formControlName="RecordedTime" />
+                                    <mat-label>Record Time</mat-label>
+                                    <ngx-material-timepicker-toggle [for]="func1"> </ngx-material-timepicker-toggle>
+                                    <ngx-material-timepicker #func1> </ngx-material-timepicker>
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Recorded During</mat-label>
+                                    <input matInput disabled placeholder="Enter" [value]="recordedDuringcognitive" />
+                                  </mat-form-field>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                                  <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>
+                                      <span class="required-asterisk"
+                                        *ngIf="(functionCogForm.get('RecordedBy').invalid) ? true : false"></span>
+                                      Recorded By
+                                    </mat-label>
+                                    <mat-select formControlName="RecordedBy">
+                                      <mat-option *ngFor="let value of recordby" [value]="value">
+                                        {{ value }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </mat-card>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-card>
+                      <input hidden formControlName="PatientID" />
+                      <input hidden formControlName="VisitID" />
+                      <input hidden formControlName="CognitiveID" />
+                      <div class="row">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Gait</mat-label>
+                            <mat-select formControlName="Gait">
+                              <mat-option *ngFor="let value of Gaitvalue" [value]="value.GaitMasterID">{{
+                                value.GaitMasterDesc }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="functionCogForm.get('GaitNotes').value" matTooltipPosition="above"
+                            matTooltipClass="Tooltip-lg">
+                            <mat-label>Gait Notes</mat-label>
+                            <textarea matInput placeholder="Enter" maxlength="500" rows="1"
+                              formControlName="GaitNotes"></textarea>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Balance</mat-label>
+                            <mat-select formControlName="Balance">
+                              <mat-option *ngFor="let balance of balanceList" [value]="balance.FCBalanceDesc">{{
+                                balance.FCBalanceDesc }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="functionCogForm.get('BalanceNotes').value" matTooltipPosition="above"
+                            matTooltipClass="Tooltip-lg">
+                            <mat-label>Balance Notes</mat-label>
+                            <textarea matInput placeholder="Enter" maxlength="75" rows="1"
+                              formControlName="BalanceNotes"></textarea>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="functionCogForm.get('NeuromuscularNotes').value" matTooltipPosition="above"
+                            matTooltipClass="Tooltip-lg">
+                            <mat-label>Neuromuscular Notes</mat-label>
+                            <textarea matInput placeholder="Enter" maxlength="75" rows="1"
+                              formControlName="NeuromuscularNotes"></textarea>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Mobility</mat-label>
+                            <mat-select formControlName="Mobility">
+                              <mat-option *ngFor="let mobility of mobilitieslist" [value]="mobility.FCMobilityDesc">{{
+                                mobility.FCMobilityDesc }}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Mobility Support Device</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75"
+                              formControlName="MobilitySupportDevice" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="functionCogForm.get('MobilityNotes').value" matTooltipPosition="above"
+                            matTooltipClass="Tooltip-lg">
+                            <mat-label>Mobility Notes</mat-label>
+                            <textarea matInput placeholder="Enter" maxlength="75" rows="1"
+                              formControlName="MobilityNotes"></textarea>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Functional Status</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="Functionalstatus" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Cognitive Status</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="Cognitivestatus" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline"
+                            [matTooltip]="functionCogForm.get('PrimaryDiagnosisNotes').value" matTooltipPosition="above"
+                            matTooltipClass="Tooltip-lg">
+                            <mat-label>Primary Diagnosis Notes</mat-label>
+                            <textarea matInput placeholder="Enter" rows="1" maxlength="500"
+                              formControlName="PrimaryDiagnosisNotes"></textarea>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline" [matTooltip]="icdTool"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                            <mat-label>ICD Code</mat-label>
+                            <mat-icon matSuffix
+                              *ngIf="(functionCogForm.get('ICD10').value == '' || functionCogForm.get('ICD10').value == null) ? true : functionCogForm.get('ICD10').value.length > 2 ? false : true">
+                              search</mat-icon>
+                            <textarea matInput [matAutocomplete]="ICDCodeDesc" maxlength="500" rows="1"
+                              #autoCompleteICDCodeFunction="matAutocompleteTrigger" placeholder="Type and Select"
+                              formControlName="ICD10"></textarea>
+                            <mat-autocomplete autoActiveFirstOption #ICDCodeDesc="matAutocomplete">
+                              <mat-option *ngFor="let ICD of cognitiveModelICDCode"
+                                (onSelectionChange)="setICDTool(ICD.ICDCode, ICD.Description)"
+                                [value]="ICD.ICDCode + '-' + ICD.Description">
+                                {{ ICD.ICDCode }}-{{ ICD.Description }}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Primary Procedure</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="PrimaryProcedure" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-6">
+                          <mat-form-field class="w-100" appearance="outline" [matTooltip]="cptTool"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                            <mat-label>CPT Code</mat-label>
+                            <mat-icon matSuffix
+                              *ngIf="(functionCogForm.get('CPT').value == '' || functionCogForm.get('CPT').value == null) ? true : functionCogForm.get('CPT').value.length > 2 ? false : true">
+                              search</mat-icon>
+                            <textarea matInput placeholder="Type and Select" maxlength="500" [matAutocomplete]="Cptcode"
+                              #autoCompleteCPTCodeFunction="matAutocompleteTrigger" rows="1"
+                              formControlName="CPT"></textarea>
+                            <mat-autocomplete autoActiveFirstOption #Cptcode="matAutocomplete">
+                              <mat-option *ngFor="let CPTCODE of cognitivecpt"
+                                (onSelectionChange)="setCPTTooltip(CPTCODE.CPTCode, CPTCODE.Description)"
+                                [value]=" CPTCODE.CPTCode + '-' + CPTCODE.Description ">
+                                {{ CPTCODE.CPTCode }}-{{ CPTCODE.Description }}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Physician Name</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="Physicianname" />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Hospital Name</mat-label>
+                            <input matInput placeholder="Enter" maxlength="75" formControlName="Hospital" />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class=" d-flex align-items-lg-center justify-content-lg-end justify-content-center pt-4 ">
+                        <div>
+                          <button mat-flat-button class="custome-button mat-primary schedbtn"
+                            (click)="addFunctionalCognitive()" [hidden]="isShow1">
+                            Save
+                          </button>
+                          <button type="button" mat-stroked-button
+                            class="  transperent-button light-sky primary mr-2 schedbtn " matStepperPrevious>
+                            Previous
+                          </button>
+                          <button type="button" mat-flat-button class="custome-button mat-primary schedbtn"
+                            matStepperNext>
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="nursingSignOffFormGroup">
+          <form [formGroup]="nursingForm" #ngForm="ngForm">
+            <ng-template matStepLabel>Nursing SignOff</ng-template>
+            <div class="row mb-4">
+              <div class="col-12">
+                <div class="row">
+                  <div class=" col-md-12 col-sm-12 col-xs-12 dark-color padding-none ">
+                    <div class="row">
+                      <div class="col-12">
+                        <mat-card class="px-4 py-2 my-2">
+                          <h5 class="py-1">Visit Details</h5>
+                          <div class="row">
+                            <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Visit Date & Time</mat-label>
+                                <mat-select [value]="nursingVisitDate" disabled>
+                                  <mat-option *ngFor="let vDate of visitDandt; index as i" [value]="vDate">
+                                    {{ vDate }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Recorded Date</mat-label>
+                                <input matInput [matDatepicker]="nso" formControlName="RecordedDate" />
+                                <mat-datepicker-toggle matSuffix [for]="nso"></mat-datepicker-toggle>
+                                <mat-datepicker #nso></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-2 timepick pb-3 pt-3">
+                              <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                <input matInput [ngxTimepicker]="nso1" [disableClick]="true"
+                                  formControlName="RecordedTime" />
+                                <mat-label>Record Time</mat-label>
+                                <ngx-material-timepicker-toggle [for]="nso1"></ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #nso1></ngx-material-timepicker>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>Recorded During</mat-label>
+                                <input disabled matInput placeholder="Enter" [value]="nursingrecordedDuring" readonly />
+                              </mat-form-field>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                              <mat-form-field class="w-100" appearance="outline">
+                                <mat-label>
+                                  <span class="required-asterisk"
+                                    *ngIf="(nursingForm.get('RecordedBy').invalid) ? true : false"></span>
+                                  Recorded By
+                                </mat-label>
+                                <mat-select formControlName="RecordedBy">
+                                  <mat-option *ngFor="let value of recordby" [value]="value">
+                                    {{ value }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <mat-card>
+                  <input hidden formControlName="PatientID" />
+                  <input hidden formControlName="VisitID" />
+                  <input hidden formControlName="NursingId" />
+                  <div class="row d-flex">
+                    <div class="col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Observations Notes</mat-label>
+                        <textarea matInput placeholder="Enter" maxlength="75" rows="1"
+                          formControlName="ObservationsNotes"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>First Aid / Dressings Notes</mat-label>
+                        <textarea matInput placeholder="Enter" maxlength="75" rows="1"
+                          formControlName="FirstaidOrDressingsNotes"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Nursing Procedures Notes</mat-label>
+                        <textarea matInput placeholder="Enter" maxlength="75" rows="1"
+                          formControlName="NursingProceduresNotes"></textarea>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Nursing Notes</mat-label>
+                        <textarea matInput placeholder="Enter" maxlength="75" rows="1"
+                          formControlName="NursingNotes"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Addtional information</mat-label>
+                        <textarea matInput placeholder="Enter" maxlength="75" rows="1"
+                          formControlName="AdditionalInformation"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-12">
+                      <input type="file" #multipleNursing placeholder="Choose file" value="upload"
+                        (change)="FileUploadNursingMethod($event)" style="display:none;" multiple>
+                      <button type="button" mat-raised-button color="primary" [disabled]="isShow"
+                        (click)="multipleNursing.click()">Upload Documents</button>
+                      <mat-list>
+                        <mat-list-item *ngFor="let file of ViewFileNursing;let index = index">
+
+                          <span>
+                            <i class="fa fa-file-text-o mr-2" aria-hidden="true"></i>
+                            <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a> [{{file.Size}}]
+                            <button mat-mini-fab color="warn" [disabled]="isShow"
+                              (click)="RemoveFileNursing(file.FileName,index)">
+                              <mat-icon>close</mat-icon>
+                            </button>
+
+                          </span>
+
+                        </mat-list-item>
+                      </mat-list>
+                    </div>
+                  </div>
+                  <div class="d-flex  align-items-lg-center justify-content-lg-end justify-content-center pt-4 ">
+                    <div>
+                      <button mat-flat-button class="custome-button mat-primary schedbtn mr-2"
+                        (click)="addNursingSignOff()" [hidden]="isShow1">
+                        Save
+                      </button>
+                      <button type="button" mat-stroked-button
+                        class=" transperent-button schedbtn light-sky primary mr-2 " matStepperPrevious>
+                        Previous
+                      </button>
+                      <button type="button" mat-stroked-button class="transperent-button light-sky schedbtn primary"
+                        (click)="closeDialogRef()" [hidden]="isShow1">
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </form>
+
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <mat-card>
+        <form [formGroup]="signoffForm">
+          <div>
+            <div class="row d-flex align-items-center mt-4">
+              <div class="col-xl-3 col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>UserName</mat-label>
+                  <input matInput placeholder="Enter" formControlName="UserName" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput type="password" placeholder="Enter" formControlName="Password" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-6 col-lg-6 text-right">
+                <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="back()">
+                  Back
+                </button>
+                <!--<button mat-stroked-button class="transperent-button mr-2" color="primary">
+                  Cancel
+                </button>-->
+                <button type="button" mat-flat-button color="primary" class="custome-button mat-primary"
+                  (click)="signOffModel()" [hidden]="signoffButton">
+                  SignOff
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

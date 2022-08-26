@@ -1,0 +1,251 @@
+  <h5 class="row col-md-12 p-3 title-bg mx-0 w-100">
+    <div class="col-md-2">OPD Nursing Orders</div>
+    <div class="col-md-3">Order No : 20158</div>
+    <div class="col-md-2">Date : 15-05-2019</div>
+    <div class="col-md-2">Time : 11.50 AM</div>
+    <div class="col-md-3">
+      <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </div>
+  </h5>
+
+  <!--<div class="bg-white p-4 upload-da">
+    <div class="d-flex align-content-center scroll-x">
+      <div class="mr-2">
+        <button mat-button class="d-flex align-content-center" id="medication" (click)="medicationChange()">
+          <span class="f-18 ">Medication</span>
+        </button>
+      </div>
+      <div class="mr-2">
+        <button mat-button class="d-flex align-content-center" id="minorprocedure" (click)="minorProcedureChange()">
+          <span class="f-18  ">Minor Procedure </span>
+        </button>
+      </div>
+      <div class="mr-2">
+        <button mat-button class="d-flex align-content-center" id="nursingcare" (click)="nursingCareChange()">
+          <span class="f-18  ">Nursing Care</span>
+        </button>
+      </div>
+    </div>
+  </div>-->
+  <div class="common_submenu p-2  d-flex">
+    <div class="d-flex align-content-center scroll-x">
+      <div class="mr-2">
+        <button mat-button class="d-flex align-content-center" id="medication" (click)="medicationChange()">
+          <mat-icon><img src='assets/images/MenuNewIcons/physician/profile.png' /> </mat-icon>
+          <span class="f-18 ">Medication</span>
+        </button>
+      </div>
+      <div class="mr-2">
+        <button mat-button class="d-flex align-content-center" id="minorprocedure" (click)="minorProcedureChange()">
+
+          <mat-icon><img src='assets/images/MenuNewIcons/physician/Speciality.png' /> </mat-icon>
+          <!-- <mat-icon><img src='assets/images/MenuNewIcons/physician/Speciality2.png' /> </mat-icon> -->
+          <span class="f-18  ">Minor Procedure</span>
+        </button>
+      </div>
+      <div class="mr-2">
+        <button mat-button class="d-flex align-content-center" id="nursingcare" (click)="nursingCareChange()">
+          <mat-icon><img src='assets/images/MenuNewIcons/physician/Schedule_setup.png' /> </mat-icon>
+          <span class="f-18  ">Nursing Care</span>
+        </button>
+      </div>
+    
+    </div>
+  </div>
+
+<form [formGroup]="OPDNursingOrdersForm">
+  <div class="row" *ngIf="isMedication">
+    <div class="col-xl-12 col-lg-12 mt-4">
+      <div class="table-responsive shroff-table reduce-field overflow">
+        <table class="table table-bordered table-hover w-100">
+          <thead>
+            <tr class="font-weight-bold" align="center">
+              <th class="w-15 text-center">Item/Drug Name</th>
+              <th class="w-15 text-center">Dispense Form</th>
+              <th class="w-15 text-center">Diagnosis</th>
+              <th class="w-10 text-center">Qty</th>
+              <th class="w-10 text-center">Medication Time</th>
+              <th class="w-10 text-center">Medication Time Period</th>
+              <th class="w-10 text-center">SIG</th>
+              <th class="w-10 text-center">Done By</th>
+              <th class="w-10 text-center"><th>
+
+            </tr>
+          </thead>
+          <tbody formArrayName="opdnursingMedications">
+            <tr align="center" *ngFor="let DM of medicationcontrols().controls;let i=index"
+               >
+              <td [formGroupName]="i" class="w-15 text-center">
+                <mat-form-field class=" w-100 " appearance="outline">
+                  <mat-select formControlName="Drugname" placeholder="Item/Drug Name">
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-15 text-center">
+                <mat-form-field class=" w-100 " appearance="outline">
+                  <mat-select formControlName="DispenseformId" placeholder="Dispense Form">
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-15 text-center">
+                <mat-form-field class=" w-100 " appearance="outline">
+                  <mat-select formControlName="SelectedDiagnosis" placeholder="Diagnosis">
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-10 text-center">
+                <mat-form-field class="w-100" appearance="outline">
+                  <input matInput placeholder="Enter" formControlName="Quantity">
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-10 text-center">
+                <mat-form-field class="w-100" appearance="outline">
+                  <input matInput placeholder="Enter" formControlName="MedicationTime">
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-10 text-center">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-select formControlName="MedicationTimePeriod">
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-10 text-center">
+                <mat-form-field class="w-100" appearance="outline">
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="SIGNotes"></textarea>
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-10 text-center">
+                <mat-form-field class="w-100" appearance="outline">
+                  <input matInput placeholder="Enter" value="" formControlName="DoneBy">
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-10 text-center">
+                <button type="button" style="color: red" class="close" (click)="onRemoveRowLabOrder(i)"
+                        *ngIf="OPDNursingOrdersForm.get('opdnursingMedications')?.controls.length>1" aria-label="Close">
+                  <span aria-hidden="true">X</span>
+                </button>
+              </td>
+</tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-12 mt-3">
+      <div class="col-lg-6 f-l pull-right">
+        <button type="button" mat-stroked-button class="transperent-button light-sky primary mr-2 schedbtn pull-right" (click)="addMedicationRow()">Add Row</button>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="isMinorProcedure">
+      <div class="col-xl-12 col-lg-12 mt-4">
+        <div class="table-responsive shroff-table reduce-field overflow">
+          <table class="table table-bordered table-hover w-100">
+            <thead>
+              <tr>
+                <th class="w-75 text-center">Procedure Type</th>
+                <th class="w-100 text-center">Procedure Notes</th>
+                <th class="w-10 text-center"></th>
+
+              </tr>
+            </thead>
+            <tbody formArrayName="OpdMinorProcedure">
+              <tr *ngFor="let DM of minorprocedureControl().controls;let i=index">
+                <td [formGroupName]="i" class="w-75 text-center">
+                  <!--<div class="col-md-2">Minor Procedure:</div>-->
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Procedure Type</mat-label>
+                    <select matNativeControl formControlName="Proceduretype">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                  </mat-form-field>
+
+                </td>
+                <td [formGroupName]="i" class="w-100 text-center">
+
+                  <mat-form-field class="w-100" appearance="outline">
+                    <textarea matInput placeholder="Procedure Notes" rows="1" formControlName="ProcedureNotes"></textarea>
+                  </mat-form-field>
+
+                </td>
+                <td [formGroupName]="i" class="w-10 text-center">
+
+                  <button type="button" style="color: red" class="text-center close" (click)="onRemoveaddprocedure(index)"
+                          *ngIf="OPDNursingOrdersForm.get('OpdMinorProcedure')?.controls.length>1" aria-label="Close">
+                    <span aria-hidden="true">X</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    <div class="col-lg-12 mt-3">
+      <div class="col-lg-6 f-l pull-right">
+        <button type="button" mat-stroked-button class="transperent-button light-sky primary mr-2 schedbtn pull-right" (click)="addProcedureRow()" [hidden]="isLabRequestconfirmed == true">Add Row</button>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="isNursingCare">
+    <div class="col-xl-12 col-lg-12 mt-4">
+      <div class="table-responsive shroff-table reduce-field overflow">
+        <table class="table table-bordered table-hover w-100">
+          <thead>
+            <tr>
+              <th class="w-75 text-center">Instruction Type</th>
+              <th class="w-100 text-center">Nursing Notes</th>
+              <th class="w-10 text-center"></th>
+
+            </tr>
+          </thead>
+          <tbody formArrayName="OpdNursingcare">
+
+            <tr *ngFor="let DM of Nursingcontrols().controls;let i=index">
+              <td [formGroupName]="i" class="w-75 text-center">
+
+                <!--<div class="col-md-2">Nursing Care:</div>-->
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Instruction Type</mat-label>
+                  <select matNativeControl formControlName="Instructiontype">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-75 text-center">
+
+                <mat-form-field class="w-100" appearance="outline">
+                  <textarea matInput placeholder="Nursing Notes" formControlName="NursingNotes"></textarea>
+                </mat-form-field>
+              </td>
+              <td [formGroupName]="i" class="w-10 text-center">
+
+                <button type="button" style="color: red" class="close" (click)="onRemoveNursingorder(index)"
+                        *ngIf="OPDNursingOrdersForm.get('OpdNursingcare')?.controls.length>1" aria-label="Close">
+                  <span aria-hidden="true">X</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-12 mt-3">
+      <div class="col-lg-6 f-l pull-right">
+        <button type="button" mat-stroked-button class="transperent-button light-sky primary mr-2 schedbtn pull-right" (click)="addNursingRow()" >Add Row</button>
+      </div>
+    </div>
+  </div>
+    <button mat-flat-button color=""
+            class="custome-button mat-primary mr-2 mt-4 schedbtn pull-right" (click)="addUpdateOPDNursingOrder()">
+      Submit
+    </button>
+    <button mat-stroked-button color=""
+            class="transperent-button light-sky primary mt-4 schedbtn pull-right" (click)="closeDialog()">
+      Cancel
+    </button>
+</form>

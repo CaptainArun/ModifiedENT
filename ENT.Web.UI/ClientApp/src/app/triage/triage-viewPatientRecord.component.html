@@ -1,0 +1,944 @@
+<mat-tab-group>
+    <mat-tab label="Triage Consult">  
+<mat-card>
+<div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+ <form>
+                        <div class="row">
+                                <div class="col-12">
+                                        <mat-card>
+                                                <h5 class="pb-2 pt-2">Visit Details</h5>
+                                                <div class="row">
+                                                        <div class="col-sm">
+                                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                                        <mat-label>Recorded during</mat-label>
+                                                                        <mat-select [(value)]="selected" [disabled]="disableSelect">
+                                                                                <mat-option value="option1" >OPD, Visit
+                                                                                </mat-option>
+                                                                                <mat-option value="option2">Inpatient
+                                                                                        Admission </mat-option>
+                                                                                <mat-option value="option3">Surgical
+                                                                                        Admission </mat-option>
+                                                                        </mat-select>
+                                                                </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm">
+                                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                                        <mat-label>6/13/2019 10.50 AM</mat-label>
+                                                                        <input matInput [matDatepicker]="d10" placeholder="6/13/2019" disabled> 
+                                                                        <mat-datepicker-toggle matSuffix [for]="d10" disabled></mat-datepicker-toggle>
+                                                                        <mat-datepicker #d10 disabled></mat-datepicker>
+                                                                </mat-form-field>
+                                                        </div>
+
+
+                                                        <div class="col-sm col-lg">
+                                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                                        <mat-label>6/14/2019</mat-label>
+                                                                        <input matInput [matDatepicker]="d20" placeholder="Visit date" disabled>
+                                                                        <mat-datepicker-toggle matSuffix [for]="d20" disabled></mat-datepicker-toggle>
+                                                                        <mat-datepicker #d20 disabled></mat-datepicker>
+                                                                </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm timepick">
+                                                                <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                                                        <input matInput [ngxTimepicker]="toggleTimepicker10" [disableClick]="true">
+                                                                        <mat-label>01:50 pm</mat-label>
+                                                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker10"></ngx-material-timepicker-toggle>
+                                                                        <ngx-material-timepicker #toggleTimepicker10></ngx-material-timepicker>
+                                                                </mat-form-field>
+                                                        </div>
+                                                </div>
+                                        </mat-card>
+                                </div>
+                        </div>
+                </form>
+                    <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Triage Consultation</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Chief Complaint</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">Ear Pain
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Problem Area</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">Ear</div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Symptoms</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">Fever</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col font_color">Duration</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">1 Weeks</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Pain</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">7/10</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Etiology</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">Unknown</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 v-line" >
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Correct Treatment</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Ear Drops & Medication for fever</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Observation</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Swelling in Ear drum</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Additional info</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">None</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Prognosis</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Seems like Otitis media</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Diagnosis Notes</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Otitis Medical</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Recommeded Procedure</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Syringiy</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        
+                    <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Otoscope</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Otoscope Make/Model</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Otoscope Operational Model</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Ear</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">Left</div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 v-line" >
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row">
+                                        <div class="col font_color">Otoscopy Findings</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Otoscopy Notes</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Laryngoscopy</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Laryngoscopy Make/Model</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Laryngoscopy Operational Model</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 v-line" >
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row">
+                                        <div class="col font_color">Laryngoscopy Findings</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Laryngoscopy Notes</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Medication</h5>
+                <div class="scroll-x">
+                  <mat-card class="p-0">
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12">
+                        <div class="table-responsive reduce-field">
+                          <table class="table table-bordered table-hover w-100">
+                            <thead>
+                              <tr class="font-weight-bold">
+                                <th>Item/Drug Name</th>
+                                <th>Dispense Form</th>
+                                <th>Diagnosis</th>
+                                <th>Qty</th>
+                                <th>Medication Time</th>
+                                <th>SIG</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Ceftibuten</td>
+                                <td>Ear</td>
+                                <td>H60.331 Swimmer's ear, right ear</td>
+                                <td>10</td>
+                                <td>Morning, Noon, Night</td>
+                                <td>3 times per day</td>
+                              </tr>
+                              <tr>
+                               <td>Ofloxacin</td>
+                                <td>Ear</td>
+                                <td>H60.333 Swimmer's ear, bilateral</td>
+                                <td>10</td>
+                                <td>Morning, Noon, Night</td>
+                                <td>3 times per day</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                        <!--end of .table-responsive-->
+                      </div>
+                    </div>
+                  </mat-card>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Lab Order</h5>
+                <div class="scroll-x">
+                  <mat-card class="p-0">
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12">
+                        <div class="table-responsive reduce-field">
+                          <table class="table table-bordered table-hover w-100">
+                            <thead>
+                              <tr class="font-weight-bold">
+                                <th>Test Name</th>
+                                <th>Instruction</th>
+                                <th>Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Eye</td>
+                                <td>Vision</td>
+                                <td>14-02-2019</td>
+                              </tr>
+                              <tr>
+                                <td>Eye</td>
+                                <td>Vision</td>
+                                <td>14-02-2019</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                        <!--end of .table-responsive-->
+                      </div>
+                    </div>
+                  </mat-card>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Tests</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Recommeded Tests</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Notes</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">OT Orders</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Recommeded OT Orders</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">-
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Pre Procedure Notes</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Patient Instruction</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 v-line" >
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row">
+                                        <div class="col font_color">Recommeded Date</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">16-06-2019</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Urgency</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Referral</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Referral Notes</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        </div>
+</div>
+
+<div class="white mt-0 mb-4 p-1">
+            <mat-card class="p-0">
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 font-bold scroll-md">
+                        <div class="col-sm-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 ">
+                                            Submitted By</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">Mr.Raj
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 w-auto v-line">
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row pb-1">
+                                    <div class="col pl-4  ">Date & Time</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">14/06/2019 : 12:55 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+     </mat-card>
+    </mat-tab>
+        <mat-tab label="Physician Consult">  
+<mat-card>
+<div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+ <form>
+                        <div class="row">
+                                <div class="col-12">
+                                        <mat-card>
+                                                <h5 class="pb-2 pt-2">Visit Details</h5>
+                                                <div class="row">
+                                                        <div class="col-sm">
+                                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                                        <mat-label>Recorded during</mat-label>
+                                                                        <mat-select [(value)]="selected" [disabled]="disableSelect">
+                                                                                <mat-option value="option1" >OPD, Visit
+                                                                                </mat-option>
+                                                                                <mat-option value="option2">Inpatient
+                                                                                        Admission </mat-option>
+                                                                                <mat-option value="option3">Surgical
+                                                                                        Admission </mat-option>
+                                                                        </mat-select>
+                                                                </mat-form-field>
+                                                        </div>
+
+                                                        <div class="col-sm">
+                                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                                        <mat-label>6/13/2019 10.50 AM</mat-label>
+                                                                        <input matInput [matDatepicker]="d11" placeholder="6/13/2019" disabled> 
+                                                                        <mat-datepicker-toggle matSuffix [for]="d11" disabled></mat-datepicker-toggle>
+                                                                        <mat-datepicker #d11 disabled></mat-datepicker>
+                                                                </mat-form-field>
+                                                        </div>
+
+
+                                                        <div class="col-sm col-lg">
+                                                                <mat-form-field class=" w-100 " appearance="outline">
+                                                                        <mat-label>6/14/2019</mat-label>
+                                                                        <input matInput [matDatepicker]="d21" placeholder="Visit date" disabled>
+                                                                        <mat-datepicker-toggle matSuffix [for]="d21" disabled></mat-datepicker-toggle>
+                                                                        <mat-datepicker #d21 disabled></mat-datepicker>
+                                                                </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm timepick">
+                                                                <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                                                                        <input matInput [ngxTimepicker]="toggleTimepicker11" [disableClick]="true" >
+                                                                        <mat-label>01:50 pm</mat-label>
+                                                                        <ngx-material-timepicker-toggle [for]="toggleTimepicker11"></ngx-material-timepicker-toggle>
+                                                                        <ngx-material-timepicker #toggleTimepicker11></ngx-material-timepicker>
+                                                                </mat-form-field>
+                                                        </div>
+                                                </div>
+                                        </mat-card>
+                                </div>
+                        </div>
+                </form>
+                    <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Triage Consultation</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Chief Complaint</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">Ear Pain
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Problem Area</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">Ear</div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Symptoms</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">Fever</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col font_color">Duration</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">1 Weeks</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Pain</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">7/10</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Etiology</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">Unknown</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 v-line" >
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Correct Treatment</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Ear Drops & Medication for fever</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Observation</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Swelling in Ear drum</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Additional info</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">None</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Prognosis</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Seems like Otitis media</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Diagnosis Notes</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Otitis Medical</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col pl-4 font_color">Recommeded Procedure</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">Syringiy</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        
+                    <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Otoscope</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Otoscope Make/Model</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Otoscope Operational Model</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Ear</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">Left</div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 v-line" >
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row">
+                                        <div class="col font_color">Otoscopy Findings</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Otoscopy Notes</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Laryngoscopy</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Laryngoscopy Make/Model</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Laryngoscopy Operational Model</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 v-line" >
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row">
+                                        <div class="col font_color">Laryngoscopy Findings</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Laryngoscopy Notes</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Medication</h5>
+                <div class="scroll-x">
+                  <mat-card class="p-0">
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12">
+                        <div class="table-responsive reduce-field">
+                          <table class="table table-bordered table-hover w-100">
+                            <thead>
+                              <tr class="font-weight-bold">
+                                <th>Item/Drug Name</th>
+                                <th>Dispense Form</th>
+                                <th>Diagnosis</th>
+                                <th>Qty</th>
+                                <th>Medication Time</th>
+                                <th>SIG</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Ceftibuten</td>
+                                <td>Ear</td>
+                                <td>H60.331 Swimmer's ear, right ear</td>
+                                <td>10</td>
+                                <td>Morning, Noon, Night</td>
+                                <td>3 times per day</td>
+                              </tr>
+                              <tr>
+                               <td>Ofloxacin</td>
+                                <td>Ear</td>
+                                <td>H60.333 Swimmer's ear, bilateral</td>
+                                <td>10</td>
+                                <td>Morning, Noon, Night</td>
+                                <td>3 times per day</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                        <!--end of .table-responsive-->
+                      </div>
+                    </div>
+                  </mat-card>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Lab Order</h5>
+                <div class="scroll-x">
+                  <mat-card class="p-0">
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12">
+                        <div class="table-responsive reduce-field">
+                          <table class="table table-bordered table-hover w-100">
+                            <thead>
+                              <tr class="font-weight-bold">
+                                <th>Test Name</th>
+                                <th>Instruction</th>
+                                <th>Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Eye</td>
+                                <td>Vision</td>
+                                <td>14-02-2019</td>
+                              </tr>
+                              <tr>
+                                <td>Eye</td>
+                                <td>Vision</td>
+                                <td>14-02-2019</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                        <!--end of .table-responsive-->
+                      </div>
+                    </div>
+                  </mat-card>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Tests</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Recommeded Tests</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Notes</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">OT Orders</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Recommeded OT Orders</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">-
+                                        </div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Pre Procedure Notes</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+
+                                    <div class="row  pb-1">
+                                        <div class="col font_color">Patient Instruction</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 v-line" >
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row">
+                                        <div class="col font_color">Recommeded Date</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7">16-06-2019</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font_color">Urgency</div>
+                                        <div class="col-lg-1">:</div>
+                                        <div class="col-lg-7"></div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="white mt-3 mb-4 p-1">
+            <mat-card class="p-0">
+                <h5 class="p-3 title-bg">Referral</h5>
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 scroll-md">
+                        <div class="col-lg-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                                            Referral Notes</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        </div>
+</div>
+
+<div class="white mt-0 mb-4 p-1">
+            <mat-card class="p-0">
+                <div class="scroll-x">
+                    <div class="row p-0 m-0 font-bold scroll-md">
+                        <div class="col-sm-6">
+                            <div class="v-line">
+                                <div class="pt-3 pb-2">
+                                    <div class="row pb-1">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 ">
+                                            Submitted By</div>
+                                        <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                                        <div class="col-xl-7 col-lg-7 col-md-7">Mr.Raj
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 w-auto v-line">
+                            <div class="pt-3 col flex-grow-1 w-auto">
+                                <div class="row pb-1">
+                                    <div class="col pl-4  ">Date & Time</div>
+                                    <div class="col-lg-1">:</div>
+                                    <div class="col">14/06/2019 : 12:55 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+     </mat-card>
+    </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,31 @@
+.searchfil.mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-radius: 30px !important;
+    border-left-style: solid !important;
+}
+  .searchfil.mat-form-field-appearance-outline .mat-form-field-outline-start {
+    display: none !important; 
+}
+      .mat-form-field-infix {
+    padding: 4px !important;
+}
+  .mat-form-field-infix {
+    border-top: 0.44375em solid transparent  !important;
+}
+.mat-form-field-infix {
+    border-top: 9px solid transparent !important;
+}
+
+:host ::ng-deep .validate .mat-radio-group.ng-invalid .mat-radio-outer-circle {
+  border-color: #f73a2c;
+}
+
+:host ::ng-deep .validate .mat-radio-group.ng-invalid .mat-radio-label-content {
+  color: #f44336;
+}
+
+
+.wrapper {
+  overflow: auto;
+  max-height: 300px;
+  overflow-x: hidden;
+}

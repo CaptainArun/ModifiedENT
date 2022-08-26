@@ -1,0 +1,316 @@
+<h5 class="p-3 title-bg">
+  OT Request <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+    <span aria-hidden="true">X</span>
+  </button>
+</h5>
+<div style="height:500px;overflow-y: scroll">
+  <mat-card class="p-0 mb-3">
+    <h5 class="row p-3 title-bg mx-0">
+      <div class="col-xl-3">Surgery Request Form</div>
+      <div class="col-xl-3">Order No : 20158</div>
+      <div class="col-xl-3">Date : 15-05-2019</div>
+      <div class="col-xl-3">Time : 11.50 AM</div>
+    </h5>
+    <div class="scroll-x">
+      <div class="row p-0 m-0 scroll-md">
+        <div class="col-sm-1 p-0 ">
+          <img src="assets/images/patient-img.png" class="img-fluid" height="136" />
+        </div>
+
+        <div class="col-sm-5">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1">
+                <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                  Patient Name
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  Mr.Rahul Sharma
+                </div>
+              </div>
+
+              <div class="row  pb-1">
+                <div class="col font_color">DOB/ Age</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">25-08-1994(25 Years)</div>
+              </div>
+
+              <div class="row  pb-1">
+                <div class="col font_color">Cell Number</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">+91-123456789</div>
+              </div>
+
+              <div class="row">
+                <div class="col font_color">Next of kin</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">Mr.Roshan Sharma (Father)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-5">
+          <div class="pt-3 col flex-grow-1 w-auto">
+            <div class="row pb-1">
+              <div class="col pl-4 font_color ">Primary Physician</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">Dr.Nithin Parmar</div>
+            </div>
+            <div class="row pb-1">
+              <div class="col pl-4 font_color ">Last Visit Date</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">14-02-2019</div>
+            </div>
+            <div class="row pb-1">
+              <div class="col pl-4 font_color ">Diabetic</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">NO</div>
+            </div>
+            <div class="row pb-1">
+              <div class="col pl-4 red">Allergies</div>
+              <div class="col-lg-1">:</div>
+              <div class="col red">Hives</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="p-0 mb-3">
+
+    <form [formGroup]="surgeryRequestForm">
+      <h5 class="p-3 title-bg">Primary Diagnosis</h5>
+      <div class="row px-4">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>ICD10</mat-label>
+                <input matInput [matAutocomplete]="DiagnosisICD10" placeholder="ICD10" (keyup)="bindDiagnosisCode()" formControlName="DiagnosisICD10">
+                <mat-autocomplete autoActiveFirstOption #DiagnosisICD10="matAutocomplete">
+                  <mat-option *ngFor="let ICD10 of diagnosisCodes" (onSelectionChange)="getDiagnosisnames($event,ICD10,input)" [value]="ICD10.Description + '-' + ICD10.ICDCode"
+                              #input>{{ICD10.Description}}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <div class="mt-3">
+                <span *ngFor="let primary of diagCodeCollection">
+                  {{primary.ICDCode}}-{{primary.Description}}
+                  <span (click)="removeDiagnosisTag(primary,'buserscoll')">x</span>
+                </span>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Surgery Diagnosis Notes</mat-label>
+                <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="SurgerydiagnosisNotes"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>CPT Code</mat-label>
+                <input matInput [matAutocomplete]="CPTCode" placeholder="CPT Code" (keyup)="bindTreatmentCode()" formControlName="CPTCode">
+                <mat-autocomplete autoActiveFirstOption #CPTCode="matAutocomplete">
+                  <mat-option *ngFor="let CPT of CPTCodes" (onSelectionChange)="getProcedurenames($event,CPT,input)" [value]="CPT.Description + '-' + CPT.CPTCode"
+                              #input>{{CPT.Description}}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <div class="mt-3">
+                <span *ngFor="let procedure of procedureCollection">
+                  {{procedure.CPTCode}}-{{procedure.Description}}
+                  <span (click)="removeProcedureTag(procedure,'buserscoll')">x</span>
+                </span>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Procedure Notes</mat-label>
+                <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="ProcedureNotes"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Urgency</mat-label>
+                <mat-select formControlName="UrgencyID">
+                  <mat-option *ngFor="let urgency of urgencyType" [value]="urgency.UrgencyTypeId">{{urgency.UrgencyTypeDescription}}</mat-option>
+                  <!--<mat-option value="2">Right Ear</mat-option>
+                  <mat-option value="3">Nose</mat-option>
+                  <mat-option value="4">Throat</mat-option>
+                  <mat-option value="5">Head</mat-option>
+                  <mat-option value="6">Neck</mat-option>
+                  <mat-option value="7" (click)="textField()">Others</mat-option>-->
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Requested Date</mat-label>
+                <input matInput [matDatepicker]="d1" placeholder="Visit date" formControlName="RequestedDate">
+                <mat-datepicker-toggle matSuffix [for]="d1">
+                </mat-datepicker-toggle>
+                <mat-datepicker #d1></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                <mat-label>Time</mat-label>
+                <input matInput [ngxTimepicker]="toggleTimepicker10" [disableClick]="true" required formControlName="Time">
+                <ngx-material-timepicker-toggle [for]="toggleTimepicker10"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker #toggleTimepicker10></ngx-material-timepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Approximate Duration</mat-label>
+                <input matInput placeholder="Enter" formControlName="ApproximateDuration">
+              </mat-form-field>
+            </div>
+            <!--<div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Anesthesia Fitness</mat-label>
+                <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="AnesthesiaFitness"></textarea>
+              </mat-form-field>
+            </div>-->
+
+            <div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Known Allergies</mat-label>
+                <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="KnownAllergies"></textarea>
+              </mat-form-field>
+            </div>
+            <!--<div class="col-xl-3 col-lg-6">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Anesthesia Fitness</mat-label>
+                <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="AnesthesiaFitness"></textarea>
+              </mat-form-field>
+            </div>-->
+            <div class="row col-xl-12 px-4">
+              <div class="col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="BloodRequired">Blood Required</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-xl-2">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="SpecialPreparation" (change)="changeSplPreToggle($event)">Special Preparation</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-xl-4" *ngIf="isSpecialPreToggle">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Special Preparation Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="SpecialPreparationNotes"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row col-xl-12 px-4">
+              <h6 class="col-xl-12 font-weight-bold pt-2">Medication:</h6>
+              <!--<div class="col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="ContinueRegularMedication">Continue all the regular medication</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="StopRegularMedication">Stop all the regular medication</mat-checkbox>
+                </div>
+              </div>-->
+              <div class="col-xl-6">
+                <mat-radio-group formControlName="RegularMedication">
+                  <mat-radio-button value="1">Continue all the regular medication</mat-radio-button>
+                  <mat-radio-button value="2">Stop all the regular medication</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="col-xl-2">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="DietInstructions" (change)="changeDietToggle($event)">Diet Instructions</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-xl-4" *ngIf="isDietToggle">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Diet Instruction Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="DietInstructionsNotes"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row col-xl-12 px-4">
+              <div class="col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="OtherInstructions" (change)="changeOthersInsToggle($event)">Other Instructions</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-xl-4" *ngIf="isOtherInsToggle">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others Instruction Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="OtherInstructionsNotes"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row col-xl-12 px-4">
+              <h6 class="col-xl-12 font-weight-bold pt-2">Other Consults:</h6>
+              <div class="col-xl-2">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Cardiac">Cardiac</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-xl-2">
+                <div cla ss="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Mephology">Mephology</mat-checkbox>
+                </div>
+              </div>
+
+              <div class="col-xl-2">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Nerology">Nerology</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-xl-2">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Urology">Urology</mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="row col-xl-12 px-4">
+              <div class="col-xl-2">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Others" (change)="changeOthersToggle($event)">Others</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-xl-4" *ngIf="isOtherToggle">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="OthersNotes"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row col-xl-12 px-4">
+              <div class="col-xl-3 col-lg-6">
+                <h5>Anesthesia Fitness Required</h5>
+              </div>
+              <div class="col-xl-3 col-lg-6">
+                <mat-radio-group (change)="anesthesiaFitnessToggle($event)" formControlName="Anesthesiafitnessrequired">
+                  <mat-radio-button value="1">Yes</mat-radio-button>
+                  <mat-radio-button value="2">No</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <div class="col-xl-3 col-lg-6" *ngIf="isAnesthesiaNotes">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Anesthesia Required Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="Anesthesiafitnessnotes"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-xl-12 justify-content-center mb-3">
+              <button mat-flat-button color="" class="custome-button mat-primary mr-2 schedbtn pull-right" (click)="addSurgeryFormRequest()">Submit</button>
+              <button mat-stroked-button color="" class="transperent-button light-sky primary schedbtn pull-right" (click)="closeDialog()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+
+</div>
