@@ -1,0 +1,25 @@
+<app-patient-demographic [PatID]="this.patientId"></app-patient-demographic> <br>
+
+<div class="mb-2">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+      <mat-card>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Visit History
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row" *ngIf="showVisitHistory">
+                <app-bms-table [config]="tableConfig" [datas]="patientVisitHistory" (viewItem)="openVisitViewReport($event)"></app-bms-table>
+            </div>
+            <mat-card *ngIf="!showVisitHistory">
+              <h3>No Record Found</h3>
+            </mat-card>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card>
+    </div>
+  </div>
+</div> <br>

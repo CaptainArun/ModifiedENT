@@ -1,0 +1,202 @@
+<div class="overflow-hidden pl-4 pr-4 pt-4">
+  <h5 class="p-3 title-bg mt-2">Speech Therapy with Special Test</h5>
+  <form [formGroup]="speechTherapySpecialTestForm">
+    <audiology-common></audiology-common>
+    <div class="mb-2">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+          <div class="row">
+            <div class="col-12">
+              <mat-card>
+                <div class="row mt-4">
+                  <div class="col-xl-2 col-lg-2">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Visit Date & Time</mat-label>
+                      <input matInput placeholder="Enter" formControlName="VisitDateandTime" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Recorded During</mat-label>
+                      <input matInput placeholder="Enter" formControlName="recordeDuring" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row w-110">
+      <div class="col-xs-12 col-lg-12 p-3 w-100">
+        <div class="table-responsive-lg shroff-table w-100">
+          <table class="table w-100">
+            <thead>
+              <tr>
+                <th class="text-center"></th>
+                <th class="text-center">SRT (dBHL)</th>
+                <th class="text-center">SD S (%)</th>
+                <th class="text-center">SISI (dBHL)</th>
+                <th class="text-center">TDT (dBHL)</th>
+                <th class="text-center">ABLB (dBHL)</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white rounded shadow-sm">
+                <td class="text-center">Right</td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-2">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.SRTRight == '' || speechTherapySpecialTestForm.value.SRTRight == null) ? true : false"></span>SRT (dBHL)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="SRTRight" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-2">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.SDSRight == '' || speechTherapySpecialTestForm.value.SDSRight == null) ? true : false"></span>SD S (%)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="SDSRight" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-2">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.SISIRight == '' || speechTherapySpecialTestForm.value.SISIRight == null) ? true : false"></span>SISI (dBHL)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="SISIRight" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-2">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.TDTRight == '' || speechTherapySpecialTestForm.value.TDTRight == null) ? true : false"></span>TDT (dBHL)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="TDTRight" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-2">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.ABLBRight == '' || speechTherapySpecialTestForm.value.ABLBRight == null) ? true : false"></span>ABLB (dBHL)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="ABLBRight" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="8" height="8" class="p-0"></td>
+              </tr>
+              <tr class="bg-white rounded shadow-sm">
+                <td class="text-center">Left</td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-3">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.SRTLeft == '' || speechTherapySpecialTestForm.value.SRTLeft == null) ? true : false"></span>SRT (dBHL)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="SRTLeft" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-3">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.SDSLeft == '' || speechTherapySpecialTestForm.value.SDSLeft == null) ? true : false"></span>SD S (%)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="SDSLeft" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-3">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.SISILeft == '' || speechTherapySpecialTestForm.value.SISILeft == null) ? true : false"></span>SISI (dBHL)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="SISILeft" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-3">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.TDTLeft == '' || speechTherapySpecialTestForm.value.TDTLeft == null) ? true : false"></span>TDT (dBHL)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="TDTLeft" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td class="text-center">
+                  <mat-form-field appearance="outline" class="w-75 pt-3">
+                    <mat-label><span class="required-asterisk" *ngIf="(speechTherapySpecialTestForm.value.ABLBLeft == '' || speechTherapySpecialTestForm.value.ABLBLeft == null) ? true : false"></span>ABLB (dBHL)</mat-label>
+                    <input matInput placeholder="Enter" formControlName="ABLBLeft" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="8" height="8" class="p-0"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--end of table-responsive-->
+      </div>
+    </div>
+    <div class="bg-white p-4 mt-2">
+      <div class="row">
+        <div class="col-xl-2 col-lg-2">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" formControlName="Starttime" autocomplete="off">
+            <mat-label>Start Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker1"></ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker1></ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-2">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker2" [disableClick]="true" formControlName="Endtime" autocomplete="off">
+            <mat-label>End Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker2"></ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker2 (closed)="TimeValidation()"></ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-2">
+          <mat-form-field class=" w-100 " appearance="outline">
+            <mat-label>Total Duration</mat-label>
+            <input matInput placeholder="Enter" formControlName="Totalduration" maxlength="20" numeric autocomplete="off">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6">
+          <mat-form-field class=" w-100 " appearance="outline" [matTooltip]="speechTherapySpecialTestForm.get('NotesandInstructions').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+            <mat-label>Notes</mat-label>
+            <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="NotesandInstructions"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-5 col-lg-5">
+          <div class="col-xl-3 col-lg-3 pull-left mt-3 pl-0 pr-0">
+            <mat-checkbox class="example-margin" formControlName="checked" (change)="onChange($event)">Next Follow Up</mat-checkbox>
+          </div>
+          <div class="col-xl-5 col-lg-5 pull-left">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label>Date</mat-label>
+              <input matInput [matDatepicker]="date2" [readonly]="!isFollowUp" [disabled]="!isFollowUp" placeholder="Visit date" formControlName="Nextfollowupdate" autocomplete="off">
+              <mat-datepicker-toggle matSuffix [for]="date2">
+              </mat-datepicker-toggle>
+              <mat-datepicker #date2></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- slide show End -->
+    <br>
+    <mat-card class="mat-card my-4">
+      <div class="row d-flex align-items-center mt-2">
+        <div class="col-xl-3 col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>UserName</mat-label>
+            <input matInput placeholder="Enter" maxlength="50" formControlName="UserName">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter" type="password" maxlength="35" formControlName="Password">
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 text-right">
+          <button type="button" mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="back()">Back</button>
+          <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" [hidden]="isShow" (click)="addUpdateSpeechTherapySpecialTest()">Save</button>
+          <button type="button" mat-stroked-button color="primary" class="transperent-button mr-2" [hidden]="isShow" (click)="resetForm()">Clear</button>
+          <button type="button" mat-flat-button color="primary" class="custome-button mat-primary" [hidden]="isShow" (click)="signOff()">Sign Off</button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</div>

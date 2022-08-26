@@ -1,0 +1,123 @@
+<div class="overflow-hidden px-4 pb-4">
+  <div class="row col-xl-12 ml-0 pl-0">
+    <mat-card class="col-xl-4 ml-0 my-2">
+      <div class="col-12">
+        <div class="row justify-content-md-left">
+          <div class="col-xl-12 text-center">
+            <h3 class="text-left">Specialty Consultation & Tests</h3>
+          </div>
+          <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-1">
+            <p class="m-0">Today's Audiology Tests : <b>{{totalTests}}</b></p>
+          </div>
+          <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-2">
+            <p class="m-0">Audiology Tests Completed : <b>{{completedTests}}</b></p>
+          </div>
+          <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-3">
+            <p class="m-0">Audiology Tests Pending : <b>{{pendingTests}}</b></p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <div style="margin:6px"></div>
+    <mat-card class="row col-xl-8 ml-0 my-2">
+      <form [formGroup]="audiologySearchForm">
+        <div class="col-xl-12">
+          <div class="col-xl-12 text-center">
+            <h3 class="text-left">Patient Search</h3>
+          </div>
+
+          <div class="row justify-content-between w-100 opdstop pt-2">
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>From Date</mat-label>
+                <input matInput [matDatepicker]="from" placeholder="From Date" formControlName="FromDate">
+                <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                <mat-datepicker #from></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>To Date</mat-label>
+                <input matInput [matDatepicker]="to" placeholder="To Date" formControlName="ToDate">
+                <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                <mat-datepicker #to></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Visit Number</mat-label>
+                <mat-icon matSuffix *ngIf="(audiologySearchForm.value.VisitNumber == '' || audiologySearchForm.value.VisitNumber == null) ? true : audiologySearchForm.value.VisitNumber.length > 2 ? false : true">search</mat-icon>
+                <input matInput placeholder="Type and Select" #autoCompleteVisitInput="matAutocompleteTrigger" [matAutocomplete]="visitNumber" formControlName="VisitNumber" maxlength="12">
+                <mat-autocomplete autoActiveFirstOption #visitNumber="matAutocomplete">
+                  <mat-option *ngFor="let number of VisitNumber" [value]="number">{{number}}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Facility</mat-label>
+                <mat-select formControlName="Facility">
+                  <mat-option *ngFor="let value of facilityData" [value]="value.FacilityId">{{value.FacilityName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4">
+              <mat-form-field class="w-100" appearance="outline" [matTooltip]="providerTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                <mat-label>Doctor</mat-label>
+                <mat-icon matSuffix *ngIf="(audiologySearchForm.value.ProviderName == '' || audiologySearchForm.value.ProviderName == null) ? true : (audiologySearchForm.value.ProviderName.length > 2) ? false : true">search</mat-icon>
+                <input matInput placeholder="Type and Select" #autoCompleteDoctorInput="matAutocompleteTrigger" [matAutocomplete]="AutoProviderName" formControlName="ProviderName">
+                <mat-autocomplete autoActiveFirstOption #AutoProviderName="matAutocomplete">
+                  <mat-option *ngFor="let doctorList of providerName" (onSelectionChange)="setProviderName(doctorList.ProviderID, doctorList.ProviderName)" [value]="doctorList.ProviderName">{{doctorList.ProviderName}}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4">
+              <mat-form-field class="w-100" appearance="outline" [matTooltip]="patientTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                <mat-label>Patient</mat-label>
+                <mat-icon matSuffix *ngIf="(audiologySearchForm.value.PatientName == '' || audiologySearchForm.value.PatientName == null) ? true : (audiologySearchForm.value.PatientName.length > 2) ? false : true">search</mat-icon>
+                <input matInput placeholder="Type and Select" #autoCompletePatientInput="matAutocompleteTrigger" [matAutocomplete]="AutoPatientName" formControlName="PatientName">
+                <mat-autocomplete autoActiveFirstOption #AutoPatientName="matAutocomplete">
+                  <mat-option *ngFor="let patList of patientName" (onSelectionChange)="setPatientName(patList.PatientId, patList.PatientFirstName, patList.PatientMiddleName, patList.PatientLastName)" [value]="patList.PatientFirstName + ' ' + patList.PatientMiddleName +' ' + patList.PatientLastName">
+                    {{patList.PatientFirstName}} {{" "}} {{patList.PatientMiddleName}} {{" "}} {{patList.PatientLastName}} {{ "-" }} {{patList.MRNo}}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4 mt-2">
+              <div class="pull-right">
+                <button type="button" mat-stroked-button class="transperent-button light-sky primary w-auto" (click)="reset()">Clear</button>
+              </div>
+              <div class="pull-right mr-2">
+                <button mat-flat-button class="custome-button mat-primary w-auto" [disabled]="IsDateCorect" (click)="audiologySearch()">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+
+  <mat-card *ngIf="show">
+    <h3>No Record Found</h3>
+  </mat-card>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <!-- <mat-card *ngIf="!show">
+        <div class="col-xs-12 p-3 w-100">
+          <app-bms-table [config]="tableConfig" [datas]="audiologyTableData" (openingItem)="viewTests($event)"></app-bms-table>
+        </div>
+      </mat-card> -->
+      <mat-card *ngIf="!show">
+        <app-cardContainer [configCard]="AudiologyListCard" [dataForContainer]="audiologyTableData"
+        (openingItem)="viewTests($event)"></app-cardContainer>
+      </mat-card>
+    </div>
+  </div>
+</div>

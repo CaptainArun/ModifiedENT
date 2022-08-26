@@ -1,0 +1,66 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+      <form>
+        <h5 cdkDragHandle class="p-3 title-bg">
+          <b>Audiology Test</b><button style="color:white" class="close" (click)="close()" aria-label="Close">
+            <span aria-hidden="true">X</span>
+          </button>
+        </h5>
+        <mat-card>
+          <div class="row col-xl-12 justify-content-center">
+
+            <div class="col-xl-3 text-center icon-box-shadow" *ngIf="data.SpecialTest" (click)="viewTests2()">
+              <img src="assets/images/MenuNewIcons/audiology/speech_therapy_with_special_test.png" width="100" height="100" style="cursor: pointer;">
+              <br>
+              <mat-label>Speech Therapy with Special Test</mat-label>
+            </div>
+
+            <div class="col-xl-3 text-center icon-box-shadow" *ngIf="data.OAE" (click)="viewTests4()">
+              <img src="assets/images/MenuNewIcons/audiology/OAE_test.png" width="100" height="100" style="cursor: pointer;" class="p-2">
+              <br>
+              <p>OAE Test</p>
+            </div>
+
+            <div class="col-xl-3 text-center icon-box-shadow" *ngIf="data.BERA" (click)="viewTests5()">
+              <img src="assets/images/MenuNewIcons/audiology/BERA_test.png" width="100" height="100" style="cursor: pointer;" class="p-2">
+              <br>
+              <p>BERA Test</p>
+            </div>
+
+            <div class="col-xl-3 text-center icon-box-shadow" *ngIf="data.ASSR" (click)="viewTests6()">
+              <img src="assets/images/MenuNewIcons/audiology/ASSR_test.png" width="100" height="100" style="cursor: pointer;" class="p-2">
+              <br>
+              <p>ASSR Test</p>
+            </div>
+
+            <div class="col-xl-3 text-center icon-box-shadow" *ngIf="data.HearingAid" (click)="viewTests7()">
+              <img src="assets/images/MenuNewIcons/audiology/hearing_aid_trial.png" width="100" height="100" style="cursor: pointer;" class="p-2">
+              <br>
+              <p>Hearing Aid Trial</p>
+            </div>
+
+            <div class="col-xl-3 text-center icon-box-shadow" *ngIf="data.TinnitusMasking" (click)="viewTests8()">
+              <img src="assets/images/MenuNewIcons/audiology/tinnitus_masking.png" width="100" height="100" style="cursor: pointer;" class="p-2">
+              <br>
+              <p>Tinnitus Masking</p>
+            </div>
+
+            <div class="col-xl-3 text-center icon-box-shadow" *ngIf="data.SpeechTherapy" (click)="viewTests9()">
+              <img src="assets/images/MenuNewIcons/audiology/speech_therapy.png" width="100" height="100" style="cursor: pointer;" class="p-2">
+              <br>
+              <p>Speech Therapy</p>
+            </div>
+
+            <div class="col-xl-3 text-center icon-box-shadow" *ngIf="data.Electrocochleography" (click)="viewTests10()">
+              <img src="assets/images/MenuNewIcons/audiology/electrocochleography.png" width="100" height="100" style="cursor: pointer;" class="p-2">
+              <br>
+              <p>Electrocochleography</p>
+            </div>
+
+          </div>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+</div>

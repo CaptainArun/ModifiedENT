@@ -1,0 +1,174 @@
+<div class="overflow-hidden p-4">
+    <form [formGroup]="tympanometryForm">
+        <audiology-common></audiology-common>
+        <!-- slide show -->
+        <div class="bg-white p-4 mt-4 upload-da">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                    <h3>Tympanometry</h3>
+                </div>
+                <div class="col-lg-12">
+                    <div class="col-lg-6 f-l">
+                        <img src="assets/images/graph.jpg" width="100%">
+                    </div>
+                    <div class="col-lg-6 f-l">
+                        <div class="col-lg-12 mt-5">
+
+                            <div class="col-lg-12 d-flex align-items-center">
+                                <mat-label>Ear:</mat-label>
+                                <section class="example-section">
+                                    <mat-checkbox class="example-margin red" formControlName="LeftEar">Left
+                                    </mat-checkbox>
+                                    <mat-checkbox class="example-margin blue" formControlName="RightEar">Right
+                                    </mat-checkbox>
+                                </section>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="w-10 f-l mt-3">ECV</div>
+                                <mat-form-field appearance="outline" class="matBox pl-3">
+                                    <input matInput placeholder="Enter" formControlName="ECV">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="w-10 f-l mt-3">MEP</div>
+                                <mat-form-field appearance="outline" class="matBox pl-3">
+                                    <input matInput placeholder="Enter" formControlName="MEP">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="w-10 f-l mt-3">SC</div>
+                                <mat-form-field appearance="outline" class="matBox pl-3">
+                                    <input matInput placeholder="Enter" formControlName="SC">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="w-10 f-l mt-3">Grad</div>
+                                <mat-form-field appearance="outline" class="matBox pl-3">
+                                    <input matInput placeholder="Enter" formControlName="Grad">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="w-10 f-l mt-3">TW</div>
+                                <mat-form-field appearance="outline" class="matBox pl-3">
+                                    <input matInput placeholder="Enter" formControlName="TW">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="w-10 f-l mt-3">Speed</div>
+                                <mat-form-field appearance="outline" class="matBox pl-3">
+                                    <input matInput placeholder="Enter" formControlName="Speed">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="w-10 f-l mt-3">Direction</div>
+                                <mat-form-field appearance="outline" class="matBox pl-3">
+                                    <input matInput placeholder="Enter" formControlName="Direction">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-4 mt-4 upload-da">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Notes</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="col-xl-3 col-lg-3 pull-left mt-3 pl-0 pr-0">
+                        <mat-checkbox class="example-margin">Next Follow Up</mat-checkbox>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 pull-left">
+                        <mat-form-field class=" w-100 " appearance="outline">
+                            <mat-label>Date</mat-label>
+                            <input matInput [matDatepicker]="date1" placeholder="Visit date">
+                            <mat-datepicker-toggle matSuffix [for]="date1">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #date1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white p-4 mt-2">
+            <div class="row">
+                <div class="col-xl-2 col-lg-2">
+                    <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                        <input matInput [ngxTimepicker]="toggleTimepicker1" formControlName="Starttime">
+                        <mat-label>Start Time</mat-label>
+                        <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+                        </ngx-material-timepicker-toggle>
+                        <ngx-material-timepicker #toggleTimepicker1>
+                        </ngx-material-timepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2">
+                    <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                        <input matInput [ngxTimepicker]="toggleTimepicker2" formControlName="Endtime">
+                        <mat-label>End Time</mat-label>
+                        <ngx-material-timepicker-toggle [for]="toggleTimepicker2">
+                        </ngx-material-timepicker-toggle>
+                        <ngx-material-timepicker #toggleTimepicker2>
+                        </ngx-material-timepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-2">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Total Duration</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"
+                            formControlName="Totalduration"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Notes</mat-label>
+                        <textarea matInput placeholder="Enter" rows="1" cols="1"
+                            formControlName="NotesandInstructions"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="col-xl-4 col-lg-4 pull-left mt-3 pl-0 pr-0">
+                        <mat-checkbox class="example-margin" (change)="onChange($event)">Next Follow Up</mat-checkbox>
+                    </div>
+                    <div class="col-xl-8 col-lg-8 pull-left">
+                        <mat-form-field class=" w-100 " appearance="outline">
+                            <mat-label>Date</mat-label>
+                            <input matInput [matDatepicker]="date2" [disabled]="!isFollowUp" placeholder="Visit date"
+                                formControlName="Nextfollowupdate">
+                            <mat-datepicker-toggle matSuffix [for]="date2">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #date2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- slide show End-->
+        <div class="row d-flex align-items-center mt-4">
+            <div class="col-xl-3 col-lg-3">
+                <mat-form-field class="w-100 " appearance="outline">
+                    <mat-label>UserName</mat-label>
+                    <input matInput placeholder="Enter">
+                </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-3">
+                <mat-form-field class="w-100 " appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Enter">
+                </mat-form-field>
+            </div>
+            <div class="col-xl-6 col-lg-6 text-right">
+                <button mat-flat-button color="primary" class="custome-button mat-primary mr-2"
+                    (click)="back()">Back</button>
+                <button mat-flat-button color="primary" class="custome-button mat-primary mr-2"
+                    (click)="addUpdateTympanometry()">Save</button>
+                <button mat-stroked-button class="transperent-button mr-2" color="primary">Cancel</button>
+                <button mat-flat-button color="primary" class="custome-button mat-primary">SignOff</button>
+            </div>
+        </div>
+    </form>
+</div>
