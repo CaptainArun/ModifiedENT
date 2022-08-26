@@ -1,0 +1,16 @@
+<div>
+  <app-patient-history></app-patient-history>
+  <div class="overflow-hidden px-4">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">     
+    </div>
+    <mat-card class="table-wrapper">
+      <h4>Patient Vitals</h4>
+      <mat-card-content>
+        <div>
+          <app-bms-table class="row text-center" [config]="tableConfig" [datas]="Vitals" (viewItem)="openViewVitalsforPatient($event)" (deleteItem)="deleteVitalsforPatient($event)" (bindItem)="onBindItem($event)"></app-bms-table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <app-patientBackbutton></app-patientBackbutton>
+</div>

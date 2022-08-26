@@ -1,0 +1,181 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="ProcedureForm">
+    <h5 cdkDragHandle class="p-3 title-bg">
+      Procedure <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+    
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+        <div class="row">
+          <div class="col-12">
+            <mat-card class="px-4 py-2">
+              <div class="row">
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk" *ngIf="(ProcedureForm.value.VisitDateandTime == '' || ProcedureForm.value.VisitDateandTime == null) ? true : false"></span>Visit Date & Time</mat-label>
+                    <mat-select formControlName="VisitDateandTime">
+                      <mat-option *ngFor="let vDate of visitDandt , index as i" [value]="vDate" (click)="RecordedDuring(i)">{{vDate}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk" *ngIf="(ProcedureForm.value.RecordedDate == '' || ProcedureForm.value.RecordedDate == null) ? true : false"></span>Recorded Date</mat-label>
+                    <input matInput [matDatepicker]="Vitals" formControlName="RecordedDate" autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="Vitals"></mat-datepicker-toggle>
+                    <mat-datepicker #Vitals></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-2 timepick pb-3 pt-3">
+                  <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk" *ngIf="(ProcedureForm.value.RecordedTime == '' || ProcedureForm.value.RecordedTime == null) ? true : false"></span>Recorded Time</mat-label>
+                    <input matInput [ngxTimepicker]="Vitals1" [disableClick]="true" formControlName="RecordedTime" autocomplete="off">
+                    <ngx-material-timepicker-toggle [for]="Vitals1"></ngx-material-timepicker-toggle>
+                    <ngx-material-timepicker #Vitals1 defaultTime="{{time}}"></ngx-material-timepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk" *ngIf="(ProcedureForm.value.recordedDuring == '' || ProcedureForm.value.recordedDuring == null) ? true : false"></span>Recorded During</mat-label>
+                    <input matInput placeholder="Enter" [value]="recordedDuring" maxlength="75" formControlName="recordedDuring" readonly>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk" *ngIf="(ProcedureForm.value.RecordedBy == '' || ProcedureForm.value.RecordedBy == null) ? true : false"></span>Recorded By</mat-label>
+                    <mat-select formControlName="RecordedBy">
+                      <mat-option *ngFor="let value of recordby" [value]="value">{{value}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overflow">
+      <mat-card class="my-4">
+        <div class="row mt-2">
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="ProcedureForm.get('ChiefComplaint').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label><span class="required-asterisk" *ngIf="(ProcedureForm.value.ChiefComplaint == '' || ProcedureForm.value.ChiefComplaint == null) ? true : false"></span>Chief Complaint</mat-label>
+              <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="ChiefComplaint"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="ProcedureForm.get('DiagnosisNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Diagnosis Notes</mat-label>
+              <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="DiagnosisNotes"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label><span class="required-asterisk" *ngIf="(ProcedureForm.value.TreatmentType == '' || ProcedureForm.value.TreatmentType == null) ? true : false"></span>Treatment Type</mat-label>
+              <mat-select formControlName="TreatmentType">
+                <mat-option *ngFor="let type of treatmentType" [value]="type.TreatmentTypeDesc">{{type.TreatmentTypeDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="ProcedureForm.get('ProcedureNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label><span class="required-asterisk" *ngIf="(ProcedureForm.value.ProcedureNotes == '' || ProcedureForm.value.ProcedureNotes == null) ? true : false"></span>Procedure Notes</mat-label>
+              <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="ProcedureNotes"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="reqProcedureTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+              <mat-label>Requested Procedure</mat-label>
+              <mat-select multiple formControlName="RequestedprocedureId">
+                <mat-option *ngFor="let problem of requestedProcedures" (click)="setReqProcedureTooltip()" [value]="problem.RequestedProcedureId">{{problem.RequestedProcedureDescription}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Procedure Date</mat-label>
+              <input matInput [matDatepicker]="proceduredate" placeholder="Procedure Date" formControlName="Proceduredate" autocomplete="off">
+              <mat-datepicker-toggle matSuffix [for]="proceduredate"></mat-datepicker-toggle>
+              <mat-datepicker #proceduredate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="cptTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Primary CPT Code</mat-label>
+              <mat-icon matSuffix *ngIf="(ProcedureForm.value.PrimaryCPT == '' || ProcedureForm.value.PrimaryCPT == null) ? true : (ProcedureForm.value.PrimaryCPT.length > 2) ? false : true">search</mat-icon>
+              <textarea placeholder="Type and Select" rows="1" matInput #autoCompleteCPTInput="matAutocompleteTrigger" [matAutocomplete]="cptCode" formControlName="PrimaryCPT" maxlength="500"></textarea>
+              <mat-autocomplete autoActiveFirstOption #cptCode="matAutocomplete">
+                <mat-option *ngFor="let CPT of CPTCodes" (onSelectionChange)="setCPTTooltip(CPT.CPTCode, CPT.Description)" [value]="CPT.CPTCode + '-' + CPT.Description">{{CPT.CPTCode}} - {{CPT.Description}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6">
+            <mat-form-field class=" w-100 " appearance="outline">
+              <mat-label><span class="required-asterisk" *ngIf="(ProcedureForm.value.ProcedureStatus == '' || ProcedureForm.value.ProcedureStatus == null) ? true : false"></span>Procedure Status</mat-label>
+              <mat-select formControlName="ProcedureStatus">
+                <mat-option *ngFor="let proStatus of procedureStatus" [value]="proStatus.ProcedureStatusDesc">{{proStatus.ProcedureStatusDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-2 col-lg-2">
+            <section class="example-section">
+              <mat-checkbox class="example-margin" formControlName="IsReferred" (change)="isRefered($event)">Referral</mat-checkbox>
+            </section>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="ProcedureForm.get('ReferralNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Referral Notes</mat-label>
+              <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="ReferralNotes" [readonly]="!isReferedLab"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="ProcedureForm.get('FollowUpNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Follow Up Notes</mat-label>
+              <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="FollowUpNotes"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="ProcedureForm.get('AdditionalNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Additional Notes</mat-label>
+              <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="AdditionalNotes"></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6">
+            <mat-form-field class="w-100" appearance="outline" [matTooltip]="icdTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+              <mat-label>Primary ICD Code</mat-label>
+              <mat-icon matSuffix *ngIf="(ProcedureForm.value.PrimaryICD == '' || ProcedureForm.value.PrimaryICD == null) ? true : (ProcedureForm.value.PrimaryICD.length > 2) ? false : true">search</mat-icon>
+              <textarea placeholder="Type and Select" rows="1" matInput #autoCompleteICDInput="matAutocompleteTrigger" [matAutocomplete]="icdCode"  formControlName="PrimaryICD" maxlength="500"></textarea>
+              <mat-autocomplete autoActiveFirstOption #icdCode="matAutocomplete">
+                <mat-option *ngFor="let ICD of ICDCodes" (onSelectionChange)="setICDTooltip(ICD.ICDCode, ICD.Description)" [value]="ICD.ICDCode + '-' + ICD.Description">{{ICD.ICDCode}} - {{ICD.Description}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="text-right my-3">
+          <button mat-flat-button class="custome-button mr-2 mat-primary" (click)="addUpdateProcedure()">Save</button>
+          <button type="button" mat-stroked-button class="transperent-button" color="primary" (click)="clearForm()">Clear</button>
+        </div>
+      </mat-card>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,5 @@
+﻿.overflow {
+    overflow: auto; 
+    overflow-x: hidden; 
+    max-height: 550px;
+}

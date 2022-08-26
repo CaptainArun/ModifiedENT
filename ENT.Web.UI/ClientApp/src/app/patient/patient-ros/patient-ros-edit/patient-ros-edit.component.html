@@ -1,0 +1,957 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+<h5 cdkDragHandle class="p-3 title-bg">
+  PATIENT ROS EDIT<button
+    style="color: white"
+    class="close"
+    (click)="dialogClose()"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">X</span>
+  </button>
+</h5>
+<div class="px-4">
+  <form [formGroup]="patientROSform">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+          <div class="row">
+            <div class="col-12">
+              <mat-card>
+                <div class="row">
+                  <div class="col-xl-3 col-lg-6 pt-2">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(patientROSform.value.VisitDate == null || patientROSform.value.VisitDate == '') ? true : false"></span>Visit Date & Time</mat-label>
+                      <mat-select formControlName="VisitDate" disabled>
+                        <mat-option
+                          *ngFor="let vDate of visitDandt; index as i"
+                          [value]="vDate"
+                          (onSelectionChange)="RecordedDuring(i)"
+                        >
+                          {{ vDate }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-2 col-lg-6 pt-2">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Recorded Date</mat-label>
+                      <input
+                        matInput
+                        [matDatepicker]="ros"
+                        formControlName="RecordedDate"
+                      />
+                      <mat-datepicker-toggle
+                        matSuffix
+                        [for]="ros"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #ros></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-lg-2 timepick pt-2">
+                    <mat-form-field
+                      class="input-full-width timer w-100"
+                      appearance="outline"
+                    >
+                      <input
+                        matInput
+                        [ngxTimepicker]="ros1"
+                        [disableClick]="true"
+                        formControlName="RecordedTime"
+                      />
+                      <mat-label>Record Time</mat-label>
+                      <ngx-material-timepicker-toggle [for]="ros1">
+                      </ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #ros1> </ngx-material-timepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-2 col-lg-6 pt-2">
+                    <mat-form-field  class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(patientROSform.value.recordedDuring == null || patientROSform.value.recordedDuring == '') ? true : false"></span>Recorded During</mat-label>
+                      <input
+                        matInput
+                        placeholder="Enter"
+                        [value]="recordedDuring"
+                        formControlName="recordedDuring"
+                        readonly
+                        disabled
+                      />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-6 pt-2">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(patientROSform.value.RecordedBy == null || patientROSform.value.RecordedBy == '') ? true : false"></span>Recorded By</mat-label>
+                      <mat-select formControlName="RecordedBy">
+                        <mat-option
+                          *ngFor="let value of recordby"
+                          [value]="value"
+                        >
+                          {{ value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+            <hr>  </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row overflow600px" >
+        <mat-card>
+          <div>
+          <input hidden formControlName="PatientID" />
+          <input hidden formControlName="VisitID" />
+          <input hidden formControlName="ROSID" />
+          <h6 class="font-weight-bold pt-2">General:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Weightlossorgain"
+                    >Weight loss or gain</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Feverorchills"
+                    >Fever or chills</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Troublesleeping"
+                    >Trouble sleeping</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Fatigue"
+                    >Fatigue</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="GeneralWeakness"
+                    >Weakness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros101()"
+                    formControlName="GeneralOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="GeneralothersComments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <h6 class="font-weight-bold pt-2">Skin:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Rashes"
+                    >Rashes</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="SkinItching"
+                    >Itching</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Colorchanges">
+                    Color changes</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="SkinLumps"
+                    >Lumps</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Dryness"
+                    >Dryness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    formControlName="Hairandnailchanges"
+                  >
+                    Hair and nail changes</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros2()"
+                    formControlName="SkinOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show4">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="SkinothersComments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Head:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Headache"
+                    >Headache</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Headinjury"
+                    >Head injury</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros3()"
+                    formControlName="Others"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show5">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="HeadothersComments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Ears:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Decreasedhearing"
+                    >Decreased hearing</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Earache"
+                    >Earache</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Ringinginears"
+                    >Ringing in ears (tinnitus)</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Drainage"
+                    >Drainage</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros4()"
+                    formControlName="EarOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="EarothersComments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Eyes:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Vision"
+                    >Vision</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    formControlName="Blurryordoublevision"
+                    >Blurry or double vision</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Cataracts"
+                    >Cataracts</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Glassesorcontacts"
+                    >Glasses or contacts</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Flashinglights"
+                    >Flashing lights</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Lasteyeexam"
+                    >Last eye exam</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="EyePain"
+                    >Pain</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Specks"
+                    >Specks</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Redness"
+                    >Redness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Glaucoma"
+                    >Glaucoma</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros5()"
+                    formControlName="EyeOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show7">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="EyesothersComments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Nose:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Stuffiness"
+                    >Stuffiness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="NoseItching"
+                    >Itching</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Nosebleeds"
+                    >Nosebleeds</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Discharge"
+                    >Discharge</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Hayfever"
+                    >Hay fever</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Sinuspain"
+                    >Sinus pain</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros6()"
+                    formControlName="NoseOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show8">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="NoseothersComments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Throat:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Teeth"
+                    >Teeth</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Soretongue"
+                    >Sore tongue</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Thrush"
+                    >Thrush</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Gums"
+                    >Gums</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Drymouth"
+                    >Dry mouth</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Nonhealingsores"
+                    >Non-healing sores</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Bleeding"
+                    >Bleeding</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Sorethroat"
+                    >Sore throat</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Sinus"
+                    >Sinus</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Lastdentalexam"
+                    >Last dental exam</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Dentures"
+                    >Dentures</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Hoarseness"
+                    >Hoarseness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros7()"
+                    formControlName="ThroatOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div class="col-sm-12 col-md-4 col-lg-12 col-xl-12" *ngIf="show9">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="ThroatothersComments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Neck:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="NeckLumps"
+                    >Lumps</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="NeckPain"
+                    >Pain</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Swollenglands"
+                    >Swollen glands</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Stiffness"
+                    >Stiffness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros8()"
+                    formControlName="NeckOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div
+                class="col-sm-12 col-md-4 col-lg-12 col-xl-12"
+                *ngIf="show10"
+              >
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="NeckothersComments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Respiratory:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Cough"
+                    >Cough (dry or wet,productive)</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Coughingupblood">
+                    Coughing up blood(hemoptysis)</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Wheezing"
+                    >Wheezing</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Sputum"
+                    >Sputum (color and amount)</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Shortnessofbreath"
+                    >Shortness of breath(dyspnea)</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Painfulbreathing"
+                    >Painful breathing</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros9()"
+                    formControlName="RespiratoryOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div
+                class="col-sm-12 col-md-4 col-lg-12 col-xl-12"
+                *ngIf="show11"
+              >
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="Respiratoryotherscomments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Neurologic:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Dizziness"
+                    >Dizziness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Weakness"
+                    >Weakness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Tremor"
+                    >Tremor</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Fainting"
+                    >Fainting</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Numbness"
+                    >Numbness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Seizures"
+                    >Seizures</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Tingling"
+                    >Tingling</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros10()"
+                    formControlName="NeurologicOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div
+                class="col-sm-12 col-md-4 col-lg-12 col-xl-12"
+                *ngIf="show12"
+              >
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="Neurologicotherscomments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Hematologic:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Easeofbruising"
+                    >Ease of bruising</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Easeofbleeding">
+                    Ease of bleeding</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros11()"
+                    formControlName="HematologicOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div
+                class="col-sm-12 col-md-4 col-lg-12 col-xl-12"
+                *ngIf="show13"
+              >
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="Hematologicotherscomments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <h6 class="font-weight-bold pt-2">Psychiatric:</h6>
+          <div class="row mb-3">
+            <div class="row col-sm-12 col-md-4 col-lg-9 col-xl-9">
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Nervousness"
+                    >Nervousness</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Memoryloss">
+                    Memory loss</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Stress"
+                    >Stress</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox class="mr-4" formControlName="Depression"
+                    >Depression</mat-checkbox
+                  >
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                <div class="align-items-center">
+                  <mat-checkbox
+                    class="mr-4"
+                    (click)="ros12()"
+                    formControlName="PsychiatricOthers"
+                    >Others</mat-checkbox
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <div
+                class="col-sm-12 col-md-4 col-lg-12 col-xl-12"
+                *ngIf="show14"
+              >
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Others</mat-label>
+                  <input maxlength="75"
+                    matInput
+                    placeholder="Enter"
+                    formControlName="Psychiatricotherscomments"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+       </div> </mat-card>
+      </div>
+    </div>
+  </form>
+  <div class="text-right justify-content-end">
+    <button
+      mat-flat-button
+      color="primary"
+      class="custome-button mat-primary mr-2"
+      (click)="addUpdateROS()"
+    >
+      Save
+    </button>
+    <button
+      mat-stroked-button
+      class="transperent-button"
+      color="primary"
+      type="button"
+      (click)="cancelForm()"
+    >
+      Clear
+    </button>
+  </div>
+</div>
+  </div>

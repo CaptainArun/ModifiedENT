@@ -1,0 +1,37 @@
+<div>
+  <app-patient-history></app-patient-history>
+  <div class="overflow-hidden px-4">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <div class="row">
+        <div class="text-right w-100 my-2">
+          <button
+            class="custome-button mat-primary btn btn-info"
+            (click)="openAddUpdateform()"
+            style="height: 32px; width: 140px"
+          >
+         Add Physical exam
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <mat-card class="table-wrapper">
+        <h4>Physical exam</h4>
+
+         <mat-card-content>
+          <div>
+            <app-bms-table
+              class="row text-center"
+              [config]="tableConfig"
+              [datas]="patientexamdata"
+              (viewItem)="openPatientPhysicalexamView($event)"
+              (editItem)="openPatientPhysicalexamEdit($event)"
+              (deleteItem)="deletePhycialexamRecord($event)"
+            ></app-bms-table>
+          </div>
+        </mat-card-content> 
+      </mat-card>
+    </div>
+  </div>
+  <app-patientBackbutton></app-patientBackbutton>
+</div>

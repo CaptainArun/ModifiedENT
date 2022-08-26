@@ -1,0 +1,163 @@
+<div class="white mt-0" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Patient Social History <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="visitIntakeForm">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+
+        <div class="row">
+          <div class="col-xl-12">
+            <mat-card class="px-4 py-2 my-2">
+
+              <div class="row">
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field  class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                      *ngIf="(visitIntakeForm.value.VisitDateandTime == null || visitIntakeForm.value.VisitDateandTime == '') ? true : false"></span>Visit Date & Time</mat-label>
+                    <mat-select formControlName="VisitDateandTime">
+                      <mat-option *ngFor="let visitDate of visitdate , index as i" [value]="visitDate" (onSelectionChange)="RecordedDuring(i)">
+                        {{visitDate}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Recorded Date</mat-label>
+                    <input matInput [matDatepicker]="soc" formControlName="RecordedDate">
+                    <mat-datepicker-toggle matSuffix [for]="soc"></mat-datepicker-toggle>
+                    <mat-datepicker #soc></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-2 timepick">
+                  <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                    <input matInput [ngxTimepicker]="RecordedTime" [disableClick]="true" formControlName="RecordedTime">
+                    <mat-label>Recorded Time</mat-label>
+                    <ngx-material-timepicker-toggle [for]="RecordedTime">
+                    </ngx-material-timepicker-toggle>
+                    <ngx-material-timepicker #RecordedTime>
+                    </ngx-material-timepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                      *ngIf="(visitIntakeForm.value.recordedDuring == null || visitIntakeForm.value.recordedDuring == '') ? true : false"></span>Recorded During</mat-label>
+                    <input matInput placeholder="Enter" [value]="recordedDuring" formControlName="recordedDuring" readonly>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk"
+                      *ngIf="(visitIntakeForm.value.RecordedBy == null || visitIntakeForm.value.RecordedBy == '') ? true : false"></span>Recorded By</mat-label>
+                    <mat-select formControlName="RecordedBy">
+                      <mat-option *ngFor="let value of recordby" [value]="value">
+                        {{value}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-xl-12">
+        <mat-card class="my-3">
+          <input hidden formControlName="PatientId" />
+          <input hidden formControlName="VisitId" />
+          <input hidden formControlName="SocialHistoryId" />
+          <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                  *ngIf="(visitIntakeForm.value.Smoking == null || visitIntakeForm.value.Smoking == '') ? true : false"></span>Smoking Status</mat-label>
+                <mat-select formControlName="Smoking">
+                  <mat-option *ngFor="let value of smoking" [value]="value.SmokingMasterID">
+                    {{value.SmokingMasterDesc}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>No.of.Cigarettes per day</mat-label>
+                <input matInput placeholder="Enter" maxlength="50" formControlName="CigarettesPerDay">
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Drinking Status</mat-label>
+                <mat-select formControlName="Drinking">
+                  <mat-option *ngFor="let value of drinking" [value]="value.DrinkingMasterID">
+                    {{value.DrinkingMasterDesc}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Consumption in (ml) per day</mat-label>
+                <input matInput placeholder="Enter" maxlength="50" formControlName="ConsumptionPerDay">
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Drug Habits</mat-label>
+                <input matInput placeholder="Enter" formControlName="DrugHabitsDetails" maxlength="75">
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Life Style</mat-label>
+                <input matInput placeholder="Enter" formControlName="LifeStyleDetails"  maxlength="75">
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+              <mat-form-field [matTooltip]="visitIntakeForm.get('CountriesVisited').value" matTooltipPosition="above"  matTooltipClass ="Tooltip-lg"  class=" w-100 " appearance="outline">
+                <mat-label>Countries Visited</mat-label>
+                <textarea rows="1" matInput placeholder="Enter" formControlName="CountriesVisited"  maxlength="75"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+              <mat-form-field [matTooltip]="visitIntakeForm.get('DailyActivities').value" matTooltipPosition="above"  matTooltipClass ="Tooltip-lg" class=" w-100 " appearance="outline">
+                <mat-label>Daily Activities</mat-label>
+                <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="DailyActivities"  maxlength="75"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+              <mat-form-field [matTooltip]="visitIntakeForm.get('AdditionalNotes').value" matTooltipPosition="above"  matTooltipClass ="Tooltip-lg" class=" w-100 " appearance="outline">
+                <mat-label>Additional Notes</mat-label>
+                <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="AdditionalNotes" maxlength="500"></textarea>
+              </mat-form-field>
+            </div>
+
+
+          </div>
+          <div class="text-right justify-content-end">
+            <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="addUpdateSocialHist()">Save</button>
+            <button mat-stroked-button class="transperent-button" color="primary" (click)="cancelForm()">Clear</button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+  </form>
+  </div>

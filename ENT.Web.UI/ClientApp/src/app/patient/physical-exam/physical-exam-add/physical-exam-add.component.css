@@ -1,0 +1,6 @@
+.overflow600px{
+    overflow: auto;
+    overflow-x: hidden;
+    width: auto;
+    max-height: 600px;
+  }

@@ -1,0 +1,172 @@
+<div class="white mt-4" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Patient Visit<button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="PatientVisitViewForm">
+    <mat-card class="px-4 py-2 my-2">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Visit Date & Time</mat-label>
+            <input matInput placeholder="Enter" formControlName="visitDateandTime">
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="RecordedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div> -->
+
+        <!-- <div class="col-lg-3 timepick pb-3 pt-3">
+          <mat-form-field  class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" formControlName="RecordedTime">
+            <mat-label>Record Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker1>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div> -->
+
+        <div class="col-xl-6 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input matInput placeholder="Enter" formControlName="recordedDuring">
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-card>
+  </form>
+  <mat-card>
+
+    <div class="row p-0 m-0 scroll-md">
+
+      <div class="col-xl-6">
+        <div class="v-line">
+          <div class="pt-3 pb-2">
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Visit No</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.VisitNo}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">To Consult</div>
+              <div class=" col-lg-1 ">:</div>
+              <div class=" col-lg-7 ">{{data.ToConsult}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Urgency Type</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.urgencyType}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Referring Facility</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.ReferringFacility}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Referring Provider</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.ReferringProvider}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Consultation Type</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.ConsultationType}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Chief Complaint</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.ChiefComplaint}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Accompanied By</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.AccompaniedBy}}</div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-6">
+        <div class="v-line">
+          <div class="pt-3 pb-2">
+            <!-- <div class="row pb-1 pt-3">
+              <div class="col font_color">Patient Next Consultation</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.PatientNextConsultation}}</div>
+            </div> -->
+
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Token Number</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.TokenNumber}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Appointment</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.Appointment}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Additional Information</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.AdditionalInformation}}</div>
+            </div>
+
+            <!-- <div class="row pb-1 pt-3">
+              <div class="col font_color">Visit Reason</div>
+              <div class=" col-lg-1 ">:</div>
+              <div class=" col-lg-7 ">{{data.VisitReason}}</div>
+            </div> -->
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Patient Arrival Condition</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.patientArrivalCondition}}</div>
+            </div>
+
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Visit Status</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.visitStatus}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Visit Type</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.visitType}}</div>
+            </div>
+
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Provider Name</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.ProviderName}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

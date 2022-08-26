@@ -1,0 +1,40 @@
+
+
+
+
+
+
+
+
+
+
+<div>
+  <app-patient-history></app-patient-history>
+  <div class="overflow-hidden px-4">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+
+      <div class="row">
+        <!--        <h4>Work History</h4>
+        -->
+        <div class="text-right w-100 my-2">
+
+
+          <button class="custome-button mat-primary btn btn-info" (click)="openAddUpdateform()" style="height:32px;width:140px">Add Social History</button>
+
+        </div>
+
+      </div>
+    </div>
+    <div>
+      <mat-card>
+        <h4>Social History</h4>
+        <mat-card-content>
+          <div>
+            <app-bms-table class="row text-center" [config]="tableConfig" [datas]="socialHistory" (viewItem)="openSocialHistoryView($event)" (deleteItem)="deleteSocialHistory($event)" (editItem)="openSocialHistoryEdit($event)"></app-bms-table>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <app-patientBackbutton></app-patientBackbutton>
+</div>

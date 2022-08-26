@@ -1,0 +1,135 @@
+<div class="row" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+
+  <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+    <div class="white mt-3 mb-4 p-1">
+      <mat-card class="p-0">
+        <h5 cdkDragHandle class="p-3 title-bg">
+          Patient Details<button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+            <span aria-hidden="true">X</span>
+          </button>
+        </h5>
+        <div class="white mt-0 mb-4" *ngIf="data.PatientId">
+         
+            <app-patient-demographic [PatID]="data.PatientId"></app-patient-demographic>
+          
+        </div>
+        <div class="row p-0 m-0 scroll-md">
+          <div class="col-lg-6 v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                  First Name
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{data.PatientFirstName}}
+                </div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Middle Name</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.PatientMiddleName}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Age</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.PatientAge}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">ID-1 Type</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.IdType1}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Mobile Number</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.PrimaryContactNumber}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Emergency Contact Number</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Emergencycontactnumber}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Village</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Village}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Pincode</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Pincode}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Country</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Country}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                  Last Name
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{data.PatientLastName}}
+                </div>
+              </div>
+
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Date of Birth</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.PatientDOB|date:'dd-MM-yyyy'}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3 ">
+                <div class="col font_color">Gender</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Gender}}</div>
+              </div>
+
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">ID-2 Type</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.IdType2}}</div> 
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Email</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.email}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Address</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Address1}} {{data.Address2}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Town/City</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Town}}/{{data.City}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">State</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.State}}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Blood group</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{data.Bloodgroup}}</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

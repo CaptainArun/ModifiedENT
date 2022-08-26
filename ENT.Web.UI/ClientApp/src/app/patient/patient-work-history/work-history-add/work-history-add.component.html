@@ -1,0 +1,204 @@
+<div class="white mt-0" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Patient Work History<button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+
+  <form [formGroup]="PatientWorkHistoryForm">
+    <mat-card class="px-3 py-1 my-3">
+
+      <div class="row">
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(PatientWorkHistoryForm.value.visitDateandTime == null || PatientWorkHistoryForm.value.visitDateandTime == '') ? true : false"></span>Visit Date & Time</mat-label>
+            <mat-select formControlName="visitDateandTime">
+              <mat-option *ngFor="let date of visitDateTime, index as i" [value]="date" (click)="RecordedDuring(i)">
+                {{date}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input matInput [matDatepicker]="vitals1" formControlName="RecordedDate">
+            <mat-datepicker-toggle matSuffix [for]="vitals1"></mat-datepicker-toggle>
+            <mat-datepicker #vitals1></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-2 timepick">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker" [disableClick]="true" formControlName="RecordedTime">
+            <mat-label>Recorded Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-2 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input matInput placeholder="Enter" [value]="recordedDuring" formControlName="recordedDuring" readonly>
+          </mat-form-field>
+        </div>
+
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(PatientWorkHistoryForm.value.RecordedBy == null || PatientWorkHistoryForm.value.RecordedBy == '') ? true : false"></span>Recorded By</mat-label>
+            <mat-select formControlName="RecordedBy">
+              <mat-option *ngFor="let rcd of recordby" [value]="rcd">
+                {{rcd}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+
+        </div>
+      </div>
+
+    </mat-card>
+
+    <mat-card>
+      <div class="row">
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(PatientWorkHistoryForm.value.EmployerName == null || PatientWorkHistoryForm.value.EmployerName == '') ? true : false"></span>Employer Name</mat-label>
+            <input matInput placeholder="Enter" formControlName="EmployerName">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Contact Person</mat-label>
+            <input matInput placeholder="Enter" formControlName="ContactPerson" >
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(PatientWorkHistoryForm.value.Email == null || PatientWorkHistoryForm.value.Email == '') ? true : false"></span>Email</mat-label>
+            <input matInput placeholder="Enter" formControlName="Email">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Cell Phone</mat-label>
+            <input matInput placeholder="Ex.000-000-0000" formControlName="CellPhone"  maxlength="12" minlength="12"  appPhoneMask >
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(PatientWorkHistoryForm.value.PhoneNo == null || PatientWorkHistoryForm.value.PhoneNo == '') ? true : false"></span>Phone No</mat-label>
+            <input matInput  placeholder="Ex.000-000-0000" formControlName="PhoneNo"  maxlength="12"  minlength="12" appPhoneMask>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Address Line 1</mat-label>
+            <input matInput placeholder="Enter" formControlName="AddressLine1">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Address Line 2</mat-label>
+            <input matInput placeholder="Enter" formControlName="AddressLine2">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Town</mat-label>
+            <input matInput placeholder="Enter" formControlName="Town">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="Enter" formControlName="City">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>District</mat-label>
+            <input matInput placeholder="Enter" formControlName="District">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>State</mat-label>
+            <input matInput placeholder="Enter" formControlName="State">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Country</mat-label>
+            <input matInput placeholder="Enter" formControlName="Country">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>PIN</mat-label>
+            <input matInput placeholder="Enter" formControlName="PIN">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(PatientWorkHistoryForm.value.WorkDateFrom == null || PatientWorkHistoryForm.value.WorkDateFrom == '') ? true : false"></span>From Date</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="WorkDateFrom">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+              *ngIf="(PatientWorkHistoryForm.value.WorkDateTo == null || PatientWorkHistoryForm.value.WorkDateTo == '') ? true : false"></span>To Date</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="WorkDateTo">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Notes</mat-label>
+            <textarea rows="1" matInput formControlName="AdditionalNotes"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <div class="text-right">
+
+          <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="addUpdateData()">Save</button>
+          <button mat-stroked-button class="transperent-button" color="primary" type="button" (click)="cancelData()">Clear</button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+  </div>
+
