@@ -1,0 +1,264 @@
+<form [formGroup]="diagnosisForm" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+      <h5 cdkDragHandle class="p-3 title-bg">
+        Diagnosis <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+      </h5>
+     
+      <mat-card class="px-4 py-2">
+        <div class="row w-100">
+          <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.VisitDateandTime == '' || diagnosisForm.value.VisitDateandTime == null) ? true : false"></span>Visit Date & Time</mat-label>
+              <mat-select formControlName="VisitDateandTime">
+                <mat-option *ngFor="let vDate of visitDandt , index as i" [value]="vDate" (click)="RecordedDuring(i)">{{vDate}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.RecordedDate == '' || diagnosisForm.value.RecordedDate == null) ? true : false"></span>Recorded Date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="RecordedDate" autocomplete="off">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-2 timepick pb-3 pt-3">
+            <mat-form-field class="input-full-width timer w-100" appearance="outline">
+              <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.RecordedTime == '' || diagnosisForm.value.RecordedTime == null) ? true : false"></span>Recorded Time</mat-label>
+              <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" formControlName="RecordedTime" autocomplete="off">
+              <ngx-material-timepicker-toggle [for]="toggleTimepicker1"></ngx-material-timepicker-toggle>
+              <ngx-material-timepicker #toggleTimepicker1 defaultTime="{{time}}"></ngx-material-timepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.recordedDuring == '' || diagnosisForm.value.recordedDuring == null) ? true : false"></span>Recorded During</mat-label>
+              <input matInput placeholder="Enter" [value]="recordedDuring" maxlength="75" formControlName="recordedDuring" readonly>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.RecordedBy == '' || diagnosisForm.value.RecordedBy == null) ? true : false"></span>Recorded By</mat-label>
+              <mat-select formControlName="RecordedBy">
+                <mat-option *ngFor="let value of recordby" [value]="value">{{value}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+
+      <div class="overflow">
+        <mat-card class="my-3">
+          <div class="row">
+            <h5 class="pb-2 pt-2 col-xl-12">Problem Details</h5>
+            <div class="col-12 pb-4 pt-3">
+              <div class="row">
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('ChiefComplaint').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.ChiefComplaint == '' || diagnosisForm.value.ChiefComplaint == null) ? true : false"></span>Chief Complaint</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="ChiefComplaint"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="problemAreaTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                    <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.ProblemAreaID == '' || diagnosisForm.value.ProblemAreaID == null) ? true : false"></span>Problem Area/Location</mat-label>
+                    <mat-select multiple formControlName="ProblemAreaID">
+                      <mat-option *ngFor="let problemArea of problemAreavalues" (click)="setProblemAreaTooltip()" [value]="problemArea.ProblemAreaId">{{problemArea.ProblemAreaDescription}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class=" w-100 " appearance="outline">
+                    <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.ProblemDuration == '' || diagnosisForm.value.ProblemDuration == null) ? true : false"></span>Problem Duration</mat-label>
+                    <input matInput placeholder="Enter" formControlName="ProblemDuration" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('PreviousHistory').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Previous History</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="PreviousHistory"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="symptomsTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.SymptomsID == '' || diagnosisForm.value.SymptomsID == null) ? true : false"></span>Symptoms</mat-label>
+                    <mat-select multiple formControlName="SymptomsID">
+                      <mat-option *ngFor="let symptom of symptoms" (click)="setSymptomsTooltip()" [value]="symptom.SymptomsId">{{symptom.SymptomsDescription}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('OtherSymptoms').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Other Symptoms</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="OtherSymptoms"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Pain / Discomfort level (0-10)</mat-label>
+                    <mat-select formControlName="PainScale">
+                      <mat-option *ngFor="let pain of painScale" [value]="pain.PainScaleID">{{pain.PainScaleDesc}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('PainNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Pain Notes</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="PainNotes"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Pain Duration & Timings</mat-label>
+                    <input matInput placeholder="Enter" formControlName="Timings" maxlength="75" numeric autocomplete="off">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="problemTypeTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-md">
+                    <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.ProblemTypeID == '' || diagnosisForm.value.ProblemTypeID == null) ? true : false"></span>Problem Type</mat-label>
+                    <mat-select multiple formControlName="ProblemTypeID">
+                      <mat-option *ngFor="let problem of problemTypes" (click)="setProblemTypeTooltip()" [value]="problem.ProblemTypeId">{{problem.ProblemTypeDescription}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('AggravatedBy').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Problem Aggravated by</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="AggravatedBy"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('Alleviatedby').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Problem Alliviated by</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="Alleviatedby"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label><span class="required-asterisk" *ngIf="(diagnosisForm.value.ProblemStatus == '' || diagnosisForm.value.ProblemStatus == null) ? true : false"></span>Problem Status</mat-label>
+                    <mat-select formControlName="ProblemStatus">
+                      <mat-option *ngFor="let pbmStatus of problemStatus" [value]="pbmStatus.ProblemStatusDesc">{{pbmStatus.ProblemStatusDesc}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('Observationotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Observation Notes</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="Observationotes"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('InteractionSummary').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Interaction Summary</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="InteractionSummary"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('PAdditionalNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>P-Additional Notes</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="PAdditionalNotes"></textarea>
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </div>
+
+            <h5 class="pb-2 col-xl-12">Diagnosis</h5>
+            <div class="col-12 pb-3 pt-3">
+              <div class="row">
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('Prognosis').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Prognosis</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="Prognosis"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('AssessmentNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Assessment Notes</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="AssessmentNotes"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('DiagnosisNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Diagnosis Notes</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="DiagnosisNotes"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('Etiology').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Etiology</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="Etiology"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="icdTooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>Primary ICD Code</mat-label>
+                    <mat-icon matSuffix *ngIf="(diagnosisForm.value.ICD10 == '' || diagnosisForm.value.ICD10 == null) ? true : (diagnosisForm.value.ICD10.length > 2) ? false : true">search</mat-icon>
+                    <textarea placeholder="Type and Select" rows="1" matInput #autoCompleteICDInput="matAutocompleteTrigger" [matAutocomplete]="icdCode" formControlName="ICD10" maxlength="500"></textarea>
+                    <mat-autocomplete autoActiveFirstOption #icdCode="matAutocomplete">
+                      <mat-option *ngFor="let ICD of icd" (onSelectionChange)="setICDTooltip(ICD.ICDCode, ICD.Description)" [value]="ICD.ICDCode + '-' + ICD.Description">{{ICD.ICDCode}} - {{ICD.Description}}</mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <mat-form-field class="w-100" appearance="outline" [matTooltip]="diagnosisForm.get('DAdditionalNotes').value" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                    <mat-label>D-Additional Notes</mat-label>
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500" formControlName="DAdditionalNotes"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 pb-2 my-2 text-left">
+                  <input type="file" #image accept="image/*" (change)="onImageUpload($event)" multiple hidden>
+                  <button type="button" mat-raised-button color="primary" (click)="image.click()">Upload Images</button>
+                  <mat-list>
+                    <mat-list-item *ngFor="let file of listOfImgFiles; let index = index">
+                      <i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp;&nbsp;
+                      <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a> &nbsp; [{{file.Size}}] &nbsp;
+                      <button type="button" mat-mini-fab color="warn" (click)="removeSelectedImgFiles(index)">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+
+                <div class="col-md-12 text-right">
+                  <button mat-flat-button class="custome-button mr-2 mat-primary" (click)="addDiagnosisForm()">Save</button>
+                  <button type="button" mat-stroked-button class="transperent-button" color="primary" (click)="clearForm()">Clear</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</form>

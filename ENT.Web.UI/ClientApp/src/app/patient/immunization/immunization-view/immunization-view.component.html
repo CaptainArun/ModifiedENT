@@ -1,0 +1,158 @@
+<div class="white mt-4" cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Immunization View<button
+      style="color: white"
+      class="close"
+      (click)="dialogClose()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="immunization">
+    <mat-card class="px-4 py-2 my-2">
+      <div class="row w-100">
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Visit Date & Time</mat-label>
+            <mat-select formControlName="visitDateandTime">
+              <mat-option *ngFor="let vDate of visitDandt" [value]="vDate">
+                {{ vDate }}
+              </mat-option> </mat-select
+            >&nbsp;
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="RecordedDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2 timepick pb-3 pt-3">
+          <mat-form-field 
+            class="input-full-width timer w-100"
+            appearance="outline"
+          >
+            <input
+              matInput
+              [ngxTimepicker]="toggleTimepicker1"
+              [disableClick]="true"
+              formControlName="RecordedTime"
+            />
+            <mat-label>Recorded Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker1>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+          <mat-form-field  class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input
+              matInput
+              placeholder="Enter"
+              formControlName="recordedDuring"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field   class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <input matInput placeholder="Enter" formControlName="RecordedBy" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+  <mat-card>
+    <div class="row p-0 m-0 scroll-md">
+      <div class="col-xl-6">
+        <div class="pt-3 pb-2">
+          <div class="row pb-1 pt-3">
+            <div class="col font_color">Immunization Date</div>
+            <div class="col-lg-1">:</div>
+            <div class="col-lg-7">
+              {{ data.ImmunizationDate | date: "dd/MM/yyyy" }}
+            </div>
+          </div>
+          <div class="row pb-1 pt-3">
+            <div class="col font_color">Immunization Time</div>
+            <div class="col-lg-1">:</div>
+            <div class="col-lg-7">{{ data.ImmunizationTime }}</div>
+          </div>
+          <div class="row pb-1 pt-3">
+            <div class="col font_color">Injecting Physician</div>
+            <div class="col-lg-1">:</div>
+            <div class="col-lg-7">{{ data.InjectingPhysician }}</div>
+          </div>
+          <div class="row pb-1 pt-3">
+            <div class="col font_color">Vaccine Name</div>
+            <div class="col-lg-1">:</div>
+            <div class="col-lg-7">{{ data.VaccineName }}</div>
+          </div>
+          <div class="row pb-1 pt-3">
+            <div class="col font_color">Manufacturer</div>
+            <div class="col-lg-1">:</div>
+            <div class="col-lg-7">{{ data.Manufacturer }}</div>
+          </div>
+          <div class="row pb-1 pt-3">
+            <div class="col font_color">Route</div>
+            <div class="col-lg-1">:</div>
+            <div class="col-lg-7">{{ data.Route }}</div>
+          </div>
+          <div class="row pb-1 pt-3">
+            <div class="col font_color">Batch No</div>
+            <div class="col-lg-1">:</div>
+            <div class="col-lg-7">{{ data.BatchNo }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="v-line">
+          <div class="pt-3 pb-2">
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Body Site</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{ data.BodySite }}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Dose</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{ data.DoseUnits }}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Product Name</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{ data.ProductName }}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Facility Name</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{ data.FacilityName }}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Patient Age</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{ data.PatientAge }}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Notes</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{ data.Notes }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

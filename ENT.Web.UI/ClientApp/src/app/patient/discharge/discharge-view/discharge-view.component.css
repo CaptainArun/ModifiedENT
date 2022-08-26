@@ -1,0 +1,27 @@
+.overflow {
+    overflow: auto; 
+    overflow-x: hidden; 
+    height: 680px;
+}
+
+.ht-2 {
+    height: 35px;
+}
+
+.ft {
+    font-size: 1rem;
+}
+
+.ht-1 {
+    height: 200px;
+}
+
+.pd {
+    padding-left: 65px;
+}
+
+.wrapper {
+    overflow: auto;
+    max-height: 250px;
+    overflow-x: hidden;
+}

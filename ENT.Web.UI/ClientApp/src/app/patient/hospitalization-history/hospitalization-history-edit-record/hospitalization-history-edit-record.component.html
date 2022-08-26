@@ -1,0 +1,246 @@
+<div class="white mt-4 " cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+
+  <div class="scroll-x">
+    <h5 cdkDragHandle class="p-3 title-bg">
+      Hospitalization History <button type="button" style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5> <br />
+    <div class="row p-0 m-0 scroll-md ">
+      <form [formGroup]="hospitalHistoryEditForm">
+        <mat-card>
+            <div class="row">
+              <div class="col-lg-6 col-xl-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Visit Date & Time</mat-label>
+                  <input matInput formControlName="VisitDateandTime">
+                  <!-- <mat-select formControlName="VisitDateandTime">
+                      <mat-option *ngFor="let data of visitDateTime, index as i" [value]="data.visitDateandTime" (click)="autoRecordedDuring(i)">
+                        {{data.visitDateandTime}}
+                      </mat-option>
+                    </mat-select> -->
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-6 col-xl-2">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Recorded date</mat-label>
+                  <input matInput formControlName="RecordedDate" [matDatepicker]="picker" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 col-xl-2 timepick">
+                <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                  <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true"
+                    formControlName="RecordedTime" readonly>
+                  <mat-label>Record Time</mat-label>
+                  <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+                  </ngx-material-timepicker-toggle>
+                  <ngx-material-timepicker #toggleTimepicker1>
+                  </ngx-material-timepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 col-xl-2">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Recorded During</mat-label>
+                  <input matInput formControlName="RecordedDuring">
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 col-xl-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Recorded By</mat-label>
+                  <mat-select formControlName="RecordedBy">
+                    <mat-option *ngFor=" let recordBy of recordedBy" [value]="recordBy">{{recordBy}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card>
+            <mat-card class="my-4 overflow600px">
+              <div class="row w-100">
+                <div class="col-xl-3 col-lg-3 pb-2 pt-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Admission date</mat-label>
+                    <input matInput formControlName="AdmissionDate" [matDatepicker]="pic">
+                    <mat-datepicker-toggle matSuffix [for]="pic"></mat-datepicker-toggle>
+                    <mat-datepicker #pic></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6 pb-2 pt-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Admission Type</mat-label>
+                    <mat-select formControlName="AdmissionType">
+                      <mat-option [value]="admission.AdmissionTypeDesc" *ngFor="let admission of AdmissionTypelist">
+                        {{admission.AdmissionTypeDesc}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6 pb-2 pt-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Initial Admission status</mat-label>
+                    <mat-select formControlName="InitialAdmissionStatus">
+                      <mat-option [value]="admission.AdmissionStatusDesc" *ngFor="let admission of AdmissionStatuslist">
+                        {{admission.AdmissionStatusDesc}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6 pb-2 pt-2">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Admitting Physician</mat-label>
+                    <mat-icon matSuffix *ngIf="(hospitalHistoryEditForm.value.AdmittingPhysician == '' || hospitalHistoryEditForm.value.AdmittingPhysician == null) ? true : (hospitalHistoryEditForm.value.AdmittingPhysician.length > 2) ? false : true">search</mat-icon>
+                    <input matInput placeholder="Type and Select" [matAutocomplete]="AdmittingPhysician"
+                      formControlName="AdmittingPhysician"  #autoCompletePhysician="matAutocompleteTrigger">
+                    <mat-autocomplete autoActiveFirstOption #AdmittingPhysician="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions" [value]="option.ProviderName">
+                        {{option.ProviderName}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6 pb-2 pt-2">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Attending Physician</mat-label>
+                    <input matInput placeholder="Enter" formControlName="AttendingPhysician">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 pb-2 pt-2">
+                  <mat-form-field [matTooltip]="hospitalHistoryEditForm.get('ChiefComplaint').value"
+                    matTooltipPosition="above" matTooltipClass="Tooltip-lg" appearance="outline" class="w-100">
+                    <mat-label>Chief Complaint</mat-label>
+                    <textarea matInput formControlName="ChiefComplaint" rows="1"
+                      placeholder="Enter your Complaint..."></textarea>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6 pb-2 pt-2">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Facility Name</mat-label>
+                    <input matInput formControlName="FacilityName">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 pb-2 pt-2">
+                  <mat-form-field [matTooltip]="hospitalHistoryEditForm.get('PrimaryDiagnosis').value"
+                    matTooltipPosition="above" matTooltipClass="Tooltip-lg" appearance="outline" class="w-100">
+                    <mat-label>Primary Diagnosis</mat-label>
+                    <textarea matInput  rows="1" formControlName="PrimaryDiagnosis" appearance="outline"
+                      placeholder="Enter"></textarea>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 pb-2 pt-2">
+                  <mat-form-field [matTooltip]="icdtooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg"
+                    class="w-100" appearance="outline">
+                    <mat-label>ICD Code</mat-label>
+                    <mat-icon matSuffix *ngIf="(hospitalHistoryEditForm.value.ICDCode == '' || hospitalHistoryEditForm.value.ICDCode == null) ? true : (hospitalHistoryEditForm.value.ICDCode.length > 2) ? false : true">search</mat-icon>
+                    <textarea type="text"  matInput  rows="1" placeholder="Type and Select" [matAutocomplete]="icdCode1"  #autoCompleteICDInput="matAutocompleteTrigger"
+                      formControlName="ICDCode"></textarea>
+                    <mat-autocomplete autoActiveFirstOption #icdCode1="matAutocomplete">
+                      <mat-option *ngFor="let opt2 of IcdCodeInfo"
+                        (onSelectionChange)="setIcdCode(opt2.ICDCode, opt2.Description)"
+                        [value]="opt2.ICDCode + '-' + opt2.Description">
+                        {{opt2.ICDCode}} - {{opt2.Description}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6 pb-2 pt-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Procedure type</mat-label>
+                    <mat-select formControlName="ProcedureType">
+                      <mat-option [value]="ProcedureType.ProcedureTypeDesc"
+                        *ngFor="let ProcedureType of ProcedureTypes">{{ProcedureType.ProcedureTypeDesc}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 pb-2 pt-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Primary Procedure</mat-label>
+                    <textarea matInput formControlName="PrimaryProcedure"  rows="1" placeholder="Enter"></textarea>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 pb-2 pt-2">
+                  <mat-form-field [matTooltip]="cpttooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg"
+                    class="w-100" appearance="outline">
+                    <mat-label>CPT Code</mat-label>
+                    <mat-icon matSuffix *ngIf="(hospitalHistoryEditForm.value.CPTCode == '' || hospitalHistoryEditForm.value.CPTCode == null) ? true : (hospitalHistoryEditForm.value.CPTCode.length > 2) ? false : true">search</mat-icon>
+                    <textarea type="text"  matInput  rows="1"  placeholder="Type and Select" formControlName="CPTCode"
+                      [matAutocomplete]="acptCode"  #autoCompleteCPTInput="matAutocompleteTrigger"></textarea>
+                    <mat-autocomplete autoActiveFirstOption #acptCode="matAutocomplete">
+                      <mat-option *ngFor="let opt of cptCode"
+                      (onSelectionChange)="setCptCode(opt.CPTCode , opt.Description)"
+                      [value]="opt.CPTCode + '-' + opt.Description">
+                      {{opt.CPTCode}} - {{opt.Description}}
+                    </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-6 pb-2 pt-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Problem status</mat-label>
+                    <mat-select formControlName="ProblemStatus">
+                      <mat-option [value]="PS.ProblemStatusDesc" *ngFor="let PS of ProblemStatuses">
+                        {{PS.ProblemStatusDesc}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 pb-2 pt-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Discharge date</mat-label>
+                    <input matInput formControlName="DischargeDate" [matDatepicker]="pic1">
+                    <mat-datepicker-toggle matSuffix [for]="pic1"></mat-datepicker-toggle>
+                    <mat-datepicker #pic1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 pb-2 pt-2">
+                  <mat-form-field [matTooltip]="dischargetooltip" matTooltipPosition="above"
+                    matTooltipClass="Tooltip-lg" class="w-100" appearance="outline">
+                    <mat-label>Discharge status Code</mat-label>
+                    <mat-icon matSuffix *ngIf="(hospitalHistoryEditForm.value.DischargeStatusCode == '' || hospitalHistoryEditForm.value.DischargeStatusCode == null) ? true : (hospitalHistoryEditForm.value.DischargeStatusCode.length > 2) ? false : true">search</mat-icon>
+                    <input type="text" matInput placeholder="Type and Select" formControlName="DischargeStatusCode"
+                      [matAutocomplete]="autodis"  #autoCompleteDischarge="matAutocompleteTrigger">
+                    <mat-autocomplete autoActiveFirstOption #autodis="matAutocomplete">
+                      <mat-option *ngFor="let option of dischargeStatusCode"
+                        (onSelectionChange)="setdischargeCode(option.Code , option.Description)"
+                        [value]="option.Code + '-' + option.Description">
+                        {{option.Code}} - {{option.Description}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 pb-2 pt-2">
+                  <mat-form-field [matTooltip]="hospitalHistoryEditForm.get('AdditionalNotes').value"
+                    matTooltipPosition="above" matTooltipClass="Tooltip-lg" appearance="outline" class="w-100">
+                    <mat-label>Additional Notes</mat-label>
+                    <textarea formControlName="AdditionalNotes"  rows="1" appearance="outline" matInput
+                      placeholder="Enter"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 pb-2 my-2 text-left">
+                  <input type="file" #multiple placeholder="Choose file" (change)="uploadMultiple($event)"
+                    style="display:none;" multiple>
+                  <button type="button" mat-raised-button color="primary" (click)="multiple.click()">Upload
+                    Documents</button>
+                  <mat-list>
+                    <mat-list-item *ngFor="let file of requiredViewFile;let index = index">
+                      <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                      <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a> &nbsp; [{{file.Size}}] &nbsp;
+                      <button type="button" mat-mini-fab color="warn" (click)="RemoveFile(file.FileName,index)">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </mat-list-item>
+                  </mat-list>
+                </div>
+
+
+                <div class="col-md-12 text-right">
+                  <button mat-flat-button class="custome-button mat-primary mr-2"
+                    (click)="updateFormdata()">Save</button>
+                  <button mat-stroked-button class="transperent-button" (click)="clear()">Clear</button>
+                </div>
+              </div>
+            </mat-card>
+      </form>
+    </div>
+  </div>
+
+</div>

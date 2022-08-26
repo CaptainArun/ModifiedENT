@@ -1,0 +1,176 @@
+<div class="white mt-0"  cdkDrag cdkDragRootElement=".cdk-overlay-pane" >
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Patient Allergy<button
+      style="color: white"
+      class="close"
+      (click)="dialogClose()"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+
+  <form [formGroup]="allergiesViewForm">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+        <div class="row mb-4">
+          <div class="col-12">
+            <mat-card class="px-4 py-2">
+              <div class="row">
+                <div class="col-xl-3 col-lg-6 pt-2">
+                  <mat-form-field  class="w-100" appearance="outline">
+                    <mat-label>Visit Date & Time</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter"
+                      formControlName="visitDateandTime"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-6 pt-2">
+                  <mat-form-field  class="w-100" appearance="outline">
+                    <mat-label>Recorded Date</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      formControlName="RecordedDate"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-2 timepick pt-2">
+                  <mat-form-field 
+                    class="input-full-width timer w-100"
+                    appearance="outline"
+                  >
+                    <input
+                      matInput
+                      [ngxTimepicker]="toggleTimepicker1"
+                      [disableClick]="true"
+                      formControlName="RecordedTime"
+                    />
+                    <mat-label>Record Time</mat-label>
+                    <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+                    </ngx-material-timepicker-toggle>
+                    <ngx-material-timepicker #toggleTimepicker1>
+                    </ngx-material-timepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-6 pt-2">
+                  <mat-form-field  class="w-100" appearance="outline">
+                    <mat-label>Recorded During</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter"
+                      formControlName="recordedDuring"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-6 pt-2">
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Recorded By</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter"
+                      formControlName="RecordedBy"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <mat-card class="p-1">
+    <div class="scroll-x">    
+      <div class="row p-0 m-0 scroll-md">
+        <div class="col-xl-6">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Allergy Type</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.AllergyTypeDesc }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Allergy Name</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.Name }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Allergy Description</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.Allergydescription }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Aggravated By</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.Aggravatedby }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Alleviated By</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.Alleviatedby }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">On Setdate</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">
+                  {{ data.Onsetdate | date: "dd-MM-yyyy" }}
+                </div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Allergy Severity</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.AllergySeverityDesc }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="v-line">
+            <div class="pt-3 pb-1">
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Reaction</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">
+                  {{ data.Reaction }}
+                </div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Status</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.Status }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">ICD Code</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.ICD10 }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">SNOMED Code</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.SNOMED }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col font_color">Notes</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{ data.Notes }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

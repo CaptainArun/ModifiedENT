@@ -1,0 +1,170 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg">
+    <span class="mr-4 ml-4">Medication History</span>
+    <span class="mr-4 ml-4" *ngIf="this.data.PatientName">Patient
+      Name : {{this.data.PatientName}}</span>
+    <span class="mr-4 ml-4" *ngIf="this.data.visitDateandTime">Visit
+      Date & Time : {{this.data.visitDateandTime}}</span>
+    <span class="mr-4 ml-4" *ngIf="this.data.RecordedBy">Physician
+      Name : {{this.data.RecordedBy}}</span>
+    <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+
+  <div>
+    <mat-card class="mt-2">
+      <form [formGroup]="ePrescriptionForm" #ngForm="ngForm">
+        <div class="row mb-3">
+          <div class="col-xl-12 col-lg-12">
+            <div class="table-responsive shroff-table reduce-field">
+              <table class="table table-bordered table-hover w-100">
+                <thead>
+                  <tr class="font-weight-bold">
+                    <th class="col-xl-4 text-center">Item/Drug Name</th>
+                    <th class="col-xl-4 text-center">Route</th>
+                    <th class="col-xl-4 text-center">Diagnosis</th>
+                    <th class="col-xl-3 text-center">Total Quantity</th>
+                    <th class="col-xl-3 text-center">No of Days</th>
+                    <th class="col-xl-6 text-center">Medication Time</th>
+                    <th class="col-xl-3 text-center">Before/After</th>
+                    <th class="col-xl-2 text-center">Status</th>
+                    <th class="col-xl-5 text-center">SIG</th>
+
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-xl-12 col-lg-12">
+            <div class="table-responsive shroff-table reduce-field overflow">
+              <table class="table table-bordered table-hover w-100">
+                <tbody>
+                  <tr>
+                    <td class="col-xl-4 text-center">
+                      <mat-form-field class="col-xl-12" appearance="outline" [matTooltip]="data?.DrugName"
+                        matTooltipPosition="below" matTooltipClass="Tooltip-sm">
+                        <mat-label>Item/Drug Name</mat-label>
+                        <input matInput placeholder="Type and Select" readonly formControlName="ItemDrugName"
+                          maxlength="500">
+                      </mat-form-field>
+                    </td>
+                    <td class="col-xl-3 text-center">
+                      <mat-form-field class="col-lg-12" appearance="outline"
+                        [matTooltip]="ePrescriptionForm.get('routeTooltip')?.value" matTooltipPosition="below"
+                        matTooltipClass="Tooltip-sm">
+                        <mat-label>Route</mat-label>
+                        <input formControlName="routeTooltip" hidden>
+                        <mat-select formControlName="Route" disabled>
+                          <mat-option *ngFor="let route of routeName" [value]="route.RouteCode">
+                            {{route.RouteDescription}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td class="col-xl-4 text-center">
+                      <mat-form-field class=" col-lg-12" appearance="outline" [matTooltip]="data?.ICDCode"
+                        matTooltipPosition="below" matTooltipClass="Tooltip-sm">
+                        <mat-label>Diagnosis</mat-label>
+                        <input matInput placeholder="Type and Select" formControlName="Diagnosis" maxlength="500"
+                          readonly>
+                      </mat-form-field>
+                    </td>
+                    <td class="col-xl-2 text-center">
+                      <mat-form-field class="col-lg-12" appearance="outline" [matTooltip]="data?.TotalQuantity"
+                        matTooltipPosition="below" matTooltipClass="Tooltip-sm">
+                        <mat-label>Total Quantity</mat-label>
+                        <input matInput placeholder="Enter" formControlName="Qty" numeric autocomplete="off" readonly>
+                      </mat-form-field>
+                    </td>
+                    <td class="col-xl-2 text-center">
+                      <mat-form-field class="col-lg-12" appearance="outline" [matTooltip]="data?.NoOfDays"
+                        matTooltipPosition="below" matTooltipClass="Tooltip-sm">
+                        <mat-label>No of Days</mat-label>
+                        <input matInput placeholder="Enter" formControlName="Days" numeric autocomplete="off" readonly>
+                      </mat-form-field>
+                    </td>
+                    <td class="col-xl-5 text-center">
+                      <div class="col-lg-2 f-l my-3">
+                        <mat-label>Morning</mat-label>
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" formControlName="Morning" disabled></mat-checkbox>
+                        </section>
+                      </div>
+                      <div class="col-lg-2 f-l m-3">
+                        <mat-label>Brunch</mat-label>
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" formControlName="Brunch" disabled></mat-checkbox>
+                        </section>
+                      </div>
+                      <div class="col-lg-2 f-l my-3">
+                        <mat-label>Noon</mat-label>
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" formControlName="Noon" disabled></mat-checkbox>
+                        </section>
+                      </div>
+                      <div class="col-lg-2 f-l my-3">
+                        <mat-label>Evening</mat-label>
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" formControlName="Evening" disabled></mat-checkbox>
+                        </section>
+                      </div>
+                      <div class="col-lg-2 f-l my-3 m-2">
+                        <mat-label>Night</mat-label>
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" formControlName="Night" disabled></mat-checkbox>
+                        </section>
+                      </div>
+                    </td>
+                    <td class="col-xl-2 text-center">
+                      <div class="col-lg-2 f-l mr-4">
+                        <mat-label>Before</mat-label>
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" formControlName="Before" disabled></mat-checkbox>
+                        </section>
+                      </div>
+                      <div class="col-lg-2 f-l">
+                        <mat-label>After</mat-label>
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" formControlName="After" disabled></mat-checkbox>
+                        </section>
+                      </div>
+                    </td>
+                    <td class="col-xl-2 text-center" [ngClass]="{'validate': ngForm.submitted}">
+                      <div class="col-lg-2 f-l">
+                        <mat-radio-group aria-label="Select an option" class="example-radio-group"
+                          formControlName="MedicationStatus" disabled>
+                          <mat-radio-button value="start">Start</mat-radio-button>
+                          <mat-radio-button value="hold">Hold</mat-radio-button>
+                          <mat-radio-button value="continue">Continue</mat-radio-button>
+                          <mat-radio-button value="discontinue">Discontinue</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </td>
+                    <td class="col-xl-5 text-center">
+                      <mat-form-field class="col-xl-12" appearance="outline" [matTooltip]="data?.SIG"
+                        matTooltipPosition="below" matTooltipClass="Tooltip-sm">
+                        <mat-label>SIG</mat-label>
+                        <input matInput placeholder="Enter" formControlName="SIG" maxlength="500" readonly>
+                      </mat-form-field>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--end of .table-responsive-->
+          </div>
+
+        </div>
+
+      </form>
+
+      <div class="text-right mt-2">
+        <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="dialogClose()"> Close
+        </button>
+
+      </div>
+    </mat-card>
+  </div>
+</div>

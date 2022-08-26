@@ -1,0 +1,17 @@
+/*div {
+  position: relative;
+  overflow: hidden;
+}
+
+input {
+  position: absolute;
+  font-size: 50px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+*/
+.card {
+  margin-bottom: 10px;
+}
+

@@ -1,0 +1,21 @@
+<div>
+    <app-patient-history></app-patient-history>
+    <div class="overflow-hidden px-4">
+        <div class="my-4"></div>
+        <div>
+            <mat-card class="table-wrapper w-100 row">
+                <h4>Audiology</h4>
+                <div>
+                    <div>
+                        <mat-card-content>
+                            <div class="row">
+                                <app-bms-table [config]="tableConfig" [datas]="audiologyData" (viewItem)="openAudiologyViewRecord($event)" (bindItem)="onBindItem($event)"></app-bms-table>
+                            </div>
+                        </mat-card-content>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <app-patientBackbutton></app-patientBackbutton>
+</div>

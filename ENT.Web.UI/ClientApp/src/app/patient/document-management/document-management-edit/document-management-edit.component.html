@@ -1,0 +1,115 @@
+<form [formGroup]="DocumentManagementEditForm">
+
+  <mat-card class=" px-3 py-1 card">
+    <div class="row w-100">
+
+      <div class="col-xl-3 col-lg-6 pb-4 pt-4">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Visit Date & Time</mat-label>
+          <mat-select formControlName="visitDateandTime">
+            <mat-option *ngFor="let date of visitDandT" [value]="date">
+              {{date}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xl-2 col-lg-6 pb-4 pt-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Recorded Date</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="RecordedDate">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-2 timepick pb-4 pt-4">
+        <mat-form-field class="input-full-width timer w-100" appearance="outline">
+          <input matInput [ngxTimepicker]="toggleTimepicker" [disableClick]="true" formControlName="RecordedTime">
+          <mat-label>Record Time</mat-label>
+          <ngx-material-timepicker-toggle [for]="toggleTimepicker">
+          </ngx-material-timepicker-toggle>
+          <ngx-material-timepicker #toggleTimepicker>
+          </ngx-material-timepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xl-2 col-lg-6 pb-4 pt-4">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Recorded During</mat-label>
+          <mat-select formControlName="recordedDuring">
+            <mat-option value="OPD Visit">
+              OPD Visit
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-xl-3 col-lg-6 pb-4 pt-4">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Recorded By</mat-label>
+          <mat-select formControlName="RecordedBy">
+            <mat-option *ngFor="let rcd of recordby" [value]="rcd">
+              {{rcd}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+      </div>
+    </div>
+
+  </mat-card>
+
+  <div class="w-100">
+    <mat-card>
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3 ">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Document Name</mat-label>
+            <input matInput placeholder="Enter Name" formControlName="DocumentName">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Document Type</mat-label>
+            <mat-select formControlName="DocumentType">
+              <mat-option value="pdf">
+                <!--*ngFor="let date of identification"-->
+                pdf
+              </mat-option>
+              <mat-option value="doc">
+                <!--*ngFor="let date of identification"-->
+                doc
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="legacy">
+            <mat-label>Document Notes</mat-label>
+            <textarea matInput formControlName="DocumentNotes"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-9 col-lg-6 pb-4 pt-4">
+          <div class="file btn btn-lg btn-primary">
+            Upload
+            <input type="file" name="file" />
+          </div>
+        </div>
+
+        <div>
+          <div class="text-right pb-3 pt-3">
+            <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="updateDocumentVal()">Submit</button>
+            <button mat-stroked-button class="transperent-button" color="primary" (click)="dialogClose()">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+    </mat-card>
+  </div>
+</form>

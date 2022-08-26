@@ -1,0 +1,21 @@
+<div>
+  <app-patient-history></app-patient-history>
+  <div class="overflow-hidden px-4">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <div class="row">
+        <div class="text-right w-100 my-2">
+          <button class="custome-button mat-primary btn btn-info" style="height:32px;width:140px" (click)="addPatient()">Add Hospitalization</button>
+       </div>
+      </div>
+    </div>
+    <mat-card class="table-wrapper w-100 row">
+              <mat-card-content>
+            <h4>Hospitalization History</h4>
+            <div class="row">
+              <app-bms-table [config]="tableConfig" [datas]="patientList" (viewItem)="viewHospitalHistory($event)" (editItem)="updateHospitalHistory($event)" (deleteItem)="deleteHospitalHistory($event)"></app-bms-table>
+            </div>
+          </mat-card-content>
+         </mat-card>
+  </div>
+  <app-patientBackbutton></app-patientBackbutton>
+</div>

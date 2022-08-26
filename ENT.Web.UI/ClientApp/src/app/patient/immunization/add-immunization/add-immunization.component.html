@@ -1,0 +1,165 @@
+<div class="overflow-hidden" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Immunization Add
+    <button style="color: white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="ImmunizationForm">
+    <mat-card class="px-3 py-1">
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 pb- pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Visit Date & Time</mat-label>
+            <mat-select id="visit" formControlName="visitDateandTime">
+              <mat-option *ngFor="let date of tempArr; index as i" [value]="date" (click)="RecordedDuring(i)">
+                {{ date }}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded Date</mat-label>
+            <input matInput readonly [matDatepicker]="picker5" formControlName="RecordedDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+            <mat-datepicker #picker5></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-2 timepick pb-3 pt-3">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker1" [disableClick]="true" formControlName="RecordedTime" />
+            <mat-label>Recorded Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker1">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker1>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input matInput [value]="recordedDuring" formControlName="recordedDuring" />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <mat-select formControlName="RecordedBy">
+              <mat-option *ngFor="let Recorded of RecordedBy" [value]="Recorded">
+                {{ Recorded }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="px-3 py-3 mt-4">
+      <div class="row pb-3 pt-3">
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Immunization Date</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="ImmunizationDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 timepick">
+          <mat-form-field class="input-full-width timer w-100" appearance="outline">
+            <input matInput [ngxTimepicker]="toggleTimepicker2" [disableClick]="true"
+              formControlName="ImmunizationTime" />
+            <mat-label>Immunization Time</mat-label>
+            <ngx-material-timepicker-toggle [for]="toggleTimepicker2">
+            </ngx-material-timepicker-toggle>
+            <ngx-material-timepicker #toggleTimepicker2>
+            </ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Injecting Physician</mat-label>
+            <input maxlength="50" matInput placeholder="Enter Injecting Physician"
+              formControlName="InjectingPhysician" />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Vaccine Name</mat-label>
+            <input matInput placeholder="Enter Vaccine Name" formControlName="VaccineName" />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Product Name</mat-label>
+            <input maxlength="50" matInput placeholder="Enter Product Name" formControlName="ProductName" />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Manufacturer</mat-label>
+            <input maxlength="50" matInput placeholder="Enter Manufacturer" formControlName="Manufacturer" />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Batch No</mat-label>
+            <input maxlength="15" matInput placeholder="Enter Batch No" formControlName="BatchNo" />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Route</mat-label>
+            <mat-select formControlName="Route">
+              <mat-option *ngFor="let typ of RouteIdvalue" [value]="typ.RouteDescription">{{ typ.RouteDescription }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Body Site</mat-label>
+            <mat-select formControlName="BodySite">
+              <mat-option *ngFor="let typ of BodySitevalue" [value]="typ.BodySiteDesc">{{ typ.BodySiteDesc }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Dose Units</mat-label>
+            <input matInput maxlength="10" placeholder="Enter Dose Units" formControlName="DoseUnits" />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Facility Name</mat-label>
+            <input matInput maxlength="50" placeholder="Enter Facility Name" formControlName="FacilityName" />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Patient Age</mat-label>
+            <input matInput maxlength="3" placeholder="Enter Patient Age" formControlName="PatientAge" numeric />
+          </mat-form-field>
+        </div>
+        <div class="col-xl-5 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="example-full-width column- 70 w-100" appearance="outline">
+            <mat-label>Notes</mat-label>
+            <textarea maxlength="500" matInput placeholder="Enter Notes" formControlName="Notes"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+    <div class="mt-4 text-right">
+      <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="submitData()">
+        Save
+      </button>
+      <button type="button" mat-stroked-button class="transperent-button" (click)="CancelData()">
+        Clear
+      </button>
+    </div>
+  </form>
+</div>

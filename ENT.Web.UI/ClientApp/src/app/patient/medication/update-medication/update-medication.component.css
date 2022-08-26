@@ -1,0 +1,7 @@
+
+:host ::ng-deep .validate .mat-radio-group.ng-invalid .mat-radio-outer-circle {
+    border-color: #f73a2c;
+}
+:host ::ng-deep .validate .mat-radio-group.ng-invalid .mat-radio-label-content {
+  color: #f44336;
+}

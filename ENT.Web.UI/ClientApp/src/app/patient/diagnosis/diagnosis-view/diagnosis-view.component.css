@@ -1,0 +1,5 @@
+.wrapper {
+    overflow: auto;
+    max-height: 135px;
+    overflow-x: hidden;
+}

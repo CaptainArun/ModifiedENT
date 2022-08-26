@@ -1,0 +1,33 @@
+<div>
+  <app-patient-history></app-patient-history>
+  <div class="col-md-12 text-right my-2">
+    <button
+      class="custome-button mat-primary btn btn-info"
+      style="height: 32px; width: 140px"
+      (click)="AddImmunization()"
+    >
+      Add Immunization
+    </button>
+  </div>
+  <div class="overflow-hidden">
+    <div class="row mt-1">
+      <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+        <mat-card class="table-wrapper">
+          <h4>Immunization</h4>
+          <mat-card-content>
+            <div>
+              <app-bms-table
+                [config]="tableConfig"
+                [datas]="identify"
+                (editItem)="ImmunizationEditRecord($event)"
+                (deleteItem)="DeletePatientImmunizationRecord($event)"
+                (viewItem)="ImmunizationViewRecord($event)"
+              ></app-bms-table>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <app-patientBackbutton></app-patientBackbutton>
+</div>

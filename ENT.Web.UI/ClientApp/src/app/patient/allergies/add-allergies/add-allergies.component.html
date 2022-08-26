@@ -1,0 +1,202 @@
+<div class="white mt-0" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+
+  <h5 cdkDragHandle class="p-3 title-bg">
+    Patient Allergy<button style="color: white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <div class="overflow-hidden px-3 pb-2">
+    <form [formGroup]="allergiesForm">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+          <div class="row mb-4">
+            <div class="col-12">
+              <mat-card class="px-4 py-2 my-3">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(allergiesForm.value.VisitDateandTime == null || allergiesForm.value.VisitDateandTime == '') ? true : false"></span>Visit Date & Time</mat-label>
+                      <mat-select formControlName="VisitDateandTime">
+                        <mat-option *ngFor="let vDate of visitDateTime; index as i" [value]="vDate"
+                          (click)="RecordedDuring(i)">
+                          {{ vDate }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-2 col-lg-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Recorded Date</mat-label>
+                      <input matInput [matDatepicker]="Allergy" formControlName="RecordedDate" />
+                      <mat-datepicker-toggle matSuffix [for]="Allergy"></mat-datepicker-toggle>
+                      <mat-datepicker #Allergy></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-2 col-lg-6 timepick">
+                    <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                      <input matInput [ngxTimepicker]="Allergy1" [disableClick]="true" formControlName="RecordedTime" />
+                      <mat-label>Record Time</mat-label>
+                      <ngx-material-timepicker-toggle [for]="Allergy1">
+                      </ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #Allergy1>
+                      </ngx-material-timepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-2 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(allergiesForm.value.recordedDuring == null || allergiesForm.value.recordedDuring == '') ? true : false"></span>Recorded During</mat-label>
+                      <input matInput placeholder="Enter" [value]="recordedDuring" formControlName="recordedDuring"
+                        readonly />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label><span class="required-asterisk"
+                        *ngIf="(allergiesForm.value.RecordedBy == null || allergiesForm.value.RecordedBy == '') ? true : false"></span>Recorded By</mat-label>
+                      <mat-select formControlName="RecordedBy">
+                        <mat-option *ngFor="let value of recordedBy" [value]="value"> {{ value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-card>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                *ngIf="(allergiesForm.value.AllergyTypeID == null || allergiesForm.value.AllergyTypeID == '') ? true : false"></span>Allergy Type</mat-label>
+              <mat-select formControlName="AllergyTypeID">
+                <mat-option *ngFor="let allergy of allergyType" [value]="allergy.AllergyTypeID">{{
+                  allergy.AllergyTypeDescription }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                *ngIf="(allergiesForm.value.Name == null || allergiesForm.value.Name == '') ? true : false"></span>Allergy Name</mat-label>
+              <input matInput placeholder="Enter" formControlName="Name" maxlength="50" />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Description</mat-label>
+              <input matInput placeholder="Enter" formControlName="Allergydescription" maxlength="500" />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Aggravated by</mat-label>
+              <input matInput placeholder="Enter" formControlName="Aggravatedby" maxlength="75" />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Alleviated by</mat-label>
+              <input matInput placeholder="Enter" formControlName="Alleviatedby" maxlength="75" />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Onset Date</mat-label>
+              <input matInput [matDatepicker]="onset" placeholder="Choose a date" formControlName="Onsetdate"
+                maxlength="10" />
+              <mat-datepicker-toggle matSuffix [for]="onset"></mat-datepicker-toggle>
+              <mat-datepicker #onset></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                *ngIf="(allergiesForm.value.AllergySeverityID == null || allergiesForm.value.AllergySeverityID == '') ? true : false"></span>Severity</mat-label>
+              <mat-select formControlName="AllergySeverityID">
+                <mat-option *ngFor="let severity of AllergySeverities" [value]="severity.AllergySeverityId">{{
+                  severity.AllergySeverityDescription }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Reaction</mat-label>
+              <input matInput placeholder="Enter" formControlName="Reaction" maxlength="75" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="Status">
+                <mat-option *ngFor="let type of allergyStatusvalue" [value]="type.AllergyStatusMasterDesc">
+                  {{type.AllergyStatusMasterDesc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+            <mat-form-field [matTooltip]="icdtooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg"
+              class="w-100" appearance="outline">
+              <mat-label>ICD Code</mat-label>
+              <mat-icon matSuffix
+                *ngIf="(allergiesForm.value.ICD10 == '' || allergiesForm.value.ICD10 == null) ? true : allergiesForm.value.ICD10.length > 2 ? false : true">
+                search</mat-icon>
+              <textarea matInput [matAutocomplete]="ICDCode" placeholder="Type and Select" formControlName="ICD10"
+                #autoCompleteICDCode="matAutocompleteTrigger" maxlength="500" rows="1"></textarea>
+              <mat-autocomplete autoActiveFirstOption #ICDCode="matAutocomplete">
+                <mat-option *ngFor="let ICD10 of diagnosisCode"
+                  (onSelectionChange)="setIcdCode(ICD10.ICDCode, ICD10.Description)"
+                  [value]="ICD10.ICDCode + '-' + ICD10.Description">{{ ICD10.ICDCode }}-{{ ICD10.Description }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3 col-xl-6">
+            <mat-form-field [matTooltip]="snoomedtooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg"
+              class="w-100" appearance="outline">
+              <mat-label>SNOMED Code</mat-label>
+              <mat-icon matSuffix
+                *ngIf="(allergiesForm.value.SNOMED == '' || allergiesForm.value.SNOMED == null) ? true : allergiesForm.value.SNOMED.length > 2 ? false : true">
+                search</mat-icon>
+              <textarea matInput placeholder="Type and Select" rows="1" [matAutocomplete]="SNOMED"
+                #autoCompleteSnomedCode="matAutocompleteTrigger" formControlName="SNOMED" maxlength="500"></textarea>
+              <mat-autocomplete autoActiveFirstOption #SNOMED="matAutocomplete">
+                <mat-option *ngFor="let SNOMED of snomedCTCode"
+                  (onSelectionChange)="setCptCode(SNOMED.Code,SNOMED.Description)"
+                  [value]="SNOMED.Code + '-' + SNOMED.Description ">{{SNOMED.Code}}-{{ SNOMED.Description }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-6 col-lg-6 align-self-start">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Notes</mat-label>
+              <textarea matInput placeholder="Diagnosis" formControlName="Notes" maxlength="500" rows="1"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="text-right justify-content-end">
+          <button mat-flat-button class="custome-button mat-primary mr-2" (click)="addAllergies()">
+            Save
+          </button>
+          <button mat-stroked-button class="transperent-button" color="primary" type="button" (click)="closeForm()">
+            Clear
+          </button>
+        </div>
+      </mat-card>
+    </form>
+  </div>
+</div>

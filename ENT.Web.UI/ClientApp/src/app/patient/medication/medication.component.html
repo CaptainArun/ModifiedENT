@@ -1,0 +1,31 @@
+<div>
+  <app-patient-history></app-patient-history>
+  <div class="overflow-hidden px-4">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <!-- <div class="row">
+        <div class="text-right w-100 my-2">
+          <button
+            class="custome-button mat-primary btn btn-info"
+            (click)="addMedication()"
+            style="height: 32px; width: 140px"
+          >
+            Add Medication
+          </button>
+        </div>
+      </div> -->
+    </div>
+    <div>
+      <mat-card class="table-wrapper">
+        <h4>Medication History</h4>
+        <mat-card-content>
+          <div class="row">
+            <app-bms-table [config]="tableConfig" [datas]="medicationRecord" (viewItem)="viewMedication($event)">
+            </app-bms-table>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <app-patientBackbutton></app-patientBackbutton>
+</div>
+<!-- (editItem)="updateMedication($event)"              (deleteItem)="deleteMedication($event)" -->

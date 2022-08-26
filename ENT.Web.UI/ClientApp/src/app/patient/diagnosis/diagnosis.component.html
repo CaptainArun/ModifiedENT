@@ -1,0 +1,21 @@
+<div>
+  <app-patient-history></app-patient-history>
+  <div class="overflow-hidden px-4">
+    <div class="text-right w-100 my-2">
+      <button class="custome-button mat-primary btn btn-info" style="height:32px; width:140px" (click)="openAddDiagnosisForm()">Add Diagnosis</button>
+    </div>
+    <div>
+      <mat-card class="table-wrapper w-100 row">
+        <h4>Diagnosis</h4>
+        <div>
+          <mat-card-content>
+            <div class="row">
+              <app-bms-table [config]="tableConfig" [datas]="diagnosisData" (viewItem)="openDiagnosisViewRecord($event)" (editItem)="openDiagnosisEditRecord($event)" (deleteItem)="deleteDiagnosisRecord($event)"></app-bms-table>
+            </div>
+          </mat-card-content>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <app-patientBackbutton></app-patientBackbutton>
+</div>

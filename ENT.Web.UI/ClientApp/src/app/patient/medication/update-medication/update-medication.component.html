@@ -1,0 +1,346 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg"> <span class="mr-4 ml-4">Medication History Edit</span>
+    <!-- <span class="mr-4 ml-4"
+    *ngIf="data.record == null && (this.ePrescriptionDetails != null && this.ePrescriptionDetails != undefined)">Patient
+    Name : {{this.ePrescriptionDetails.PatientName}}</span>
+  <span class="mr-4 ml-4"
+    *ngIf="data.record == null && (this.ePrescriptionDetails != null && this.ePrescriptionDetails != undefined)">Visit
+    Date & Time : {{this.ePrescriptionDetails.VisitDateandTime}}</span>
+  <span class="mr-4 ml-4"
+    *ngIf="data.record == null && (this.ePrescriptionDetails != null && this.ePrescriptionDetails != undefined)">Physician
+    Name : {{this.ePrescriptionDetails.ProviderName}}</span>
+  <span class="mr-4 ml-4" *ngIf="data.record != null">Patient Name : {{data.record.PatientName}}</span>
+  <span class="mr-4 ml-4" *ngIf="data.record != null">Visit Date & Time : {{data.record.VisitDateandTime}}</span>
+  <span class="mr-4 ml-4" *ngIf="data.record != null">Physician Name : {{data.record.RequestingPhysician}}</span> -->
+    <button style="color: white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <div>
+    <form [formGroup]="ePrescriptionForm" #ngForm="ngForm">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+          <div class="row mb-4">
+            <div class="col-12">
+              <mat-card class="px-4 py-2 my-3">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-6 pt-2">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Visit Date & Time</mat-label>
+                      <mat-select formControlName="VisitDate">
+                        <mat-option *ngFor="let vDate of visitDateTime; index as i" [value]="vDate"
+                          (click)="RecordedDuring(i)">
+                          {{ vDate }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-6 pt-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Recorded Date</mat-label>
+                      <input matInput [matDatepicker]="func" formControlName="RecordedDate" />
+                      <mat-datepicker-toggle matSuffix [for]="func"></mat-datepicker-toggle>
+                      <mat-datepicker #func></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-2 timepick pt-2">
+                    <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                      <input matInput [ngxTimepicker]="func1" [disableClick]="true" formControlName="RecordedTime" />
+                      <mat-label>Recorded Time</mat-label>
+                      <ngx-material-timepicker-toggle [for]="func1">
+                      </ngx-material-timepicker-toggle>
+                      <ngx-material-timepicker #func1> </ngx-material-timepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-6 pt-2">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Recorded During</mat-label>
+                      <input matInput placeholder="Enter" [value]="recordedDuring" readonly />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-6 pt-2">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>Recorded By</mat-label>
+                      <mat-select formControlName="RecordedBy">
+                        <mat-option *ngFor="let value of recordedBy" [value]="value">
+                          {{ value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+
+          <mat-card class="mt-2">
+
+            <div class="row mb-3">
+              <div class="col-xl-12 col-lg-12">
+                <div class="table-responsive shroff-table reduce-field">
+                  <table class="table table-bordered table-hover w-100">
+                    <thead>
+                      <tr class="font-weight-bold">
+                        <th class="col-xl-4 text-center">Item/Drug Name</th>
+                        <th class="col-xl-4 text-center">Route</th>
+                        <th class="col-xl-4 text-center">Diagnosis</th>
+                        <th class="col-xl-3 text-center">Total Quantity</th>
+                        <th class="col-xl-3 text-center">No of Days</th>
+                        <th class="col-xl-6 text-center">Medication Time</th>
+                        <th class="col-xl-3 text-center">Before/After</th>
+                        <th class="col-xl-2 text-center">Status</th>
+                        <th class="col-xl-4 text-center">SIG</th>
+                        <th class="col-xl-1"></th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+
+              <div class="col-xl-12 col-lg-12">
+                <div class="table-responsive shroff-table reduce-field overflow">
+                  <table class="table table-bordered table-hover w-100">
+                    <tbody formArrayName="rows">
+                      <tr *ngFor="let row of ePrescriptionForm.get('rows')?.controls; let index = index;">
+                        <td [formGroupName]="index" class="col-xl-4 text-center">
+                          <mat-form-field class="col-xl-12" appearance="outline"
+                            [matTooltip]="(row.get('ItemDrugName').value != null && row.get('ItemDrugName').value != undefined)?row.get('ItemDrugName').value:''"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                            <mat-label>Item/Drug Name</mat-label>
+                            <input matInput placeholder="Type and Select" [matAutocomplete]="AutoDrugName"
+                              formControlName="ItemDrugName" (keyup)="getDrugList(index)" maxlength="500">
+                            <mat-autocomplete autoActiveFirstOption #AutoDrugName="matAutocomplete">
+                              <mat-option *ngFor="let drug of drugName" [value]="drug.NDCCode + '/' + drug.Description"
+                                (click)="DrugId(drug.DrugCodeID)">{{drug.NDCCode}} / {{drug.Description}}</mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </td>
+                        <td [formGroupName]="index" class="col-xl-3 text-center">
+                          <mat-form-field class="col-lg-12" appearance="outline"
+                            [matTooltip]="ePrescriptionForm.controls['rows'].value[index].routeTooltip"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                            <mat-label>Route</mat-label>
+                            <input formControlName="routeTooltip" hidden>
+                            <mat-select formControlName="Route">
+                              <mat-option *ngFor="let route of routeName" (click)="setRouteTooltip(index)"
+                                [value]="route.RouteCode">{{route.RouteDescription}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </td>
+                        <td [formGroupName]="index" class="col-xl-4 text-center">
+                          <mat-form-field class=" col-lg-12" appearance="outline"
+                            [matTooltip]="(row.get('Diagnosis').value != null && row.get('Diagnosis').value != undefined)?row.get('Diagnosis').value:''"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                            <mat-label>Diagnosis</mat-label>
+                            <input matInput placeholder="Type and Select" [matAutocomplete]="AutoDiagnosisName"
+                              formControlName="Diagnosis" (keyup)="getDiagnosisList(index)" maxlength="500">
+                            <mat-autocomplete autoActiveFirstOption #AutoDiagnosisName="matAutocomplete">
+                              <mat-option *ngFor="let diagnosis of diagnosisName"
+                                [value]="diagnosis.ICDCode + '-' + diagnosis.Description"
+                                (click)="DiagnosisId(diagnosis.DiagnosisCodeID)">{{diagnosis.ICDCode}} -
+                                {{diagnosis.Description}}</mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </td>
+                        <td [formGroupName]="index" class="col-xl-2 text-center">
+                          <mat-form-field class="col-lg-12" appearance="outline"
+                            [matTooltip]="(row.get('Qty').value != null && row.get('Qty').value != undefined)?row.get('Qty').value:''"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                            <mat-label>Total Quantity</mat-label>
+                            <input matInput placeholder="Enter" formControlName="Qty" numeric autocomplete="off">
+                          </mat-form-field>
+                        </td>
+                        <td [formGroupName]="index" class="col-xl-2 text-center">
+                          <mat-form-field class="col-lg-12" appearance="outline"
+                            [matTooltip]="(row.get('Days').value != null && row.get('Days').value != undefined)?row.get('Days').value:''"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                            <mat-label>No of Days</mat-label>
+                            <input matInput placeholder="Enter" formControlName="Days" numeric autocomplete="off">
+                          </mat-form-field>
+                        </td>
+                        <td [formGroupName]="index" class="col-xl-5 text-center">
+                          <div class="col-lg-2 f-l my-3">
+                            <mat-label>Morning</mat-label>
+                            <section class="example-section">
+                              <mat-checkbox class="example-margin" formControlName="Morning"></mat-checkbox>
+                            </section>
+                          </div>
+                          <div class="col-lg-2 f-l m-3">
+                            <mat-label>Brunch</mat-label>
+                            <section class="example-section">
+                              <mat-checkbox class="example-margin" formControlName="Brunch"></mat-checkbox>
+                            </section>
+                          </div>
+                          <div class="col-lg-2 f-l my-3">
+                            <mat-label>Noon</mat-label>
+                            <section class="example-section">
+                              <mat-checkbox class="example-margin" formControlName="Noon"></mat-checkbox>
+                            </section>
+                          </div>
+                          <div class="col-lg-2 f-l my-3">
+                            <mat-label>Evening</mat-label>
+                            <section class="example-section">
+                              <mat-checkbox class="example-margin" formControlName="Evening"></mat-checkbox>
+                            </section>
+                          </div>
+                          <div class="col-lg-2 f-l my-3 m-2">
+                            <mat-label>Night</mat-label>
+                            <section class="example-section">
+                              <mat-checkbox class="example-margin" formControlName="Night"></mat-checkbox>
+                            </section>
+                          </div>
+                        </td>
+                        <td [formGroupName]="index" class="col-xl-2 text-center">
+                          <div class="col-lg-2 f-l mr-4">
+                            <mat-label>Before</mat-label>
+                            <section class="example-section">
+                              <mat-checkbox class="example-margin" formControlName="Before"></mat-checkbox>
+                            </section>
+                          </div>
+                          <div class="col-lg-2 f-l">
+                            <mat-label>After</mat-label>
+                            <section class="example-section">
+                              <mat-checkbox class="example-margin" formControlName="After"></mat-checkbox>
+                            </section>
+                          </div>
+                        </td>
+                        <td [formGroupName]="index" class="col-xl-2 text-center"
+                          [ngClass]="{'validate': ngForm.submitted}">
+                          <div class="col-lg-2 f-l">
+                            <mat-radio-group aria-label="Select an option" class="example-radio-group"
+                              formControlName="MedicationStatus">
+                              <mat-radio-button value="start">Start</mat-radio-button>
+                              <mat-radio-button value="hold">Hold</mat-radio-button>
+                              <mat-radio-button value="continue">Continue</mat-radio-button>
+                              <mat-radio-button value="discontinue">Discontinue</mat-radio-button>
+                            </mat-radio-group>
+                          </div>
+                        </td>
+                        <td [formGroupName]="index" class="col-xl-4 text-center">
+                          <mat-form-field class="col-xl-12" appearance="outline"
+                            [matTooltip]="(row.get('SIG').value != null && row.get('SIG').value != undefined)?row.get('SIG').value:''"
+                            matTooltipPosition="above" matTooltipClass="Tooltip-sm">
+                            <mat-label>SIG</mat-label>
+                            <input matInput placeholder="Enter" formControlName="SIG" maxlength="500">
+                          </mat-form-field>
+                        </td>
+                        <td class="col-xl-1">
+                          <button style="color: red" class="close" (click)="onRemoveRow(index)"
+                            *ngIf="ePrescriptionForm.get('rows').length>1" [hidden]="isMedRequestconfirmed == true"
+                            aria-label="Close">
+                            <span aria-hidden="true">X</span>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!--end of .table-responsive-->
+              </div>
+              <div class="col-lg-12 mt-3">
+                <div class="col-lg-6 f-l pull-right">
+                  <!-- ADD ROW -->
+                  <button type="button" mat-stroked-button color=""
+                    class="transperent-button light-sky primary schedbtn pull-right" (click)="onAddRow()"
+                    [hidden]="isMedRequestconfirmed == true">Add Row</button>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <section class="example-section">
+                  <mat-checkbox class="example-margin" formControlName="Start">Take your other regular medications with
+                    this
+                    prescription
+                  </mat-checkbox>
+                </section>
+              </div>
+              <div class="mr-4 m-4"></div>
+              <div class="mr-4 m-4"></div>
+              <div class="mr-4 m-3"></div>
+              <div class="mr-4"></div>
+              <div class="col-xl-8 mr-4">
+                <section class="example-section">
+                  <mat-checkbox class="example-margin" formControlName="Hold" (change)="isHold($event)">Hold your other
+                    regular medications while taking this prescription
+                  </mat-checkbox>
+                  <mat-form-field class="w-100" appearance="outline"
+                    [matTooltip]="ePrescriptionForm.get('HoldMedication').value" matTooltipPosition="above"
+                    matTooltipClass="Tooltip-md">
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="HoldMedication"
+                      [readonly]="!hold" maxlength="500"></textarea>
+                  </mat-form-field>
+                </section>
+              </div>
+              <div class="col-xl-6">
+                <section class="example-section">
+                  <mat-checkbox class="example-margin" formControlName="Discontinue" (change)="isDiscontinue($event)">
+                    Discontinue the following drugs</mat-checkbox>
+                  <mat-form-field class="w-100" appearance="outline"
+                    [matTooltip]="ePrescriptionForm.get('DiscontinueDrugs').value" matTooltipPosition="above"
+                    matTooltipClass="Tooltip-md">
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="DiscontinueDrugs"
+                      [readonly]="!discontinue" maxlength="500"></textarea>
+                  </mat-form-field>
+                </section>
+              </div>
+              <div class="col-xl-6">
+                <section class="example-section">
+                  <mat-checkbox class="example-margin" formControlName="Notes" (change)="isNotes($event)">Notes to
+                    Pharmacist</mat-checkbox>
+                  <mat-form-field class="w-100" appearance="outline"
+                    [matTooltip]="ePrescriptionForm.get('NotesPharmacist').value" matTooltipPosition="above"
+                    matTooltipClass="Tooltip-md">
+                    <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="NotesPharmacist"
+                      [readonly]="!notes" maxlength="500"></textarea>
+                  </mat-form-field>
+                </section>
+              </div>
+              <div class="col-xl-1 mr-4">
+                <section class="example-section">
+                  <mat-checkbox class="example-margin" formControlName="Refill" (change)="isRefill($event)">Refill
+                  </mat-checkbox>
+                  <mat-form-field class="w-80" appearance="outline"
+                    [matTooltip]="ePrescriptionForm.get('RefillNumber').value" matTooltipPosition="above"
+                    matTooltipClass="Tooltip-sm">
+                    <input matInput placeholder="Enter" formControlName="RefillNumber" [readonly]="!refill" numeric>
+                  </mat-form-field>
+                </section>
+              </div>
+              <div class="mr-4 m-3"></div>
+              <div class="mr-4 m-2"></div>
+              <div class="col-xl-2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Date</mat-label>
+                  <input matInput [matDatepicker]="date2" formControlName="Date" [readonly]="!refill"
+                    [disabled]="!refill" placeholder="Visit date">
+                  <mat-datepicker-toggle matSuffix [for]="date2">
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #date2></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="mr-4 m-3"></div>
+              <div class="col-xl-5">
+                <mat-form-field class="w-100" appearance="outline"
+                  [matTooltip]="ePrescriptionForm.get('RefillNotes').value" matTooltipPosition="above"
+                  matTooltipClass="Tooltip-md">
+                  <mat-label>Refill Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="RefillNotes"
+                    [readonly]="!refill" maxlength="500"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="text-right my-2">
+              <button mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="submitData()"
+                [hidden]="isMedRequestconfirmed == true">Save</button>
+              <button type="button" mat-stroked-button class="transperent-button" color="primary" (click)="resetForm()"
+                [hidden]="isMedRequestconfirmed == true">Clear</button>
+            </div>
+
+          </mat-card>
+
+
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
