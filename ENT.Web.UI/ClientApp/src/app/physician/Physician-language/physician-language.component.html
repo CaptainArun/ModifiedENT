@@ -1,0 +1,83 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="form">
+
+    <h5 cdkDragHandle class="p-3 title-bg">
+      Physician Language <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+
+    <div class="row pb-3 pt-3">
+      <div class="col-xl-3 col-lg-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>
+            <span class="required-asterisk"
+                  *ngIf="(form.value.Language == '' || form.value.Language == null) ? true : false"></span>
+          </mat-label>
+          <mat-select formControlName="Language">
+            <mat-option *ngFor="let lang of language" [value]="lang.LanguageDescription">
+              {{lang.LanguageDescription}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    
+        <div class="col-xl-3 col-lg6 d-flex align-items-center">
+          <mat-checkbox class="pr-2" (change)="onspeak()" formControlName="IsSpeak">Speak</mat-checkbox>
+          <mat-form-field class="w-50" appearance="outline">
+            <mat-label>
+              Level
+            </mat-label>
+            <mat-select formControlName="SpeakingLevel">
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="4">4</mat-option>
+              <mat-option value="5">5</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg6 d-flex align-items-center">
+          <mat-checkbox class="pr-2" (change)="onread()" formControlName="IsRead">Read</mat-checkbox>
+          <mat-form-field class="w-50" appearance="outline">
+            <mat-label>
+              Level
+            </mat-label>
+            <mat-select formControlName="ReadingLevel">
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="4">4</mat-option>
+              <mat-option value="5">5</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg6 d-flex align-items-center">
+          <mat-checkbox class="pr-2" (change)="onwrite()" formControlName="IsWrite">Write</mat-checkbox>
+          <mat-form-field class="w-50" appearance="outline">
+            <mat-label>
+              Level
+            </mat-label>
+            <mat-select formControlName="WritingLevel">
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="4">4</mat-option>
+              <mat-option value="5">5</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+     
+    </div>
+
+
+    <div class="pull-right">
+      <button mat-flat-button color="" (click)="submit()" class="custome-button mr-2  mat-primary vissub schedbtn">Submit</button>
+      <button type="button" mat-stroked-button class="transperent-button mr-2 schedbtn"
+              (click)="clear()" color="primary">
+        Clear
+      </button>
+    </div>
+  </form>
+</div>
+

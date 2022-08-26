@@ -1,0 +1,196 @@
+<div class="overflow-hidden" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <h5 class="p-3 title-bg">
+    Add Physician <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+</div>
+<div class="overflow-hidden px-4">
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+      <form [formGroup]="addPhysicianForm">
+        <mat-card class="mb-4">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+
+                <div class="col-xl-2">
+
+                  <div class="col-xl-10 pr-2">
+                    <div class="upload-file p-2" *ngIf="imageFlag">
+
+                      <img src="assets/images/No-Image.png" class="img-fluid" width="200" />
+                    </div>
+                    <div class="upload-file" *ngIf="!imageFlag" style="text-align: center;">
+                      <img src={{ImageBase64}} width="150" />
+
+                    </div>
+                  </div>
+                  <div class="col-xl-10 pr-2" *ngIf="imagebutton" style="margin-top: 10px;">
+
+                    <button type="button" mat-flat-button color="" value="upload" (click)="openImageCropper()"
+                            class="custome-button mat-primary">
+                      Upload Image
+                    </button>
+                  </div>
+                  <div class="col-lg-3" style="padding-top:12%; padding-left:26%">
+                    <h4>  <mat-checkbox formControlName="IsActive"> Active</mat-checkbox></h4>
+                  </div>
+                </div>
+
+                <!--<input hidden formControlName="ProviderID" />
+  <input hidden formControlName="UserID" />
+  <input hidden formControlName="FacilityId" />-->
+                <div class="col-xl-10 col-lg-12">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(addPhysicianForm.value.FirstName == '' || addPhysicianForm.value.FirstName == null) ? true : false"></span>
+                          First Name
+                        </mat-label>
+                        <input matInput placeholder="First Name" maxlength="50" formControlName="FirstName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Last Name" maxlength="50" formControlName="LastName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Middle Name</mat-label>
+                        <input matInput placeholder="Middle Name" maxlength="25" formControlName="MiddleName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Prefix</mat-label>
+                        <input matInput placeholder="Prefix" maxlength="25" formControlName="NamePrefix">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Suffix</mat-label>
+                        <input matInput placeholder="Suffix" maxlength="25" formControlName="NameSuffix">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Title</mat-label>
+                        <input matInput placeholder="Title" maxlength="50" formControlName="Title">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Date Of Birth</mat-label>
+
+                        <input matInput [matDatepicker]="pickers" placeholder="Date of Birth" (dateChange)="bindDob()" formControlName="BirthDate" [max]="startDate" [min]="endDate">
+                        <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                        <mat-datepicker #pickers></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(addPhysicianForm.value.PhysicianAge == '' || addPhysicianForm.value.PhysicianAge == null) ? true : false"></span>
+                          Age
+                        </mat-label>
+                        <input matInput placeholder="Enter" (blur)="bindAgeDob()" formControlName="PhysicianAge" type="number">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(addPhysicianForm.value.Gender == '' || addPhysicianForm.value.Gender == null) ? true : false"></span>
+                          Gender
+                        </mat-label>
+                        <mat-select formControlName="Gender">
+                          <mat-option *ngFor="let gen of gender" maxlength="15" [value]="gen.GenderDesc">
+                            {{gen.GenderDesc}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(addPhysicianForm.value.PersonalEmail == '' || addPhysicianForm.value.PersonalEmail == null) ? true : false"></span>Email Address
+                        </mat-label>
+                        <input matInput placeholder="demo@email.com" maxlength="50" formControlName="PersonalEmail">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Language</mat-label>
+                        <input matInput placeholder="Language" maxlength="15" formControlName="Language">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Preferred Language</mat-label>
+                        <input matInput placeholder="Preferred Language" maxlength="15" formControlName="PreferredLanguage">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Mother's Maiden Name</mat-label>
+                        <input matInput placeholder="Mother's Maiden Name" maxlength="50" formControlName="MothersMaidenName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class=" w-100 " appearance="outline">
+                        <mat-label>Website Name</mat-label>
+                        <input matInput placeholder="Website Name" maxlength="50" formControlName="WebsiteName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline" [matTooltip]="facilitytooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(addPhysicianForm.value.facility == '' || addPhysicianForm.value.facility == null) ? true : false"></span>Facility
+                        </mat-label>
+                        <mat-select formControlName="facility" placeholder="facility" multiple>
+                          <mat-option *ngFor="let facility of Facility" (click)="setFacility()" [value]="facility.FacilityId"> {{facility.FacilityName}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(addPhysicianForm.value.Role == '' || addPhysicianForm.value.Role == null) ? true : false"></span>
+                          Role
+                        </mat-label>
+                        <mat-select formControlName="Role" placeholder="facility">
+                          <mat-option *ngFor="let role of Role" [value]="role.RoleId"> {{role.RoleDescription}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+            
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+</div>
+                  </mat-card>
+                  <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center schedbtn">
+                    <div>
+                      <button mat-flat-button color="" class="custome-button mr-2  mat-primary vissub schedbtn" (click)="addPhysicianDetails()">Save</button>
+                      <button mat-stroked-button class="transperent-button mr-2 schedbtn" (click)="clear()" color="primary">Clear</button>
+                    </div>
+                  </div>
+
+</form>
+    </div>
+  </div>
+  </div>

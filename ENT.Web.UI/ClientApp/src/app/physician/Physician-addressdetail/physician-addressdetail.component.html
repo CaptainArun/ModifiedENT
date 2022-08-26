@@ -1,0 +1,112 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="form">
+
+    <h5 cdkDragHandle class="p-3 title-bg">
+     Physician Address <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+
+    <div class="row pb-3 pt-3">
+
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>
+            <span class="required-asterisk"
+                  *ngIf="(form.value.AddressType == '' || form.value.AddressType == null) ? true : false"></span>
+            Address Type
+          </mat-label>
+          <mat-select formControlName="AddressType">
+            <mat-option *ngFor="let add of address" [value]="add.AddressTypeDescription">
+              {{add.AddressTypeDescription}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>
+            <span class="required-asterisk"
+                  *ngIf="(form.value.DoorOrApartmentNo == '' || form.value.DoorOrApartmentNo == null) ? true : false"></span>Door/Apartment Number
+          </mat-label>
+          <input matInput maxlength="20" placeholder="Enter" formControlName="DoorOrApartmentNo">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Apartment Name / House Name</mat-label>
+          <input matInput maxlength="100" placeholder="Enter" formControlName="ApartmentNameOrHouseName">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Street Name</mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="StreetName">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Locality</mat-label>
+          <input matInput placeholder="Enter" maxlength="50" formControlName="Locality">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.Town == '' || form.value.Town == null) ? true : false"></span>Town</mat-label>
+          <input matInput placeholder="Enter" maxlength="50" formControlName="Town">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>City</mat-label>
+          <input maxlength="50" matInput placeholder="Enter" formControlName="City">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>District</mat-label>
+          <input matInput placeholder="Enter" maxlength="50" formControlName="District">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.State == '' || form.value.State == null) ? true : false"></span>State</mat-label>
+          <mat-select formControlName="State">
+            <mat-option *ngFor="let State of state" [value]="State.StateDescription">
+              {{State.StateDescription}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.Country == '' || form.value.Country == null) ? true : false"></span>Country</mat-label>
+          <mat-select formControlName="Country">
+            <mat-option *ngFor="let Country of country" [value]="Country.CountryDescription">
+              {{Country.CountryDescription}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Pin Code</mat-label>
+          <input maxlength="6" matInput placeholder="Enter" formControlName="PinCode" numeric>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div class="pull-right">
+      <button mat-flat-button color="" (click)="submit()" class="custome-button mr-2  mat-primary vissub schedbtn">Submit</button>
+      <button type="button" mat-stroked-button class="transperent-button mr-2 schedbtn"
+              (click)="clear()" color="primary">
+        Clear
+      </button>
+    </div>
+  </form>
+</div>
+

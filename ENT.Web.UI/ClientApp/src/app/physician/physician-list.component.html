@@ -1,0 +1,74 @@
+<form [formGroup]="physicianForm">
+
+  <div class="overflow-hidden pr-4 pl-4 pb-4">
+    <div class="row col-xl-12 ml-0 pl-0">
+      <mat-card class="col-xl-5 ml-0 my-2">
+        <div class="col-12">
+          <div class="row justify-content-md-left" *ngIf="physicianCount">
+            <div class="col-xl-12 text-center">
+              <h3 class="text-left">Physician Status</h3>
+            </div>
+            <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-1">
+              <p class="m-0">Total No of Physician : <b>{{physicianCount.TotalProviderCount}}</b></p> <!--physicianCount-->
+            </div>
+            <div class="col-xl-5 p-2 m-2 text-center rounded dash-box-2">
+              <p class="m-0">Active Physician : <b>{{physicianCount.ActiveProviderCount}}</b></p><!--ActiveProviderCount-->
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <div class="" style="margin:6px">
+      </div>
+      <mat-card class="row col-xl-7 ml-0 my-2">
+        <div class="col-xl-12">
+          <div class="col-xl-12 text-center">
+            <h3 class="text-left">Physician Search</h3>
+          </div>
+          <div class="row justify-content-between w-100 opdstop pt-2">
+            <div class="col-xl-4">
+              <mat-form-field class=" w-100 " appearance="outline">
+                <mat-label>Doctor</mat-label>
+                <mat-select formControlName="Doctor">
+                  <mat-option *ngFor="let doctor of doctordata" [value]="doctor.ProviderID">{{doctor.FirstName}} {{doctor.MiddleName}} {{doctor.LastName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Speciality</mat-label>
+                <mat-select formControlName="Speciality">
+                  <mat-option *ngFor="let speciality of specialityData" [value]="speciality.SpecialityID">{{speciality.SpecialityDescription}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 mt-1">
+              <div class="pull-left mr-2">
+                <button mat-flat-button color="" class="custome-button mat-primary w-auto" (click)="searchPhysicianData()">Search</button>
+              </div>
+              <div class="pull-left">
+                <button mat-stroked-button color="" class="transperent-button light-sky primary w-auto" (click)="cancel()">Clear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-md-12 text-right my-2">
+      <button mat-flat-button color="" class="custome-button  w-auto  mat-primary appointbtn" (click)="addPhysician()">+ Add New Physician</button>
+    </div>
+    <mat-card *ngIf="show">
+      <h3>No Record Found</h3>
+    </mat-card>
+    <div class="row mt-1">
+      <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+        <mat-card *ngIf="!show">
+          <mat-card-content>
+            <div class="row">
+              <app-bms-table [config]="tableConfig" [datas]="physiciansearchgrid" (editItem)="openPhysician($event)"(bindItem)="setpincode($event)"></app-bms-table>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</form>

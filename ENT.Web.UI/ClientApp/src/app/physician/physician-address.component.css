@@ -1,0 +1,24 @@
+.ht {
+    height: 100px;
+    text-align: center;
+}
+
+.mv {
+   text-align: center;
+}
+
+.widht {
+    width: 350px;
+    height: 98px;
+}
+
+.m-auto {
+    margin: auto!important;
+}
+
+.text-center {
+    text-align: center!important;
+    padding-top: 7%;
+    font-size: 25px; 
+    color: #ccc;
+}

@@ -1,0 +1,60 @@
+<div class="overflow-hidden px-4">
+  <physician-commonVisit></physician-commonVisit>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 dark-color padding-none">
+      <h5 class="p-3 title-bg mt-2">Physician Vacation</h5>
+      <div class="">
+        <form [formGroup]="physicainVacationForm">
+          <mat-card class="mb-4">
+            <div class="row justify-content-center">
+              <div class="col-xl-3 col-lg-3">
+                <mat-form-field  class="w-100" appearance="outline">
+                  <input   matInput [matDatepicker]="pickers1" placeholder="Start Date" formControlName="StartDate">
+                  <mat-datepicker-toggle matSuffix [for]="pickers1"></mat-datepicker-toggle>
+                  <mat-datepicker #pickers1></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <input matInput [matDatepicker]="pickers2" placeholder="End Date" formControlName="EndDate">
+                  <mat-datepicker-toggle matSuffix [for]="pickers2"></mat-datepicker-toggle>
+                  <mat-datepicker #pickers2></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-3">
+                <mat-form-field class="w-100 " appearance="outline">
+                  <mat-label>Reason</mat-label>
+                  <textarea maxlength="100" rows="1" cols="1" matInput placeholder="Leave a comment" formControlName="Reason"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="d-flex align-items-lg-center justify-content-center pt-4">
+              <div>
+                <button [disabled]="IsDateCorect" mat-flat-button color="" class="custome-button mat-primary mr-2" (click)="addVacationDetails()">Save</button>
+                <button type="reset" mat-stroked-button  color="primary" class="transperent-button light-sky primary" (click)="clear()">Clear</button>
+              </div>
+            </div>
+          </mat-card>
+        </form>
+      </div>
+      <form>
+        <div class="row">
+          <div class="col-12">
+            <mat-card>
+              <mat-card-content>
+                <div class="row">
+                  <app-bms-table [config]="tableConfig" [datas]="vacationGriddata" (viewItem)="ViewRecord($event)"(editItem)="EditRecord($event)" ></app-bms-table>
+                </div>
+                <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center schedbtn mt-3">
+                  <!--<div>
+                    <button mat-flat-button color="" class="custome-button mr-2  mat-primary vissub" (click)="back()">Back</button>
+                  </div>-->
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

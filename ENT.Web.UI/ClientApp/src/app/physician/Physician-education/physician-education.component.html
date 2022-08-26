@@ -1,0 +1,132 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="form">
+
+    <h5 cdkDragHandle class="p-3 title-bg">
+     Physician Education <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+
+    <div class="row pb-3 pt-3">
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.EducationType == '' || form.value.EducationType == null) ? true : false"></span>Type</mat-label>
+          <input matInput maxlength="100" placeholder="Enter" formControlName="EducationType">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.BoardorUniversity == '' || form.value.BoardorUniversity == null) ? true : false"></span>Board/University</mat-label>
+          <input matInput maxlength="100" placeholder="Enter" formControlName="BoardorUniversity">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.MonthandYearOfPassing == '' || form.value.MonthandYearOfPassing == null) ? true : false"></span>Month/Year of Passing</mat-label>
+          <input matInput [matDatepicker]="passing1" placeholder="Month/Year of Passing" formControlName="MonthandYearOfPassing">
+          <mat-datepicker-toggle matSuffix [for]="passing1"></mat-datepicker-toggle>
+          <mat-datepicker #passing1></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.NameOfSchoolorCollege == '' || form.value.NameOfSchoolorCollege == null) ? true : false"></span>Name of School/College</mat-label>
+          <input matInput maxlength="100" placeholder="Enter" formControlName="NameOfSchoolorCollege">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.MainSubjects == '' || form.value.MainSubjects == null) ? true : false"></span>Main Subjects</mat-label>
+          <input matInput maxlength="100" placeholder="Enter" formControlName="MainSubjects">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.PercentageofMarks == '' || form.value.PercentageofMarks == null) ? true : false"></span>Percentage Marks/Div</mat-label>
+          <input matInput maxlength="30" placeholder="Enter" formControlName="PercentageofMarks" numeric>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Honours/Scholarship(Heading)</mat-label>
+          <input matInput maxlength="100" placeholder="Enter" formControlName="HonoursorScholarshipHeading">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Project Work Undertaken(Heading)</mat-label>
+          <input matInput maxlength="100" placeholder="Enter" formControlName="ProjectWorkUndertakenHeading">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Publications/Papers(Heading)</mat-label>
+          <input matInput maxlength="100" placeholder="Enter" formControlName="PublicationsorPapers">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.Qualification == '' || form.value.Qualification == null) ? true : false"></span>Qualification</mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="Qualification">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.DurationOfQualification == '' || form.value.DurationOfQualification == null) ? true : false"></span>Duration of Qualification</mat-label>
+          <input matInput maxlength="20" placeholder="Enter" formControlName="DurationOfQualification">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.NameOfInstitution == '' || form.value.NameOfInstitution == null) ? true : false"></span>Name of Institution</mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="NameOfInstitution">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Place of Institution</mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="PlaceOfInstitution">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Registration Authority</mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="RegisterationAuthority">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.RegisterationNumber == '' || form.value.RegisterationNumber == null) ? true : false"></span>Registration Number</mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="RegisterationNumber" numeric>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Expiry of Registration Number</mat-label>
+          <input matInput maxlength="20" placeholder="Enter" formControlName="ExpiryOfRegisterationNumber">
+        </mat-form-field>
+      </div>
+
+    </div>
+
+
+    <div class="pull-right">
+      <button mat-flat-button color="" (click)="submit()" class="custome-button mr-2  mat-primary vissub schedbtn">Submit</button>
+      <button type="button" mat-stroked-button class="transperent-button mr-2 schedbtn"
+              (click)="clear()" color="primary">
+        Clear
+      </button>
+    </div>
+  </form>
+</div>
+

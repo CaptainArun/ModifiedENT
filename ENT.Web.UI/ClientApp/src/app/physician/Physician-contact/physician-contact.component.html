@@ -1,0 +1,73 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="form">
+
+    <h5 cdkDragHandle class="p-3 title-bg">
+     Physician Contact <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+
+    <div class="row pb-3 pt-3">
+
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.CellNumber == '' || form.value.CellNumber == null) ? true : false"></span>Cell Number</mat-label>
+          <input matInput placeholder="Ex.000-000-0000" formControlName="CellNumber" maxlength="12"  minlength="12" appPhoneMask>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.PhoneNumber == '' || form.value.PhoneNumber == null) ? true : false"></span>Phone Number (Home)</mat-label>
+          <input matInput placeholder="Ex.000-000-0000" formControlName="PhoneNumber"  maxlength="12"  minlength="12" appPhoneMask>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>
+            <span class="required-asterisk"
+                  *ngIf="(form.value.WhatsAppNumber == '' || form.value.WhatsAppNumber == null) ? true : false"></span>WhatsApp Number
+          </mat-label>
+          <input  matInput placeholder="Ex.000-000-0000" formControlName="WhatsAppNumber"  maxlength="12"  minlength="12" appPhoneMask>
+        </mat-form-field>
+        <mat-checkbox class="pt-2" (change)="samecell()" formControlName="samecellno">Same as Cell Number</mat-checkbox>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.EmergencyContactNumber == '' || form.value.EmergencyContactNumber == null) ? true : false"></span>Emergency Contact Number</mat-label>
+          <input matInput placeholder="Ex.000-000-0000" formControlName="EmergencyContactNumber"  maxlength="12"  minlength="12" appPhoneMask >
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6 pt-3">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Telephone Number</mat-label>
+          <input matInput placeholder="Ex.000-000-0000" formControlName="TelephoneNo"  maxlength="12"  minlength="12" appPhoneMask >
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6 pt-3">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Fax</mat-label>
+          <input matInput maxlength="20" placeholder="Enter" formControlName="Fax">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6 pt-3">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>E-mail address (personal)</mat-label>
+          <input matInput maxlength="50" placeholder="demo@email.com" formControlName="Email">
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div class="pull-right">
+      <button mat-flat-button color="" (click)="submit()" class="custome-button mr-2  mat-primary vissub schedbtn">Submit</button>
+      <button type="button" mat-stroked-button class="transperent-button mr-2 schedbtn"
+              (click)="clear()" color="primary">
+        Clear
+      </button>
+    </div>
+  </form>
+</div>
+

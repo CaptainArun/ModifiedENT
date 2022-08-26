@@ -1,0 +1,989 @@
+<div class="overflow-hidden px-4">
+  <physician-commonVisit [submit]="this.submitData"></physician-commonVisit>
+    <div class="row mt-2">
+      <div class="col-xl-12 dark-color padding-none">
+        <h5 class="p-3 title-bg mt-2">Add Physician Address</h5>
+        <mat-horizontal-stepper #stepper (selectionChange)="stepChanged($event, stepper);">
+          <mat-step type="button" [stepControl]="personalFormGroup">
+            <form [formGroup]="physicianAddressForm">
+              <ng-template type="button" matStepLabel>Personal Data</ng-template>
+              <mat-card class="mb-4">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-xl-2">
+                        <div class="upload-file p-2" *ngIf="providerDetailById?.ProviderImage != null || !imageFlag"
+                             style="text-align: center;">
+                          <img src={{profilePics}} style="width:200px; height:200px;">
+                          <!--<button mat-mini-fab color="accent" (click)="RemoveFile()" *ngIf="!imageFlag"><mat-icon>X</mat-icon></button>-->
+                        </div>
+                        <div class="upload-file " *ngIf="providerDetailById?.ProviderImage == null && imageFlag">
+                          <img src="assets/images/No-Image.png" class="img-fluid" width="200" />
+                        </div>
+                        <div class="upload-file p-2" style="text-align: center;">
+                          <input type="file" placeholder="Choose file" value="upload"
+                                 (change)="imageUpload($event)" style="display:none;">
+                          <button type="button" mat-flat-button value="upload" (click)="openImageCropper()"
+                                  class="custome-button mat-primary">Upload Image
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-xl-10 col-lg-12">
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <mat-form-field class=" w-100 " appearance="outline">
+                              <mat-label>
+                                <span class="required-asterisk"
+                                      *ngIf="(physicianAddressForm.value.FirstName == '' || physicianAddressForm.value.FirstName == null) ? true : false"></span>
+                                First Name
+                              </mat-label>
+                              <input matInput placeholder="First Name" maxlength="50" formControlName="FirstName">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4">
+                            <mat-form-field class=" w-100 " appearance="outline">
+                              <mat-label>Last Name</mat-label>
+                              <input matInput placeholder="Last Name" maxlength="50" formControlName="LastName">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4">
+                            <mat-form-field class=" w-100 " appearance="outline">
+                              <mat-label>Middle Name</mat-label>
+                              <input matInput placeholder="Middle Name" maxlength="25" formControlName="MiddleName">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4">
+                            <mat-form-field class=" w-100 " appearance="outline">
+                              <mat-label>Prefix</mat-label>
+                              <input matInput placeholder="Prefix" maxlength="25" formControlName="NamePrefix">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4">
+                            <mat-form-field class=" w-100 " appearance="outline">
+                              <mat-label>Suffix</mat-label>
+                              <input matInput placeholder="Suffix" maxlength="25" formControlName="NameSuffix">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4">
+                            <mat-form-field class=" w-100 " appearance="outline">
+                              <mat-label>Title</mat-label>
+                              <input matInput placeholder="Title" maxlength="50" formControlName="Title">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>Date Of Birth</mat-label>
+                              <input matInput [matDatepicker]="pickers" placeholder="Date of Birth" (dateChange)="bindDob()" formControlName="BirthDate" [max]="startDate" [min]="endDate">
+                              <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+                              <mat-datepicker #pickers></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4">
+                            <mat-form-field class=" w-100 " appearance="outline">
+                              <mat-label>Age</mat-label>
+                              <input matInput placeholder="Enter" (blur)="bindAgeDob()" formControlName="PhysicianAge" type="number">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>
+                                <span class="required-asterisk"
+                                      *ngIf="(physicianAddressForm.value.Gender == '' || physicianAddressForm.value.Gender == null) ? true : false"></span>Gender
+                              </mat-label>
+                              <mat-select formControlName="Gender">
+                                <mat-option *ngFor="let gen of gender" [value]="gen.GenderDesc">
+                                  {{gen.GenderDesc}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-4">
+                            <mat-form-field class=" w-100 " appearance="outline">
+                              <mat-label>
+                                <span class="required-asterisk"
+                                      *ngIf="(physicianAddressForm.value.PersonalEmail == '' || physicianAddressForm.value.PersonalEmail == null) ? true : false"></span>Email Address
+                              </mat-label>
+                              <input matInput placeholder="demo@email.com" maxlength="50" formControlName="PersonalEmail">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-3">
+                            <mat-form-field class="w-100" appearance="outline" [matTooltip]="facilitytooltip" matTooltipPosition="above" matTooltipClass="Tooltip-lg">
+                              <mat-label>
+                                <span class="required-asterisk"
+                                      *ngIf="(physicianAddressForm.value.facility == '' || physicianAddressForm.value.facility == null) ? true : false"></span>Facility
+                              </mat-label>
+                              <mat-select formControlName="facility" placeholder="facility" multiple>
+                                <mat-option *ngFor="let facility of Facility" (click)="setFacility()" [value]="facility.FacilityId"> {{facility.FacilityName}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-lg-3">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>
+                                <span class="required-asterisk"
+                                      *ngIf="(physicianAddressForm.value.Role == '' || physicianAddressForm.value.Role == null) ? true : false"></span>
+                                Role
+                              </mat-label>
+                              <mat-select formControlName="Role" placeholder="facility">
+                                <mat-option *ngFor="let role of Role" [value]="role.RoleId"> {{role.RoleDescription}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 pt-4">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Language</mat-label>
+                      <input matInput placeholder="Language" maxlength="15" formControlName="Language">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-3 pt-4">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Preferred Language</mat-label>
+                      <input matInput placeholder="Preferred Language" maxlength="15" formControlName="PreferredLanguage">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-3 pt-4">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Mother's Maiden Name</mat-label>
+                      <input matInput placeholder="Mother's Maiden Name" maxlength="50" formControlName="MothersMaidenName">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-3 pt-4">
+                    <mat-form-field class=" w-100 " appearance="outline">
+                      <mat-label>Website Name</mat-label>
+                      <input matInput placeholder="Website Name" maxlength="50" formControlName="WebsiteName">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-3">
+                    <mat-checkbox formControlName="IsActive">Active</mat-checkbox>
+                  </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 pl-1 pt-2">
+                  <div class="upload-file ht" *ngIf="!showSign">
+                    <p class="m-auto text-center" [hidden]="noSign">No Signature Found</p>
+                    <span *ngIf="ViewSignUpload">
+                      <img [src]="localUrl" class="widht"> 
+                    </span>
+                  </div>
+                  <div class="upload-file ht" *ngIf="showSign">
+                    <img src={{signPic}} class="widht">
+                  </div>
+                  <div class="pt-3 mv">
+                    <input type="file" #sign accept="image/*" value="upload" (change)="signUpload($event)" hidden>
+                    <button type="button" mat-raised-button color="primary" (click)="sign.click()">Upload Signature</button>
+                  </div>
+                </div>
+                <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center">
+                  <div>
+                    <button type="button" mat-flat-button class="custome-button mat-primary" matStepperNext>Next</button>
+                  </div>
+                </div>
+              </mat-card>
+            </form>
+          </mat-step>
+
+          <mat-step type="button" [stepControl]="contactFormGroup">
+            <form [formGroup]="contactForm">
+              <ng-template type="button" matStepLabel>Contact info</ng-template>
+              <mat-card class="mb-4" formArrayName="providerContacts"  *ngFor="let contact of getDynamicContactInfo().controls; let i=index">
+                <div [formGroupName]="i">
+                  <div class="row">
+                    <input hidden formControlName="ProviderContactID" />
+                    <input hidden formControlName="ProviderID" />
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(contact.value.CellNumber == '' || contact.value.CellNumber == null) ? true : false"></span>Cell Number
+                        </mat-label>
+                        <input matInput placeholder="Ex.000-000-0000" formControlName="CellNumber" maxlength="12"  minlength="12" appPhoneMask>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(contact.value.PhoneNumber == '' || contact.value.PhoneNumber == null) ? true : false"></span>Phone Number (Home)
+                        </mat-label>
+                        <input matInput placeholder="Ex.000-000-0000" formControlName="PhoneNumber"  maxlength="12"  minlength="12" appPhoneMask>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(contact.value.WhatsAppNumber == '' || contact.value.WhatsAppNumber == null) ? true : false"></span>WhatsApp Number
+                        </mat-label>
+                        <input  matInput placeholder="Ex.000-000-0000" formControlName="WhatsAppNumber"  maxlength="12"  minlength="12" appPhoneMask>
+                      </mat-form-field>
+                      <mat-checkbox class="pt-2" (change)="samecell()" formControlName="samecellno">Same as Cell Number</mat-checkbox>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(contact.value.EmergencyContactNumber == '' || contact.value.EmergencyContactNumber == null) ? true : false"></span>Emergency Contact Number
+                        </mat-label>
+                        <input  matInput placeholder="Ex.000-000-0000" formControlName="EmergencyContactNumber" maxlength="12"  minlength="12" appPhoneMask>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6  pt-3">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Telephone Number</mat-label>
+                        <input matInput placeholder="Ex.000-000-0000" formControlName="TelephoneNo"  maxlength="12"  minlength="12" appPhoneMask>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6  pt-3">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Fax</mat-label>
+                        <input matInput maxlength="20" placeholder="Enter" formControlName="Fax">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6 pt-3">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>E-mail address (personal)</mat-label>
+                        <input matInput maxlength="50" placeholder="demo@email.com" formControlName="Email">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-12 text-right pb-4">
+                      <button type="button" mat-flat-button (click)="addUpdateContactInfo('submit')" class="custome-button w-auto mat-primary">Add Contact</button>
+                    </div>
+                  </div>        
+                  <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;" *ngIf="contactInfoShow">
+                    <div class="col-12" *ngFor="let contact of contactInfoList; let i = index;">
+                      <div class="row m-0 border-bottom">
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold pl-0">Cell Number :</div>
+                            <div class="col p-0 ">{{contact.CellNumber}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Phone Number :</div>
+                            <div class="col p-0 ">{{contact.PhoneNumber}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">WhatsApp Number :</div>
+                            <div class="col p-0 ">{{contact.WhatsAppNumber}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Emergency Contact Number :</div>
+                            <div class="col p-0 ">{{contact.EmergencyContactNumber}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Telephone Number :</div>
+                            <div class="col p-0 ">{{contact.TelephoneNo}}</div>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-auto pr-0">
+                          <!--<i *ngIf="hideArray[i]" class="fa fa-floppy-o f-25 cursor-pointer " (click)="setupdate(i)"></i>-->
+                          <i class="fa fa-pencil-square f-25 cursor-pointer" (click)="openContact(contact,i)"></i>
+                          <i *ngIf="contactInfoList.length>1" class="fa fa-trash f-25 ml-2" (click)="deleteContactInfo(contact)" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                    <div>
+                      <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                      <button type="button" (click)="addUpdateContactInfo" mat-flat-button color="" class="custome-button mat-primary" matStepperNext>Next</button>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+            </form>
+          </mat-step>
+          <mat-step type="button" [stepControl]="addressFormGroup">
+            <form [formGroup]="addressForm">
+              <ng-template type="button" matStepLabel>Address</ng-template>
+              <mat-card class="mb-4" formArrayName="providerAddresses" *ngFor="let add of getDynamicAddress().controls; let i=index;">
+                <div [formGroupName]="i">
+                  <div class="row">
+                    <input hidden formControlName='ProviderAddressID' />
+                    <input hidden formControlName='ProviderID' />
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(add.value.AddressType == '' || add.value.AddressType == null) ? true : false"></span>
+                          Address Type
+                        </mat-label>
+                        <mat-select formControlName="AddressType">
+                          <mat-option *ngFor="let add of address" [value]="add.AddressTypeDescription">
+                            {{add.AddressTypeDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(add.value.DoorOrApartmentNo == '' || add.value.DoorOrApartmentNo == null) ? true : false"></span>Door/Apartment Number
+                        </mat-label>
+                        <input matInput maxlength="20" placeholder="Enter" formControlName="DoorOrApartmentNo">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Apartment Name / House Name</mat-label>
+                        <input matInput maxlength="100" placeholder="Enter" formControlName="ApartmentNameOrHouseName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Street Name</mat-label>
+                        <input matInput maxlength="50" placeholder="Enter" formControlName="StreetName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Locality</mat-label>
+                        <input matInput placeholder="Enter" maxlength="50" formControlName="Locality">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(add.value.Town == '' || add.value.Town == null) ? true : false"></span>Town
+                        </mat-label>
+                        <input matInput placeholder="Enter" maxlength="50" formControlName="Town">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>City</mat-label>
+                        <input maxlength="50" matInput placeholder="Enter" formControlName="City">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>District</mat-label>
+                        <input matInput placeholder="Enter" maxlength="50" formControlName="District">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(add.value.State == '' || add.value.State == null) ? true : false"></span>State
+                        </mat-label>
+                        <mat-select formControlName="State">
+                          <mat-option *ngFor="let State of state" [value]="State.StateDescription">
+                            {{State.StateDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(add.value.Country == '' || add.value.Country == null) ? true : false"></span>Country
+                        </mat-label>
+                        <mat-select formControlName="Country">
+                          <mat-option *ngFor="let Country of country" [value]="Country.CountryDescription">
+                            {{Country.CountryDescription}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Pin Code</mat-label>
+                        <input maxlength="6" matInput placeholder="Enter" formControlName="PinCode" numeric>
+                      </mat-form-field>
+                    </div>
+                      <div class="col-xl-12 text-right pb-4">
+                        <button type="button" mat-flat-button (click)="addUpdateAddress('submit')" class="custome-button w-auto mat-primary">Add Address</button>
+                      </div> 
+                  </div>
+                  <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;" *ngIf="addressShow">
+                    <div class="col-12" *ngFor="let address of addressList; let i = index;">
+                      <div class="row m-0 border-bottom">
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold pl-0">Address Type :</div>
+                            <div class="col p-0 ">{{address.AddressType}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Door Number :</div>
+                            <div [matTooltip]="address.DoorOrApartmentNo" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{address.DoorOrApartmentNo}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Apartment Name :</div>
+                            <div [matTooltip]="address.ApartmentNameOrHouseName" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{address.ApartmentNameOrHouseName}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Town :</div>
+                            <div class="col p-0 ">{{address.Town}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">State :</div>
+                            <div class="col p-0 ">{{address.State}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Country :</div>
+                            <div class="col p-0 ">{{address.Country}}</div>
+                          </div>
+                        </div>
+                        <div class="col-lg-auto pr-0">
+                          <!--<i *ngIf="hideedit[i]" class="fa fa-floppy-o f-25 cursor-pointer "  (click)="setupdateaddress(i)"></i>-->
+                          <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openAddress(address,i)"></i>
+                          <i *ngIf="addressList.length>1  " class="fa fa-trash f-25 ml-2" (click)="deleteAddress(address)" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               
+                  <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                    <div>
+                      <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                      <button type="button" (click)="addUpdateAddress()" mat-flat-button color="" class="custome-button mat-primary" matStepperNext>Next</button>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+            </form>
+          </mat-step>
+          <mat-step type="button" [stepControl]="educationalFormGroup">
+            <form [formGroup]="educationalForm">
+              <ng-template type="button" matStepLabel>Educational Details</ng-template>
+              <mat-card class="mb-4" formArrayName="educations" *ngFor="let education of getDynamicEducationalDetails().controls;let i=index;">
+                <div [formGroupName]="i">
+                  <div class="row">
+                    <input hidden formControlName="ProviderEducationId" />
+                    <input hidden formControlName="ProviderID" />
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.EducationType == '' || education.value.EducationType == null) ? true : false"></span>
+                          Type
+                        </mat-label>
+                        <input matInput maxlength="100" placeholder="Enter" formControlName="EducationType">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.BoardorUniversity == '' || education.value.BoardorUniversity == null) ? true : false"></span>Board/University
+                        </mat-label>
+                        <input matInput maxlength="100" placeholder="Enter" formControlName="BoardorUniversity">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.MonthandYearOfPassing == '' || education.value.MonthandYearOfPassing == null) ? true : false"></span>Month/Year of Passing
+                        </mat-label>
+                        <input matInput [matDatepicker]="passing" placeholder="Month/Year of Passing" formControlName="MonthandYearOfPassing">
+                        <mat-datepicker-toggle matSuffix [for]="passing"></mat-datepicker-toggle>
+                        <mat-datepicker #passing></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.NameOfSchoolorCollege == '' || education.value.NameOfSchoolorCollege == null) ? true : false"></span>Name of School/College
+                        </mat-label>
+                        <input matInput maxlength="100" placeholder="Enter" formControlName="NameOfSchoolorCollege">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.MainSubjects == '' || education.value.MainSubjects == null) ? true : false"></span>Main Subjects
+                        </mat-label>
+                        <input matInput maxlength="100" placeholder="Enter" formControlName="MainSubjects">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.PercentageofMarks == '' || education.value.PercentageofMarks == null) ? true : false"></span>Percentage Marks/Div
+                        </mat-label>
+                        <input matInput maxlength="30" placeholder="Enter" formControlName="PercentageofMarks" numeric>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Honours/Scholarship(Heading)</mat-label>
+                        <input matInput maxlength="100" placeholder="Enter" formControlName="HonoursorScholarshipHeading">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Project Work Undertaken(Heading)</mat-label>
+                        <input matInput maxlength="100" placeholder="Enter" formControlName="ProjectWorkUndertakenHeading">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Publications/Papers(Heading)</mat-label>
+                        <input matInput maxlength="100" placeholder="Enter" formControlName="PublicationsorPapers">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.Qualification == '' || education.value.Qualification == null) ? true : false"></span>Qualification
+                        </mat-label>
+                        <input matInput maxlength="50" placeholder="Enter" formControlName="Qualification">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.DurationOfQualification == '' || education.value.DurationOfQualification == null) ? true : false"></span>Duration of Qualification
+                        </mat-label>
+                        <input matInput maxlength="20" placeholder="Enter" formControlName="DurationOfQualification">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.NameOfInstitution == '' || education.value.NameOfInstitution == null) ? true : false"></span>Name of Institution
+                        </mat-label>
+                        <input matInput maxlength="50" placeholder="Enter" formControlName="NameOfInstitution">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Place of Institution</mat-label>
+                        <input matInput maxlength="50" placeholder="Enter" formControlName="PlaceOfInstitution">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          Registration Authority
+                        </mat-label>
+                        <input matInput maxlength="50" placeholder="Enter" formControlName="RegisterationAuthority">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.RegisterationNumber == '' || education.value.RegisterationNumber == null) ? true : false"></span>Registration Number
+                        </mat-label>
+                        <input matInput maxlength="50" placeholder="Enter" formControlName="RegisterationNumber" numeric>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(education.value.ExpiryOfRegisterationNumber == '' || education.value.ExpiryOfRegisterationNumber == null) ? true : false"></span>Expiry of Registration Number
+                        </mat-label>
+                        <input matInput maxlength="20" placeholder="Enter" formControlName="ExpiryOfRegisterationNumber">
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-12 text-right pb-4">
+                    <button type="button" mat-flat-button (click)="addUpdateEducationalDetails('submit')" class="custome-button w-auto mat-primary">Add Education</button>
+                  </div>
+
+                  <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;" *ngIf="educationalShow">
+                    <div class="col-12" *ngFor="let education of educationList; let i = index;">
+                      <div class="row m-0 border-bottom">
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold pl-0">University :</div>
+                            <div [matTooltip]="education.BoardorUniversity" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{education.BoardorUniversity}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Name of School :</div>
+                            <div [matTooltip]="education.NameOfSchoolorCollege" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{education.NameOfSchoolorCollege}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Year of Passing :</div>
+                            <div class="col p-0 ">{{education.MonthandYearOfPassing | date:'dd-MM-yyyy'}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Main Subject :</div>
+                            <div [matTooltip]="education.MainSubjects" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{education.MainSubjects}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Qualification :</div>
+                            <div class="col p-0 ">{{education.Qualification}}</div>
+                          </div>
+                        </div>
+                        <div class="col-lg-auto pr-0">
+                          <!--<i *ngIf="hideeducational[i]" class="fa fa-floppy-o f-25 cursor-pointer "  (click)="setupdateeducation(i)"></i>-->
+                          <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openEducation(education,i)"></i>
+                          <i *ngIf="educationList.length>1" class="fa fa-trash f-25 ml-2" (click)="deleteEducationalDetails(education)" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                    <div>
+                      <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                      <button type="button" (click)="addUpdateEducationalDetails()" mat-flat-button color="" class="custome-button mat-primary" matStepperNext>Next</button>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+            </form>
+          </mat-step>
+          <mat-step type="button" [stepControl]="familyFormGroup">
+            <form [formGroup]="familyForm">
+              <ng-template type="button" matStepLabel>Family Details</ng-template>
+              <mat-card class="mb-4" formArrayName="familyDetails" *ngFor="let familyDetails of getDynamicFamilyDetails().controls;let i=index;">
+                <div [formGroupName]="i">
+                  <div class="row">
+                    <input hidden formControlName="ProviderFamilyDetailId" />
+                    <input hidden formControlName="ProviderID" />
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(familyDetails.value.FullName == '' || familyDetails.value.FullName == null) ? true : false"></span>Full Name
+                        </mat-label>
+                        <input matInput maxlength="50" placeholder="Enter" formControlName="FullName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(familyDetails.value.Age == '' || familyDetails.value.Age == null) ? true : false"></span>Age
+                        </mat-label>
+                        <input maxlength="3" matInput placeholder="Enter" formControlName="Age" numeric>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>
+                          <span class="required-asterisk"
+                                *ngIf="(familyDetails.value.RelationShip == '' || familyDetails.value.RelationShip == null) ? true : false"></span>Relationship
+                        </mat-label>
+                        <input matInput maxlength="50" placeholder="Enter" formControlName="RelationShip">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Occupation</mat-label>
+                        <input matInput maxlength="50" placeholder="Enter" formControlName="Occupation">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg6">
+                      <mat-form-field class="w-100 " appearance="outline">
+                        <mat-label>Notes</mat-label>
+                        <textarea matInput maxlength="500" placeholder="Notes" rows="1" cols="1" formControlName="Notes"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-12 text-right pb-4">
+
+                      <button type="button" mat-flat-button (click)="addUpdateFamilyDetails('submit')" class="custome-button w-auto mat-primary">Add Family</button>
+                    </div>
+                  </div>
+                  <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;" *ngIf="familyDetailsShow">
+                    <div class="col-12" *ngFor="let family of familyDetailsList; let i = index;">
+                      <div class="row m-0 border-bottom">
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold pl-0">Full Name :</div>
+                            <div [matTooltip]="family.FullName" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{family.FullName}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Age :</div>
+                            <div class="col p-0 ">{{family.Age}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Relationship :</div>
+                            <div [matTooltip]="family.RelationShip" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{family.RelationShip}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Occupation :</div>
+                            <div [matTooltip]="family.Occupation" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{family.Occupation}}</div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row pb-1">
+                            <div class="col-lg-auto font-weight-bold">Notes :</div>
+                            <div [matTooltip]="family.Notes" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{family.Notes}}</div>
+                          </div>
+                        </div>
+                        <div class="col-lg-auto pr-0">
+                          <!--<i *ngIf="hidefamily[i]" class="fa fa-floppy-o f-25 cursor-pointer "  (click)="setupdatefamily(i)"></i>-->
+                          <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openFamily(family,i)"></i>
+                          <i *ngIf="familyDetailsList.length>1" class="fa fa-trash f-25 ml-2" (click)="deleteFamilyDetails(family)" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                    <div>
+                      <button type="button" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                      <button type="button" (click)="addUpdateFamilyDetails()" mat-flat-button color="" class="custome-button mat-primary" matStepperNext>Next</button>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+            </form>
+          </mat-step>
+          <mat-step type="button" [stepControl]="languageFormGroup">
+          
+              <ng-template type="button" matStepLabel>Language / Extra Curricular Activities</ng-template>
+              <mat-card class="mb-4">
+                <form [formGroup]="languageForm">
+                  <div formArrayName="languages" *ngFor="let lang of getDynamicLanguage().controls;let i=index;">
+                    <h5 class="py-3 pl-0 pt-3 col-xl-12">Language:</h5>
+                    <div [formGroupName]="i">
+                      <div class="row">
+                        <input hidden formControlName="ProviderLanguageId" />
+                        <input hidden formControlName="ProviderID" />
+                        <div class="col-xl-4 col-lg6 mt-4 pt-2">
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>
+                              <span class="required-asterisk"
+                                    *ngIf="(lang.value.Language == '' || lang.value.Language == null) ? true : false"></span>Language
+                            </mat-label>
+                            <mat-select formControlName="Language">
+                              <mat-option *ngFor="let lang of language" [value]="lang.LanguageDescription">
+                                {{lang.LanguageDescription}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xl-4 col-lg6 d-flex align-items-center">
+                          <mat-checkbox class="pr-2" (change)="onspeak($event)" formControlName="IsSpeak">Speak</mat-checkbox>
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>
+                              Level
+                            </mat-label>
+                            <mat-select formControlName="SpeakingLevel">
+                              <mat-option value="1">1</mat-option>
+                              <mat-option value="2">2</mat-option>
+                              <mat-option value="3">3</mat-option>
+                              <mat-option value="4">4</mat-option>
+                              <mat-option value="5">5</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg6 d-flex align-items-center">
+                          <mat-checkbox class="pr-2" (change)="onread()" formControlName="IsRead">Read</mat-checkbox>
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>
+                              Level
+                            </mat-label>
+                            <mat-select formControlName="ReadingLevel">
+                              <mat-option value="1">1</mat-option>
+                              <mat-option value="2">2</mat-option>
+                              <mat-option value="3">3</mat-option>
+                              <mat-option value="4">4</mat-option>
+                              <mat-option value="5">5</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg6 d-flex align-items-center">
+                          <mat-checkbox class="pr-2" (change)="onwrite()" formControlName="IsWrite">Write</mat-checkbox>
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>
+                              Level
+                            </mat-label>
+                            <mat-select formControlName="WritingLevel">
+                              <mat-option value=1>1</mat-option>
+                              <mat-option value=2>2</mat-option>
+                              <mat-option value=3>3</mat-option>
+                              <mat-option value=4>4</mat-option>
+                              <mat-option value=5>5</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-12 text-right pb-4">
+                          <button type="button" mat-flat-button (click)="addUpdateLanguage('submit')" class="custome-button w-auto mat-primary">Add Language</button>
+                        </div>
+                      </div>
+                      <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;" *ngIf="languageShow">
+                        <div class="col-12" *ngFor="let language of languageList; let i=index;">
+                          <div class="row m-0 border-bottom">
+                            <div class="col">
+                              <div class="row pb-1">
+                                <div class="col-lg-auto font-weight-bold pl-0">Language :</div>
+                                <div class="col p-0 ">{{language.Language}}</div>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="row pb-1">
+                                <div class="col-lg-auto font-weight-bold">Speak :</div>
+                                <div class="col p-0 ">{{language.SpeakingLevel}}</div>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="row pb-1">
+                                <div class="col-lg-auto font-weight-bold">Read :</div>
+                                <div class="col p-0 ">{{language.ReadingLevel}}</div>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="row pb-1">
+                                <div class="col-lg-auto font-weight-bold">Write :</div>
+                                <div class="col p-0 ">{{language.WritingLevel}}</div>
+                              </div>
+                            </div>
+                            <div class="col pr-0 text-right">
+                              <!--<i *ngIf="hidelanguage[i]" class="fa fa-floppy-o f-25 cursor-pointer "  (click)="setupdatelanguage(i)"></i>-->
+                              <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openLanguage(language,i)"></i>
+                              <i *ngIf="languageList.length>1" class="fa fa-trash f-25 ml-2" (click)="deleteLanguage(language)" aria-hidden="true"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </mat-card>
+                <form [formGroup]="extraActivityForm">
+                  <mat-card class="mb-4">
+                    <div formArrayName="extraActivities" *ngFor="let lang of getDynamicExtraActivities().controls;let i=index;">
+                      <h5 class="py-3 pl-0 pt-3 col-xl-12">Extra Activity:</h5>
+                      <div [formGroupName]="i">
+                        <div class="row">
+                          <input hidden formControlName="ProviderActivityId" />
+                          <input hidden formControlName="ProviderID" />
+                          <div class="col-xl-3 col-lg6">
+                            <mat-form-field class="w-100 " appearance="outline">
+                              <mat-label>
+                                <span class="required-asterisk"
+                                      *ngIf="(lang.value.NatureOfActivity == '' || lang.value.NatureOfActivity == null) ? true : false"></span>Nature of Activity
+                              </mat-label>
+                              <input matInput maxlength="100" placeholder="Enter" formControlName="NatureOfActivity">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-3 col-lg6">
+                            <mat-form-field class="w-100" appearance="outline">
+                              <mat-label>
+                                <span class="required-asterisk"
+                                      *ngIf="(lang.value.YearOfParticipation == '' || lang.value.YearOfParticipation == null) ? true : false"></span>Year of Participation
+                              </mat-label>
+                              <input matInput placeholder="Year of Participation" formControlName="YearOfParticipation" numeric>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-3 col-lg6">
+                            <mat-form-field class="w-100 " appearance="outline">
+                              <mat-label>
+                                <span class="required-asterisk"
+                                      *ngIf="(lang.value.PrizesorAwards == '' || lang.value.PrizesorAwards == null) ? true : false"></span>Level of Participation/Prizes/Awards
+                              </mat-label>
+                              <input matInput maxlength="150" placeholder="Enter" formControlName="PrizesorAwards">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-3 col-lg6">
+                            <mat-form-field class="w-100 " appearance="outline">
+                              <mat-label>Your Personal Strengths And Area That Need Improvement</mat-label>
+                              <input matInput maxlength="200" placeholder="Enter" formControlName="StrengthandAreaneedImprovement">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-12 text-right pb-4">
+                            <button type="button" mat-flat-button (click)="addUpdateExtraActivities('submit')" class="custome-button w-auto mat-primary">Add Extra Activities</button>
+                          </div>
+                        </div>
+                        <div class="row mb-2 pt-4" style="border-top: 3px solid #58bdbd;" *ngIf="extraActivityShow">
+                          <div class="col-12" *ngFor="let activity of extraActivityList; let i= index;">
+                            <div class="row m-0 border-bottom">
+                              <div class="col">
+                                <div class="row pb-1">
+                                  <div class="col-lg-auto font-weight-bold pl-0">Nature of Activity :</div>
+                                  <div [matTooltip]="activity.NatureOfActivity" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{activity.NatureOfActivity}}</div>
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="row pb-1">
+                                  <div class="col-lg-auto font-weight-bold">year of Participation :</div>
+                                  <div class="col p-0 ">{{activity.YearOfParticipation}}</div>
+                                </div>
+                              </div>
+                              <div class="col-auto">
+                                <div class="row pb-1">
+                                  <div class="col-lg-auto font-weight-bold">Level of Participation / Prizes / Awards :</div>
+                                  <div [matTooltip]="activity.PrizesorAwards" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{activity.PrizesorAwards}}</div>
+                                </div>
+                              </div>
+                              <div class="col-auto">
+                                <div class="row pb-1">
+                                  <div class="col-lg-auto font-weight-bold">Strength and Area Need Improvement:</div>
+                                  <div [matTooltip]="activity.StrengthandAreaneedImprovement" matTooltipPosition="above" matTooltipClass="Tooltip-sm">{{activity.StrengthandAreaneedImprovement}}</div>
+                                </div>
+                              </div>
+                              <div class="col pr-0 text-right">
+                                <!--<i *ngIf="hideactivity[i]" class="fa fa-floppy-o f-25 cursor-pointer "  (click)="setupdateactivity(i)"></i>-->
+                                <i class="fa fa-pencil-square f-25 cursor-pointer" aria-hidden="true" (click)="openExtraActivity(activity,i)"></i>
+                                <i *ngIf="extraActivityList.length>1" class="fa fa-trash f-25 ml-2" (click)="deleteExtraCurricularActivities(activity)" aria-hidden="true"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center pt-4">
+                      <div>
+                        <button type="button" (click)="languageprevious()" mat-stroked-button color="" class="transperent-button light-sky primary mr-2" matStepperPrevious>Previous</button>
+                      </div>
+                    </div>
+                  </mat-card>
+                </form>
+            </mat-step>
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+    <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center schedbtn mt-3">
+      <div>
+        <button mat-flat-button color="" class="custome-button mr-2  mat-primary vissub schedbtn" (click)="back()">Back</button>
+        <button  mat-flat-button  color="" class="custome-button mr-2  mat-primary vissub schedbtn" (click)="addPhysicianDetails()">Submit</button>
+        <button  mat-stroked-button class="transperent-button mr-2 schedbtn" (click)="stepper.reset()" (change)="clear()" color="primary">Cancel</button>
+      </div>
+    </div>
+</div>

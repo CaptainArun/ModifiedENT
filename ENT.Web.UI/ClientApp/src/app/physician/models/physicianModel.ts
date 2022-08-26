@@ -1,0 +1,40 @@
+import { PhysicianAddressComponent } from '../physician-address.component';
+import { PhysicianContactInfoModel } from './physicianContactInfoModel';
+import { PhysicianEducationalDetailsModel } from './physicianEducationalDetailsModel';
+import { PhysicianFamilyDetailsModel } from './physicianFamilyDetailsModel';
+import { PhysicianLanguageModel } from './physicianLanguageModel';
+import { PhysicianExtraActivitiesModel } from './physicianExtraActivitiesModel';
+
+export class PhysicianModel {
+  public ProviderID: number;
+  public UserID: string;
+  public RoleId: number;
+  public FacilityId: string;
+  public FirstName: string;
+  public MiddleName: string;
+  public LastName: string;
+  public NamePrefix: string;
+  public NameSuffix: string;
+  public Title: string;
+  public BirthDate: Date;
+  public Age: number;
+  public Gender: string;
+  public PhoneNumber: string;
+  public PersonalEmail: string;
+  public IsActive: boolean;
+  public Language: string;
+  public PreferredLanguage: string;
+  public MotherMaiden: string;
+  public WebSiteName: string;
+  public FacilityName: string;
+  public ProviderName: string;
+  public SpecialityID: number;
+  public SpecialityCode: string;
+  public SpecialityDescription: string;
+  public providerAddresses: Array<PhysicianAddressComponent> = [];
+  public providerContacts: Array<PhysicianContactInfoModel> = [];
+  public educations: Array<PhysicianEducationalDetailsModel> = [];
+  public familyDetails: Array<PhysicianFamilyDetailsModel> = [];
+  public languages: Array<PhysicianLanguageModel> = [];
+  public extraActivities: Array<PhysicianExtraActivitiesModel> = [];
+}

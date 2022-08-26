@@ -1,0 +1,56 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="form">
+
+    <h5 cdkDragHandle class="p-3 title-bg">
+     Physician Family <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+
+    <div class="row pb-3 pt-3">
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.FullName == '' || form.value.FullName == null) ? true : false"></span>Full Name</mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="FullName">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.Age == '' || form.value.Age == null) ? true : false"></span>Age</mat-label>
+          <input maxlength="3" matInput placeholder="Enter" formControlName="Age" numeric>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label><span class="required-asterisk"
+      *ngIf="(form.value.RelationShip == '' || form.value.RelationShip == null) ? true : false"></span>Relationship </mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="RelationShip">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Occupation</mat-label>
+          <input matInput maxlength="50" placeholder="Enter" formControlName="Occupation">
+        </mat-form-field>
+      </div>
+      <div class="col-xl-3 col-lg6">
+        <mat-form-field class="w-100 " appearance="outline">
+          <mat-label>Notes</mat-label>
+          <textarea matInput maxlength="500" placeholder="Notes" rows="1" cols="1" formControlName="Notes"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div class="pull-right">
+      <button mat-flat-button color="" (click)="submit()" class="custome-button mr-2  mat-primary vissub schedbtn">Submit</button>
+      <button type="button" mat-stroked-button class="transperent-button mr-2 schedbtn"
+              (click)="clear()" color="primary">
+        Clear
+      </button>
+    </div>
+  </form>
+</div>
+

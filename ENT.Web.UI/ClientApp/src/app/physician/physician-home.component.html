@@ -1,0 +1,79 @@
+<!--<div class="common_submenu p-2  d-flex">-->
+
+  <div class="d-flex align-content-center scroll-x">
+
+    <!-- <div class="pr-4 mr-2">
+      <button mat-button [matMenuTriggerFor]="menu" #patientMenuTrigger="matMenuTrigger" class="d-flex align-content-center">
+        <mat-icon><img src='assets/images/patientprofile/patient-profile.png' /> </mat-icon>
+        <span class="f-18 theme-text-color">Patient Profile</span>
+      </button>
+    </div>
+    <mat-menu #menu="matMenu">
+      <div *ngFor=" let subitem of subMenuVals">
+        <button class="submenuicons" mat-menu-item [routerLink]="subitem.Url">
+          <mat-icon [innerHTML]="subitem.Icon"></mat-icon>
+          <span class="menu-title" [innerHTML]="subitem.Title"></span>
+        </button>
+      </div>
+    </mat-menu>
+
+    <div class="pr-4 mr-2">
+
+      <button mat-button [matMenuTriggerFor]="mrmenu" #medicalMenuTrigger="matMenuTrigger" class="d-flex align-content-center">
+        <mat-icon><img src='assets/images/patientprofile/medical-records.png' /> </mat-icon>
+        <span class="f-18  theme-text-color">Medical Records</span>
+      </button>
+    </div>
+
+    <mat-menu #mrmenu="matMenu">
+      <div *ngFor=" let subitem of subMenuMedical">
+        <button class="submenuicons" mat-menu-item [routerLink]="subitem.Url">
+          <mat-icon [innerHTML]="subitem.Icon"></mat-icon>
+          <span class="menu-title" [innerHTML]="subitem.Title"></span>
+        </button>
+      </div>
+    </mat-menu> *ngIf="this.visible==false" -->
+
+   <!-- <div class="mr-2">
+      <button mat-button routerLink="physicianaddress/:providerId" class="d-flex align-content-center">
+        <mat-icon><img src='assets/images/patientprofile/patient-chart.png' /> </mat-icon>
+        <span class="f-18 theme-text-color">Address</span>
+      </button>
+    </div>
+
+    <div class="mr-2">
+      <button mat-button routerLink="physicianspeciality/:providerId" class="d-flex align-content-center">
+        <mat-icon><img src='assets/images/patientprofile/patient-programs.png' /> </mat-icon>
+        <span class="f-18  theme-text-color">Speciality</span>
+      </button>
+    </div>
+    <div class="mr-2">
+      <button mat-button routerLink="physicianschedule/:providerId" class="d-flex align-content-center">
+        <mat-icon><img src='assets/images/patientprofile/patient-programs.png' /> </mat-icon>
+        <span class="f-18  theme-text-color">Schedule Setup</span>
+      </button>
+    </div>
+    <div class="mr-2">
+      <button mat-button routerLink="physicianvacation/:providerId" class="d-flex align-content-center">
+        <mat-icon><img src='assets/images/patientprofile/patient-chart.png' /> </mat-icon>
+        <span class="f-18 theme-text-color">Vacation Setup</span>
+      </button>
+    </div>
+
+    <div class="mr-2">
+      <button mat-button routerLink="physiciandiagnosiscode/:providerId" class="d-flex align-content-center">
+        <mat-icon><img src='assets/images/patientprofile/patient-programs.png' /> </mat-icon>
+        <span class="f-18  theme-text-color">Diagnosis Code</span>
+      </button>
+    </div>
+    <div class="mr-2">
+      <button mat-button routerLink="physicianprocedurescode/:providerId" class="d-flex align-content-center">
+        <mat-icon><img src='assets/images/patientprofile/patient-programs.png' /> </mat-icon>
+        <span class="f-18  theme-text-color">Procedure Code</span>
+      </button>
+    </div>-->
+
+  </div>
+<!--</div>-->
+
+<router-outlet></router-outlet>

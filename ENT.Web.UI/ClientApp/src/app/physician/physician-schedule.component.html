@@ -1,0 +1,185 @@
+<div class="overflow-hidden px-4">
+    <physician-commonVisit></physician-commonVisit>
+    <form [formGroup]="physicianScheduleForm">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+          <h5 class="p-3 title-bg mt-2">Physician Schedule</h5>
+          <mat-card>
+            <div class="row d-flex align-items-center">
+              <div class="col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>  <span class="required-asterisk"
+                    *ngIf="(physicianScheduleForm.value.Facility == '' || physicianScheduleForm.value.Facility == null) ? true : false"></span>Facility</mat-label>
+                  <mat-select formControlName="Facility">
+                    <mat-option *ngFor="let hospital of facilityName" (click)="facilityDetails(hospital.FacilityId)" [value]="hospital.FacilityId">{{hospital.FacilityName}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label><span class="required-asterisk"
+      *ngIf="(physicianScheduleForm.value.EffectiveDate == '' || physicianScheduleForm.value.EffectiveDate == null) ? true : false"></span>Effective Date</mat-label>
+                  <input matInput [matDatepicker]="pickersDate" placeholder="Effective Date" formControlName="EffectiveDate">
+                  <mat-datepicker-toggle matSuffix [for]="pickersDate"></mat-datepicker-toggle>
+                  <mat-datepicker #pickersDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-3 col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label><span class="required-asterisk"
+      *ngIf="(physicianScheduleForm.value.TerminationDate == '' || physicianScheduleForm.value.TerminationDate == null) ? true : false"></span>Termination Date</mat-label>
+                  <input matInput [matDatepicker]="pickersTerminationDate" placeholder="Termination Date" formControlName="TerminationDate">
+                  <mat-datepicker-toggle matSuffix [for]="pickersTerminationDate"></mat-datepicker-toggle>
+                  <mat-datepicker #pickersTerminationDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-checkbox formControlName="WorkHours" Checked (change)="tableChange($event)">Work Hours</mat-checkbox>
+              </div>
+              <div class="col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label> <span class="required-asterisk"
+                    *ngIf="(physicianScheduleForm.value.TimeSlotDuration == '' || physicianScheduleForm.value.TimeSlotDuration == null) ? true : false"></span>Time Slot Duration</mat-label>
+                  <mat-select formControlName="TimeSlotDuration">
+                    <mat-option *ngFor="let timeDuration of timeSlotDuration" [value]="timeDuration">{{timeDuration}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-form-field class=" w-100 " appearance="outline">
+                  <mat-label><span class="required-asterisk"
+                    *ngIf="(physicianScheduleForm.value.BookingPerSlot == '' || physicianScheduleForm.value.BookingPerSlot == null) ? true : false"></span>Booking Per Slot</mat-label>
+                  <mat-select formControlName="BookingPerSlot">
+                    <mat-option [value]="1">1</mat-option>
+                    <mat-option [value]="2">2</mat-option>
+                    <mat-option [value]="3">3</mat-option>
+                    <mat-option [value]="4">4</mat-option>
+                    <mat-option [value]="5">5</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div>
+          </mat-card>
+        </div>
+      </div>
+      <div class="pt-3 pb-2">
+        <mat-card>
+          <div>
+            <div>
+              <div>
+                <div class="row">
+                  <div class="col-xs-12 col-xl-12 col-lg-12">
+                    <div class="table-responsive shroff-table reduce-field w-100">
+                      <table class="table table-bordered table-hover w-100" [ngClass]="{'disabled' : isTableVisible}">
+                        <thead class="pt-3 pb-2 pb-2">
+                          <tr>
+                            <th class="w-50" style="text-align: center;">Select</th>
+                            <th class="w-50" style="text-align: center;">Day</th>
+                            <th class="w-100" style="text-align: center;">Work Hours From</th>
+                            <th class="w-100" style="text-align: center;">Work Hours To</th>
+                            <th class="w-100" style="text-align: center;">Break Time-1 from</th>
+                            <th class="w-100" style="text-align: center;">Break Time-1 To </th>
+                            <th class="w-100" style="text-align: center;">Break Time-2 from</th>
+                            <th class="w-100" style="text-align: center;">Break Time-2 To</th>
+                            <th class="w-50" style="text-align: center;">No of Slots</th>
+                            <th class="w-50" style="text-align: center;">Booking Per Day</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="ScheduleItem">
+                          <tr *ngFor="let items of getDynamicControl().controls; let i=index" [formGroupName]="i">
+                            <td style="text-align: center;"><mat-checkbox class="pt-5 pb-1" (change)="daysCheck(i)" formControlName="IsDaysAvailable"></mat-checkbox></td>
+                            <td style="text-align: center;"><input class="pt-3 pb-2" matInput formControlName="AppointmentDay" /></td>
+                            <td style="text-align: center;">
+                              <mat-form-field class="input-full-width timer w-100 pt-3 pb-2 " appearance="outline">
+                                <input maxlength="20" matInput [ngxTimepicker]="Sundayfrom" formControlName="RegularWorkHrsFrom">
+                                <mat-label>From Time</mat-label>
+                                <ngx-material-timepicker-toggle [for]="Sundayfrom"></ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #Sundayfrom defaultTime="{{time}}" [preventOverlayClick]=true></ngx-material-timepicker>
+                              </mat-form-field>
+                            </td>
+                            <td style="text-align: center;">
+                              <mat-form-field class="input-full-width timer w-100 pt-3 pb-2" appearance="outline">
+
+                                <mat-label>To Time</mat-label>
+                                <input  maxlength="20" matInput [ngxTimepicker]="default" formControlName="RegularWorkHrsTo" />
+                               <ngx-material-timepicker-toggle [for]="default"></ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #default defaultTime="{{time}}" [preventOverlayClick]=true (closed)="WorkHoursToValidation(i)"></ngx-material-timepicker>
+                              </mat-form-field>
+                              <!--<div class="12hr-example">
+
+                              </div>-->
+                            </td>
+
+                            <td style="text-align: center;">
+                              <mat-form-field class="input-full-width timer w-100 pt-3 pb-2" appearance="outline">
+                                <input maxlength="20" matInput [ngxTimepicker]="Sundaybreak1from" formControlName="BreakHrsFrom1">
+                                <mat-label>From Time</mat-label>
+                                <ngx-material-timepicker-toggle [for]="Sundaybreak1from"></ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #Sundaybreak1from defaultTime="{{time}}"[preventOverlayClick]=true (closed)="BreakTimeOneFromValidation(i)"></ngx-material-timepicker>
+                              </mat-form-field>
+                            </td>
+                            <td style="text-align: center;">
+                              <mat-form-field class="input-full-width timer w-100 pt-3 pb-2" appearance="outline">
+                                <input maxlength="20" matInput [ngxTimepicker]="Sundaybreak1to" formControlName="BreakHrsTo1">
+                                <mat-label>To Time</mat-label>
+                                <ngx-material-timepicker-toggle [for]="Sundaybreak1to"></ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #Sundaybreak1to  defaultTime="{{time}}"  [preventOverlayClick]=true
+                                (closed)="BreakTimeOneToValidation(i)"></ngx-material-timepicker>
+                              </mat-form-field>
+                            </td>
+                            <td style="text-align: center;">
+                              <mat-form-field class="input-full-width timer w-100 pt-3 pb-2" appearance="outline">
+                                <input maxlength="20" matInput [ngxTimepicker]="Sundaybreak2from" formControlName="BreakHrsFrom2">
+                                <mat-label>From Time</mat-label>
+                                <ngx-material-timepicker-toggle [for]="Sundaybreak2from"></ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #Sundaybreak2from defaultTime="{{time}}" [preventOverlayClick]=true (closed)="BreakTimeTwoFromValidation(i)"></ngx-material-timepicker>
+                              </mat-form-field>
+                            </td>
+                            <td style="text-align: center;">
+                              <mat-form-field maxlength="20" class="input-full-width timer w-100 pt-3 pb-2" appearance="outline">
+                                <input matInput [ngxTimepicker]="Sundaybreak2to" formControlName="BreakHrsTo2">
+                                <mat-label>To Time</mat-label>
+                                <ngx-material-timepicker-toggle [for]="Sundaybreak2to"></ngx-material-timepicker-toggle>
+
+                                <ngx-material-timepicker #Sundaybreak2to defaultTime="{{time}}"  [preventOverlayClick]=true
+                                (closed)="BreakTimeTwoToValidation(i)"></ngx-material-timepicker>
+                              </mat-form-field>
+                            </td>
+                            <td style="text-align: center;">
+                              <mat-form-field class=" w-100 pt-3 pb-2" appearance="outline">
+                                <mat-label>No of Slot</mat-label>
+                                <input matInput readonly placeholder="enter" formControlName="NoOfSlots">
+                              </mat-form-field>
+                            </td>
+                            <td style="text-align: center;">
+                              <mat-form-field class=" w-100 pt-3 pb-2" appearance="outline">
+                                <mat-label>Booking Per Day</mat-label>
+                                <input matInput readonly placeholder="enter" formControlName="BookingPerDay">
+                              </mat-form-field>
+                            </td>
+</tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-lg-center  justify-content-lg-end justify-content-center schedbtn mt-2">
+            <div>
+
+              <button mat-flat-button color="" class="custome-button mr-2  mat-primary vissub" (click)="back()">Back</button>
+              <button [disabled]="submitdisable" mat-flat-button color="primary" class="custome-button mat-primary mr-2" (click)="addPhysicianScheduleDetails()">Save</button>
+              <button type="button" mat-stroked-button class="transperent-button" color="primary" (click)="ClearForm()">Clear</button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+    </form>
+
+
+
+</div>
+

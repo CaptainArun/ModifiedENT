@@ -1,0 +1,106 @@
+<div class="common_submenu p-2  d-flex">
+  <div class="d-flex align-content-center scroll-x">
+    <div class="mr-2">
+      <button mat-button class="d-flex align-content-center" id="Address" (click)="openAddress()">
+        <mat-icon><img src='assets/images/MenuNewIcons/physician/profile.png' /> </mat-icon>
+        <span class="f-18 ">Profile</span>
+      </button>
+    </div>
+    <div class="mr-2">
+      <button mat-button class="d-flex align-content-center" id="Speciality" (click)="openSpeciality()">
+
+        <mat-icon><img src='assets/images/MenuNewIcons/physician/Speciality.png' /> </mat-icon>
+        <!-- <mat-icon><img src='assets/images/MenuNewIcons/physician/Speciality2.png' /> </mat-icon> -->
+        <span class="f-18  ">Speciality</span>
+      </button>
+    </div>
+    <div class="mr-2">
+      <button mat-button class="d-flex align-content-center " id="Schedule" (click)="openSchedule()">
+        <mat-icon><img src='assets/images/MenuNewIcons/physician/Schedule_setup.png' /> </mat-icon>
+        <span class="f-18  ">Schedule Setup</span>
+      </button>
+    </div>
+    <div class="mr-2">
+      <button mat-button class="d-flex align-content-center" id="vacation" (click)="openVacation()">
+        <mat-icon><img src='assets/images/MenuNewIcons/physician/Vacation_setup.png' /> </mat-icon>
+        <span class="f-18 ">Vacation Setup</span>
+      </button>
+    </div>
+    <div class="mr-2">
+      <button mat-button class="d-flex align-content-center" id="Diagnosis" (click)="openDiagnosis()">
+        <mat-icon><img src='assets/images/MenuNewIcons/physician/Diagnosis.png' /> </mat-icon>
+        <span class="f-18  ">Diagnosis Code</span>
+      </button>
+    </div>
+    <div class="mr-2">
+      <button mat-button class="d-flex align-content-center" id="Procedure" (click)="openProcedure()">
+        <mat-icon><img src='assets/images/MenuNewIcons/physician/Procudure_code.png' /> </mat-icon>
+        <span class="f-18  ">Procedure Code</span>
+      </button>
+    </div>
+    <div class="col-xl-5 text-right">
+        <button mat-flat-button color="" class="custome-button   mat-primary vissub" (click)="back()">Back</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="white mt-4">
+  <mat-card class="p-0">
+    <div class="scroll-x">
+      <div class="row p-0 m-0 scroll-md" *ngIf="physicianData">
+        <div *ngIf="physicianData.ProviderImage == null" class="col-xl-1 p-0">
+          <img src="assets/images/No-Image.png" class="img-fluid" width="136" />
+        </div>
+        <div *ngIf="physicianData.ProviderImage != null" class="col-xl-1 p-0">
+          <img src={{profilePics}} class="img-fluid" style="height:125px;width: 125px;" />
+        </div>
+        <div class="col-xl-5">
+          <div class="v-line">
+            <div class="pt-3 pb-2">
+              <div class="row pb-1">
+                <div class="col-xl-4 col-lg-4 col-md-4 font_color">
+                  Physician Name
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                  {{physicianData.FirstName}} {{physicianData.MiddleName}} {{physicianData.LastName}}
+                </div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">DOB/ Age</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{physicianData.BirthDate|date:'dd-MM-yyyy'}}</div>
+              </div>
+              <div class="row  pb-1">
+                <div class="col font_color">Cell Number</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{physicianData.PhoneNumber}}</div>
+              </div>
+              <div class="row">
+                <div class="col font_color">Email Address</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-7">{{physicianData.PersonalEmail}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="pt-3 col flex-grow-1 w-auto">
+            <div class="row pb-1">
+              <div class="col pl-4 font_color">State</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">{{physicianData.State}}</div>
+            </div>
+            <div class="row pb-1">
+              <div class="col pl-4 font_color">Pincode</div>
+              <div class="col-lg-1">:</div>
+              <div class="col">{{physicianData.Pincode}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  </div>

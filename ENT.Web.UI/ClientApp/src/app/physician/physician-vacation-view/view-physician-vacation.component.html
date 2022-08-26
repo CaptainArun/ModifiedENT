@@ -1,0 +1,45 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    <h5 cdkDragHandle class="p-3 title-bg">
+      Physician Vacation <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+        <span aria-hidden="true">X</span>
+      </button>
+    </h5>
+      <mat-card>
+        <div class="scroll-x">
+          <div class="row p-0 m-0 scroll-md">
+            <div class="col-xl-6">
+              <div class="v-line">
+                <div class="pb-2">
+                  
+                  <div class="row pb-1 pt-3">
+                    <div class="col font_color">Start Date</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">{{data.StartDate | date: 'dd-MM-yyyy'}}</div>
+                  </div>
+                  <div class="row pb-1 pt-3">
+                    <div class="col font_color">End Date</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">{{data.EndDate | date: 'dd-MM-yyyy'}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-xl-6">
+              <div class="v-line">
+                <div>
+                  <div class="row pb-1 pt-3">
+                    <div class="col font_color">Reason</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-7">{{data.Reason}}</div>
+                  </div>
+            
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+  
+  
+  </div>
