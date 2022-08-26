@@ -1,0 +1,236 @@
+<form [formGroup]="DrugForm">
+  <div style="overflow: auto; overflow-x: hidden;">
+    <div class="row mt-1">
+      <div class="col-lg-12 ">
+        <button type="button" mat-flat-button color="primary" class="custome-button mat-primary pull-right mr-2"
+          (click)="back()">Back</button>
+      </div>
+    </div>
+    <div class="white">
+      <div class="white mt-0 mb-1" *ngIf="PatientID">
+        <app-patient-demographic [PatID]="PatientID"></app-patient-demographic>
+      </div>
+      <mat-card class="px-3 py-1 mt-2">
+        <div class="row  pb-1 mt-3">
+
+          <div class="col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Admission Number</mat-label>
+              <input matInput placeholder="Admission Number" [disabled]="IsSignOff" [value]="AdmissionNo" readonly>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Admission Date & Time</mat-label>
+              <input matInput placeholder="Admission Date & Time" [value]="AdmissionDateTime" [disabled]="IsSignOff"
+                readonly>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                  *ngIf="(DrugForm.get('RecordedDuring').invalid) ? true :false"></span>Recorded During</mat-label>
+              <mat-select formControlName="RecordedDuring">
+                <mat-option *ngFor="let value of recordduring" [value]="value.RecordedDuringId">
+                  {{value.RecordedDuringDescription}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                  *ngIf="(DrugForm.get('RecordedBy').invalid) ? true :false"></span>Recorded By</mat-label>
+              <mat-select formControlName="RecordedBy">
+                <mat-option *ngFor="let value of recordby" [value]="value">
+                  {{value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <mat-card class="my-3">
+      <div class="row mt-3">
+        <div class="col-lg-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label><span class="required-asterisk" *ngIf="(DrugForm.get('Date').invalid) ? true :false"></span>Date
+            </mat-label>
+            <input matInput formControlName="Date" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6">
+          <mat-form-field class="w-100" [matTooltip]="drugToolTip" matTooltipPosition="above"
+            matTooltipClass="Tooltip-md" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(DrugForm.value.Drug == '' || DrugForm.value.Drug == null) ? true : DrugForm.value.Drug.length > 2 ? false : true"></span>Drug
+            </mat-label>
+            <mat-icon matSuffix
+              *ngIf="(DrugForm.value.Drug == '' || DrugForm.value.Drug == null) ? true : DrugForm.value.Drug.length > 2 ? false : true">
+              search</mat-icon>
+            <textarea type="text" matInput placeholder="Type and Select" [matAutocomplete]="autocompleteCPT"
+              #autoCompletedrug="matAutocompleteTrigger" formControlName="Drug" rows="1" maxlength="500"></textarea>
+            <mat-autocomplete autoActiveFirstOption #autocompleteCPT="matAutocomplete">
+              <mat-option *ngFor="let item of drugName" (onSelectionChange)="setDrugToolTip(item.Description)"
+                [value]="item.Description">
+                {{item.NDCCode}}-{{item.Description}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(DrugForm.get('Route').invalid) ? true :false"></span>Route</mat-label>
+            <mat-select formControlName="Route">
+              <mat-option *ngFor="let value of routeData" [value]="value.RouteDescription">
+                {{value.RouteDescription}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row mt-3">
+        <div class="col-lg-4">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(DrugForm.get('DosageDescription').invalid) ? true :false"></span>Dosage Description</mat-label>
+            <textarea matInput placeholder="Enter Description" rows="1" formControlName="DosageDescription"
+              maxlength="75"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-4">
+          <mat-form-field class="w-100" [matTooltip]="drugTimeToolTip" matTooltipPosition="above"
+            matTooltipClass="Tooltip-sm" appearance="outline">
+            <mat-label><span class="required-asterisk" *ngIf="(DrugForm.get('time').invalid) ? true :false"></span>Time
+            </mat-label>
+            <mat-select formControlName="time" placeholder="time" multiple>
+              <ng-container *ngFor="let option of time">
+                <mat-option value="{{option.Value}}" (click)="setDrugTimeToolTip()"> {{option.Value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-4">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(DrugForm.get('RateOfInflation').invalid) ? true :false"></span>Rate of Infusion</mat-label>
+            <input matInput placeholder="Enter Rate" formControlName="RateOfInflation" maxlength="75">
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(DrugForm.get('Frequency').invalid) ? true :false"></span>Frequency</mat-label>
+            <textarea matInput placeholder="Enter Frequency" rows="1" formControlName="Frequency"
+              maxlength="75"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" [matTooltip]="DrugForm.get('orderingPhysician').value"
+            matTooltipPosition="above" matTooltipClass="Tooltip-md" appearance="outline">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(DrugForm.value.orderingPhysician == '' || DrugForm.value.orderingPhysician == null) ? true : DrugForm.value.orderingPhysician > 2 ? false : true"></span>Ordering
+              Physician</mat-label>
+            <mat-icon matSuffix
+              *ngIf="(DrugForm.value.orderingPhysician == '' || DrugForm.value.orderingPhysician == null) ? true : DrugForm.value.orderingPhysician > 2 ? false : true">
+              search</mat-icon>
+            <input type="text" matInput [matAutocomplete]="autocpta" placeholder="Type and Select"
+              #autoCompletePhysicianInput="matAutocompleteTrigger" formControlName="orderingPhysician" maxlength="50">
+            <mat-autocomplete autoActiveFirstOption #autocpta="matAutocomplete">
+              <mat-option *ngFor="let patList of orderPhysician" [value]="patList.ProviderName">
+                {{patList.ProviderName}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Stop Medicine on</mat-label>
+            <textarea matInput maxlength="500" placeholder="Enter Stop Medicine on" rows="1"
+              formControlName="StopMedicine"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Additional Notes</mat-label>
+            <textarea matInput maxlength="500" placeholder="Enter Notes" rows="1"
+              formControlName="AdditionalNotes"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+    <div class="text-right w-3 col-xl-12 pb-2 pt-2">
+      <div>
+        <button  type="button" color="primary" class="custome-button mat-primary mr-2" [hidden]="IsSignOff"
+          (click)="save()">Save</button>
+        <button type="button" mat-stroked-button class="transperent-button" [hidden]="IsSignOff"
+          (click)="dialogClose()">Clear</button>
+      </div>
+    </div>
+    <div class="overflow-hidden px-4 pb-3">
+      <br />
+      <div>
+        <mat-card class="table-wrapper w-100 row" *ngIf="tableToBeShow">
+          <h4>Drug Chart</h4>
+          <div>
+            <div>
+              <mat-card-content>
+                <div class="row">
+                  <app-bms-table [config]="tableConfig" [datas]="griddata" (viewItem)="openVisitViewRecord($event)"
+                    (editItem)="openPatientEditRecord($event)" (deleteItem)="deleteCarePlanPatient($event)">
+                  </app-bms-table>
+                </div>
+              </mat-card-content>
+            </div>
+          </div>
+        </mat-card>
+        <mat-card *ngIf="!tableToBeShow">
+          <h3>No Record Found</h3>
+        </mat-card>
+      </div>
+    </div>
+    <mat-card>
+      <div class="row mt-2">
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>User Name</mat-label>
+            <input matInput placeholder="Enter" formControlName="UserName" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Enter" formControlName="Password" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 text-right">
+          <button type="button" mat-flat-button [hidden]="IsSignOff" color="primary" (click)="SignOff()"
+            class="custome-button mat-primary mr-2">Sign Off</button>
+          <button type="button" mat-flat-button color="primary" class="custome-button mat-primary mr-2"
+            (click)="back()">Back</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</form>

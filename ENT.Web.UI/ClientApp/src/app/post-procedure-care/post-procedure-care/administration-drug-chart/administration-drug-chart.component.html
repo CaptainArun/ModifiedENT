@@ -1,0 +1,177 @@
+<form [formGroup]="adminDrugChart">
+
+  <mat-card>
+    <div class="col-12">
+
+      <div class="white mt-0 mb-1" *ngIf="PatientID">
+        <app-patient-demographic [PatID]="PatientID"></app-patient-demographic>
+      </div>
+
+      <div class="row mt-4 mb-2">
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Admission Number</mat-label>
+            <input matInput [value]="AdmissionNo" [disabled]="IsSignOff" readonly />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Admission Date And time</mat-label>
+            <input matInput [value]="AdmissionDateAndTime" [disabled]="IsSignOff" readonly />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <mat-select formControlName="RecordedDuringID">
+              <mat-option *ngFor="let value of recordDuring" [value]="value.RecordedDuringId">
+                {{value.RecordedDuringDescription}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <mat-select formControlName="RecordedBy">
+              <mat-option *ngFor="let value of recordby" [value]="value.ProviderName">
+                {{value.ProviderName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row" *ngIf="IsTableHasRecord">
+        <div class="col-xs-12 col-xl-12 col-lg-12">
+          <div class="table-responsive shroff-table reduce-field">
+            <table class="table table-bordered table-hover">
+
+              <thead>
+                <tr>
+                  <th class="w-75 text-center">Date & Time</th>
+                  <th class="w-100 text-center">Drug</th>
+                  <th class="w-50 text-center">Dosage</th>
+                  <th class="w-50 text-center">Route</th>
+                  <th class="w-50 text-center">Frequency</th>
+                  <th class="w-100 text-center">Instructed By</th>
+                  <th class="w-100 text-center">Administered By</th>
+                  <th class="w-100 text-center">Remarks</th>
+                </tr>
+              </thead>
+
+              <tbody formArrayName="ScheduleItem">
+                <tr *ngFor="let items of getDynamicControl().controls; let i = index" [formGroupName]="i">
+                  <td class="w-50 text-center">
+                    <input readonly class="pt-3 pb-2" matInput formControlName="DrugDate" />
+                  </td>
+                  <td class="w-100 text-center" [matTooltip]="Drugdata[i]?.DrugName" matTooltipPosition="below"
+                    matTooltipClass="Tooltip-md">
+                    <input readonly class="pt-3 pb-2" matInput formControlName="DrugName" />
+                  </td>
+                  <td class="w-100 text-center">
+                    <input readonly class="pt-3 pb-2" matInput formControlName="DosageDesc" />
+                  </td>
+                  <td class="w-50 text-center">
+                    <input readonly class="pt-3 pb-2" matInput formControlName="DrugRoute" />
+                  </td>
+                  <td class="w-50 text-center">
+                    <input readonly class="pt-3 pb-2" matInput formControlName="Frequency" />
+                  </td>
+                  <td class="w-100 text-center">
+                    <input readonly class="pt-3 pb-2" matInput formControlName="RecordedBy" />
+                  </td>
+                  <td class="w-100 text-center">
+                    <mat-form-field class="w-100 pt-2"
+                                    [matTooltip]="adminDrugChart.controls['ScheduleItem'].value[i]?.AdministratedByToolTip"
+                                    matTooltipPosition="below" matTooltipClass="Tooltip-md" appearance="outline">
+                      <mat-label>
+                        <span class="required-asterisk"
+                              *ngIf="(items.value.AdministratedBy == '' || items.value.AdministratedBy == null) ? true : false"></span>Physician
+                      </mat-label>
+                      <mat-icon matSuffix
+                                *ngIf="(items.value.AdministratedBy == '' || items.value.AdministratedBy == null) ? true : items.value.AdministratedBy.length > 2 ? false : true">
+                        search
+                      </mat-icon>
+                      <input type="text" matInput [matAutocomplete]="autoAdminBy" placeholder="Type and Select" (blur)="toValidatePhysician(i)"
+                             formControlName="AdministratedBy" (keyup)="getAdministratedBy(i)" maxlength="50" />
+                      <input type="text" matInput formControlName="AdministratedByNumber" hidden>
+                      <input type="text" matInput formControlName="AdministratedByToolTip" hidden>
+                      <mat-autocomplete autoActiveFirstOption #autoAdminBy="matAutocomplete">
+                        <mat-option *ngFor="let type of administratedBy" [value]="type.ProviderName"    (onSelectionChange)="setAdministratedByNumber(i,type)">
+                          {{type.ProviderName}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </td>
+                  <td class="w-100 pt-2 text-center">
+                    <mat-form-field class="w-100 h-100"
+                      [matTooltip]="adminDrugChart.controls['ScheduleItem'].value[i]?.AdministratedRemarks"
+                      matTooltipPosition="below" matTooltipClass="Tooltip-md" appearance="outline">
+                      <input type="text" matInput placeholder="Remarks" formControlName="AdministratedRemarks"
+                        maxlength="500" />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+        <div class="row mt-4 mb-2 ml-3">
+          <div class="ml-4">
+            <mat-label>
+              <h5><b>Drug Administration Status : </b>{{DrugAdministrationStatus}} </h5>
+            </mat-label>
+          </div>
+        </div>
+      </div>
+
+      <mat-card *ngIf="!IsTableHasRecord">
+        <h3>No Drug Administration Record Found</h3>
+      </mat-card>
+
+      <mat-card>
+
+        <div class="row">
+          <div class="col-xl-3 col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>UserName</mat-label>
+              <input matInput placeholder="Enter" formControlName="UserName" maxlength="50" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" placeholder="Enter" formControlName="Password" maxlength="35" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6 text-right">
+            <button mat-flat-button type="button" color="primary" class="custome-button mat-primary mr-2"
+              (click)="back()">
+              Back
+            </button>
+            <button mat-flat-button (click)="saveDrug()" [disabled]="!IsTableHasRecord" color="primary" [hidden]="IsSignOff"
+              class="custome-button mat-primary mr-2">
+              Save
+            </button>
+            <button mat-stroked-button type="button" [disabled]="!IsTableHasRecord" class="transperent-button mr-2" color="primary"
+              [hidden]="IsSignOff" (click)="ClearTheForm()">
+              Clear
+            </button>
+
+            <button mat-flat-button (click)="ProcedureSignOff()" [disabled]="!IsTableHasRecord" type="button" color="primary" [hidden]="IsSignOff"
+              class="custome-button mat-primary mr-2">
+              Sign Off
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </mat-card>
+</form>

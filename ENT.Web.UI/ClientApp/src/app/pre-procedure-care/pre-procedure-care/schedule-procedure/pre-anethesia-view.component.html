@@ -1,0 +1,242 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div>
+    <mat-card>
+      <h5 cdkDragHandle class="p-3 title-bg">
+        View / Schedule <button style="color: white" class="close" (click)="dialogClose()" aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+      </h5>
+      <div class="white" *ngIf="this.data.PatientID">
+        <app-patient-demographic [PatID]="this.data.PatientID"></app-patient-demographic>
+      </div>
+
+      <div class="bg-white mt-2">
+        <div class="row p-0 m-0 scroll-md">
+          <div class="col-lg-6">
+            <div class="v-line">
+              <div class="pt-1 ">
+
+                <div class="row pb-1 pt-3">
+                  <div class="col-xl-4 col-lg-4 col-md-4 font_color">Procedure Request Date & Time</div>
+                  <div class="col-xl-1 col-lg-1 col-md-1">:</div>
+                  <div class="col-xl-7 col-lg-7 col-md-7">{{ ProcedureDateBind }}</div>
+                </div>
+
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Requesting Physician</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{ ProcRequestedPhysician }}</div>
+                </div>
+
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Procedure Type</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{ data.ProcedureTypeDesc }}</div>
+                </div>
+
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admitting Physician/Surgeon</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{ data.ProviderName }}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Approximate Duration</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{ approximateDuration }}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Admission Type</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{ data.admissionTypeDesc }}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Pre-Procedure Diagnosis</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{ data.PreProcedureDiagnosis }}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Primary ICD <Code></Code></div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{ data.ICDCode }}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Planned Procedure</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{ data.PlannedProcedure }}</div>
+                </div>
+                <div class="row pb-1 pt-3">
+                  <div class="col font_color">Procedure Name (Short)</div>
+                  <div class="col-lg-1">:</div>
+                  <div class="col-lg-7">{{ data.ProcedureDesc }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 v-line">
+            <div class="pt-1 col flex-grow-1 w-auto">
+              <div class="row pb-1 pt-3">
+                <div class="col pl-4 font_color">Primary CPT Code</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">{{ data.CPTCode }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col pl-4 font_color">Anesthesia Fitness Required</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">{{ AnesthesiaFitnessRequiredDesc }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col pl-4 font_color">Blood Required</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">{{ data.BloodRequiredDesc }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col pl-4 font_color">Instructions</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">{{ data.InstructionToPatient }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col pl-4 font_color">Special Preparation</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">{{ SpecialPreparation }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col pl-4 font_color">Continue all the regular medications</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">{{ ContinueMedication }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col  pl-4  font_color">Other Consults</div>
+                <div class="col-lg-1">:</div>
+                <div class="col">{{ OtherConsults }}</div>
+              </div>
+              <div class="row pb-1 pt-3">
+                <div class="col  pl-4  font_color">Anesthesia Fitness Clearance</div>
+                <div class="col-lg-1">:</div>
+                <div class="col"> {{ AnesthesiaFitnessClearance }}</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <div>
+      <form [formGroup]="viewAnesthesiaForm">
+        <div class="row mt-4">
+
+          <div class="col-xl-4 col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                  *ngIf="(viewAnesthesiaForm.get('ProcedureDate').invalid) ? true :false"></span>Procedure Date
+              </mat-label>
+              <input matInput [matDatepicker]="ProDate" placeholder="Pick Date" formControlName="ProcedureDate" />
+              <mat-datepicker-toggle matSuffix [for]="ProDate"></mat-datepicker-toggle>
+              <mat-datepicker #ProDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4 col-lg-3">
+            <mat-form-field class="input-full-width timer w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                  *ngIf="(viewAnesthesiaForm.get('ProcedureStarttime').invalid) ? true :false"></span>Procedure Start
+                Time
+              </mat-label>
+              <input matInput [ngxTimepicker]="ProStartTime" [disableClick]="true" placeholder="Pick Start Time"
+                formControlName="ProcedureStarttime" />
+              <ngx-material-timepicker-toggle [for]="ProStartTime"></ngx-material-timepicker-toggle>
+              <ngx-material-timepicker #ProStartTime></ngx-material-timepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4 col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                  *ngIf="(viewAnesthesiaForm.value.ScheduleApprovedBy == '' || viewAnesthesiaForm.value.ScheduleApprovedBy == null) ? true : viewAnesthesiaForm.value.ScheduleApprovedBy.length > 2 ? false : true"></span>Scheduled
+                Approved By</mat-label>
+              <mat-icon matSuffix
+                *ngIf="(viewAnesthesiaForm.value.ScheduleApprovedBy == '' || viewAnesthesiaForm.value.ScheduleApprovedBy == null) ? true : viewAnesthesiaForm.value.ScheduleApprovedBy.length > 2 ? false : true">
+                search</mat-icon>
+              <input type="text" placeholder="Type and Select" matInput [matAutocomplete]="autoap"
+                #autoCompletePhysicianInput="matAutocompleteTrigger" formControlName="ScheduleApprovedBy"
+                maxlength="50" />
+              <mat-autocomplete autoActiveFirstOption #autoap="matAutocomplete">
+                <mat-option *ngFor="let option of PhysicianName" [value]="option.ProviderName"
+                  (onSelectionChange)="setScheduleApprovedBy(option.ProviderID)">
+                  {{ option.ProviderName }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="row mt-1">
+          <div class="col-xl-4 col-lg-3 ml-2 pt-3" *ngIf="!IsCompleted">
+            <mat-label><span class="required-asterisk"
+                *ngIf="(viewAnesthesiaForm.get('ProcedureStatus').invalid) ? true :false"></span><b>Procedure Status
+                :</b>
+            </mat-label>
+            <mat-radio-group class="pl-3" formControlName="ProcedureStatus">
+              <mat-radio-button class="pl-3 pr-3" value="Scheduled">Scheduled</mat-radio-button>
+              <mat-radio-button class="pl-3 pr-3" value="Started">Started</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div class="col-xl-4 col-lg-3 ml-2 pt-3" *ngIf="IsCompleted">
+            <b class="pl-2 font_color">Procedure Status :</b>
+            <a class="ml-3">Completed</a>
+          </div>
+
+          <div class=" col-xl-6 col-lg-3">
+            <mat-form-field class="w-100" [matTooltip]="viewAnesthesiaForm.get('CancelReason').value"
+              matTooltipPosition="above" matTooltipClass="Tooltip-lg" appearance="outline">
+              <mat-label> Reason </mat-label>
+              <textarea matInput (keyup)="enableCancelProcedure()" placeholder="Enter Cancel Procedure Reason"
+                maxlength="500" rows="1" cols="1" formControlName="CancelReason"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-xl-3 col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                  *ngIf="(viewAnesthesiaForm.get('UserName').invalid) ? true :false"></span>User Name</mat-label>
+              <input matInput placeholder="Enter" maxlength="50" formControlName="UserName" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3 col-lg-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label><span class="required-asterisk"
+                  *ngIf="(viewAnesthesiaForm.get('Password').invalid) ? true :false"></span>Password</mat-label>
+              <input matInput type="password" placeholder="Enter" maxlength="35" formControlName="Password" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6 col-lg-6 text-right">
+
+            <button *ngIf="IsShowBtn" mat-flat-button color="primary" class="custome-button Btn150px mat-primary mr-2"
+              (click)="confirmProcedure()">
+              Confirm Procedure
+            </button>
+            <button [disabled]="IsCancelProcedureDisabled" *ngIf="IsShowBtn" type="button" mat-stroked-button
+              class="transperent-button mr-2 Btn150px" (click)="cancelProcedureSave()">
+              Cancel Procedure
+            </button>
+
+            <button type="button" *ngIf="IsShowBtn" mat-stroked-button class="transperent-button mr-2"
+              (click)="clear()">
+              Clear
+            </button>
+
+            <button type="button" *ngIf="!IsShowBtn" mat-flat-button color="primary"
+              class="custome-button mat-primary mr-2" (click)="dialogClose()">
+              Back
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

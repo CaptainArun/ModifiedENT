@@ -1,0 +1,163 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 class="p-6 px-3 py-1 title-bg" cdkDragHandle>
+    Drug Chart <button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="Drugform">
+    <mat-card class="px-3 py-1">
+      <div class="row  pb-1 mt-2">
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Admission Number</mat-label>
+            <input matInput placeholder="Admission Number" formControlName="AdmissionNumber">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Admission Date & Time</mat-label>
+            <input matInput placeholder="Enter" formControlName="AdmissionDatTime">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <mat-select formControlName="RecordedDuring">
+              <mat-option *ngFor="let value of recordduring" [value]="value.RecordedDuringDescription">
+                {{value.RecordedDuringDescription}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <mat-select formControlName="RecordedBy">
+              <mat-option *ngFor="let value of recordby" [value]="value.ProviderName">
+                {{value.ProviderName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="my-3">
+      <div class="row mt-3">
+        <div class="col-lg-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label><span class="required-asterisk"
+      *ngIf="(Drugform.get('DrugDate').invalid) ? true :false"></span>Date</mat-label>
+            <input matInput formControlName="DrugDate" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field class="w-100" [matTooltip]="drugToolTip" matTooltipPosition="above"
+                          matTooltipClass="Tooltip-sm" appearance="outline">
+            <mat-label>
+              <span class="required-asterisk"
+                    *ngIf="(Drugform.value.DrugName == '' || Drugform.value.DrugName == null) ? true : Drugform.value.DrugName.length > 2 ? false : true">
+              </span>Drug
+            </mat-label>
+            <mat-icon matSuffix
+                      *ngIf="(Drugform.value.DrugName == '' || Drugform.value.DrugName == null) ? true : Drugform.value.DrugName.length > 2 ? false : true">
+              search
+            </mat-icon>
+            <textarea type="text" matInput placeholder="Type and Select" [matAutocomplete]="drug" rows="1"  #autoDrug="matAutocompleteTrigger" 
+                   formControlName="DrugName" maxlength="500"></textarea>
+            <mat-autocomplete autoActiveFirstOption #drug="matAutocomplete">
+              <mat-option *ngFor="let item of Drugg" (onSelectionChange)="setDrugToolTip(item.Description)"
+                          [value]="item.Description">
+                {{item.NDCCode}}-{{item.Description}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Route</mat-label>
+            <mat-select formControlName="Route">
+              <mat-option *ngFor="let value of route" [value]="value.RouteDescription">
+                {{value.RouteDescription}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-lg-4">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+      *ngIf="(Drugform.get('DosageDesc').invalid) ? true :false"></span>Dosage Description</mat-label>
+            <textarea matInput placeholder="DosageDescription" rows="1" cols="1" maxlength="500"
+              formControlName="DosageDesc"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field class="w-100" [matTooltip]="DrugTimeToolTip" matTooltipPosition="above"
+            matTooltipClass="Tooltip-sm" appearance="outline">
+            <mat-label>Drug Time</mat-label>
+            <input matInput placeholder="" formControlName="DrugTime">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+      *ngIf="(Drugform.get('RateOfInfusion').invalid) ? true :false"></span>Rate Of Infusion</mat-label>
+            <input matInput placeholder="Enter" formControlName="RateOfInfusion" maxlength="75">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label><span class="required-asterisk"
+      *ngIf="(Drugform.get('Frequency').invalid) ? true :false"></span>Frequency</mat-label>
+            <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="Frequency" maxlength="75"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field class="w-100" [matTooltip]="Drugform.get('OrderingPhysician').value"
+                          matTooltipPosition="above" matTooltipClass="Tooltip-md" appearance="outline">
+            <mat-label>
+              <span class="required-asterisk"
+                    *ngIf="(Drugform.value.OrderingPhysician == '' || Drugform.value.OrderingPhysician == null) ? true : Drugform.value.OrderingPhysician.length > 2 ? false : true"></span>
+              Ordering Physician
+            </mat-label>
+            <mat-icon matSuffix
+                      *ngIf="(Drugform.value.OrderingPhysician == '' || Drugform.value.OrderingPhysician == null) ? true : Drugform.value.OrderingPhysician.length > 2 ? false : true">
+              search
+            </mat-icon>
+            <textarea  type="text" matInput placeholder="Type and Select" [matAutocomplete]="autocpta" maxlength="50" rows="1" #autoOrderingPhysician="matAutocompleteTrigger"
+                   formControlName="OrderingPhysician"></textarea>
+            <mat-autocomplete autoActiveFirstOption #autocpta="matAutocomplete">
+              <mat-option *ngFor="let patList of orderPhysician" [value]="patList.ProviderName">
+                {{patList.ProviderName}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Stop Medicine</mat-label>
+            <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="StopMedicationOn" maxlength="500"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Additional Notes</mat-label>
+            <textarea matInput placeholder="Enter" rows="1" cols="1" formControlName="AdditionalInfo" maxlength="500"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+    <div class="text-right justify-content-end">
+      <button mat-flat-button class="custome-button mat-primary mr-2 " [hidden]="isShow" (click)="save()">Save</button>
+      <button type="button" mat-stroked-button class="transperent-button light-sky primary"
+        (click)="clear()">Clear</button>
+    </div>
+  </form>
+</div>

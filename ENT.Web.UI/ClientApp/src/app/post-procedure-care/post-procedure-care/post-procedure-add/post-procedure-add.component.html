@@ -1,0 +1,407 @@
+<form [formGroup]="postprocedureform" #ngForm="ngForm">
+  <div style="overflow: auto; overflow-x: hidden;">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12  dark-color padding-none">
+        <div class="white">
+          <mat-card class="p-0" *ngIf="this.PatientID">
+            <app-patient-demographic [PatID]="this.PatientID"></app-patient-demographic>
+          </mat-card>
+        </div>
+        <mat-card class="card">
+          <div class="row">
+
+            <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Admission Number</mat-label>
+                <input matInput [value]="admisssionid" [disabled]="IsSignOff" readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Admission Date & Time</mat-label>
+                <input matInput placeholder="Admission Date & Time" [value]="AdmissionDateTime" [disabled]="IsSignOff"
+                       readonly>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.RecordedDate == '' || postprocedureform.value.RecordedDate == null) ? true : false"></span>Recorded Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="RecordedDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-lg-2 timepick pb-3 pt-3">
+              <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                <input matInput [ngxTimepicker]="toggleTimepickerRecordedTime" [disableClick]="true"
+                       formControlName="RecordedTime">
+                <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.RecordedTime == '' || postprocedureform.value.RecordedTime == null) ? true : false"></span>Recorded Time</mat-label>
+                <ngx-material-timepicker-toggle [for]="toggleTimepickerRecordedTime">
+                </ngx-material-timepicker-toggle>
+                <ngx-material-timepicker #toggleTimepickerRecordedTime>
+                </ngx-material-timepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.RecordedDuring == '' || postprocedureform.value.RecordedDuring == null) ? true : false"></span>Recorded During</mat-label>
+                <mat-select formControlName="RecordedDuring">
+                  <mat-option *ngFor="let value of recordduring"
+                              [value]="value.RecordedDuringId">
+                    {{value.RecordedDuringDescription}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.RecordedBy == '' || postprocedureform.value.RecordedBy == null) ? true : false"></span>Recorded By</mat-label>
+                <mat-select formControlName="RecordedBy">
+                  <mat-option *ngFor="let value of recordby" [value]="value.ProviderName">
+                    {{value.ProviderName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+        <div>
+          <mat-card class="px-3 py-3">
+            <h5 class="py-3 pt-3 col-xl-12">Procedure Request Details :</h5>
+            <div class="row p-0 m-0 scroll-md">
+              <div class="col-xl-6">
+                <div class="v-line">
+                  <div class="pt-3 pb-2">
+
+                    <div class="row pb-1 pt-3">
+                      <div class="col font_color">Pre-Procedure Diagnosis</div>
+                      <div class=" col-lg-1 ">:</div>
+                      <div class=" col-lg-7 ">{{PreProcedureDiagnosis}}</div>
+                    </div>
+
+                    <div class="row pb-1 pt-3">
+                      <div class="col font_color">Planned Procedure</div>
+                      <div class=" col-lg-1 ">:</div>
+                      <div class=" col-lg-7 ">{{PlannedProcedure}}</div>
+                    </div>
+
+                    <div class="row pb-1 pt-3">
+                      <div class="col font_color">Urgency</div>
+                      <div class=" col-lg-1 ">:</div>
+                      <div class=" col-lg-7 ">{{UrgencyType}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="v-line">
+                  <div class="pt-3 pb-2">
+                    <div class="row pb-1 pt-3">
+                      <div class="col font_color">Ansthesia Fitness Required</div>
+                      <div class="col-lg-1">:</div>
+                      <div class="col-lg-7">{{AnesthesiaFitnessRequiredDesc}}</div>
+                    </div>
+
+                    <div class="row pb-1 pt-3">
+                      <div class="col font_color">Other Consults</div>
+                      <div class="col-lg-1">:</div>
+                      <div class="col-lg-7">{{OtherConsults}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h5 class="py-1 pt-3 col-xl-12">Procedure Sumary :</h5>
+            <div class="row">
+              <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.ProcedureStartDate == '' || postprocedureform.value.ProcedureStartDate == null) ? true : false"></span>Procedure Start Date</mat-label>
+                  <input matInput [matDatepicker]="picker2" formControlName="ProcedureStartDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-2 col-lg-6 pb-3 pt-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.ProcedureEndDate == '' || postprocedureform.value.ProcedureEndDate == null) ? true : false"></span>Procedure End Date</mat-label>
+                  <input matInput [matDatepicker]="picker3" formControlName="ProcedureEndDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                  <mat-datepicker #picker3></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-2 timepick pb-3 pt-3">
+                <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                  <input matInput [ngxTimepicker]="toggleTimepickerProcedureStartTime" [disableClick]="true"
+                         formControlName="ProcedureStartTime">
+                  <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.ProcedureStartTime == '' || postprocedureform.value.ProcedureStartTime == null) ? true : false"></span>Procedure Start Time</mat-label>
+                  <ngx-material-timepicker-toggle [for]="toggleTimepickerProcedureStartTime">
+                  </ngx-material-timepicker-toggle>
+                  <ngx-material-timepicker #toggleTimepickerProcedureStartTime defaultTime="{{time}}"  [preventOverlayClick]=true (closed)="validStartTime()">
+                  </ngx-material-timepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-3 timepick pb-3 pt-3">
+                <mat-form-field class="input-full-width timer w-100" appearance="outline">
+                  <input matInput [ngxTimepicker]="toggleTimepickerProcedureEndTime" [disableClick]="true"
+                         formControlName="ProcedureEndTime">
+                  <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.ProcedureEndTime == '' || postprocedureform.value.ProcedureEndTime == null) ? true : false"></span>Procedure End Time</mat-label>
+                  <ngx-material-timepicker-toggle [for]="toggleTimepickerProcedureEndTime">
+                  </ngx-material-timepicker-toggle>
+                  <ngx-material-timepicker #toggleTimepickerProcedureEndTime defaultTime="{{time}}" [preventOverlayClick]=true (closed)="validEndTime()">
+                  </ngx-material-timepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-3 pb-3 pt-3">
+                <mat-form-field class="w-100" [matTooltip]="postprocedureform.get('AttendingPhysician').value"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-md" appearance="outline">
+                  <mat-label>
+                    <span class="required-asterisk"
+                          *ngIf="(postprocedureform.value.AttendingPhysician == '' || postprocedureform.value.AttendingPhysician == null) ? true : false"></span>Attending Physician/surgeon
+                  </mat-label>
+                  <mat-icon matSuffix
+                            *ngIf="(postprocedureform.value.AttendingPhysician == '' || postprocedureform.value.AttendingPhysician == null) ? true : postprocedureform.value.AttendingPhysician.length > 2 ? false : true">
+                    search
+                  </mat-icon>
+                  <textarea type="text" matInput placeholder="Type and Select" #autoattendingphysician="matAutocompleteTrigger" [matAutocomplete]="autocptn"  rows="1"
+                         formControlName="AttendingPhysician" maxlength="50"></textarea>
+                  <mat-autocomplete autoActiveFirstOption #autocptn="matAutocomplete">
+                    <mat-option *ngFor="let item of AdmittingPhysiciansurgeon" [value]="item.ProviderName"
+                                (onSelectionChange)="getAttendingphysician(item.ProviderID)">
+                      {{item.ProviderName}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6 ">
+                <mat-form-field class="w-100" [matTooltip]="postprocedureform.get('ProcedureNotes').value"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-lg" appearance="outline">
+                  <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.ProcedureNotes == '' || postprocedureform.value.ProcedureNotes == null) ? true : false"></span>Procedure Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500"
+                            formControlName="ProcedureNotes"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-3 ">
+                <mat-form-field class="w-100" [matTooltip]="postprocedureform.get('ProcedureName').value"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-md" appearance="outline">
+                  <mat-label>
+                    <span class="required-asterisk"
+                          *ngIf="(postprocedureform.value.ProcedureName == '' || postprocedureform.value.ProcedureName == null) ? true : false"></span>Procedure Name (short)
+                  </mat-label>
+                  <mat-icon matSuffix
+                            *ngIf="(postprocedureform.value.ProcedureName == '' || postprocedureform.value.ProcedureName == null) ? true : postprocedureform.value.ProcedureName.length > 2 ? false : true">
+                    search
+                  </mat-icon>
+                  <input matInput type="text"  placeholder="Type and Select" #autoCompleteprocedurename="matAutocompleteTrigger" (keyup)="getprocedurename()" rows="1"
+                         [matAutocomplete]="autocptk" formControlName="ProcedureName" maxlength="75">
+                  <mat-autocomplete autoActiveFirstOption #autocptk="matAutocomplete">
+                    <mat-option *ngFor="let item of Procedurename" [value]="item.ProcedureDesc"
+                                (onSelectionChange)="getprocedure(item.ProcedureID)">
+                      {{item.ProcedureDesc}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6">
+                <mat-form-field class="w-100" [matTooltip]="cptValueTooltip" matTooltipPosition="above"
+                                matTooltipClass="Tooltip-lg" appearance="outline">
+                  <mat-label>
+                    Primary CPT Code
+                  </mat-label>
+                  <mat-icon matSuffix
+                            *ngIf="(postprocedureform.value.PrimaryCPTCode == '' || postprocedureform.value.PrimaryCPTCode == null) ? true : postprocedureform.value.PrimaryCPTCode.length > 2 ? false : true">
+                    search
+                  </mat-icon>
+                  <textarea type="text" matInput placeholder="Type and Select"  [matAutocomplete]="autocptp" #autoCompleteCpt="matAutocompleteTrigger" rows="1"
+                         formControlName="PrimaryCPTCode" maxlength="500"></textarea>
+                  <mat-autocomplete autoActiveFirstOption #autocptp="matAutocomplete">
+                    <mat-option *ngFor="let item of CPTCode" (onSelectionChange)="setcptValueTooltip(item.Description)"
+                                [value]="item.Description">
+                      {{item.CPTCode}}-{{item.Description}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6 ">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Specimens</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500"
+                            formControlName="Speciments"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6 ">
+                <mat-form-field class="w-100" [matTooltip]="postprocedureform.get('DiagnosticNotes').value"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-lg" appearance="outline">
+                  <mat-label>Diagnostic Notes</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500"
+                            formControlName="DiagnosticNotes"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6 ">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Complication</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500"
+                            formControlName="Complication"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6 ">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Bloodloss & Transfusion details</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500"
+                            formControlName="Bloodloss"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6 ">
+                <mat-form-field class="w-100" [matTooltip]="postprocedureform.get('AdditionalInformation').value"
+                                matTooltipPosition="above" matTooltipClass="Tooltip-md" appearance="outline">
+                  <mat-label>Additional Information</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500"
+                            formControlName="AdditionalInformation"></textarea>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6 mt-3 pl-4" [ngClass]="{'validate': ngForm.submitted && postprocedureform.get('Procedurestatus').invalid}">
+                <mat-label><b>Procedure status :</b></mat-label>
+                <mat-radio-group formControlName="Procedurestatus" class="pb-2 pt-2 pr-3">
+                  <mat-radio-button class="pr-3 pl-3" value="Scheduled">Scheduled</mat-radio-button>
+                  <mat-radio-button class="pr-3 pl-3" value="Started">Started</mat-radio-button>
+                  <mat-radio-button class="pr-3 pl-3" value="Completed">Completed</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <div class="col-xl-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.procedurestatusdesc == '' || postprocedureform.value.procedurestatusdesc == null) ? true : false"></span>Procedure status desc</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1" maxlength="500"
+                            formControlName="procedurestatusdesc"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <h5 class="py-1 pt-3 col-xl-12">Patient Status :</h5>
+            <div class="row mt-4">
+              <div class="col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label><span class="required-asterisk"
+      *ngIf="(postprocedureform.value.PatientCondition == '' || postprocedureform.value.PatientCondition == null) ? true : false"></span>Patient Condition</mat-label>
+                  <mat-select formControlName="PatientCondition">
+                    <mat-option *ngFor="let value of patientcondition" [value]="value.PatientArrivalConditionId">
+                      {{value.PatientArrivalconditionDescription}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-3">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Pain level</mat-label>
+                  <mat-select formControlName="Painlevel">
+                    <mat-option *ngFor="let value of painlevel" [value]="value.PainScaleID">
+                      {{value.PainScaleDesc}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Pain & Sleep Medication</mat-label>
+                  <textarea matInput placeholder="Enter" rows="1" cols="1"
+                            formControlName="PainSleepMedication"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <!--<div class="col-xl-3">
+                <input type="file" />
+              </div>-->
+
+
+              <div class="col-xl-6 col-lg-6 pb-2 my-2 text-left">
+                <input type="file" #multiple placeholder="Choose file" value="upload" (change)="FileUploadFunction($event)" style="display:none;" multiple>
+                <button type="button" mat-raised-button color="primary" [disabled]="isShow" (click)="multiple.click()">Upload Documents</button>
+                <mat-list>
+                  <mat-list-item *ngFor="let file of requiredViewFile;let index = index">
+    
+                    <span>
+                      <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                      <a [href]="file.FileBlobUrl" target="_blank">{{file.FileName}}</a> [{{file.Size}}] &nbsp;
+                    <button type="button" [disabled]="isShow" mat-mini-fab color="warn" (click)="RemoveFile(file.FileName,index)">
+                      <mat-icon>close</mat-icon>
+                      </button>
+                       </span>
+
+                  </mat-list-item>
+                </mat-list>
+
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+    <mat-card class="px-3 py-3">
+      <div class="row mt-4 pt-4 ">
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>UserName</mat-label>
+            <input matInput placeholder="Enter" formControlName="UserName" maxlength="50" />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Enter" formControlName="Password" maxlength="35" />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6 text-right">
+          <button mat-flat-button type="button" color="primary" class="custome-button mat-primary mr-2"
+                  [hidden]="isShow" (click)="signOffModel()">
+            SignOff
+          </button>
+
+          <button mat-flat-button type="button" class="custome-button mat-primary mr-2" color="primary"
+                  (click)="back()">
+            Back
+          </button>
+          <button mat-flat-button class="custome-button mat-primary mr-2" color="primary" [hidden]="isShow"
+                  (click)="save()">
+            Save
+          </button>
+          <button mat-stroked-button type="button" class="transperent-button" [hidden]="isShow" (click)="reset()">
+            Clear
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+</form>
+

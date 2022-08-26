@@ -1,0 +1,454 @@
+<div class="col-12 ml-1 row hiddenX" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <form [formGroup]="anesthesiafitnessClearaneForm" #ngForm="ngForm">
+    <mat-card class="p-0">
+      <h5 cdkDragHandle class="p-3 title-bg">
+        Anesthesia fitness <button class="close colorWhite" (click)="dialogClose()" aria-label="Close">
+          <span aria-hidden="true">X</span>
+        </button>
+      </h5>
+      <div class="white" *ngIf="this.data.PatientID">
+        <mat-card>
+          <app-patient-demographic [PatID]="this.data.PatientID"></app-patient-demographic>
+        </mat-card>
+      </div>
+      <div class="row mt-4 ml-2 overflow600px">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-xl-12">
+              <h3 class="pb-4 pt-4 font-weight-bold">History</h3>
+            </div>
+            <div class="row col-xl-6 col-lg-6 mb-5">
+              <div class="row col-xl-12">
+                <div class="col-xl-6">
+                  <mat-checkbox formControlName="WNLRespiratory">WNL</mat-checkbox>
+                </div>
+                <div class="col-xl-6">
+                  <h4 class="ml-3">Respiratory</h4>
+                </div>
+              </div>
+              <div class="row col-xl-12">
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Cough">Cough</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Dyspnea">Dyspnea</mat-checkbox>
+                </div>
+                <div class="col-xl-4"></div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Dry">Dry</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="RecentURILRTI">Recent URI / LRTI</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="OSA">OSA</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Productive">Productive</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="TB">TB</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="COPD">COPD</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Asthma">Asthma</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Pneumonia">Pneumonia</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Fever">Fever</mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="row col-xl-6 col-lg-6 mb-5">
+              <div class="row col-xl-12">
+                <div class="col-xl-6">
+                  <mat-checkbox formControlName="WNLNeuroMusculoskeletal">WNL</mat-checkbox>
+                </div>
+                <div class="col-xl-6">
+                  <h4 class="ml-3">Neuro / Musculoskeletal</h4>
+                </div>
+              </div>
+              <div class="row col-xl-12">
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="RhArthritisGOUT">Rh Arthritis / GOUT</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="CVATIA">CVA / TIA</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Seizures">Seizures</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="ScoliosisKyphosis">Scoliosis / Kyphosis</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="HeadInjury">Head Injury</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="PsychDisorder">Psych Disorder</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="MuscleWeakness">Muscle Weakness</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Paralysis">Paralysis</mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="row col-xl-6 col-lg-6 mb-5">
+              <div class="row col-xl-12">
+                <div class="col-xl-6">
+                  <mat-checkbox formControlName="WNLCardio">WNL</mat-checkbox>
+                </div>
+                <div class="col-xl-6">
+                  <h4 class="ml-3">Cardiovascular</h4>
+                </div>
+              </div>
+              <div class="row col-xl-12">
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Hypertension">Hypertension</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="DOE">DOE</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Pacemarker">Pacemarker</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="RheumaticFever">Rheumatic Fever</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="OrthopneaPND">Orthopnea / PND</mat-checkbox>
+                </div>
+                <div class="col-xl-4"></div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="CADAnginaMI">CAD / Angina / MI</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="ExerciseTolerance">Exercise Tolerance</mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="row col-xl-6 col-lg-6 mb-5">
+              <div class="row col-xl-12">
+                <div class="col-xl-6">
+                  <mat-checkbox formControlName="WNLRenalEndocrine">WNL</mat-checkbox>
+                </div>
+                <div class="col-xl-6">
+                  <h4 class="ml-3">Renal / Endocrine</h4>
+                </div>
+              </div>
+              <div class="row col-xl-12">
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="RenalInsufficiency">Renal Insufficiency</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="ThyroidDisease">Thyroid Disease</mat-checkbox>
+                </div>
+                <div class="col-xl-4"></div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Diabetes">Diabetes</mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="row col-xl-6 col-lg-6 mb-5">
+              <div class="row col-xl-12">
+                <div class="col-xl-6">
+                  <mat-checkbox formControlName="WNLGastrointestinal">WNL</mat-checkbox>
+                </div>
+                <div class="col-xl-6">
+                  <h4 class="ml-3">Hepato / Gastrointestinal</h4>
+                </div>
+              </div>
+              <div class="row col-xl-12">
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Vomiting">Vomiting</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Cirrhosis">Cirrhosis</mat-checkbox>
+                </div>
+                <div class="col-xl-4"></div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Diarrhea">Diarrhea</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="GERD">GERD</mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="row col-xl-6 col-lg-6 mb-5">
+              <div class="row col-xl-12">
+                <div class="col-xl-6">
+                  <mat-checkbox formControlName="WNLOthers">WNL</mat-checkbox>
+                </div>
+                <div class="col-xl-6">
+                  <h4 class="ml-3">Others</h4>
+                </div>
+              </div>
+              <div class="row col-xl-12">
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="HeamatDisorder">Heamat Disorder</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Radiotherapy">Radiotherapy</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Immunosuppressant">Immunosuppressant</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Pregnancy">Pregnancy</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Chemotherapy">Chemotherapy</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="SteroidUse">Steroid Use</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Smoking">Smoking</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Alcohol">Alcohol</mat-checkbox>
+                </div>
+                <div class="col-xl-4">
+                  <mat-checkbox formControlName="Allergies">Allergies</mat-checkbox>
+                </div>
+              </div>
+            </div>
+            <div class="row col-xl-6">
+              <div class="col-xl-4 pl-6">
+                <h5>Significant Details of the above, if any</h5>
+              </div>
+              <div class="col-xl-8 col-lg-8">
+                <mat-form-field class="w-100"
+                  [matTooltip]="anesthesiafitnessClearaneForm.get('SignificantDetails').value"
+                  matTooltipPosition="above" matTooltipClass="Tooltip-md" appearance="outline">
+                  <mat-label>Significant Details</mat-label>
+                  <textarea matInput placeholder="Enter Significant Details" rows="1" cols="1" maxlength="500"
+                    formControlName="SignificantDetails"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row col-xl-6">
+              <div class="col-xl-4 mt-3 pl-9">
+                <h5 class="ml-6">Current Medication(s)</h5>
+              </div>
+              <div class="col-xl-8 col-lg-8">
+                <mat-form-field class="w-100"
+                  [matTooltip]="anesthesiafitnessClearaneForm.get('CurrentMedications').value"
+                  matTooltipPosition="above" matTooltipClass="Tooltip-md" appearance="outline">
+                  <mat-label>Current Medications</mat-label>
+                  <textarea matInput placeholder="Enter Current Medications" rows="1" cols="1" maxlength="500"
+                    formControlName="CurrentMedications"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <br />
+            <div class="row col-xl-12 mb-3">
+              <div class="col-xl-12">
+                <h5 class="">Past History</h5>
+              </div>
+              <div class="row col-xl-12 col-lg-12">
+                <p class="col-xl-3">H/o Previous Anesthesia</p>
+                <div class="col-xl-6">
+                  <mat-checkbox class="mx-3" formControlName="LA">LA</mat-checkbox>
+                  <mat-checkbox class="mx-3" formControlName="GA">GA</mat-checkbox>
+                  <mat-checkbox class="mx-3" formControlName="RA">RA</mat-checkbox>
+                  <mat-checkbox class="mx-3" formControlName="NA">NA</mat-checkbox>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <p><span class="f-25 top">&#8226;</span> Emergency </p>
+              </div>
+              <div class="col-xl-6">
+                <p> <span class="f-25 top">&#8226;</span> Post OP ICU admission </p>
+              </div>
+              <div class="col-xl-6">
+                <p><span class="f-25 top">&#8226;</span> PONV </p>
+              </div>
+              <div class="col-xl-6">
+                <p><span class="f-25 top">&#8226;</span>Adverse Anesthesia response in family </p>
+              </div>
+            </div>
+
+            <div class="row col-xl-12 mb-3">
+              <div class="row">
+                <div class="col-xl-12 ml-3">
+                  <h5>General / Airway Examination</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50" appearance="outline">
+                <mat-label>Pulse</mat-label>
+                <input matInput maxlength="75" placeholder="min" formControlName="Pulse" />
+              </mat-form-field>
+              <div class="col-xl-2 mt-3 pl-0">/ Min</div>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Clubbing</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="Clubbing" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Intubation: Simple / Difficult</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="IntubationSimpleDifficult" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                    *ngIf="(anesthesiafitnessClearaneForm.get('BP').invalid) ? true :false"></span>BP</mat-label>
+                <input matInput maxlength="75" placeholder="BP" formControlName="BP" />
+              </mat-form-field>
+              <div class="col-xl-2 mt-3 pl-0 pr-0">/ mmHg</div>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Cyanosis</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="Cyanosis" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Short Neck</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="ShortNeck" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>RR</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="RR" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Icterus</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="Icterus" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Mouth Opening<3 cm>3 cm</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="MouthOpening" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label><span class="required-asterisk"
+                    *ngIf="(anesthesiafitnessClearaneForm.get('Temp').invalid) ? true :false"></span>Temp</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="Temp" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Obesity</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="Obesity" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>M P Class</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="MPClass" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Pallor</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="Pallor" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>ODH</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="ODH" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Thyromental <6 cm>6 cm</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="Thyromental" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Loose Tooth</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="LooseTooth" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Distance</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="Distance" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Artificial Dentures</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="ArtificialDentures" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-3">
+              <mat-form-field class="col-xl-10 w-50 mr-4" appearance="outline">
+                <mat-label>Difficult Venous Access</mat-label>
+                <input matInput maxlength="75" placeholder="Enter" formControlName="DifficultVenousAccess" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-6">
+              <mat-form-field class="col-xl-11 w-100"
+                [matTooltip]="anesthesiafitnessClearaneForm.get('AnesthesiaFitnessnotes').value"
+                matTooltipPosition="above" matTooltipClass="Tooltip-md" appearance="outline">
+                <mat-label>Additional details</mat-label>
+                <textarea matInput maxlength="75" placeholder="Enter Anesthesia Fitness Details" rows="1"
+                  formControlName="AnesthesiaFitnessnotes"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="d-flex col-xl-6 mt-4 mb-2"
+              [ngClass]="{'validate': ngForm.submitted && anesthesiafitnessClearaneForm.get('AnesthesiaFitnessClearedCheck').invalid}">
+              <h5>
+                <mat-label class="mr-2 mt-2"><span class="required-asterisk"
+                    *ngIf="(anesthesiafitnessClearaneForm.get('AnesthesiaFitnessClearedCheck').invalid) ? true :false"></span>Anesthesia
+                  Fittness Cleared :</mat-label>
+              </h5>
+              <mat-radio-group aria-label="Anesthesia Fittness Cleared" formControlName="AnesthesiaFitnessClearedCheck">
+                <mat-radio-button class="mr-2" value="Yes">Yes</mat-radio-button>
+                <mat-radio-button value="No">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <div class="row mt-4">
+      <div class="col-lg-4 ">
+        <mat-form-field appearance="outline" class="w-100 pl-4">
+          <mat-label>User Name</mat-label>
+          <input matInput placeholder="Enter" formControlName="UserName" />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="Enter" formControlName="Password" />
+        </mat-form-field>
+      </div>
+      <div class="col-lg-4 text-right">
+        <button mat-flat-button [hidden]="IsSignOff" class="custome-button mat-primary mr-2" color="primary"
+          (click)="addUpdateAnesthesiaFitness()"> Save</button>
+        <button type="button" [hidden]="IsSignOff" mat-stroked-button class="transperent-button mr-2" color="primary"
+          (click)="reset()"> Clear</button>
+        <button type="button" [hidden]="IsSignOff" mat-flat-button color="primary" class="custome-button mat-primary"
+          (click)="signOff()"> Sign Off</button>
+        <button mat-flat-button *ngIf="IsSignOff" class="custome-button mat-primary ml-2" color="primary"
+          (click)="dialogClose()"> Back </button>
+      </div>
+    </div>
+  </form>
+</div>

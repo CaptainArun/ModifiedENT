@@ -1,0 +1,111 @@
+<div class="white mt-4" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <h5 cdkDragHandle class="p-3 title-bg" >Drug Chart View<button style="color:white" class="close" (click)="dialogClose()" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </h5>
+  <form [formGroup]="Preprocedure">
+    <mat-card class="px-4 py-2 my-2">
+      <div class="row ">
+
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100"  appearance="outline">
+            <mat-label>Admission No</mat-label>
+            <input matInput placeholder="Enter" formControlName="AdmissionNo">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Admission Date Time</mat-label>
+            <input matInput placeholder="Enter" formControlName="admissiondateandtime">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded During</mat-label>
+            <input matInput placeholder="Enter" formControlName="RecordedDuring">
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 pb-3 pt-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Recorded By</mat-label>
+            <input matInput placeholder="Enter" formControlName="RecordedBy">
+          </mat-form-field>
+        </div>
+
+      </div>
+    </mat-card>
+  </form>
+  <mat-card>
+    <div class="row p-0 m-0 scroll-md">
+      <div class="col-xl-6">
+        <div class="v-line">
+          <div class="pt-3 pb-2">
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Drug Date</div>
+              <div class=" col-lg-1 ">:</div>
+              <div class=" col-lg-7 ">{{data.DrugDate |date:"dd/MM/yyyy"}}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Drug Name</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.DrugName}}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Drug Route</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.DrugRoute}}</div>
+            </div>
+
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Dosage Desc</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.DosageDesc}}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Drug Time</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.DrugTime}}</div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="v-line">
+          <div class="pt-3 pb-2">
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Rate Of Infusion</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.RateOfInfusion}}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Frequency</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.Frequency}}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Ordering Physician</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.OrderingPhysician}}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Stop Medication On</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.StopMedicationOn}}</div>
+            </div>
+            <div class="row pb-1 pt-3">
+              <div class="col font_color">Additional Info</div>
+              <div class="col-lg-1">:</div>
+              <div class="col-lg-7">{{data.AdditionalInfo}}</div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
